@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/app/login/login.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body onload="loginInit()">
+  <div id="loginPage">
+    <img id="loginLogoWhite" src="/assets/img/logo/login_logo_white.png" alt="Logo" />
+    <img id="loginLogoBlue" class="no-opacity" src="/assets/img/logo/login_logo_blue.png" alt="Logo" />
+    <div id="loginSignupBox" class="no-opacity">
+      <span class="signupText">Not a Join user?</span>
+      <button class="loginButtonBlue signupButton" onclick="loadSignUpBox()">
+        Sign up
+      </button>
+    </div>
+    <!-- login -->
+    <div id="loginBox" class="loginBox no-opacity">
+      <span class="loginBoxHeadline">Log in</span>
+      <form class="loginForm" onsubmit="loginUser(); return false;">
+        <div class="loginInputColumn">
+          <input
+            id="loginInputEmail"
+            class="loginInput"
+            type="email"
+            placeholder="Email"
+            required
+          />
+          <img
+            class="loginIcon"
+            src="/assets/img/functionButtons/icon_email.png"
+            alt="E-Mail"
+          />
+        </div>
+        <div class="loginInputColumn">
+          <input
+            id="loginInputPassword"
+            class="loginInput"
+            type="password"
+            placeholder="Password"
+            required
+          />
+          <img
+            id="loginIconPassword"
+            class="loginIcon"
+            src="/assets/img/functionButtons/icon_password.png"
+            alt="Password"
+          />
+          <img
+            id="loginIconPasswordVisibility"
+            class="loginIcon visibilityIcon d-none"
+            src="/assets/img/functionButtons/icon_password_nonvisible.png"
+            alt="Password"
+            onclick=""
+          />
+          <div id="loginFaultPassword" class="loginFault d-none">
+            Wrong password
+          </div>
+          <div id="loginFaultEmail" class="loginFault d-none">
+            This Email is not signed up yet. Please sign up first.
+          </div>
+        </div>
+        <div class="loginOptions">
+          <label class="checkbox">
+            <input type="checkbox" />
+            <span class="checkmark">Remember me</span>
+          </label>
+          <span class="loginForgot" onclick=""
+            >Forgot my password</span
+          >
+        </div>
+        <div class="loginButton">
+          <button class="loginButtonBlue">Log in</button>
+          <button class="loginButtonWhite" onclick="">
+            Guest log in
+          </button>
+        </div>
+      </form>
+    </div>
+    <!-- sign up -->
+    <div id="signupBox" class="loginBox d-none">
+      <img
+        src="/assets/img/functionButtons/arrow_left.png"
+        alt="Back"
+        class="arroBack"
+        onclick=""
+      />
+      <span class="logiBoxHeadline">Sign up</span>
+      <form class="loginForm" onsubmit="registerNewUser(); return false;">
+        <div class="loginInputColumn">
+          <input
+            id="signupInputName"
+            class="loginInput"
+            type="text"
+            placeholder="Name"
+            required
+          />
+          <img
+            class="loginIcon"
+            src="/assets/img/functionButtons/icon_name.png"
+            alt="Name"
+          />
+        </div>
+        <div class="loginInputColumn">
+          <input
+            id="signupInputEmail"
+            class="loginInput"
+            type="email"
+            placeholder="Email"
+            required
+          />
+          <img
+            class="loginIcon"
+            src="/assets/img/functionButtons/icon_email.png"
+            alt="E-Mail"
+          />
+        </div>
+        <div class="loginInputColumn">
+          <input
+            id="signupInputPassword"
+            class="loginInput"
+            type="password"
+            placeholder="Password"
+            required
+            minlength="8"
+          />
+          <img
+            id="signupIconPassword"
+            class="loginIcon"
+            src="/assets/img/functionButtons/icon_password.png"
+            alt="Password"
+          />
+          <img
+            id="signupIconPasswordVisibility"
+            class="loginIcon visibilityIcon d-none"
+            src="/assets/img/functionButtons/icon_password_nonvisible.png"
+            alt="Password"
+          />
+        </div>
+        <div class="loginButton">
+          <button class="loginButtonBlue">Sign up</button>
+        </div>
+      </form>
+    </div>
+    <!-- forgot password -->
+    <div id="forgotBox" class="loginBox d-none">
+      <img
+        src="/assets/img/functionButtons/arrow_left.png"
+        alt="Back"
+        class="arrowBack"
+        onclick="backToLogin()"
+      />
+      <span class="loginBoxHeadline forgotHeadline">Forgot my password</span>
+      <form class="loginForm" onsubmit="sendResetEmail(); return false;">
+        <p class="forgotBoxText">
+          Don't worry! We will send you an email with the instructions to reset
+          your password.
+        </p>
+        <div class="loginInputColumn">
+          <input
+            id="forgotInputEmail"
+            class="loginInput"
+            type="email"
+            placeholder="Email"
+            required
+          />
+          <img
+            class="loginIcon"
+            src="/assets/img/functionButtons/icon_email.png"
+            alt="E-Mail"
+          />
+          <div id="forgotFault" class="d-none">
+            This Email is not signed up yet
+          </div>
+        </div>
+  
+        <div class="loginButton">
+          <button class="loginButtonBlue forgotButton">
+            Send me the email
+          </button>
+        </div>
+      </form>
+    </div>
+    <!-- reset password -->
+    <div id="resetbox" class="loginbox d-none">
+      <img
+        src="/assets/img/functionButtons/arrow_left.png"
+        alt="Back"
+        class="arrowback"
+        onclick="backToLogin()"
+      />
+      <span class="loginBoxHeadline resetHeadline">Reset your password</span>
+      <form class="loginForm" onsubmit="resetPassword(); return false;">
+        <p class="resetBoxText">Change your account password here</p>
+        <div class="loginInputColumn">
+          <input
+            id="resetNewInputPassword"
+            class="loginInput"
+            type="password"
+            placeholder="New password"
+            required
+            minlength="8"
+          />
+          <img
+            id="resetNewIconPassword"
+            class="loginIcon"
+            src="/assets/img/functionButtons/icon_password.png"
+            alt="Password"
+          />
+          <img
+            id="resetNewIconPasswordVisibility"
+            class="loginIcon visibilityIcon d-none"
+            src="/assets/img/functionButtons/icon_password_nonvisible.png"
+            alt="Password"
+            onclick=""
+          />
+        </div>
+        <div class="loginInputColumn">
+          <input
+            id="resetConfInputPassword"
+            class="loginInput"
+            type="password"
+            placeholder="Confirm password"
+          />
+          <img
+            id="resetConfIconPassword"
+            class="loginIcon"
+            src="/assets/img/functionButtons/icon_password.png"
+            alt="Password"
+          />
+          <img
+            id="resetConfIconPasswordVisibility"
+            class="loginIcon visibilityIcon d-none"
+            src="/assets/img/functionButtons/icon_password_nonvisible.png"
+            alt="Password"
+          />
+          <div id="resetFault" class="d-none">
+            Make sure the second password you typed matches the first
+          </div>
+          <div id="resetAccept" class="d-none">Both passwords match</div>
+        </div>
+        <div class="loginButton">
+          <button
+            id="resetButton"
+            class="loginButtonBlue forgotButton deactivated-button"
+          >
+            Continue
+          </button>
+        </div>
+      </form>
+    </div>
+  
+    <div id="signupPopup" class="popup">
+      <span>Your account has been successfully created</span>
+    </div>
+    <div id="forgotPopup" class="popup popupWhite">
+      <span>We have sent you an email. Check your inbox.</span>
+    </div>
+    <div id="resetPopup" class="popup">
+      <span>Your password has been successfully changed</span>
+    </div>
+  </div>  
+  <script src="login.js"></script>
+</body>
+</html>

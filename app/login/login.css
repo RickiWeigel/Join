@@ -1,0 +1,335 @@
+#loginPage {
+    height: 100vh;
+    width: 100vw;
+    background-color: #4589ff;
+    overflow: hidden;
+    position: relative;
+    transition: all 225ms ease-in-out;
+}
+
+#loginLogoWhite {
+    width: 265px;
+    object-fit: cover;
+    position: absolute;
+    left: 50%;
+    right: 50%;
+    top: 50%;
+    bottom: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 225ms ease-in-out;
+}
+
+#loginLogoBlue {
+    width: 265px;
+    object-fit: cover;
+    position: absolute;
+    left: 50%;
+    right: 50%;
+    top: 50%;
+    bottom: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 225ms ease-in-out;
+}
+
+.logoMovement {
+    width: 100px !important;
+    left: 5.35% !important;
+    right: 87.71% !important;
+    top: 7.81% !important;
+    bottom: 80.28% !important;
+    transform: translate(0) !important;
+}
+
+.pageColorChange {
+    background-color: white !important;
+}
+
+
+.loginBox {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 35px 0px;
+    gap: 35px;
+    width: 45%;
+    height: 55%;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
+    transition: all 225ms ease-in-out;
+}
+
+.loginBoxHeadline {
+    display: block;
+    font-size: 48px;
+    font-weight: 700;
+    width: 100%;
+    text-align: center;
+    position: relative;
+}
+
+.loginBoxHeadline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 95px;
+    margin: auto;
+    height: 3px;
+    width: 21%;
+    background-color: #4589ff;
+}
+
+.loginForm {
+    padding-top: 35px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 35px;
+}
+
+.loginInputColumn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #d1d1d1;
+    padding: 13px 21px;
+    width: 422px;
+    height: 49px;
+    position: relative;
+}
+
+.loginInput {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    background: #ffffff;
+    border: none;
+    outline: none;
+    font-size: 20px;
+    width: 90%;
+}
+
+.loginInput::placeholder {
+    font-size: 19px;
+    line-height: 120%;
+    color: #d1d1d1;
+}
+
+.loginIcon {
+    width: 20px;
+    object-fit: contain;
+}
+
+.visibilityIcon {
+    cursor: pointer;
+}
+
+.loginButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 35px;
+}
+
+.loginButtonBlue {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 35px;
+    gap: 10px;
+    width: 135px;
+    height: 48px;
+    background: #4589ff;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 23px;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all 225ms ease-in-out;
+}
+
+.loginButtonBlue:hover {
+    background: #005dff;
+    transition: all 225ms ease-in-out;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+.loginButtonWhite {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 35px;
+    gap: 10px;
+    width: 197px;
+    height: 48px;
+    background: #ffffff;
+    border: 1px solid #647188;
+    border-radius: 8px;
+    color: #647188;
+    font-size: 23px;
+    cursor: pointer;
+    transition: all 225ms ease-in-out;
+}
+
+.loginButtonWhite:hover {
+    transition: all 225ms ease-in-out;
+    border: 2px solid #4589ff;
+    color: #4589ff;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+.loginOptions {
+    font-size: 19px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 35px;
+}
+
+.loginForgot {
+    color: #005dff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+}
+
+.checkbox input {
+    width: 16px;
+    height: 16px;
+    margin-right: 20px;
+    border: 2px solid #4589ff;
+    border-radius: 3px;
+}
+
+#loginSignupBox {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 35px;
+    right: 5.35%;
+    top: 7.81%;
+    transition: all 225ms ease-in-out;
+}
+
+.signupText {
+    font-size: 23px;
+}
+
+.loginFault {
+    position: absolute;
+    top: 50px;
+    left: 24px;
+    font-size: 13px;
+    color: #ff8190;
+}
+
+.popup {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 5px 0 5px;
+    height: 74px;
+    width: 45%;
+    background-color: #4589ff;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
+    border-radius: 20px;
+    color: white;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    z-index: 10;
+    transform: translateY(200px);
+    transition: transform 500ms ease-in-out;
+}
+
+.popupWhite {
+    background-color: #ffffff;
+    color: black;
+}
+
+.popup > span {
+    text-align: center;
+}
+
+.slideIn {
+    transform: translateY(0);
+    transition: transform 500ms ease-in-out;
+}
+
+.arrowBack {
+    position: absolute;
+    width: 25px;
+    object-fit: cover;
+    cursor: pointer;
+    z-index: 1;
+    left: 4%;
+    top: 11.5%;
+}
+
+.forgotBoxText {
+    margin: 0 0 35px 0;
+    padding: 0 65px 0 65px;
+    text-align: center;
+    font-size: 23px;
+}
+
+.resetBoxText {
+    margin: 0;
+    padding: 0 65px 0 65px;
+    text-align: center;
+    font-size: 23px;
+}
+
+.forgotButton {
+    width: 100%;
+}
+
+#forgotFault {
+    position: absolute;
+    top: 50px;
+    left: 24px;
+    font-size: 13px;
+    color: #ff8190;
+}
+
+#resetFault {
+    position: absolute;
+    top: 50px;
+    left: 24px;
+    font-size: 13px;
+    color: #ff8190;
+}
+
+#resetAccept {
+    position: absolute;
+    top: 50px;
+    left: 24px;
+    font-size: 13px;
+    color: #2a9d47;
+}
+
+.deactivatedbutton {
+    pointer-events: none;
+    opacity: 0.3;
+}

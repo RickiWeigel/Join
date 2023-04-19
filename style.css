@@ -11,9 +11,20 @@ body {
     margin: 0;
     padding: 0;
 }
+
 .d-none {
     display: none !important;
 }
+
 .no-opacity {
     opacity: 0 !important;
+}
+
+main {
+    background-color: rgb(255, 255, 255);
+    width: calc(100vw - 232px);
+    height: calc(100vh - 97.3px);
+    position: fixed;
+    left: 232px;
+    top: 97.3px;
 }

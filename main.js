@@ -1,6 +1,12 @@
 //loadJSONFromServer();  TODO
 
 
+
+async function init() {
+    await includeHTML();
+}
+
+
 /**
  * Rendering the header and the sidebar in the page
  */

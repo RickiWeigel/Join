@@ -83,7 +83,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #4589FF;
     padding: 40px;
     width: 208px;
     height: 191px;
@@ -93,7 +92,11 @@
     transition: all 225ms ease-in-out;
 }
 
-.smallInfoBox:hover>*{
+.smallInfoBox span {
+    color: #4589FF;
+}
+
+.smallInfoBox:hover>* {
     transform: scale(1.03);
 }
 

@@ -12,6 +12,17 @@ body {
     padding: 0;
 }
 
+h1 {
+    font-size: 64px;
+    margin: 0;
+}
+
+h2 {
+    font-size: 48px;
+    font-weight: 700;
+    margin: 0;
+}
+
 .d-none {
     display: none !important;
 }
@@ -21,10 +32,32 @@ body {
 }
 
 main {
-    background-color: rgb(255, 255, 255);
-    width: calc(100vw - 232px);
-    height: calc(100vh - 97.3px);
     position: fixed;
-    left: 232px;
-    top: 97.3px;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    padding-left: 232px;
+    padding-top: 97.3px;
+    width:  100%;
+    height: calc(100vh - 97.3px);
+}
+
+
+
+
+@media (max-width: 1200px) {
+    main {
+        padding-top: 150px;
+    }
+
+}
+
+@media (max-height: 860px) {
+    main {
+        justify-content: flex-start;
+    }
 }

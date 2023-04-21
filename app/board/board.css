@@ -1,0 +1,67 @@
+.contentBoard {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    padding: 63px;
+}
+
+.findTask {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 63px;
+}
+
+.findTaskInput {
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    border: 1px solid #d1d1d1;
+    margin-right: 35px;
+    height: 50px;
+    width: 250px;
+    padding-left: 25px;
+    padding-right: 25px;
+    gap: 10px;
+}
+
+.findTaskInput input {
+    border: none;
+    width: 180px;
+    height: 31px;
+    border-right: 1px solid #d1d1d1;
+    outline: none;
+    font-size: 16px;
+}
+
+.btn {
+    font-size: 23px;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 18px 10px;
+    gap: 10px;
+    height: 51px;
+    background: #4589FF;
+    border: 1px solid #4589FF;
+    border-radius: 10px;
+}
+
+.statusCategories{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    height: 70vh;
+}
+
+.singleCategory{
+    display: flex;
+    font-size: 23px;
+    font-weight: 700;
+    justify-content: space-between;
+    align-items: center;
+    width: 230px;
+}

@@ -45,19 +45,3 @@ main {
     width:  100%;
     height: calc(100vh - 97.3px);
 }
-
-
-
-
-@media (max-width: 1200px) {
-    main {
-        padding-top: 150px;
-    }
-
-}
-
-@media (max-height: 860px) {
-    main {
-        justify-content: flex-start;
-    }
-}

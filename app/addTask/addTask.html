@@ -23,6 +23,53 @@
         <div w3-include-html="..\sidebar\sidebar-template.html"></div>
     </aside>
 
-    <main></main>
+    <main>
+        <div class="addTaskContent">
+            <form class="addTaskSection">
+                 <div class="enterTitle">
+                    <input type="text" placeholder="Enter a title">
+                 </div>
+                 <div class="selectContacts">
+                    <span>Select contacts to assign</span>
+                    <img src="../../assets/img/functionButtons/selectorArrow.png">
+                </div>
+                <div class="dueDate">
+                    <span>Due date</span>
+                    <div class="dateContainer">
+                        <div class="date">dd/mm/yyyy</div>
+                        <img src="../../assets/img/board/calendar.png">
+                    </div>                    
+                </div>
+                <div class="category">
+                    <span>Category</span>
+                    <div class="selectCategory">
+                        <div class="date">Select task category</div>
+                        <img src="../../assets/img/functionButtons/selectorArrow.png">
+                    </div>                    
+                </div>
+                <div class="priorityContainer">
+                    <img class="priority" id="priorityUrgent" src="../../assets/img/addTask/TaskValueHard.png">
+                    <img class="priority" id="priorityMedium" src="../../assets/img/addTask/TaskValueMid.png">
+                    <img class="priority" id="priorityLow" src="../../assets/img/addTask/TaskValueLow.png">
+                </div>
+                <div class="descriptionContainer">
+                    <span>Description</span>
+                    <textarea name="descriptionTextarea" placeholder="Enter a description" id="description" cols="30" rows="10"></textarea>
+                </div>
+                <div class="subtaskContainer">
+                    <span>Subtasks</span>
+                    <div class="addSubtask">
+                        <input type="text" placeholder="Add new subtask">
+                        <img src="../../assets/img/functionButtons/add.png">
+                    </div>
+                </div>
+                <div class="subtasks" id="addedSubtasks">
+                    <img src="../../assets/img/functionButtons/checkbox.png">
+                    <span id="subtasks">Subtask 1</span>
+                </div>
+            </form>
+        </div>
+    </main>
 </body>
+
 </html>

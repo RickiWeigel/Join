@@ -4,6 +4,7 @@
 
 async function init() {
     await includeHTML();
+    loadLogin();
 }
 
 
@@ -22,4 +23,12 @@ async function includeHTML() {
             element.innerHTML = 'Page not found';
         }
     }
+}
+
+
+/**
+ * load the login page 
+ */
+function loadLogin() {
+    window.location.href = 'app/login/login.html';
 }

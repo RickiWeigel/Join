@@ -4,6 +4,8 @@ let registerBtn = document.getElementById('registerButton');
 let registerEmail = document.getElementById('signupInputEmail');
 let registerName = document.getElementById('signupInputName'); 
 let registerPassword = document.getElementById('signupInputPassword'); 
+let loginEmail = document.getElementById('loginInputEmail');
+let loginPasswort = document.getElementById('loginInputPassword');
 
 
 async function loginInit(){
@@ -28,7 +30,14 @@ async function register() {
         password: registerPassword.value,
     });
     await setItem('users', JSON.stringify(users));
+    loadRegisterValue(); 
     backToLogin();
+}
+
+
+function loadRegisterValue() {
+    loginEmail.value = registerEmail.value;
+    loginPasswort.value = registerPassword.value;
 }
 
 

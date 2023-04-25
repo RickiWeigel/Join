@@ -51,9 +51,9 @@ function loadRegisterInLogin() {
  * @returns string with rgb-color
  */
 function getRandomColor() {
-    let r = randomInteger(255);
-    let g = randomInteger(255);
-    let b = randomInteger(255);
+    let r = Math.floor(Math.random() * 255);
+    let g = Math.floor(Math.random() * 255);
+    let b = Math.floor(Math.random() * 255);
     let rgbColor = 'rgb(' + r + ', ' + g + ', ' + b + ')';
     return rgbColor;
 }

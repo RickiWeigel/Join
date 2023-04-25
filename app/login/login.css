@@ -136,7 +136,8 @@
 
 .loginButton {
     display: flex;
-    justify-content: center;
+    width: 364.672px;
+    justify-content: space-between;
     align-items: center;
     gap: 35px;
 }
@@ -172,7 +173,6 @@
     align-items: center;
     padding: 10px 35px;
     gap: 10px;
-    width: 197px;
     height: 48px;
     background: #ffffff;
     border: 1px solid #647188;

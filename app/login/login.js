@@ -28,14 +28,7 @@ async function register() {
         password: registerPassword.value,
     });
     await setItem('users', JSON.stringify(users));
-    resetForm();
-}
-
-
-function resetForm() {
-    email.value = '';
-    password.value = '';
-    registerBtn.disabled = false;
+    backToLogin();
 }
 
 

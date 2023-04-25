@@ -136,19 +136,19 @@
 
 .loginButton {
     display: flex;
-    justify-content: center;
+    width: 364.672px;
+    justify-content: space-between;
     align-items: center;
     gap: 35px;
 }
 
-.loginButtonBlue {
+.buttonBlue {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     padding: 10px 35px;
     gap: 10px;
-    width: 135px;
     height: 48px;
     background: #4589ff;
     border: none;
@@ -160,20 +160,19 @@
     transition: all 225ms ease-in-out;
 }
 
-.loginButtonBlue:hover {
+.buttonBlue:hover {
     background: #005dff;
     transition: all 125ms ease-in-out;
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
 }
 
-.loginButtonWhite {
+.buttonWhite {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     padding: 10px 35px;
     gap: 10px;
-    width: 197px;
     height: 48px;
     background: #ffffff;
     border: 1px solid #647188;
@@ -184,7 +183,7 @@
     transition: all 125ms ease-in-out;
 }
 
-.loginButtonWhite:hover {
+.buttonWhite:hover {
     transition: all 125ms ease-in-out;
     border: 2px solid #4589ff;
     color: #4589ff;

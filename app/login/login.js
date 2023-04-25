@@ -9,7 +9,7 @@ function loginInit() {
  * todo
  */
 function loginUser() {
-
+    window.location.href = '/app/summary/summary.html';
 }
 
 

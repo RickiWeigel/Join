@@ -1,32 +1,41 @@
-/**
- * init function when body loads in index.html
- */
-function loginInit() {
+
+let users = [];
+let registerBtn = document.getElementById('registerButton');
+let registerEmail = document.getElementById('signupInputEmail');
+let registerName = document.getElementById('signupInputName'); 
+let registerPassword = document.getElementById('signupInputPassword'); 
+
+
+async function loginInit(){
+    loadUsers();
     changeColorsOfLoginScreen();
 }
 
-/**
- * todo
- */
-function loginUser() {
-    window.location.href = '/app/summary/summary.html';
+async function loadUsers(){
+    try {
+        users = JSON.parse(await getItem('users'));
+    } catch(e){
+        console.error('Loading error:', e);
+    }
 }
 
 
-/**
- * todo
- */
-function registerNewUser() {
-
+async function register() {
+    registerBtn.disabled = true;
+    users.push({
+        name: registerName.value,
+        email: registerEmail.value,
+        password: registerPassword.value,
+    });
+    await setItem('users', JSON.stringify(users));
+    resetForm();
 }
 
 
-/**
- * todo
- */
-
-function sendResetEmail() {
-    
+function resetForm() {
+    email.value = '';
+    password.value = '';
+    registerBtn.disabled = false;
 }
 
 

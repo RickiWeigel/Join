@@ -29,6 +29,6 @@ async function includeHTML() {
 /**
  * load the login page 
  */
-function loadLogin() {
-    window.location.href = 'app/login/login.html';
-}
+// function loadLogin() {
+//     window.location.href = 'app/login/login.html';
+// }

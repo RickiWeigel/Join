@@ -136,8 +136,7 @@
 
 .loginButton {
     display: flex;
-    width: 364.672px;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     gap: 35px;
 }

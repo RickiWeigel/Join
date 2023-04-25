@@ -141,6 +141,8 @@
     gap: 35px;
 }
 
+
+
 .buttonBlue {
     display: flex;
     flex-direction: row;
@@ -187,6 +189,10 @@
     border: 2px solid #4589ff;
     color: #4589ff;
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+#guestLogin{
+    width: 197px;
 }
 
 .loginOptions {

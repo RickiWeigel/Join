@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <link rel="stylesheet" href="/style.css">
   <link rel="stylesheet" href="/app/login/login.css">
@@ -9,6 +10,7 @@
   <link rel="shortcut icon" href="/assets/img/logo/login_logo_blue.png" type="image/x-icon">
   <title>Join - Login</title>
 </head>
+
 <body onload="loginInit()">
   <div id="loginPage">
     <img id="loginLogoWhite" src="/assets/img/logo/login_logo_white.png" alt="Logo" />
@@ -24,40 +26,15 @@
       <span class="loginBoxHeadline">Log in</span>
       <form class="loginForm" onsubmit="loginUser(); return false;">
         <div class="loginInputColumn">
-          <input
-            id="loginInputEmail"
-            class="loginInput"
-            type="email"
-            placeholder="Email"
-            required
-          />
-          <img
-            class="loginIcon"
-            src="/assets/img/functionButtons/icon_email.png"
-            alt="E-Mail"
-          />
+          <input id="loginInputEmail" class="loginInput" type="email" placeholder="Email" required />
+          <img class="loginIcon" src="/assets/img/functionButtons/icon_email.png" alt="E-Mail" />
         </div>
         <div class="loginInputColumn">
-          <input
-            id="loginInputPassword"
-            class="loginInput"
-            type="password"
-            placeholder="Password"
-            required
-          />
-          <img
-            id="loginIconPassword"
-            class="loginIcon"
-            src="/assets/img/functionButtons/icon_password.png"
-            alt="Password"
-          />
-          <img
-            id="loginIconPasswordVisibility"
-            class="loginIcon visibilityIcon d-none"
-            src="/assets/img/functionButtons/icon_password_nonvisible.png"
-            alt="Password"
-            onclick="//todo" 
-          />
+          <input id="loginInputPassword" class="loginInput" type="password" placeholder="Password" required />
+          <img id="loginIconPassword" class="loginIcon" src="/assets/img/functionButtons/icon_password.png"
+            alt="Password" />
+          <img id="loginIconPasswordVisibility" class="loginIcon visibilityIcon d-none"
+            src="/assets/img/functionButtons/icon_password_nonvisible.png" alt="Password" onclick="//todo" />
           <div id="loginFaultPassword" class="loginFault d-none">
             Wrong password
           </div>
@@ -70,13 +47,11 @@
             <input type="checkbox" />
             <span class="checkmark">Remember me</span>
           </label>
-          <span class="loginForgot" onclick="showForgetPasswortSection()"
-            >Forgot my password</span
-          >
+          <span class="loginForgot" onclick="showForgetPasswortSection()">Forgot my password</span>
         </div>
         <div class="loginButton">
           <button class="buttonBlue">Log in</button>
-          <button class="buttonWhite" onclick="//todo">
+          <button id="guestLogin" class="buttonWhite" onclick="//todo">
             Guest log in
           </button>
         </div>
@@ -84,63 +59,24 @@
     </div>
     <!-- sign up -->
     <div id="signupBox" class="loginBox d-none">
-      <img
-        src="/assets/img/functionButtons/arrow_left.png"
-        alt="Back"
-        class="arrowBack"
-        onclick="backToLogin()"
-      />
+      <img src="/assets/img/functionButtons/arrow_left.png" alt="Back" class="arrowBack" onclick="backToLogin()" />
       <span class="loginBoxHeadline">Sign up</span>
       <form class="loginForm" onsubmit="register(); return false;">
         <div class="loginInputColumn">
-          <input
-            id="signupInputName"
-            class="loginInput"
-            type="text"
-            placeholder="Name"
-            required
-          />
-          <img
-            class="loginIcon"
-            src="/assets/img/functionButtons/icon_name.png"
-            alt="Name"
-          />
+          <input id="signupInputName" class="loginInput" type="text" placeholder="Name" required />
+          <img class="loginIcon" src="/assets/img/functionButtons/icon_name.png" alt="Name" />
         </div>
         <div class="loginInputColumn">
-          <input
-            id="signupInputEmail"
-            class="loginInput"
-            type="email"
-            placeholder="Email"
-            required
-          />
-          <img
-            class="loginIcon"
-            src="/assets/img/functionButtons/icon_email.png"
-            alt="E-Mail"
-          />
+          <input id="signupInputEmail" class="loginInput" type="email" placeholder="Email" required />
+          <img class="loginIcon" src="/assets/img/functionButtons/icon_email.png" alt="E-Mail" />
         </div>
         <div class="loginInputColumn">
-          <input
-            id="signupInputPassword"
-            class="loginInput"
-            type="password"
-            placeholder="Password"
-            required
-            minlength="8"
-          />
-          <img
-            id="signupIconPassword"
-            class="loginIcon"
-            src="/assets/img/functionButtons/icon_password.png"
-            alt="Password"
-          />
-          <img
-            id="signupIconPasswordVisibility"
-            class="loginIcon visibilityIcon d-none"
-            src="/assets/img/functionButtons/icon_password_nonvisible.png"
-            alt="Password"
-          />
+          <input id="signupInputPassword" class="loginInput" type="password" placeholder="Password" required
+            minlength="8" />
+          <img id="signupIconPassword" class="loginIcon" src="/assets/img/functionButtons/icon_password.png"
+            alt="Password" />
+          <img id="signupIconPasswordVisibility" class="loginIcon visibilityIcon d-none"
+            src="/assets/img/functionButtons/icon_password_nonvisible.png" alt="Password" />
         </div>
         <div class="loginButton">
           <button id="registerButton" class="buttonBlue">Sign up</button>
@@ -149,12 +85,7 @@
     </div>
     <!-- forgot password -->
     <div id="forgotBox" class="loginBox d-none">
-      <img
-        src="/assets/img/functionButtons/arrow_left.png"
-        alt="Back"
-        class="arrowBack"
-        onclick="backToLogin()"
-      />
+      <img src="/assets/img/functionButtons/arrow_left.png" alt="Back" class="arrowBack" onclick="backToLogin()" />
       <span class="loginBoxHeadline forgotHeadline">Forgot my password</span>
       <form class="loginForm" onsubmit="sendResetEmail(); return false;">
         <p class="forgotBoxText">
@@ -162,23 +93,13 @@
           your password.
         </p>
         <div class="loginInputColumn">
-          <input
-            id="forgotInputEmail"
-            class="loginInput"
-            type="email"
-            placeholder="Email"
-            required
-          />
-          <img
-            class="loginIcon"
-            src="/assets/img/functionButtons/icon_email.png"
-            alt="E-Mail"
-          />
+          <input id="forgotInputEmail" class="loginInput" type="email" placeholder="Email" required />
+          <img class="loginIcon" src="/assets/img/functionButtons/icon_email.png" alt="E-Mail" />
           <div id="forgotFault" class="d-none">
             This Email is not signed up yet
           </div>
         </div>
-  
+
         <div class="loginButton">
           <button class="buttonBlue forgotButton">
             Send me the email
@@ -188,73 +109,37 @@
     </div>
     <!-- reset password -->
     <div id="resetbox" class="loginbox d-none">
-      <img
-        src="/assets/img/functionButtons/arrow_left.png"
-        alt="Back"
-        class="arrowback"
-        onclick="backToLogin()"
-      />
+      <img src="/assets/img/functionButtons/arrow_left.png" alt="Back" class="arrowback" onclick="backToLogin()" />
       <span class="loginBoxHeadline resetHeadline">Reset your password</span>
       <form class="loginForm" onsubmit="resetPassword(); return false;">
         <p class="resetBoxText">Change your account password here</p>
         <div class="loginInputColumn">
-          <input
-            id="resetNewInputPassword"
-            class="loginInput"
-            type="password"
-            placeholder="New password"
-            required
-            minlength="8"
-          />
-          <img
-            id="resetNewIconPassword"
-            class="loginIcon"
-            src="/assets/img/functionButtons/icon_password.png"
-            alt="Password"
-          />
-          <img
-            id="resetNewIconPasswordVisibility"
-            class="loginIcon visibilityIcon d-none"
-            src="/assets/img/functionButtons/icon_password_nonvisible.png"
-            alt="Password"
-            onclick="//todo"
-          />
+          <input id="resetNewInputPassword" class="loginInput" type="password" placeholder="New password" required
+            minlength="8" />
+          <img id="resetNewIconPassword" class="loginIcon" src="/assets/img/functionButtons/icon_password.png"
+            alt="Password" />
+          <img id="resetNewIconPasswordVisibility" class="loginIcon visibilityIcon d-none"
+            src="/assets/img/functionButtons/icon_password_nonvisible.png" alt="Password" onclick="//todo" />
         </div>
         <div class="loginInputColumn">
-          <input
-            id="resetConfInputPassword"
-            class="loginInput"
-            type="password"
-            placeholder="Confirm password"
-          />
-          <img
-            id="resetConfIconPassword"
-            class="loginIcon"
-            src="/assets/img/functionButtons/icon_password.png"
-            alt="Password"
-          />
-          <img
-            id="resetConfIconPasswordVisibility"
-            class="loginIcon visibilityIcon d-none"
-            src="/assets/img/functionButtons/icon_password_nonvisible.png"
-            alt="Password"
-          />
+          <input id="resetConfInputPassword" class="loginInput" type="password" placeholder="Confirm password" />
+          <img id="resetConfIconPassword" class="loginIcon" src="/assets/img/functionButtons/icon_password.png"
+            alt="Password" />
+          <img id="resetConfIconPasswordVisibility" class="loginIcon visibilityIcon d-none"
+            src="/assets/img/functionButtons/icon_password_nonvisible.png" alt="Password" />
           <div id="resetFault" class="d-none">
             Make sure the second password you typed matches the first
           </div>
           <div id="resetAccept" class="d-none">Both passwords match</div>
         </div>
         <div class="loginButton">
-          <button
-            id="resetButton"
-            class="loginButtonBlue forgotButton deactivated-button"
-          >
+          <button id="resetButton" class="loginButtonBlue forgotButton deactivated-button">
             Continue
           </button>
         </div>
       </form>
     </div>
-  
+
     <div id="signupPopup" class="popup">
       <span>Your account has been successfully created</span>
     </div>
@@ -264,8 +149,9 @@
     <div id="resetPopup" class="popup">
       <span>Your password has been successfully changed</span>
     </div>
-  </div>  
+  </div>
   <script src="login.js"></script>
   <script src="../../storage.js"></script>
 </body>
+
 </html>

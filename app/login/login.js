@@ -25,20 +25,58 @@ async function loadUsers(){
 async function register() {
     registerBtn.disabled = true;
     users.push({
+        id: users.length,
         name: registerName.value,
         email: registerEmail.value,
         password: registerPassword.value,
+        color: getRandomColor(),
+        initials: getUserInitials(registerName.value),
+        contacts: [],
+        userTasks: []
     });
     await setItem('users', JSON.stringify(users));
-    loadRegisterValue(); 
+    loadRegisterInLogin(); 
     backToLogin();
 }
 
 
-function loadRegisterValue() {
+function loadRegisterInLogin() {
     loginEmail.value = registerEmail.value;
     loginPasswort.value = registerPassword.value;
 }
+
+
+/**
+ * generating random rgb-colors
+ * @returns string with rgb-color
+ */
+function getRandomColor() {
+    let r = randomInteger(255);
+    let g = randomInteger(255);
+    let b = randomInteger(255);
+    let rgbColor = 'rgb(' + r + ', ' + g + ', ' + b + ')';
+    return rgbColor;
+}
+
+
+/**
+ * getting users initials (first letter of firstname and lastname)
+ * @param {string} signUpName - username from sign up
+ * @returns string with two letters
+ */
+function getUserInitials(signUpName) {
+    let stringName = signUpName;
+    let stringLetters = stringName.match(/\b(\w)/g);
+    let initials;
+
+    if (stringLetters.length > 1) {
+        initials = stringLetters[0] + stringLetters[1];
+    } else {
+        initials = stringLetters[0];
+    }
+    return initials;
+}
+
 
 
 /**

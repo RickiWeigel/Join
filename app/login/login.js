@@ -1,5 +1,6 @@
 
 let users = [];
+let activeUser;
 let registerBtn = document.getElementById('registerButton');
 let registerEmail = document.getElementById('signupInputEmail');
 let registerName = document.getElementById('signupInputName'); 
@@ -19,6 +20,11 @@ async function loadUsers(){
     } catch(e){
         console.error('Loading error:', e);
     }
+}
+
+
+function login() {
+    //todo
 }
 
 

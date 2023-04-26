@@ -3,6 +3,7 @@ let userlogin = false;
 
 async function mainInit() {
   await includeHTML();
+  await loadUsers();
   //loadLogin();
 }
 

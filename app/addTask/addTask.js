@@ -7,12 +7,6 @@ async function addTaskInit(){
 
 
 
-function getActiveUserLocal() {
-    let activeUser = localStorage.getItem('activeUser');
-    return activeUser;
-}
-
-
 // Show Date
 $(function () {
   $("#datepicker").datepicker({

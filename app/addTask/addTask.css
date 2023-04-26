@@ -254,17 +254,24 @@ input {
 .contactsToAssign {
     font-size: 19px;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    padding: 18px 21px;
-    isolation: isolate;
     width: 100%;
-    height: 51px;
+    max-height: 204px;
     margin-bottom: 25px;
 }
 
-.contactsToAssign div{
+.singleContact{
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    height: 51px;
+    padding: 18px 21px;
+    cursor: pointer;
+}
+
+.singleContact:hover{
+    background: #D2E3FF;
+    cursor: pointer;
 }

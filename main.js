@@ -15,6 +15,14 @@ async function loadUsers(){
 }
 
 /**
+ * Load activeUser from localStorage
+ */
+function getActiveUserLocal() {
+  let activeUser = localStorage.getItem('activeUser');
+  return activeUser;
+}
+
+/**
  * Rendering the header and the sidebar in the page
  */
 async function includeHTML() {

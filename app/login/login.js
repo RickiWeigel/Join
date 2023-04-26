@@ -14,15 +14,6 @@ async function loginInit(){
     changeColorsOfLoginScreen();
 }
 
-// hab die in die main.js 
-// async function loadUsers(){
-//     try {
-//         users = JSON.parse(await getItem('users'));
-//     } catch(e){
-//         console.error('Loading error:', e);
-//     }
-// }
-
 
 function login() { 
     let user = users.find((u) => u.email == loginEmail.value && u.password == loginPasswort.value);
@@ -35,7 +26,7 @@ function login() {
 }
 
 
-function showLoginFault() { // Ja ricki ist noch nicht gut ich muss später nochmal drann ich weis :) 
+function showLoginFault() { 
     let mail = users.find((m) => m.email == loginEmail.value);
 
     if (!mail) {

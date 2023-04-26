@@ -76,6 +76,11 @@ input {
     cursor: pointer;
 }
 
+.dateContainer input{
+    height: 100%;
+    font-size: 19px;
+}
+
 .category {
     display: flex;
     flex-direction: column;

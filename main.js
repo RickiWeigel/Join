@@ -4,7 +4,6 @@ let userlogin = false;
 async function mainInit() {
   await includeHTML();
   await loadUsers();
-  //loadLogin();
 }
 
 async function loadUsers(){
@@ -38,8 +37,4 @@ async function includeHTML() {
       element.innerHTML = "Page not found";
     }
   }
-}
-
-function loadLogin() { // todo
-  window.location.href = "/app/login/login.html";
 }

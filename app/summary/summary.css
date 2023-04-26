@@ -94,11 +94,12 @@
 }
 
 .smallInfoBox span {
-
+    color:  #4589ff;
 }
 
-.smallInfoBox:hover>* {
+.smallInfoBox:hover * {
     transform: scale(1.03);
+    color: white;
 }
 
 .smallInfoBox:hover {

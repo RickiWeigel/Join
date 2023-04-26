@@ -23,24 +23,26 @@ async function loadUsers(){
 }
 
 
-function login() { // Ja ricki ist noch nicht gut ich muss später nochmal drann ich weis :) 
+function login() { 
     let user = users.find((u) => u.email == loginEmail.value && u.password == loginPasswort.value);
     if (user) {
         saveActiveUserLocal(user);
-        window.location.href = 'app/summary/summary.html';
+        window.location.href = '../summary/summary.html';
     } else {
         showLoginFault();
     }
 }
 
 
-function showLoginFault() {
+function showLoginFault() { // Ja ricki ist noch nicht gut ich muss später nochmal drann ich weis :) 
     let mail = users.find((m) => m.email == loginEmail.value);
 
     if (!mail) {
         document.getElementById('loginFaultEmail').classList.remove('d-none');
+        document.getElementById('loginFaultPassword').classList.add('d-none');
     } else {
         document.getElementById('loginFaultPassword').classList.remove('d-none');
+        document.getElementById('loginFaultEmail').classList.add('d-none');
         loginPasswort.value = '';
         loginPasswort.placeholder = 'Please try again!';
     }

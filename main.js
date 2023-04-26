@@ -1,7 +1,7 @@
 //loadJSONFromServer();  TODO
 let userlogin = false;
 
-async function init() {
+async function mainInit() {
   await includeHTML();
   //loadLogin();
 }

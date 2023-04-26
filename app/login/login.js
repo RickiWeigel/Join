@@ -42,7 +42,7 @@ function showLoginFault() {
 
 
 function saveActiveUserLocal(user) {
-    let activeUser = user.userId;
+    let activeUser = user.id;
     localStorage.setItem('activeUser', activeUser);
 }
 

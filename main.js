@@ -6,6 +6,14 @@ async function init() {
   //loadLogin();
 }
 
+async function loadUsers(){
+  try {
+      users = JSON.parse(await getItem('users'));
+  } catch(e){
+      console.error('Loading error:', e);
+  }
+}
+
 /**
  * Rendering the header and the sidebar in the page
  */

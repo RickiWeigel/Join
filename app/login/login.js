@@ -14,13 +14,14 @@ async function loginInit(){
     changeColorsOfLoginScreen();
 }
 
-async function loadUsers(){
-    try {
-        users = JSON.parse(await getItem('users'));
-    } catch(e){
-        console.error('Loading error:', e);
-    }
-}
+// hab die in die main.js 
+// async function loadUsers(){
+//     try {
+//         users = JSON.parse(await getItem('users'));
+//     } catch(e){
+//         console.error('Loading error:', e);
+//     }
+// }
 
 
 function login() { 

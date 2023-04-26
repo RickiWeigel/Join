@@ -11,14 +11,16 @@
     <link rel="stylesheet" href="addTask.css">
     <link rel="stylesheet" href="/jquery/jquery-ui.min.css">
 
+    <script src="/storage.js"></script>
     <script src="/jquery/external/jquery/jquery.js"></script>
     <script src="/jquery/jquery-ui.min.js"></script>
     <script src="/main.js"></script>
-    <script src="/app/addTask/addTask.js"></script>c
+    <script src="/app/addTask/addTask.js"></script>
+    <script src="/app/login/login.js"></script>
     <title>Join - Add Task</title>
 </head>
 
-<body onload="init()">
+<body onload="init(); addTaskInit()">
     <header>
         <div w3-include-html="..\header\header-template.html"></div>
     </header>
@@ -27,15 +29,22 @@
     </aside>
 
     <main>
-        <form onsubmit="return false" class="addTaskContent">
+        <form onsubmit="return false" class="addTaskContent" id="addTaskContent">
             <div class="addTaskSection">
                  <div class="enterTitle">
                     <input type="text" placeholder="Enter a title" required>
                  </div>
+
                  <div class="selectContacts">
                     <span>Select contacts to assign</span>
                     <img src="../../assets/img/functionButtons/selectorArrow.png">
                 </div>
+
+                <div class="contactsToAssign" id="contactsToAssign">
+                    <div><span>contactName</span><img src="/assets/img/functionButtons/checkButton.png"></div>
+                </div>
+
+
                 <div class="dueDate">
                     <span>Due date</span>
                     <div class="dateContainer">

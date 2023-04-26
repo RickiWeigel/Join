@@ -1,33 +1,213 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/style.css">
-    <link rel="stylesheet" href="/app/header/header.css">
-    <link rel="stylesheet" href="/app/sidebar/sidebar.css">
-    <link rel="stylesheet" href="contacts.html">
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/app/header/header.css" />
+    <link rel="stylesheet" href="/app/sidebar/sidebar.css" />
+    <link rel="stylesheet" href="contacts.css" />
+    <link rel="stylesheet" href="../login/login.css">
 
     <title>Join - Contacts</title>
-</head>
+  </head>
 
-<body onload="contactsInit()">
+  <body onload="contactsInit()">
     <header>
-        <div w3-include-html="..\header\header-template.html"></div>
+      <div w3-include-html="..\header\header-template.html"></div>
     </header>
     <aside>
-        <div w3-include-html="..\sidebar\sidebar-template.html"></div>
+      <div w3-include-html="..\sidebar\sidebar-template.html"></div>
     </aside>
 
     <main>
-        <!-- Todo -->
+      <!-- add contact popup -->
+      <div
+        id="popupBg"
+        class="d-none no-opacity"
+        onclick="//todo">
+        <div id="popupContact" onclick="//todo">
+          <img
+            class="popupCloseIcon"
+            src="../../assets/img/functionButtons/icon_close_white.png"
+            alt="Close"
+            onclick="//todo"
+          />
+          <div class="popupContactTop">
+            <img
+              class="contactTopLogo"
+              src="../../assets/img/logo/login_logo_white.png"
+              alt="Join Logo"
+            />
+            <span class="contactTopHeadline">Add contact</span>
+            <span class="contactTopSubtext"
+              >Tasks are better with a team!</span
+            >
+          </div>
+          <div class="popupContactBottom">
+            <div class="contactProfilBox">
+              <img
+                class="contactCrofilIMG"
+                src="../../assets/img/functionButtons/user_white.png"
+                alt="User"
+              />
+            </div>
+            <form
+              class="contactForm"
+              onsubmit="//todo; return false;"
+            >
+              <div class="contactInputBox">
+                <input
+                  id="contactName"
+                  type="text"
+                  class="contactInput"
+                  placeholder="Name"
+                  required
+                />
+                <img
+                  class="contactIcon"
+                  src="../../assets/img/functionButtons/icon_user_grey.png"
+                  alt="Name"
+                />
+              </div>
+              <div class="contactInputBox">
+                <input
+                  id="contactEmail"
+                  type="email"
+                  class="contactInput"
+                  placeholder="Email"
+                  pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z0-9.-]{1,}[.]{1}[a-zA-Z0-9]{2,}"
+                  required
+                />
+                <img
+                  class="contactIcon"
+                  src="../../assets/img/functionButtons/icon_mail_grey.png"
+                  alt="Email"
+                />
+              </div>
+              <div class="contactInputBox">
+                <input
+                  id="contactPhone"
+                  type="tel"
+                  class="contactInput"
+                  placeholder="Phone"
+                />
+                <img
+                  class="contactIcon"
+                  src="../../assets/img/functionButtons/icon_phone_grey.png"
+                  alt="Phone"
+                />
+              </div>
+              <div class="contactButtonBox">
+                <button class="contactButtonBlue">
+                  Create contact
+                  <img
+                    src="../../assets/img/functionButtons/icon_check_white.png"
+                    alt="Create"
+                  />
+                </button>
+              </div>
+            </form>
+            <div class="contactButtonBox">
+              <button
+                class="contactButtonWhite"
+                onmouseover="//todo"
+                onmouseleave="//todo"
+                onclick="//todo"
+              >
+                Cancel
+                <img
+                  id="button-close"
+                  src="../../assets/img/functionButtons/icon_close_dark.png"
+                  alt="Close"
+                />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end add contact popup -->
+      <!-- edit contact popup -->
+      <div id="popupBgEdit" class="d-none no-opacity" onclick="//TODO">
+        <div id="popupContactEdit" onclick="//TODO">
+            <img class="popupCloseIcon" src="../../assets/img/functionButtons/icon_close_white.png" alt="Close"
+                onclick="//TODO" />
+            <div class="popupContactTop">
+                <img class="contactTopLogo" src="../../assets/img/logo/login_logo_white.png" alt="Join Logo" />
+                <span class="contactTopHeadline">Edit contact</span>
+                <span class="contactTopSubtext">Tasks are better with a team!</span>
+            </div>
+            <div class="popupContactBottom">
+                <div id="contactProfilEdit"></div>
+                <form class="contactForm" onsubmit="//TODO; return false;">
+                    <div class="contactInputBox">
+                        <input id="contactNameEdit" type="text" class="contactInput" placeholder="Name"
+                            required />
+                        <img class="contactIcon" src="../../assets/img/functionButtons/icon_user_grey.png" alt="Name" />
+                    </div>
+                    <div class="contactInputBox">
+                        <input id="contactEmailEdit" type="email" class="contactInput" placeholder="Email"
+                            pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z0-9.-]{1,}[.]{1}[a-zA-Z0-9]{2,}" required />
+                        <img class="contactIcon" src="../../assets/img/functionButtons/icon_mail_grey.png" alt="Email" />
+                    </div>
+                    <div class="contactInputBox">
+                        <input id="contactPhoneEdit" type="tel" class="contactInput" placeholder="Phone" />
+                        <img class="contactIcon" src="../../assets/img/functionButtons/icon_phone_grey.png" alt="Phone" />
+                    </div>
+                    <div class="contactButtonBox">
+                        <button class="contactButtonBlue">
+                            Save
+                            <img src="../../assets/img/functionButtons/icon_check_white.png" alt="Create" />
+                        </button>
+                    </div>
+                </form>
+                <div class="contactButtonBox">
+                    <button class="contactButtonRed" onclick="//TODO; return false;">
+                        Delete
+                        <img class="contactDeleteIcon" src="../../assets/img/functionButtons/icon_close_white.png"
+                            alt="Delete" />
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end edit contact popup -->
+
+    <!-- contact list -->
+    <div class="contactsWrapper">
+        <div class="contactsBox">
+            <div id="contactsContent"></div>
+        </div>
+        <div id="contactsRight">
+            <div id="contactsDetail"></div>
+        </div>
+    </div>
+    <!-- end contact list -->
+
+    <!-- button for contact creation -->
+    <button class="addContactButton" onclick="//TODO">
+        <span>New contact</span>
+        <img src="../../assets/img/functionButtons/icon_addContact.png" alt="New Contact" />
+    </button>
+    <!-- end button for contact creation -->
+
+    <!-- bottom popup sliders -->
+    <div id="createdPopup" class="popup">
+        <span>Your contact has been created successfully.</span>
+    </div>
+    <div id="editedPopup" class="popup">
+        <span>Your contact has been edited successfully.</span>
+    </div>
+    <div id="deletedPopup" class="popup">
+        <span>Your contact has been deleted successfully.</span>
+    </div>
+    <!-- end bottom popup sliders -->
+
     </main>
 
     <script src="../../main.js"></script>
     <script src="../../storage.js"></script>
     <script src="./contacts.js"></script>
-</body>
+  </body>
 </html>

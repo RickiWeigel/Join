@@ -65,6 +65,16 @@ async function register() {
 }
 
 
+function guestLog() {
+    let guest = users[0];
+    loginEmail.value = guest.email; 
+    loginPasswort.value = guest.password; 
+    setTimeout(() => {
+        login(); 
+    }, 1000);
+}
+
+
 function loadRegisterInLogin() {
     loginEmail.value = registerEmail.value;
     loginPasswort.value = registerPassword.value;

@@ -23,8 +23,34 @@ async function loadUsers(){
 }
 
 
-function login() {
-    //todo
+function login() { // Ja ricki ich weis die Seite läd neu. Das Problem geh ich später an 
+    let user = users.find((u) => u.userEmail == loginEmail.value && u.userPassword == loginPasswort.value);
+    if (user) {
+        saveActiveUserLocal(user);
+        window.location.href = 'app/summary/summary.html';
+    } else {
+        showLoginFault();
+    }
+}
+
+
+function showLoginFault() {
+    let mail = users.find((m) => m.userEmail == loginEmail.value);
+
+    if (!mail) {
+        document.getElementById('loginFaultEmail').classList.remove('d-none');
+    } else {
+        document.getElementById('loginFaultPassword').classList.remove('d-none');
+        loginPasswort.value = '';
+        loginPasswort.placeholder = 'Please try again!';
+    }
+    showVisibilityIcon('login');
+}
+
+
+function saveActiveUserLocal(user) {
+    let activeUser = user.userId;
+    localStorage.setItem('activeUser', activeUser);
 }
 
 

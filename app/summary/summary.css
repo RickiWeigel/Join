@@ -94,7 +94,7 @@
 }
 
 .smallInfoBox span {
-    color: #4589FF;
+
 }
 
 .smallInfoBox:hover>* {
@@ -102,7 +102,7 @@
 }
 
 .smallInfoBox:hover {
-    color: white;
+    color: white; 
     padding: 40px;
     transform: scale(1.01);
     background: #005DFF;

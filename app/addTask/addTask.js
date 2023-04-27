@@ -8,6 +8,9 @@ let taskId = tasks.length;
 let priority;
 let assignedTo = selectedContactsToAssign;
 let taskStatus;
+let taskInputTitle = document.getElementById("taskTitle");
+let date = document.getElementById("datepicker");
+let description = document.getElementById("description");
 
 async function addTaskInit() {
   mainInit();
@@ -61,9 +64,6 @@ function contactCheckbox(id) {
 }
 
 async function addTask() {
-  let taskInputTitle = document.getElementById("taskTitle");
-  let date = document.getElementById("datepicker");
-  let description = document.getElementById("description");
     users[activeUser].userTasks.push({
     taskTitle: taskInputTitle.value,
     taskDescription: description.value,
@@ -71,10 +71,15 @@ async function addTask() {
     taskID: taskId,
   });
   await setItem(`users[${activeUser}].userTasks`, JSON.stringify(tasks));
+  resetInput();
+}
+
+function resetInput() {
   taskInputTitle = document.getElementById("taskTitle").value='';
   date = document.getElementById("datepicker").value='';
   description = document.getElementById("description").value='';
 }
+
 
 function renderCategories() {
     for (let i = 0; i < users[activeUser].userTasks.length; i++) {

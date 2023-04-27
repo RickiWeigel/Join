@@ -10,8 +10,6 @@ let taskStatus;
 
 async function addTaskInit() {
   mainInit();
-  loadTasks();
-  // loadUsers();
   // getActiveUserLocal();
 }
 
@@ -64,13 +62,13 @@ async function addTask() {
   let taskInputTitle = document.getElementById("taskTitle");
   let date = document.getElementById("datepicker");
   let description = document.getElementById("description");
-  tasks.push({
+  users[activeUser].userTasks.push({
     taskTitle: taskInputTitle.value,
     taskDescription: description.value,
     toDueDate: date.value,
     taskID: users[activeUser].userTasks.length,
   });
-  await setItem(`Tasks`, JSON.stringify(tasks));
+  await setItem(`users`, JSON.stringify(users));
   resetInput();
 }
 

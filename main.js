@@ -4,7 +4,7 @@ let activeUser;
 
 async function mainInit() {
   await includeHTML();
-  await loadUsers();
+  await loadUsers(); 
   getActiveUserLocal();
 }
 
@@ -13,14 +13,6 @@ async function loadUsers(){
       users = JSON.parse(await getItem('users'));
   } catch(e){
       console.error('Loading error:', e);
-  }
-}
-
-async function loadTasks() {
-  try {
-    tasks = JSON.parse(await getItem('Tasks'));
-  } catch(e) {
-    console.error('Loading error:', e);
   }
 }
 

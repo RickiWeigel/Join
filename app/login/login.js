@@ -56,7 +56,8 @@ async function register() {
         color: getRandomColor(),
         initials: getUserInitials(registerName.value),
         contacts: [],
-        userTasks: []
+        userTasks: [],
+        taskCategories: []
     });
     await setItem('users', JSON.stringify(users));
     loadRegisterInLogin(); 

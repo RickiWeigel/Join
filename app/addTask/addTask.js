@@ -4,16 +4,13 @@ let contactsSelektorOpen = false;
 let contactSelector;
 let categories = [];
 let subTask;
-let taskId = tasks.length;
 let priority;
 let assignedTo = selectedContactsToAssign;
 let taskStatus;
-let taskInputTitle = document.getElementById("taskTitle");
-let date = document.getElementById("datepicker");
-let description = document.getElementById("description");
 
 async function addTaskInit() {
   mainInit();
+  loadTasks();
   // loadUsers();
   // getActiveUserLocal();
 }
@@ -64,13 +61,16 @@ function contactCheckbox(id) {
 }
 
 async function addTask() {
-    users[activeUser].userTasks.push({
+  let taskInputTitle = document.getElementById("taskTitle");
+  let date = document.getElementById("datepicker");
+  let description = document.getElementById("description");
+  tasks.push({
     taskTitle: taskInputTitle.value,
     taskDescription: description.value,
     toDueDate: date.value,
-    taskID: taskId,
+    taskID: users[activeUser].userTasks.length,
   });
-  await setItem(`users[${activeUser}].userTasks`, JSON.stringify(tasks));
+  await setItem(`Tasks`, JSON.stringify(tasks));
   resetInput();
 }
 
@@ -80,12 +80,10 @@ function resetInput() {
   description = document.getElementById("description").value='';
 }
 
-
 function renderCategories() {
-    for (let i = 0; i < users[activeUser].userTasks.length; i++) {
-      document.getElementById("contactsToAssign").innerHTML += `
+  for (let i = 0; i < users[activeUser].userTasks.length; i++) {
+    document.getElementById("contactsToAssign").innerHTML += `
       <div onclick="contactCheckbox(${i})" class="singleContact"><span>${categories[i]}</span></div>
       `;
-    }
+  }
 }
-

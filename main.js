@@ -16,6 +16,15 @@ async function loadUsers(){
   }
 }
 
+async function loadTasks() {
+  try {
+    tasks = JSON.parse(await getItem('Tasks'));
+  } catch(e) {
+    console.error('Loading error:', e);
+  }
+}
+
+
 /**
  * Load activeUser from localStorage
  */

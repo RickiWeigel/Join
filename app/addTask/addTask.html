@@ -20,7 +20,7 @@
     <title>Join - Add Task</title>
 </head>
 
-<body onload="init(); addTaskInit()">
+<body onload="mainInit(); addTaskInit()">
     <header>
         <div w3-include-html="..\header\header-template.html"></div>
     </header>
@@ -35,25 +35,17 @@
                     <input type="text" placeholder="Enter a title" required>
                  </div>
 
-                 <div class="selectContacts">
+                 <div class="selectContacts" onclick="renderContactsToAssign();">
                     <span>Select contacts to assign</span>
                     <img src="../../assets/img/functionButtons/selectorArrow.png">
                 </div>
 
-                <div class="contactsToAssign" id="contactsToAssign">
-                    <div style="max-height: 204px; overflow: auto;">
-                    <div class="singleContact"><span>contactName</span><img src="/assets/img/functionButtons/checkButton.png"></div>
-                    <div class="singleContact"><span>contactName</span><img src="/assets/img/functionButtons/checkButton.png"></div>
-                    <div class="singleContact"><span>contactName</span><img src="/assets/img/functionButtons/checkButton.png"></div>
-                    <div class="singleContact"><span>contactName</span><img src="/assets/img/functionButtons/checkButton.png"></div>
-                    <div class="singleContact"><span>contactName</span><img src="/assets/img/functionButtons/checkButton.png"></div>
-                    <div class="singleContact"><span>contactName</span><img src="/assets/img/functionButtons/checkButton.png"></div>
-                    <div class="singleContact"><span>contactName</span><img src="/assets/img/functionButtons/checkButton.png"></div>
-                    <div class="singleContact"><span>contactName</span><img src="/assets/img/functionButtons/checkButton.png"></div>
-                    <div class="singleContact"><span>contactName</span><img src="/assets/img/functionButtons/checkButton.png"></div>
-                    <div class="singleContact"><span>contactName</span><img src="/assets/img/functionButtons/checkButton.png"></div>
+                <div class="contactsToAssign" >
+                    <div style="max-height: 204px; overflow: auto;" >
+                        <div style="max-height: 204px; overflow: auto;" id="contactsToAssign">
+                            
+                        </div>
                     </div>
-                    
                 </div>
 
 

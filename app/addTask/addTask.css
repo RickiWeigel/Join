@@ -186,6 +186,7 @@ input {
     align-items: flex-start;
     gap: 8px;
     border-bottom: 1px solid #D1D1D1;
+    margin-bottom: 25px;
 }
 
 .addSubtask {

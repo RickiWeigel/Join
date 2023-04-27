@@ -81,7 +81,7 @@ function resetInput() {
 function renderCategories() {
   for (let i = 0; i < users[activeUser].userTasks.length; i++) {
     document.getElementById("contactsToAssign").innerHTML += `
-      <div onclick="contactCheckbox(${i})" class="singleContact"><span>${categories[i]}</span></div>
+      <div class="singleContact"><span>${categories[i]}</span></div>
       `;
   }
 }

@@ -1,15 +1,28 @@
 let tasks = [];
-let contacts = ["user1", "user2", "user3", "user4", "user5"];
 let selectedContactsToAssign = [];
+let selectedcategories=[];
 let contactsSelektorOpen = false;
 let loginCheckedBox;
+let title = document.getElementById('taskTitle');
+let description = document.getElementById('description');
+let date = document.getElementById('datepicker');
+let category;
+let subTask;
+let taskId = tasks.length;
+let priority;
+let assignedTo = selectedContactsToAssign;
+let taskStatus;
+
+
 
 async function addTaskInit() {
+  mainInit();
+  loadUsers();  
   getActiveUserLocal();
-  loadUsers();
 }
 
-// Show Date
+
+// Show Date (jquery)
 $(function () {
   $("#datepicker").datepicker({
     inline: true,
@@ -18,19 +31,24 @@ $(function () {
   });
 });
 
+
 function renderContactsToAssign() {
   if (contactsSelektorOpen === false) {
-    for (let i = 0; i < contacts.length; i++) {
+    for (let i = 0; i < users[activeUser].contacts.length; i++) {
       document.getElementById("contactsToAssign").innerHTML += `
       <div onclick="loginCheckbox(${i})" class="singleContact"><span>${contacts[i]}</span><img id="contactSelector[${i}]"  src="/assets/img/functionButtons/checkButton.png"></div>
       `;
     }
+    document.getElementById("contactsToAssign").innerHTML +=`
+    <div class="singleContact"><span>Invite new contact</span><img src="/assets/img/functionButtons/contactIcon.png"></div>
+    `;
     contactsSelektorOpen = true;
   } else {
     document.getElementById("contactsToAssign").innerHTML = ``;
     contactsSelektorOpen = false;
   }
 }
+
 
 function loginCheckbox(id) {
   if (loginCheckedBox) {
@@ -42,13 +60,11 @@ function loginCheckbox(id) {
     if (index > -1) {
       selectedContactsToAssign.splice(index, 1);
     }
-
     loginCheckedBox = false;
 
   } else {
     //fügt aktivierten Kontakt hinzu
     selectedContactsToAssign.push(contacts[id]);
-
 
     document.getElementById(`contactSelector[${id}]`).src =
       "/assets/img/functionButtons/checkButtonChecked.png";
@@ -56,4 +72,14 @@ function loginCheckbox(id) {
   }
 }
 
+async function addTask() {
+  tasks.push({
+      taskTitle: title.value,
+      taskDescription: description.value,
+      toDueDate: date.value,
+      taskID: taskId,
 
+
+  });
+  await setItem('tasks', JSON.stringify(tasks));
+}

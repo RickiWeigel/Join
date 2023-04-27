@@ -16,11 +16,10 @@
     <script src="/jquery/jquery-ui.min.js"></script>
     <script src="/main.js"></script>
     <script src="/app/addTask/addTask.js"></script>
-    <script src="/app/login/login.js"></script>
     <title>Join - Add Task</title>
 </head>
 
-<body onload="mainInit(); addTaskInit()">
+<body onload="addTaskInit()">
     <header>
         <div w3-include-html="..\header\header-template.html"></div>
     </header>
@@ -32,7 +31,7 @@
         <form onsubmit="return false" class="addTaskContent" id="addTaskContent">
             <div class="addTaskSection">
                  <div class="enterTitle">
-                    <input type="text" placeholder="Enter a title" required>
+                    <input id="taskTitle" type="text" placeholder="Enter a title" required>
                  </div>
 
                  <div class="selectContacts" onclick="renderContactsToAssign();">

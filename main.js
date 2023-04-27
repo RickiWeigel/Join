@@ -1,5 +1,6 @@
 //loadJSONFromServer();  TODO
 let userlogin = false;
+let activeUser;
 
 async function mainInit() {
   await includeHTML();
@@ -18,8 +19,7 @@ async function loadUsers(){
  * Load activeUser from localStorage
  */
 function getActiveUserLocal() {
-  let activeUser = localStorage.getItem('activeUser');
-  return activeUser;
+  activeUser = localStorage.getItem('activeUser');
 }
 
 /**

@@ -1,6 +1,5 @@
 
 let users = [];
-let activeUser;
 let registerBtn = document.getElementById('registerButton');
 let registerEmail = document.getElementById('signupInputEmail');
 let registerName = document.getElementById('signupInputName'); 

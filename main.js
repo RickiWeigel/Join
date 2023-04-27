@@ -5,6 +5,7 @@ let activeUser;
 async function mainInit() {
   await includeHTML();
   await loadUsers();
+  getActiveUserLocal();
 }
 
 async function loadUsers(){

@@ -32,7 +32,8 @@
                     <span>Select contacts to assign</span>
                     <img src="../../assets/img/functionButtons/selectorArrow.png">
                 </div>
-                <div class="contactsToAssign" >
+
+                <div class="dropDownContainer" >
                     <div>
                         <div style="max-height: 204px; overflow: auto;" id="contactsToAssign">
                             
@@ -49,31 +50,39 @@
                     </div>                    
                 </div>
 
+
                 <div class="category">
                     <span>Category</span>
-                    <div class="selectCategory">
+                    <div class="selectCategory" onclick="renderCategories()">
                         <div class="date">Select task category</div>
                         <img src="../../assets/img/functionButtons/selectorArrow.png">
                     </div>                    
                 </div>
-                <div class="contactsToAssign" >
+
+
+                <div class="dropDownContainer" >
                     <div>
                         <div style="max-height: 204px; overflow: auto;" id="selectTaskCategory">
-                            <div class="singleContact"><span>New category</span></div>
-                            
+                            <!-- <div class="dropdown-content"><span>New category</span></div> -->
+                            <!-- <div class="dropdown-content"><span>${users[activeUser].taskCategories[i]}</span>></div> -->
                         </div>
                     </div>
                 </div>
+
 
                 <div class="priorityContainer">
                     <img class="priority" id="priorityUrgent" src="../../assets/img/addTask/TaskValueHard.png">
                     <img class="priority" id="priorityMedium" src="../../assets/img/addTask/TaskValueMid.png">
                     <img class="priority" id="priorityLow" src="../../assets/img/addTask/TaskValueLow.png">
                 </div>
+
+
                 <div class="descriptionContainer">
                     <span>Description</span>
                     <textarea name="descriptionTextarea" placeholder="Enter a description" id="description" cols="30" rows="10"></textarea>
                 </div>
+
+
                 <div class="subtaskContainer">
                     <span>Subtasks</span>
                     <div class="addSubtask">

@@ -2,7 +2,8 @@ let tasks = [];
 let selectedContactsToAssign = [];
 let contactsSelektorOpen = false;
 let contactSelector;
-let categories = [];
+let taskCategories = [];
+let categorySelektorOpen;
 let subTask;
 let priority;
 let assignedTo = selectedContactsToAssign;
@@ -23,19 +24,36 @@ $(function () {
 });
 
 function renderContactsToAssign() {
-  if (contactsSelektorOpen === false) {
+  if (!contactsSelektorOpen) {
     for (let i = 0; i < users[activeUser].contacts.length; i++) {
       document.getElementById("contactsToAssign").innerHTML += `
-      <div onclick="contactCheckbox(${i})" class="singleContact"><span>${contacts[i]}</span><img id="contactSelector[${i}]"  src="/assets/img/functionButtons/checkButton.png"></div>
+      <div onclick="contactCheckbox(${i})" class="dropdown-content"><span>${contacts[i]}</span><img id="contactSelector[${i}]"  src="/assets/img/functionButtons/checkButton.png"></div>
       `;
     }
     document.getElementById("contactsToAssign").innerHTML += `
-    <div class="singleContact"><span>Invite new contact</span><img src="/assets/img/functionButtons/contactIcon.png"></div>
+    <div class="dropdown-content"><span>Invite new contact</span><img src="/assets/img/functionButtons/contactIcon.png"></div>
     `;
     contactsSelektorOpen = true;
   } else {
     document.getElementById("contactsToAssign").innerHTML = ``;
     contactsSelektorOpen = false;
+  }
+}
+
+function renderCategories() {
+  if (!categorySelektorOpen) {
+    document.getElementById("selectTaskCategory").innerHTML = `
+  <div class="dropdown-content"><span>New category</span></div>
+  `;
+    for (let i = 0; i < users[activeUser].taskCategories.length; i++) {
+      document.getElementById("selectTaskCategory").innerHTML += `
+    <div class="dropdown-content"><span>${users[activeUser].taskCategories[i].categoryName}</span></div>
+    `;
+    }
+    categorySelektorOpen = true;
+  } else {
+    document.getElementById("selectTaskCategory").innerHTML = ``;
+    categorySelektorOpen = false;
   }
 }
 
@@ -73,15 +91,20 @@ async function addTask() {
 }
 
 function resetInput() {
-  taskInputTitle = document.getElementById("taskTitle").value='';
-  date = document.getElementById("datepicker").value='';
-  description = document.getElementById("description").value='';
+  taskInputTitle = document.getElementById("taskTitle").value = "";
+  date = document.getElementById("datepicker").value = "";
+  description = document.getElementById("description").value = "";
 }
 
-function renderCategories() {
-  for (let i = 0; i < users[activeUser].userTasks.length; i++) {
-    document.getElementById("contactsToAssign").innerHTML += `
-      <div class="singleContact"><span>${categories[i]}</span></div>
-      `;
-  }
+function test() {
+  taskCategories.push(
+    {
+      categoryName: "test1",
+      color: "255 255 255",
+    },
+    {
+      categoryName: "test2",
+      color: "255 255 255",
+    }
+  );
 }

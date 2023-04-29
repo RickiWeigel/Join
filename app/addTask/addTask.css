@@ -251,13 +251,13 @@ input {
     cursor: pointer;
 }
 
-.contactsToAssign {
+.dropDownContainer {
     font-size: 19px;
     width: 100%;
     margin-bottom: 25px;
 }
 
-.singleContact{
+.dropdown-content{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -267,7 +267,7 @@ input {
     cursor: pointer;
 }
 
-.singleContact:hover{
+.dropdown-content:hover{
     background: #D2E3FF;
     cursor: pointer;
 }

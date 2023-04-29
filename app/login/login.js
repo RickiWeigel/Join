@@ -1,5 +1,7 @@
 
 let users = [];
+let rememberMe = false;
+let rememberMeCheckbox = document.getElementById('checkboxRememberMe');
 let registerBtn = document.getElementById('registerButton');
 let registerEmail = document.getElementById('signupInputEmail');
 let registerName = document.getElementById('signupInputName'); 
@@ -11,6 +13,17 @@ let loginPasswort = document.getElementById('loginInputPassword');
 async function loginInit(){
     loadUsers();
     changeColorsOfLoginScreen();
+}
+
+
+function rememberMeCheck() {
+    if(!rememberMe) {
+        rememberMeCheckbox.src = '../../assets/img/functionButtons/checkboxActive.png'
+        rememberMe = true; 
+    } else {
+        rememberMeCheckbox.src = '../../assets/img/functionButtons/checkbox.png'
+        rememberMe = false; 
+    }
 }
 
 

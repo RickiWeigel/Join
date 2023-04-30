@@ -22,7 +22,7 @@
     </aside>
 
     <main>
-        <form onsubmit="return false" class="addTaskContent" id="addTaskContent">
+        <form onsubmit=" addTask(); return false;" class="addTaskContent" id="addTaskContent">
             <div class="addTaskSection">
                  <div class="enterTitle">
                     <input id="taskTitle" type="text" placeholder="Enter a title" required>
@@ -45,7 +45,7 @@
                 <div class="dueDate">
                     <span>Due date</span>
                     <div class="dateContainer">
-                        <input type="text" class="date" placeholder="dd/mm/yyyy" id="datepicker"></input>
+                        <input type="text" class="date" placeholder="dd/mm/yyyy" id="datepicker" required></input>
                         <img src="../../assets/img/board/calendar.png">
                     </div>                    
                 </div>
@@ -79,7 +79,7 @@
 
                 <div class="descriptionContainer">
                     <span>Description</span>
-                    <textarea name="descriptionTextarea" placeholder="Enter a description" id="description" cols="30" rows="10"></textarea>
+                    <textarea required name="descriptionTextarea" placeholder="Enter a description" id="description" cols="30" rows="10"></textarea>
                 </div>
 
 
@@ -97,7 +97,7 @@
             </div>
             <div class="btn-container">
                 <div class="btn-white">Clear <img src="/assets/img/functionButtons/icon_cancel.png"></div>
-                <button class="btn-blue" onclick="addTask(); return false;">Creat Task <img src="/assets/img/functionButtons/akar-icons_check.png"></button>
+                <button class="btn-blue">Creat Task <img src="/assets/img/functionButtons/akar-icons_check.png"></button>
             </div>
         </form>
     </main>

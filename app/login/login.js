@@ -12,11 +12,23 @@ let loginPasswort = document.getElementById('loginInputPassword');
 
 async function loginInit(){
     loadUsers();
+    loadRememberMeDatas();
     changeColorsOfLoginScreen();
 }
 
 
-function rememberMeCheck() {
+function loadRememberMeDatas() {
+    let rememberMeStorage = localStorage.getItem('rememberMe');
+    if(rememberMeStorage == 'true') {
+        loginEmail.value = localStorage.getItem('logDataEmail');
+        loginPasswort.value = localStorage.getItem('logDataPassword');
+        rememberMeCheckbox.src = '../../assets/img/functionButtons/checkboxActive.png'
+        rememberMe = true; 
+    }
+}
+
+
+function rememberMeCheckboxToggle() {
     if(!rememberMe) {
         rememberMeCheckbox.src = '../../assets/img/functionButtons/checkboxActive.png'
         rememberMe = true; 
@@ -27,8 +39,22 @@ function rememberMeCheck() {
 }
 
 
+function setRememberMeStorage() {
+    if(rememberMe) {
+        localStorage.setItem('logDataEmail',loginEmail.value);
+        localStorage.setItem('logDataPassword',loginPasswort.value);
+        localStorage.setItem('rememberMe', true);
+    } else {
+        localStorage.setItem('logDataEmail',null);
+        localStorage.setItem('logDataPassword',null);
+        localStorage.setItem('rememberMe', false);
+    }
+}
+
+
 function login() { 
     let user = users.find((u) => u.email == loginEmail.value && u.password == loginPasswort.value);
+    setRememberMeStorage();
     if (user) {
         saveActiveUserLocal(user);
         window.location.href = '../summary/summary.html';

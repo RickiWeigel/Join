@@ -22,7 +22,7 @@
 .enterTitle {
     font-size: 40px;
     border-bottom: 1px solid #D1D1D1;
-    padding: 13px 21px;
+    padding: 10px 21px;
     cursor: pointer;
     margin-bottom: 25px;
 }
@@ -43,7 +43,7 @@ input {
     align-items: center;
     justify-content: space-between;
     font-size: 19px;
-    padding: 18px 21px;
+    padding: 10px 21px;
     border-bottom: 1px solid #D1D1D1;
     width: 100%;
     cursor: pointer;
@@ -58,7 +58,7 @@ input {
     color: #42526E;
     font-weight: 700;
     font-size: 19px;
-    margin-bottom: 45px;
+    margin-bottom: 40px;
 }
 
 .dateContainer {
@@ -68,7 +68,7 @@ input {
     font-weight: 400;
     align-items: center;
     justify-content: space-between;
-    padding: 18px 21px;
+    padding: 10px 21px;
     gap: 10px;
     width: 100%;
     border-bottom: 1px solid #D1D1D1;
@@ -97,7 +97,7 @@ input {
     font-weight: 400;
     align-items: center;
     justify-content: space-between;
-    padding: 18px 21px;
+    padding: 10px 21px;
     gap: 10px;
     width: 100%;
     border-bottom: 1px solid #D1D1D1;
@@ -192,7 +192,7 @@ input {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 14px 21px;
+    padding: 10px 21px;
     width: 100%;
     cursor: pointer;
 }

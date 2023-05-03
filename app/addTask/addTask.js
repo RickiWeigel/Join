@@ -31,7 +31,7 @@ function renderContactsToAssign() {
       `;
     }
     document.getElementById("contactsToAssign").innerHTML += `
-    <div class="dropdown-content"><span>Invite new contact</span><img src="/assets/img/functionButtons/contactIcon.png"></div>
+    <div onclick="showInviteNewContact()" class="dropdown-content"><span>Invite new contact</span><img src="/assets/img/functionButtons/contactIcon.png"></div>
     `;
     contactsSelektorOpen = true;
   } else {
@@ -107,4 +107,24 @@ function test() {
       color: "255 255 255",
     }
   );
+}
+
+
+function showInviteNewContact(){
+  document.getElementById('showInviteNewContact').classList.remove('d-none');
+  document.getElementById('selectContacts').classList.add('d-none');
+  document.getElementById('contactsToAssign').classList.add('d-none');  
+}
+
+
+function hideInviteNewContact(){
+  document.getElementById('showInviteNewContact').classList.add('d-none');
+  document.getElementById('selectContacts').classList.remove('d-none');
+  document.getElementById('contactsToAssign').classList.remove('d-none');
+}
+
+function addNewInviteContact(){
+  let contactEmail = document.getElementById('inviteNewContact').value;
+
+  
 }

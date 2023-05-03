@@ -122,9 +122,3 @@ function hideInviteNewContact(){
   document.getElementById('selectContacts').classList.remove('d-none');
   document.getElementById('contactsToAssign').classList.remove('d-none');
 }
-
-function addNewInviteContact(){
-  let contactEmail = document.getElementById('inviteNewContact').value;
-  push.users[activeUser].contacts
-
-}

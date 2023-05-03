@@ -6,7 +6,6 @@ let taskCategories = [];
 let categorySelektorOpen;
 let subTask;
 let priority;
-let assignedTo = selectedContactsToAssign;
 let taskStatus;
 
 async function addTaskInit() {
@@ -85,6 +84,7 @@ async function addTask() {
     taskDescription: description.value,
     toDueDate: date.value,
     taskID: users[activeUser].userTasks.length,
+    assignedTo: selectedContactsToAssign
   });
   await setItem(`users`, JSON.stringify(users));
   resetInput();

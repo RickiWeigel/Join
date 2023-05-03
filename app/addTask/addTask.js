@@ -27,7 +27,7 @@ function renderContactsToAssign() {
   if (!contactsSelektorOpen) {
     for (let i = 0; i < users[activeUser].contacts.length; i++) {
       document.getElementById("contactsToAssign").innerHTML += `
-      <div onclick="contactCheckbox(${i})" class="dropdown-content"><span>${contacts[i]}</span><img id="contactSelector[${i}]"  src="/assets/img/functionButtons/checkButton.png"></div>
+      <div onclick="contactCheckbox(${i})" class="dropdown-content"><span>${users[activeUser].contacts[i].name}</span><img id="contactSelector[${i}]"  src="/assets/img/functionButtons/checkButton.png"></div>
       `;
     }
     document.getElementById("contactsToAssign").innerHTML += `
@@ -62,14 +62,14 @@ function contactCheckbox(id) {
     document.getElementById(`contactSelector[${id}]`).src =
       "/assets/img/functionButtons/checkButton.png";
     //entfernt aktivierten Kontakt
-    let index = selectedContactsToAssign.indexOf(contacts[id]);
+    let index = selectedContactsToAssign.indexOf(users[activeUser].contacts[id]);
     if (index > -1) {
       selectedContactsToAssign.splice(index, 1);
     }
     contactSelector = false;
   } else {
     //fügt aktivierten Kontakt hinzu
-    selectedContactsToAssign.push(contacts[id]);
+    selectedContactsToAssign.push(users[activeUser].contacts[id]);
     document.getElementById(`contactSelector[${id}]`).src =
       "/assets/img/functionButtons/checkButtonChecked.png";
     contactSelector = true;

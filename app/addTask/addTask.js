@@ -84,7 +84,7 @@ async function addTask() {
     taskDescription: description.value,
     toDueDate: date.value,
     taskID: users[activeUser].userTasks.length,
-    assignedTo: selectedContactsToAssign
+    assignedTo: selectedContactsToAssign,
   });
   await setItem(`users`, JSON.stringify(users));
   resetInput();
@@ -94,19 +94,6 @@ function resetInput() {
   taskInputTitle = document.getElementById("taskTitle").value = "";
   date = document.getElementById("datepicker").value = "";
   description = document.getElementById("description").value = "";
-}
-
-function test() {
-  taskCategories.push(
-    {
-      categoryName: "test1",
-      color: "255 255 255",
-    },
-    {
-      categoryName: "test2",
-      color: "255 255 255",
-    }
-  );
 }
 
 
@@ -121,4 +108,11 @@ function hideInviteNewContact(){
   document.getElementById('showInviteNewContact').classList.add('d-none');
   document.getElementById('selectContacts').classList.remove('d-none');
   document.getElementById('contactsToAssign').classList.remove('d-none');
+}
+
+
+function addNewInviteContact(){
+  let contactEmail = document.getElementById('inviteNewContact').value;
+
+  
 }

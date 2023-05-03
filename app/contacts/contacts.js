@@ -2,7 +2,7 @@ let contactContent = document.getElementById('contactsContent');
 
 async function contactsInit() {
     await mainInit(); 
-    renderContacts();
+    //renderContacts();
     renderContactsCards();
 }
 
@@ -30,5 +30,5 @@ function templateContact(contact, index) {
             <div class="dataMail">${contact.email}</div>
         </div>
     </div>
-        `
+    `
 }

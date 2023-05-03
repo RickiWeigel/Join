@@ -2,6 +2,14 @@ body {
     padding: 0 !important;
 }
 
+main {
+    height: 100vh;
+}
+
+#mainContacts {
+    align-items: flex-start;
+}
+
 .checkAndCrossIconsCategory {
     left: 350px;
 }
@@ -17,17 +25,14 @@ body {
 }
 
 .contactsWrapper {
-    display: flex;
     height: 100%;
-    padding-left: 230px;
-    padding-top: 100px;
 }
 
 .contactsBox {
     width: 450px;
     height: 100%;
     overflow-y: auto;
-    box-shadow: 4px 0px 6px rgba(0, 0, 0, 0.08);
+    box-shadow: 4px 0px 6px rgba(0, 0, 0, 0.089);
     padding: 48px;
 }
 

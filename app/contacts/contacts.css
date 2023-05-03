@@ -331,7 +331,7 @@ body {
     transition: all 225ms ease-in-out;
 }
 
-.contactPic {
+.contactAvatar {
     flex-shrink: 0;
     width: 42px;
     height: 42px;
@@ -401,7 +401,7 @@ body {
     padding: 48px;
 }
 
-.contactPicDetail {
+.contactAvatarDetail {
     flex-shrink: 0;
     width: 120px;
     height: 120px;
@@ -766,7 +766,7 @@ body {
 }
 
 @media (max-height: 720px) {
-    .contactPicDetail {
+    .contactAvatarDetail {
         width: 80px;
         height: 80px;
         font-size: 36px;

@@ -125,6 +125,6 @@ function hideInviteNewContact(){
 
 function addNewInviteContact(){
   let contactEmail = document.getElementById('inviteNewContact').value;
+  push.users[activeUser].contacts
 
-  
 }

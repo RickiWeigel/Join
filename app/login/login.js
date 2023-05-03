@@ -153,22 +153,6 @@ function getUserInitials(signUpName) {
 
 
 
-// function userNameInitial(name) {
-//     let initials = "";
-//     let nameSplit = name.split(" ");
-  
-//     for (let i = 0; i < nameSplit.length; i++) {           viel besser :DDDD
-//       let initial = nameSplit[i].charAt(0);
-//       initials += initial;
-//     }
-//     return initials;
-//   }
-
-
-
-
-
-
 /**
  * go back to login section 
  */

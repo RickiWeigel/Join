@@ -61,7 +61,9 @@ function contactCheckbox(id) {
     document.getElementById(`contactSelector[${id}]`).src =
       "/assets/img/functionButtons/checkButton.png";
     //entfernt aktivierten Kontakt
-    let index = selectedContactsToAssign.indexOf(users[activeUser].contacts[id]);
+    let index = selectedContactsToAssign.indexOf(
+      users[activeUser].contacts[id]
+    );
     if (index > -1) {
       selectedContactsToAssign.splice(index, 1);
     }
@@ -96,23 +98,29 @@ function resetInput() {
   description = document.getElementById("description").value = "";
 }
 
+function showInviteNewContact() {
+  document.getElementById("showInviteNewContact").classList.remove("d-none");
+  document.getElementById("selectContacts").classList.add("d-none");
+  document.getElementById("contactsToAssign").classList.add("d-none");
+}
 
-function showInviteNewContact(){
-  document.getElementById('showInviteNewContact').classList.remove('d-none');
-  document.getElementById('selectContacts').classList.add('d-none');
-  document.getElementById('contactsToAssign').classList.add('d-none');  
+function hideInviteNewContact() {
+  document.getElementById("showInviteNewContact").classList.add("d-none");
+  document.getElementById("selectContacts").classList.remove("d-none");
+  document.getElementById("contactsToAssign").classList.remove("d-none");
 }
 
 
-function hideInviteNewContact(){
-  document.getElementById('showInviteNewContact').classList.add('d-none');
-  document.getElementById('selectContacts').classList.remove('d-none');
-  document.getElementById('contactsToAssign').classList.remove('d-none');
-}
-
-
-function addNewInviteContact(){
-  let contactEmail = document.getElementById('inviteNewContact').value;
-
-  
+async function addNewInviteContact() {
+  let contactEmail = document.getElementById("inviteNewContact").value;
+  users[activeUser].contacts.push({
+    name: contactEmail,
+    email: contactEmail,
+    phone: null,
+    initials: null,
+    color: getRandomColor(),
+  });
+  await setItem(`users`, JSON.stringify(users));
+  hideInviteNewContact()
+  renderContactsToAssign()
 }

@@ -40,3 +40,34 @@ async function includeHTML() {
     }
   }
 }
+
+/**
+ * getting users initials (first letter of firstname and lastname)
+ * @param {string} signUpName - username from sign up
+ * @returns string with two letters
+ */
+function getUserInitials(signUpName) {
+  let stringName = signUpName;
+  let stringLetters = stringName.match(/\b(\w)/g);
+  let initials;
+
+  if (stringLetters.length > 1) {
+      initials = stringLetters[0] + stringLetters[1];
+  } else {
+      initials = stringLetters[0];
+  }
+  return initials;
+}
+
+
+/**
+ * generating random rgb-colors
+ * @returns string with rgb-color
+ */
+function getRandomColor() {
+  let r = Math.floor(Math.random() * 255);
+  let g = Math.floor(Math.random() * 255);
+  let b = Math.floor(Math.random() * 255);
+  let rgbColor = 'rgb(' + r + ', ' + g + ', ' + b + ')';
+  return rgbColor;
+}

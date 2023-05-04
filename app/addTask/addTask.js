@@ -116,11 +116,12 @@ async function addNewInviteContact() {
   users[activeUser].contacts.push({
     name: contactEmail,
     email: contactEmail,
-    phone: null,
-    initials: null,
+    phone: '',
+    initials: '',
     color: getRandomColor(),
   });
   await setItem(`users`, JSON.stringify(users));
+  document.getElementById("inviteNewContact").value = '';
   hideInviteNewContact()
   renderContactsToAssign()
 }

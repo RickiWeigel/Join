@@ -1,3 +1,7 @@
+body{
+    user-select: none;
+}
+
 .addTaskContent {
     display: flex;
     width: 100%;

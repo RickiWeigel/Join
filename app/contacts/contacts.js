@@ -9,10 +9,7 @@ function renderContactsCards() {
   contactContent.innerHTML = "";
   if (users[activeUser].contacts) {
     for (let i = 0; i < users[activeUser].contacts.length; i++) {
-      contactContent.innerHTML += templateContact(
-        users[activeUser].contacts[i],
-        i
-      );
+      contactContent.innerHTML += templateContact(users[activeUser].contacts[i],i);
     }
   } else {
     contactContent.innerHTML = noContact();

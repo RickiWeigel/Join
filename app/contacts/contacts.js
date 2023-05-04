@@ -2,19 +2,61 @@ let contactContent = document.getElementById("contactsContent");
 
 async function contactsInit() {
   await mainInit();
-  renderContactsCards();
+  renderContacts();
 }
 
-function renderContactsCards() {
-  contactContent.innerHTML = "";
-  if (users[activeUser].contacts) {
-    for (let i = 0; i < users[activeUser].contacts.length; i++) {
-      contactContent.innerHTML += templateContact(users[activeUser].contacts[i],i);
-    }
-  } else {
-    contactContent.innerHTML = noContact();
-  }
+function renderContacts() {
+    const contacts = users[activeUser].contacts;
+    const contactList = [];
+  
+    // Erstelle ein Set aller ersten Buchstaben
+    const firstLetters = new Set(contacts.map((contact) => contact.name.charAt(0)));
+    
+    // Sortiere die ersten Buchstaben und erstelle eine Karte für jeden Buchstaben
+    [...firstLetters].sort().forEach((letter) => {
+        const alphabet = contacts
+          .filter((contact) => contact.name.charAt(0) === letter)
+          .sort((a, b) => a.name.localeCompare(b.name));
+        contactList.push(alphabetCardTemplate(letter));
+        alphabet.forEach((contact, index) => {
+          contactList.push(contactCardTemplate(contact, index));
+        });
+      });
+  
+    renderContactCards(contactList);
 }
+
+function renderContactCards(contactList) {
+    const content = document.getElementById("contactsContent");
+    content.innerHTML = contactList || noContact();
+}
+
+function getContactsGroupedByFirstLetter(contactsArray) {
+    const groups = new Map();
+    for (const contact of contactsArray) {
+        console.log(contact);
+        const firstLetter = contact.initials.charAt(0);
+        if (!groups.has(firstLetter)) {
+            groups.set(firstLetter, []);
+        }
+        groups.get(firstLetter).push(contact);
+    }
+    const sortedGroups = [...groups.entries()].sort();
+    return sortedGroups.map(([letter, contacts]) => ({ letter, contacts }));
+}
+
+
+function getIndexOfContact(search) {
+    let contactsArray = users[activeUser].contacts;
+    let index;
+    contactsArray.find((c, i) => {
+        if (c.contactEmail == search) {
+            index = i;
+        }
+    });
+    return index;
+}
+
 
 function templateContact(contact, index) {
   return `
@@ -62,6 +104,30 @@ function contactDetailView(contact, index) {
                 <img class="change-icon" src="./assets/img/icons/icon_edit_contact.png" alt="Edit contact">
                 <img class="change-icon-mobile" src="./assets/img/editButton.png" alt="Edit contact">
                 <span class="change-icon-text">Edit contact</span>
+            </div>
+        </div>
+    `;
+}
+
+
+function alphabetCardTemplate(letter) {
+    return /*html*/ `
+    <div class="alphabetCard">
+        <span class="alphabetLetter">${letter}</span>
+    </div>
+`;
+}
+
+
+function contactCardTemplate(contact, index) {
+    return /*html*/ `
+        <div id="contact-id-${index}" class="contactCard" onclick="openContactDetailView(${index})">
+            <div class="contactPic" style="background-color:${contact.color}">
+                <span class="contactInitials">${contact.initials}</span>
+            </div>
+            <div class="contact-data">
+                <div class="dataName" title="${contact.name}">${contact.name}</div>
+                <div class="dataMail" title="${contact.email}">${contact.email}</div>
             </div>
         </div>
     `;

@@ -22,6 +22,16 @@ $(function () {
   });
 });
 
+
+function clearBtnOnHover(){
+  document.getElementById('clearBtn').src = "/assets/img/functionButtons/icon_cancel_blue.png";
+}
+
+function clearBtnLeaveHover(){
+  document.getElementById('clearBtn').src = "/assets/img/functionButtons/icon_cancel.png";
+}
+
+
 function renderContactsToAssign() {
   if (!contactsSelektorOpen) {
     for (let i = 0; i < users[activeUser].contacts.length; i++) {
@@ -125,3 +135,5 @@ async function addNewInviteContact() {
   hideInviteNewContact()
   renderContactsToAssign()
 }
+
+

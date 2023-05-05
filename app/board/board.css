@@ -49,6 +49,13 @@
     border: 1px solid #4589FF;
     border-radius: 10px;
     cursor: pointer;
+    transition: all 125ms ease-in-out;
+}
+
+.btn:hover {
+    background: #005dff;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+    transition: all 125ms ease-in-out;
 }
 
 

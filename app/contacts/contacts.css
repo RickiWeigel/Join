@@ -59,7 +59,7 @@ main {
 
 .addContactButton:hover {
     background: #005dff;
-    transition: all 225ms ease-in-out;
+
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
     transition: all 225ms ease-in-out;
 }

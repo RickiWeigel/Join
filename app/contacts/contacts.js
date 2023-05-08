@@ -7,7 +7,7 @@ async function contactsInit() {
 
 function renderContacts() {
     const contacts = users[activeUser].contacts;
-    const contactList = [];
+    let contactList = "";
   
     // Erstelle ein Set aller ersten Buchstaben
     const firstLetters = new Set(contacts.map((contact) => contact.name.charAt(0)));
@@ -17,14 +17,15 @@ function renderContacts() {
         const alphabet = contacts
           .filter((contact) => contact.name.charAt(0) === letter)
           .sort((a, b) => a.name.localeCompare(b.name));
-        contactList.push(alphabetCardTemplate(letter));
+        contactList += alphabetCardTemplate(letter);
         alphabet.forEach((contact, index) => {
-          contactList.push(contactCardTemplate(contact, index));
+          contactList += contactCardTemplate(contact, index);
         });
       });
   
     renderContactCards(contactList);
 }
+
 
 function renderContactCards(contactList) {
     const content = document.getElementById("contactsContent");
@@ -115,11 +116,11 @@ function alphabetCardTemplate(letter) {
     <div class="alphabetCard">
         <span class="alphabetLetter">${letter}</span>
     </div>
-`;
+    `;
 }
 
 
-function contactCardTemplate(contact, index) {
+function contactCardTemplate(contact, index) {  
     return /*html*/ `
         <div id="contact-id-${index}" class="contactCard" onclick="openContactDetailView(${index})">
             <div class="contactPic" style="background-color:${contact.color}">

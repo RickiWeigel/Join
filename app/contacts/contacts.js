@@ -10,14 +10,14 @@ function renderContacts() {
     let contactList = "";
   
     // Erstelle ein Set aller ersten Buchstaben
-    const firstLetters = new Set(contacts.map((contact) => contact.name.charAt(0)));
+    const firstLetters = new Set(contacts.map((contact) => contact.name.charAt(0).toUpperCase()));
     
     // Sortiere die ersten Buchstaben und erstelle eine Karte für jeden Buchstaben
     [...firstLetters].sort().forEach((letter) => {
         const alphabet = contacts
-          .filter((contact) => contact.name.charAt(0) === letter)
+          .filter((contact) => contact.name.charAt(0).toUpperCase() === letter)
           .sort((a, b) => a.name.localeCompare(b.name));
-        contactList += alphabetCardTemplate(letter);
+        contactList += alphabetCardTemplate(letter.toUpperCase());
         alphabet.forEach((contact, index) => {
           contactList += contactCardTemplate(contact, index);
         });
@@ -36,7 +36,7 @@ function getContactsGroupedByFirstLetter(contactsArray) {
     const groups = new Map();
     for (const contact of contactsArray) {
         console.log(contact);
-        const firstLetter = contact.initials.charAt(0);
+        let firstLetter = contact.initials.charAt(0);
         if (!groups.has(firstLetter)) {
             groups.set(firstLetter, []);
         }

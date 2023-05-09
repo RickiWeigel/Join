@@ -58,20 +58,25 @@
                 </div>
 
 
-                <div class="category">
+                <div  class="category">
                     <span>Category</span>
-                    <div class="selectCategory" onclick="renderCategories()">
-                        <div class="date">Select task category</div>
+                    <div id="showCategory" class="selectCategory" onclick="renderCategories()">
+                        <div class="date"><span>Select task category</span> </div>
                         <img src="../../assets/img/functionButtons/selectorArrow.png">
                     </div>                    
                 </div>
 
 
+                <div id="showNewCategory" class="selectCategory d-none">
+                    <input id="addNewCategory" type="text" placeholder="New category name" style="font-size: 19px;">
+                    <img onclick="hideNewCategory()" src="/assets/img/functionButtons/cancelBlue.png">
+                    <img style="padding-left: 8px; padding-right: 8px;" src="/assets/img/functionButtons/trennstrich.png">
+                    <img onclick="" src="/assets/img/functionButtons/checkedIconSelector.png">
+                 </div>
+
                 <div class="dropDownContainer" >
                     <div>
                         <div style="max-height: 204px; overflow: auto;" id="selectTaskCategory">
-                            <!-- <div class="dropdown-content"><span>New category</span></div> -->
-                            <!-- <div class="dropdown-content"><span>${users[activeUser].taskCategories[i]}</span>></div> -->
                         </div>
                     </div>
                 </div>

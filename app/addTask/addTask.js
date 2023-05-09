@@ -7,6 +7,8 @@ let categorySelektorOpen;
 let subTask;
 let priority;
 let taskStatus;
+let selectedCategory;
+
 
 async function addTaskInit() {
   mainInit();
@@ -26,6 +28,7 @@ $(function () {
 function clearBtnOnHover(){
   document.getElementById('clearBtn').src = "/assets/img/functionButtons/icon_cancel_blue.png";
 }
+
 
 function clearBtnLeaveHover(){
   document.getElementById('clearBtn').src = "/assets/img/functionButtons/icon_cancel.png";
@@ -52,11 +55,11 @@ function renderContactsToAssign() {
 function renderCategories() {
   if (!categorySelektorOpen) {
     document.getElementById("selectTaskCategory").innerHTML = `
-  <div class="dropdown-content"><span>New category</span></div>
+  <div onclick="showNewCategory()" class="dropdown-content"><span>New category</span></div>
   `;
     for (let i = 0; i < users[activeUser].taskCategories.length; i++) {
       document.getElementById("selectTaskCategory").innerHTML += `
-    <div class="dropdown-content"><span>${users[activeUser].taskCategories[i].categoryName}</span></div>
+    <div onclick="setSelectedCategory("${users[activeUser].taskCategories[i].categoryName}")" class="dropdown-content"><span>${users[activeUser].taskCategories[i].categoryName}</span></div>
     `;
     }
     categorySelektorOpen = true;
@@ -117,7 +120,8 @@ function showInviteNewContact() {
 function hideInviteNewContact() {
   document.getElementById("showInviteNewContact").classList.add("d-none");
   document.getElementById("selectContacts").classList.remove("d-none");
-  document.getElementById("contactsToAssign").classList.remove("d-none");
+  document.getElementById("contactsToAssign").classList.add("d-none");
+  renderContactsToAssign()
 }
 
 
@@ -125,7 +129,7 @@ async function addNewInviteContact() {
   let contactEmail = document.getElementById("inviteNewContact").value;
   users[activeUser].contacts.push({
     name: contactEmail,
-    email: contactEmail,
+    email: 'contactEmail',
     phone: '',
     initials: '',
     color: getRandomColor(),
@@ -137,3 +141,26 @@ async function addNewInviteContact() {
 }
 
 
+async function setSelectedCategory(value){
+  selectedCategory = value;
+}
+
+
+async function addNewCategory (){
+
+}
+
+
+function showNewCategory() {
+  document.getElementById("showNewCategory").classList.remove("d-none");
+  document.getElementById("showCategory").classList.add("d-none");
+  document.getElementById("selectTaskCategory").classList.add("d-none");
+}
+
+
+function hideNewCategory() {
+  document.getElementById("showNewCategory").classList.add("d-none");
+  document.getElementById("showCategory").classList.remove("d-none");
+  document.getElementById("selectTaskCategory").classList.remove("d-none");
+  renderCategories()
+}

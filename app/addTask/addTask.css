@@ -40,9 +40,11 @@ input {
     border: none;
     width: 100%;
     cursor: pointer;
+    height: 100%;
 }
 
-.selectContacts {
+.selectContacts, .selectCategory {
+    color: black;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -50,6 +52,7 @@ input {
     padding: 10px 21px;
     border-bottom: 1px solid #D1D1D1;
     width: 100%;
+    font-weight: 400;
     cursor: pointer;
 }
 
@@ -95,18 +98,6 @@ input {
     font-size: 19px;
 }
 
-.selectCategory {
-    display: flex;
-    font-size: 19px;
-    font-weight: 400;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 21px;
-    gap: 10px;
-    width: 100%;
-    border-bottom: 1px solid #D1D1D1;
-    cursor: pointer;
-}
 
 .priorityContainer {
     display: flex;

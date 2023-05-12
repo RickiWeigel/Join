@@ -52,18 +52,18 @@
                 <div class="dueDate">
                     <span>Due date</span>
                     <div class="dateContainer">
-                        <input type="text" class="date" placeholder="dd/mm/yyyy" id="datepicker" required></input>
+                        <input type="text" placeholder="dd/mm/yyyy" id="datepicker" required></input>
                         <img src="../../assets/img/board/calendar.png">
                     </div>                    
                 </div>
 
 
-                <div  class="category">
+                <div class="category">
                     <span>Category</span>
                     <div id="showCategory" class="selectCategory" onclick="renderCategories()">
-                        <div class="date"><span>Select task category</span> </div>
+                        <div id="currentCategory"><span>Select task category</span></div>
                         <img src="../../assets/img/functionButtons/selectorArrow.png">
-                    </div>                    
+                    </div>
                 </div>
 
 
@@ -71,11 +71,21 @@
                     <input id="addNewCategory" type="text" placeholder="New category name" style="font-size: 19px;">
                     <img onclick="hideNewCategory()" src="/assets/img/functionButtons/cancelBlue.png">
                     <img style="padding-left: 8px; padding-right: 8px;" src="/assets/img/functionButtons/trennstrich.png">
-                    <img onclick="" src="/assets/img/functionButtons/checkedIconSelector.png">
+                    <img onclick="addNewCategoryFunction()" src="/assets/img/functionButtons/checkedIconSelector.png">
                  </div>
 
                 <div class="dropDownContainer" >
                     <div>
+                        <div id="colorCircle" class="circle-content d-none">
+                            <div id="lightblue" onclick="addCategoryColor('lightblue')" class="colorCircle" style="background: #8AA4FF;"></div>
+                            <div id="red" onclick="addCategoryColor('red')" class="colorCircle" style="background: #FF0000;"></div>
+                            <div id="green" onclick="addCategoryColor('green')" class="colorCircle" style="background: #2AD300;"></div>
+                            <div id="orange" onclick="addCategoryColor('orange')" class="colorCircle" style="background: #FF8A00;"></div>
+                            <div id="pink" onclick="addCategoryColor('pink')" class="colorCircle" style="background: #E200BE;"></div>
+                            <div id="blue" onclick="addCategoryColor('blue')" class="colorCircle" style="background: #0038FF;"></div>
+                        </div>
+
+
                         <div style="max-height: 204px; overflow: auto;" id="selectTaskCategory">
                         </div>
                     </div>

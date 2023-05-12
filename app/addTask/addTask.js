@@ -11,7 +11,8 @@ let selectedCategory;
 let selectedColor;
 let categoryColor;
 let newCategoryName;
-let newCategory={};
+let newCategory = {};
+let prioritySelect;
 const colorActions = {
   lightblue: () => {
     selectedColor = "#8AA4FF";
@@ -132,10 +133,9 @@ async function addTask() {
       name: newCategory.name,
       color: newCategory.color,
     },
+    priority: prioritySelect,
   });
-  users[activeUser].taskCategories.push(
-    newCategory
-  );
+  users[activeUser].taskCategories.push(newCategory);
   resetInput();
   await setItem(`users`, JSON.stringify(users));
 }
@@ -196,36 +196,35 @@ function addNewCategoryName() {
 function addCategoryColor(color) {
   addNewCategoryName();
   colorActions[color]();
-  document.getElementById('lightblue').classList.remove("colorCircleActive");
-  document.getElementById('red').classList.remove("colorCircleActive");
-  document.getElementById('green').classList.remove("colorCircleActive");
-  document.getElementById('orange').classList.remove("colorCircleActive");
-  document.getElementById('pink').classList.remove("colorCircleActive");
-  document.getElementById('blue').classList.remove("colorCircleActive");
+  document.getElementById("lightblue").classList.remove("colorCircleActive");
+  document.getElementById("red").classList.remove("colorCircleActive");
+  document.getElementById("green").classList.remove("colorCircleActive");
+  document.getElementById("orange").classList.remove("colorCircleActive");
+  document.getElementById("pink").classList.remove("colorCircleActive");
+  document.getElementById("blue").classList.remove("colorCircleActive");
   document.getElementById(color).classList.add("colorCircleActive");
 }
 
-function addNewCategoryFunction(){
+function addNewCategoryFunction() {
   newCategory.name = newCategoryName;
   newCategory.color = categoryColor;
   hideNewCategory();
-  document.getElementById('showCategory').innerHTML=`
+  document.getElementById("showCategory").innerHTML = `
     <div id="currentCategory">
       <span>${newCategory.name}</span>
       <div id="circle" class="colorCircle"></div>
     </div>
     <img src="../../assets/img/functionButtons/selectorArrow.png">
   `;
-  document.getElementById('circle').style.backgroundColor = newCategory.color;
+  document.getElementById("circle").style.backgroundColor = newCategory.color;
 }
 
-function renderShowCategory(){
-  document.getElementById('showCategory').innerHTML=`
+function renderShowCategory() {
+  document.getElementById("showCategory").innerHTML = `
     <div id="currentCategory"><span>Select task category</span></div>
     <img src="../../assets/img/functionButtons/selectorArrow.png"> 
   `;
 }
-
 
 function showNewCategory() {
   document.getElementById("showNewCategory").classList.remove("d-none");
@@ -240,4 +239,65 @@ function hideNewCategory() {
   document.getElementById("showCategory").classList.remove("d-none");
   document.getElementById("selectTaskCategory").classList.remove("d-none");
   renderCategories();
+}
+
+function renderPrioritySelected(priority) {
+  prioritySelect = priority;
+  switch (prioritySelect) {
+    case "Low":
+      document.getElementById("priorityUrgent").src =
+        "../../assets/img/addTask/TaskValueHard.png";
+      document.getElementById("priorityMedium").src =
+        "../../assets/img/addTask/TaskValueMid.png";
+      document.getElementById("priorityLow").src =
+        "../../assets/img/addTask/TaskValueLowSelected.png";
+      document.getElementById("priorityLow").classList.remove("priorityLow");
+      break;
+    case "Medium":
+      document.getElementById("priorityUrgent").src =
+        "../../assets/img/addTask/TaskValueHard.png";
+      document.getElementById("priorityMedium").src =
+        "../../assets/img/addTask/TaskValueMidSelected.png";
+      document.getElementById("priorityLow").src =
+        "../../assets/img/addTask/TaskValueLow.png";
+      document
+        .getElementById("priorityMedium")
+        .classList.remove("priorityMedium");
+      break;
+    case "Urgent":
+      document.getElementById("priorityUrgent").src =
+        "../../assets/img/addTask/TaskValueHardSelected.png";
+      document.getElementById("priorityMedium").src =
+        "../../assets/img/addTask/TaskValueMid.png";
+      document.getElementById("priorityLow").src =
+        "../../assets/img/addTask/TaskValueLow.png";
+      document
+        .getElementById("priorityUrgent")
+        .classList.remove("priorityUrgent");
+      break;
+  }
+}
+
+function priorityMouseHover(overBorder) {
+  switch (overBorder) {
+    case "red":
+      addClassesPriorties();
+      break;
+    case "orange":
+      addClassesPriorties();
+      break;
+    case "green":
+      addClassesPriorties();
+      break;
+  }
+}
+
+function addClassesPriorties() {
+  document.getElementById("priorityUrgent").classList.add("priorityUrgent");
+  document.getElementById("priorityMedium").classList.add("priorityMedium");
+  document.getElementById("priorityLow").classList.add("priorityLow");
+}
+
+function priorityMouseLeave(id) {
+  document.getElementById(id).classList.remove(id);
 }

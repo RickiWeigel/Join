@@ -120,7 +120,7 @@ input {
     border-right: none;
 }
 
-#priorityUrgent:hover {
+.priorityUrgent:hover {
     border: 2px solid #ff3d00;
     border-top: none;
     border-left: none;
@@ -128,7 +128,8 @@ input {
     cursor: pointer;
 }
 
-#priorityMedium:hover {
+
+.priorityMedium:hover {
     border: 2px solid #FFA800;
     border-top: none;
     border-left: none;
@@ -136,7 +137,7 @@ input {
     cursor: pointer;
 }
 
-#priorityLow:hover {
+.priorityLow:hover {
     border: 2px solid #7AE229;
     border-top: none;
     border-left: none;

@@ -24,26 +24,27 @@
     <main>
         <form onsubmit=" addTask(); return false;" class="addTaskContent" id="addTaskContent">
             <div class="addTaskSection">
-                 <div class="enterTitle">
+                <div class="enterTitle">
                     <input id="taskTitle" type="text" placeholder="Enter a title" required>
-                 </div>
+                </div>
 
-                 <div id="showInviteNewContact" class="selectContacts d-none">
+                <div id="showInviteNewContact" class="selectContacts d-none">
                     <input id="inviteNewContact" type="text" placeholder="Contact email" style="font-size: 19px;">
                     <img onclick="hideInviteNewContact()" src="/assets/img/functionButtons/cancelBlue.png">
-                    <img style="padding-left: 8px; padding-right: 8px;" src="/assets/img/functionButtons/trennstrich.png">
+                    <img style="padding-left: 8px; padding-right: 8px;"
+                        src="/assets/img/functionButtons/trennstrich.png">
                     <img onclick="addNewInviteContact()" src="/assets/img/functionButtons/checkedIconSelector.png">
-                 </div>
+                </div>
 
-                 <div class="selectContacts" id="selectContacts" onclick="renderContactsToAssign();">
+                <div class="selectContacts" id="selectContacts" onclick="renderContactsToAssign();">
                     <span>Select contacts to assign</span>
                     <img src="../../assets/img/functionButtons/selectorArrow.png">
                 </div>
 
-                <div class="dropDownContainer" >
+                <div class="dropDownContainer">
                     <div>
                         <div style="max-height: 204px; overflow: auto;" id="contactsToAssign">
-                            
+
                         </div>
                     </div>
                 </div>
@@ -54,7 +55,7 @@
                     <div class="dateContainer">
                         <input type="text" placeholder="dd/mm/yyyy" id="datepicker" required></input>
                         <img src="../../assets/img/board/calendar.png">
-                    </div>                    
+                    </div>
                 </div>
 
 
@@ -70,19 +71,26 @@
                 <div id="showNewCategory" class="selectCategory d-none">
                     <input id="addNewCategory" type="text" placeholder="New category name" style="font-size: 19px;">
                     <img onclick="hideNewCategory()" src="/assets/img/functionButtons/cancelBlue.png">
-                    <img style="padding-left: 8px; padding-right: 8px;" src="/assets/img/functionButtons/trennstrich.png">
+                    <img style="padding-left: 8px; padding-right: 8px;"
+                        src="/assets/img/functionButtons/trennstrich.png">
                     <img onclick="addNewCategoryFunction()" src="/assets/img/functionButtons/checkedIconSelector.png">
-                 </div>
+                </div>
 
-                <div class="dropDownContainer" >
+                <div class="dropDownContainer">
                     <div>
                         <div id="colorCircle" class="circle-content d-none">
-                            <div id="lightblue" onclick="addCategoryColor('lightblue')" class="colorCircle" style="background: #8AA4FF;"></div>
-                            <div id="red" onclick="addCategoryColor('red')" class="colorCircle" style="background: #FF0000;"></div>
-                            <div id="green" onclick="addCategoryColor('green')" class="colorCircle" style="background: #2AD300;"></div>
-                            <div id="orange" onclick="addCategoryColor('orange')" class="colorCircle" style="background: #FF8A00;"></div>
-                            <div id="pink" onclick="addCategoryColor('pink')" class="colorCircle" style="background: #E200BE;"></div>
-                            <div id="blue" onclick="addCategoryColor('blue')" class="colorCircle" style="background: #0038FF;"></div>
+                            <div id="lightblue" onclick="addCategoryColor('lightblue')" class="colorCircle"
+                                style="background: #8AA4FF;"></div>
+                            <div id="red" onclick="addCategoryColor('red')" class="colorCircle"
+                                style="background: #FF0000;"></div>
+                            <div id="green" onclick="addCategoryColor('green')" class="colorCircle"
+                                style="background: #2AD300;"></div>
+                            <div id="orange" onclick="addCategoryColor('orange')" class="colorCircle"
+                                style="background: #FF8A00;"></div>
+                            <div id="pink" onclick="addCategoryColor('pink')" class="colorCircle"
+                                style="background: #E200BE;"></div>
+                            <div id="blue" onclick="addCategoryColor('blue')" class="colorCircle"
+                                style="background: #0038FF;"></div>
                         </div>
 
 
@@ -92,16 +100,17 @@
                 </div>
 
 
-                <div class="priorityContainer">
-                    <img class="priority" id="priorityUrgent" src="../../assets/img/addTask/TaskValueHard.png">
-                    <img class="priority" id="priorityMedium" src="../../assets/img/addTask/TaskValueMid.png">
-                    <img class="priority" id="priorityLow" src="../../assets/img/addTask/TaskValueLow.png">
+                <div id="showPriorities" class="priorityContainer">
+                    <img onmouseover="priorityMouseHover('red')" onmouseleave="priorityMouseLeave('priorityUrgent')" onclick="renderPrioritySelected('Urgent')" class="priority priorityUrgent" id="priorityUrgent" src="../../assets/img/addTask/TaskValueHard.png">
+                    <img onmouseover="priorityMouseHover('orange')" onmouseleave="priorityMouseLeave('priorityMedium')" onclick="renderPrioritySelected('Medium')" class="priority priorityMedium" id="priorityMedium" src="../../assets/img/addTask/TaskValueMid.png">
+                    <img onmouseover="priorityMouseHover('green')" onmouseleave="priorityMouseLeave('priorityLow')" onclick="renderPrioritySelected('Low')" class="priority priorityLow" id="priorityLow" src="../../assets/img/addTask/TaskValueLow.png">
                 </div>
 
 
                 <div class="descriptionContainer">
                     <span>Description</span>
-                    <textarea required name="descriptionTextarea" placeholder="Enter a description" id="description" cols="30" rows="10"></textarea>
+                    <textarea required name="descriptionTextarea" placeholder="Enter a description" id="description"
+                        cols="30" rows="10"></textarea>
                 </div>
 
 
@@ -118,8 +127,11 @@
                 </div>
             </div>
             <div class="btn-container">
-                <div onmouseover="clearBtnOnHover()" onmouseleave="clearBtnLeaveHover()" class="btn-white"><span>Clear</span><img id="clearBtn" src="/assets/img/functionButtons/icon_cancel.png"></div>
-                <button class="btn-blue">Creat Task <img src="/assets/img/functionButtons/akar-icons_check.png"></button>
+                <div onmouseover="clearBtnOnHover()" onmouseleave="clearBtnLeaveHover()" class="btn-white">
+                    <span>Clear</span><img id="clearBtn" src="/assets/img/functionButtons/icon_cancel.png">
+                </div>
+                <button class="btn-blue">Creat Task <img
+                        src="/assets/img/functionButtons/akar-icons_check.png"></button>
             </div>
         </form>
     </main>
@@ -129,4 +141,5 @@
     <script src="/main.js"></script>
     <script src="/app/addTask/addTask.js"></script>
 </body>
+
 </html>

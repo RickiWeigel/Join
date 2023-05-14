@@ -101,9 +101,15 @@
 
 
                 <div id="showPriorities" class="priorityContainer">
-                    <img onmouseover="priorityMouseHover('red')" onmouseleave="priorityMouseLeave('priorityUrgent')" onclick="renderPrioritySelected('Urgent')" class="priority priorityUrgent" id="priorityUrgent" src="../../assets/img/addTask/TaskValueHard.png">
-                    <img onmouseover="priorityMouseHover('orange')" onmouseleave="priorityMouseLeave('priorityMedium')" onclick="renderPrioritySelected('Medium')" class="priority priorityMedium" id="priorityMedium" src="../../assets/img/addTask/TaskValueMid.png">
-                    <img onmouseover="priorityMouseHover('green')" onmouseleave="priorityMouseLeave('priorityLow')" onclick="renderPrioritySelected('Low')" class="priority priorityLow" id="priorityLow" src="../../assets/img/addTask/TaskValueLow.png">
+                    <img onmouseover="priorityMouseHover('red')" onmouseleave="priorityMouseLeave('priorityUrgent')"
+                        onclick="renderPrioritySelected('Urgent')" class="priority priorityUrgent" id="priorityUrgent"
+                        src="../../assets/img/addTask/TaskValueHard.png">
+                    <img onmouseover="priorityMouseHover('orange')" onmouseleave="priorityMouseLeave('priorityMedium')"
+                        onclick="renderPrioritySelected('Medium')" class="priority priorityMedium" id="priorityMedium"
+                        src="../../assets/img/addTask/TaskValueMid.png">
+                    <img onmouseover="priorityMouseHover('green')" onmouseleave="priorityMouseLeave('priorityLow')"
+                        onclick="renderPrioritySelected('Low')" class="priority priorityLow" id="priorityLow"
+                        src="../../assets/img/addTask/TaskValueLow.png">
                 </div>
 
 
@@ -116,10 +122,14 @@
 
                 <div class="subtaskContainer">
                     <span>Subtasks</span>
-                    <div class="addSubtask">
-                        <input type="text" placeholder="Add new subtask">
-                        <img src="../../assets/img/functionButtons/add.png">
+
+                    <div id="subtask" class="addSubtask">
+                        <input id="subtaskInput" onclick="subtaskActiveInput()" type="text" placeholder="Add new subtask">
+                        <div id="subtaskButtons" style="display: flex; align-items: center;">
+                            <img src="../../assets/img/functionButtons/add.png">
+                        </div>
                     </div>
+
                 </div>
                 <div class="subtasks" id="addedSubtasks">
                     <img src="../../assets/img/functionButtons/checkbox.png">

@@ -42,6 +42,7 @@ const colorActions = {
 
 async function addTaskInit() {
   mainInit();
+
   // getActiveUserLocal();
 }
 
@@ -88,7 +89,7 @@ function renderCategories() {
   `;
     for (let i = 0; i < users[activeUser].taskCategories.length; i++) {
       document.getElementById("selectTaskCategory").innerHTML += `
-    <div onclick="setSelectedCategory('${users[activeUser].taskCategories[i].name}')" class="dropdown-content"><span>${users[activeUser].taskCategories[i].categoryName}</span></div>
+    <div onclick="setSelectedCategory('${users[activeUser].taskCategories[i].name}')" class="dropdown-content"><span>${users[activeUser].taskCategories[i].name}</span></div>
     `;
     }
     categorySelektorOpen = true;
@@ -181,16 +182,6 @@ function setSelectedCategory(value) {
 
 function addNewCategoryName() {
   newCategoryName = document.getElementById("addNewCategory").value;
-  // document.getElementById("currentCategory").innerHTML = `
-  //   <div>
-  //     <span>${newCategoryValue.name}</span>
-  //     <div id="circle" class="colorCircle"></div>
-  //   </div>
-  //   <img onclick="hideNewCategory()" src="/assets/img/functionButtons/cancelBlue.png">
-  //   <img style="padding-left: 8px; padding-right: 8px;" src="/assets/img/functionButtons/trennstrich.png">
-  //   <img onclick="" src="/assets/img/functionButtons/checkedIconSelector.png">
-  // `;
-  // document.getElementById('circle').style.backgroundColor = color;
 }
 
 function addCategoryColor(color) {
@@ -301,3 +292,21 @@ function addClassesPriorties() {
 function priorityMouseLeave(id) {
   document.getElementById(id).classList.remove(id);
 }
+
+function subtaskActiveInput(){
+  document.getElementById('subtaskButtons').innerHTML=`
+    <img onclick="clearSubtaskInput()"
+      src="/assets/img/functionButtons/cancelBlue.png">
+    <img style="padding-left: 8px; padding-right: 8px;"
+      src="/assets/img/functionButtons/trennstrich.png">
+    <img src="/assets/img/functionButtons/checkedIconSelector.png">
+  `;
+}
+
+function clearSubtaskInput(){
+  document.getElementById('subtaskInput').value='';
+  document.getElementById('subtaskButtons').innerHTML = `
+    <img src="../../assets/img/functionButtons/add.png">
+  `;
+}
+

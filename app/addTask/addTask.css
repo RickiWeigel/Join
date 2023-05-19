@@ -185,14 +185,6 @@ input {
     margin-bottom: 25px;
 }
 
-/* .addSubtask {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 21px;
-    width: 100%;
-    cursor: pointer;
-} */
 
 .subtaskContainer input {
     font-size: 19px;
@@ -204,7 +196,7 @@ input {
     gap: 20px;
     font-size: 16px;
     cursor: pointer;
-    padding-bottom: 45px;
+    padding-bottom: 10px;
 }
 
 .btn-container {
@@ -319,3 +311,8 @@ input {
     gap: 10px;
 }
 
+
+.addedSubtasks{
+    display: flex;
+
+}

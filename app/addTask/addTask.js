@@ -4,7 +4,6 @@ let contactsSelektorOpen = false;
 let contactSelector;
 let taskCategories = [];
 let categorySelektorOpen;
-let subTask;
 let priority;
 let taskStatus;
 let selectedCategory;
@@ -42,8 +41,7 @@ const colorActions = {
 
 async function addTaskInit() {
   mainInit();
-
-  // getActiveUserLocal();
+  renderSubtasks();
 }
 
 // Show Date (jquery)
@@ -293,20 +291,49 @@ function priorityMouseLeave(id) {
   document.getElementById(id).classList.remove(id);
 }
 
-function subtaskActiveInput(){
-  document.getElementById('subtaskButtons').innerHTML=`
+function subtaskActiveInput() {
+  document.getElementById("subtaskButtons").innerHTML = `
     <img onclick="clearSubtaskInput()"
       src="/assets/img/functionButtons/cancelBlue.png">
     <img style="padding-left: 8px; padding-right: 8px;"
       src="/assets/img/functionButtons/trennstrich.png">
-    <img src="/assets/img/functionButtons/checkedIconSelector.png">
+    <img onclick="addSubTasks()" src="/assets/img/functionButtons/checkedIconSelector.png">
   `;
 }
 
-function clearSubtaskInput(){
-  document.getElementById('subtaskInput').value='';
-  document.getElementById('subtaskButtons').innerHTML = `
+function clearSubtaskInput() {
+  document.getElementById("subtaskInput").value = "";
+  document.getElementById("subtaskButtons").innerHTML = `
     <img src="../../assets/img/functionButtons/add.png">
   `;
 }
 
+async function addSubTasks() {
+  let newSubtask = document.getElementById("subtaskInput").value;
+  users[activeUser].subtasks.push(newSubtask);
+  deleteSubtasks();
+  await setItem(`users`, JSON.stringify(users));
+  newSubtask = document.getElementById("subtaskInput").value = "";
+  renderSubtasks();
+}
+
+function deleteSubtasks(){
+  if (users[activeUser].subtasks.length > 4){
+    users[activeUser].subtasks.shift();
+  }
+}
+
+
+async function renderSubtasks() {
+  setTimeout(() => {
+    document.getElementById("addedSubtasks").innerHTML = "";
+    for (let i = users[activeUser].subtasks.length - 1; i >= 0; i--) {
+      document.getElementById("addedSubtasks").innerHTML += `
+        <div class="subtasks">
+          <img src="../../assets/img/functionButtons/checkbox.png">
+          <span id="subtasks">${users[activeUser].subtasks[i]}</span>
+        </div>
+      `;
+    }
+  }, 100);
+}

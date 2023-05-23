@@ -87,7 +87,13 @@ function renderCategories() {
   `;
     for (let i = 0; i < users[activeUser].taskCategories.length; i++) {
       document.getElementById("selectTaskCategory").innerHTML += `
-    <div onclick="setSelectedCategory('${users[activeUser].taskCategories[i].name}')" class="dropdown-content"><span>${users[activeUser].taskCategories[i].name}</span></div>
+ 
+    <div onclick="setSelectedCategory('${users[activeUser].taskCategories[i].name}')" class="dropdown-content">
+      <span>${users[activeUser].taskCategories[i].name}</span>
+      <div class="colorCircle" style="background: ${users[activeUser].taskCategories[i].color};"></div>
+    </div>
+    
+   
     `;
     }
     categorySelektorOpen = true;
@@ -335,5 +341,5 @@ async function renderSubtasks() {
         </div>
       `;
     }
-  }, 100);
+  }, 400);
 }

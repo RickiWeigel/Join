@@ -267,7 +267,7 @@ input {
 
 .dropdown-content{
     display: flex;
-    gap: 10px;
+    gap: 15px;
     align-items: center;
     width: 100%;
     height: 51px;

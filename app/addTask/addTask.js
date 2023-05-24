@@ -1,7 +1,6 @@
 let tasks = [];
 let selectedContactsToAssign = [];
 let contactsSelektorOpen = false;
-let contactSelector;
 let taskCategories = [];
 let categorySelektorOpen;
 let priority;
@@ -12,6 +11,7 @@ let categoryColor;
 let newCategoryName;
 let newCategory = {};
 let prioritySelect;
+let selectedSubtasks = [];
 const colorActions = {
   lightblue: () => {
     selectedColor = "#8AA4FF";
@@ -64,14 +64,15 @@ function clearBtnLeaveHover() {
 }
 
 function renderContactsToAssign() {
-  if (!contactsSelektorOpen) {
+  document.getElementById("contactsToAssign").classList.remove("d-none");
+  if (!contactsSelektorOpen) {    
     for (let i = 0; i < users[activeUser].contacts.length; i++) {
       document.getElementById("contactsToAssign").innerHTML += `
-      <div onclick="contactCheckbox(${i})" class="dropdown-content"><span>${users[activeUser].contacts[i].name}</span><img id="contactSelector[${i}]"  src="/assets/img/functionButtons/checkButton.png"></div>
+      <div onclick="selectContactsToAssign(${i})" class="dropdown-content"><span>${users[activeUser].contacts[i].name}</span><img id="contactSelector[${i}]" src="/assets/img/functionButtons/checkButton.png"></div>
       `;
     }
     document.getElementById("contactsToAssign").innerHTML += `
-    <div onclick="showInviteNewContact()" class="dropdown-content"><span>Invite new contact</span><img src="/assets/img/functionButtons/contactIcon.png"></div>
+    <div onclick="toggleInviteNewContact()" class="dropdown-content"><span>Invite new contact</span><img src="/assets/img/functionButtons/contactIcon.png"></div>
     `;
     contactsSelektorOpen = true;
   } else {
@@ -92,8 +93,6 @@ function renderCategories() {
       <span>${users[activeUser].taskCategories[i].name}</span>
       <div class="colorCircle" style="background: ${users[activeUser].taskCategories[i].color};"></div>
     </div>
-    
-   
     `;
     }
     categorySelektorOpen = true;
@@ -103,24 +102,17 @@ function renderCategories() {
   }
 }
 
-function contactCheckbox(id) {
-  if (contactSelector) {
-    document.getElementById(`contactSelector[${id}]`).src =
-      "/assets/img/functionButtons/checkButton.png";
-    //entfernt aktivierten Kontakt
-    let index = selectedContactsToAssign.indexOf(
-      users[activeUser].contacts[id]
-    );
-    if (index > -1) {
-      selectedContactsToAssign.splice(index, 1);
-    }
-    contactSelector = false;
+function selectContactsToAssign(id) {
+  const contactSelectorElement = document.getElementById(`contactSelector[${id}]`);
+  const selectedContact = users[activeUser].contacts[id];
+  const index = selectedContactsToAssign.indexOf(selectedContact);
+
+  if (index > -1) {
+    selectedContactsToAssign.splice(index, 1);
+    contactSelectorElement.src = "/assets/img/functionButtons/checkButton.png";
   } else {
-    //fügt aktivierten Kontakt hinzu
-    selectedContactsToAssign.push(users[activeUser].contacts[id]);
-    document.getElementById(`contactSelector[${id}]`).src =
-      "/assets/img/functionButtons/checkButtonChecked.png";
-    contactSelector = true;
+    selectedContactsToAssign.push(selectedContact);
+    contactSelectorElement.src = "/assets/img/functionButtons/checkButtonChecked.png";
   }
 }
 
@@ -152,17 +144,10 @@ function resetInput() {
   renderShowCategory();
 }
 
-function showInviteNewContact() {
-  document.getElementById("showInviteNewContact").classList.remove("d-none");
-  document.getElementById("selectContacts").classList.add("d-none");
-  document.getElementById("contactsToAssign").classList.add("d-none");
-}
-
-function hideInviteNewContact() {
-  document.getElementById("showInviteNewContact").classList.add("d-none");
-  document.getElementById("selectContacts").classList.remove("d-none");
-  document.getElementById("contactsToAssign").classList.add("d-none");
-  renderContactsToAssign();
+function toggleInviteNewContact() {
+  document.getElementById("showInviteNewContact").classList.toggle("d-none");
+  document.getElementById("selectContacts").classList.toggle("d-none");
+  document.getElementById("contactsToAssign").classList.toggle("d-none");
 }
 
 async function addNewInviteContact() {
@@ -176,7 +161,7 @@ async function addNewInviteContact() {
   });
   await setItem(`users`, JSON.stringify(users));
   document.getElementById("inviteNewContact").value = "";
-  hideInviteNewContact();
+  toggleInviteNewContact()
   renderContactsToAssign();
 }
 
@@ -303,7 +288,7 @@ function subtaskActiveInput() {
       src="/assets/img/functionButtons/cancelBlue.png">
     <img style="padding-left: 8px; padding-right: 8px;"
       src="/assets/img/functionButtons/trennstrich.png">
-    <img onclick="addSubTasks()" src="/assets/img/functionButtons/checkedIconSelector.png">
+    <img onclick="addNewSubTasks()" src="/assets/img/functionButtons/checkedIconSelector.png">
   `;
 }
 
@@ -314,7 +299,7 @@ function clearSubtaskInput() {
   `;
 }
 
-async function addSubTasks() {
+async function addNewSubTasks() {
   let newSubtask = document.getElementById("subtaskInput").value;
   users[activeUser].subtasks.push(newSubtask);
   deleteSubtasks();
@@ -323,23 +308,37 @@ async function addSubTasks() {
   renderSubtasks();
 }
 
-function deleteSubtasks(){
-  if (users[activeUser].subtasks.length > 4){
+function deleteSubtasks() {
+  if (users[activeUser].subtasks.length > 4) {
     users[activeUser].subtasks.shift();
   }
 }
-
 
 async function renderSubtasks() {
   setTimeout(() => {
     document.getElementById("addedSubtasks").innerHTML = "";
     for (let i = users[activeUser].subtasks.length - 1; i >= 0; i--) {
       document.getElementById("addedSubtasks").innerHTML += `
-        <div class="subtasks">
-          <img src="../../assets/img/functionButtons/checkbox.png">
+        <div onclick="addToSelectedSubtasks(${i})" class="subtasks">
+          <img id=checkbox[${i}] src="../../assets/img/functionButtons/checkbox.png">
           <span id="subtasks">${users[activeUser].subtasks[i]}</span>
         </div>
       `;
     }
   }, 400);
+}
+
+
+function addToSelectedSubtasks(id) {
+  const checkbox = document.getElementById(`checkbox[${id}]`);
+  const subtask = users[activeUser].subtasks[id];
+  const index = selectedSubtasks.indexOf(subtask);
+
+  if (index > -1) {
+    selectedSubtasks.splice(index, 1);
+    checkbox.src = `/assets/img/functionButtons/checkbox.png`;
+  } else {
+    selectedSubtasks.push(subtask);
+    checkbox.src = `/assets/img/functionButtons/checkboxActive.png`;
+  }
 }

@@ -5,7 +5,7 @@ let taskCategories = [];
 let categorySelektorOpen;
 let priority;
 let taskStatus;
-let selectedCategory = [];
+let selectedCategory = {};
 let selectedColor;
 let categoryColor;
 let newCategoryName;

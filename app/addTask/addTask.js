@@ -143,6 +143,7 @@ async function addTask() {
     },
     priority: prioritySelect,
     subtasks: selectedSubtasks,
+    progressStatus: "toDo",
   });
  
   resetInput();

@@ -70,7 +70,8 @@
     display: flex;
     font-size: 23px;
     font-weight: 700;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 20px;
     align-items: center;
     width: 230px;
 }

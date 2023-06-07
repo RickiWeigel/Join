@@ -64,14 +64,24 @@
     align-items: flex-start;
     justify-content: space-between;
     height: 70vh;
+    gap: 40px;
 }
 
 .singleCategory{
+    width: 20vw;
     display: flex;
-    font-size: 23px;
-    font-weight: 700;
+    flex-direction: column;
     justify-content: center;
     gap: 20px;
+}
+
+.singleCategoryHeader{
+    height: 80px;
+    display: flex;
+    justify-content: center;
     align-items: center;
-    width: 230px;
+    gap: 20px;
+    font-size: 23px;
+    font-weight: 700;
+    text-align: center;
 }

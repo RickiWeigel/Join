@@ -10,9 +10,6 @@
     <link rel="stylesheet" href="/app/sidebar/sidebar.css">
     <link rel="stylesheet" href="board.css">
 
-    <script src="/storage.js"></script>
-    <script src="/main.js"></script>
-    <script src="board.js"></script>
 
     <title>Join - Board</title>
 </head>
@@ -41,41 +38,60 @@
                         <span>To do</span>
                         <img src="../../assets/img/board/plus button v1.png">
                     </div>
-                    <div class="taskCard">
-                        <div class="categoryHeadline">
-                            <span>Category</span>
-                        </div>
-                        <div class="taskHeadline">
-                            <span>Task Headline</span>
-                        </div>
-                        <div class="taskDescription">
-                            <span>Task Description <br>
-                                zeizeilig
-                            </span>
-                        </div>
-                        <div class="progressStatus">
-                            <div class="progress"></div>
-                            <span>3/3 Done</span>
-                        </div>
+
+                    <div class="statusCard" id="toDoTasks">
+                        <!-- <div class="taskCard">
+                            <div class="categoryHeadline">
+                                <span>Category</span>
+                            </div>
+                            <div class="taskHeadline">
+                                <span>Task Headline</span>
+                            </div>
+                            <div class="taskDescription">
+                                <span>Task Description <br>
+                                    zeizeilig
+                                </span>
+                            </div>
+                            <div class="progressStatus">
+                                <div class="progress"></div>
+                                <span>3/3 Done</span>
+                            </div>
+                            <div class="taskFooter">
+                                <div class="taskContacts">
+                                    <div class="contact box1">
+                                        <span id="contactInitials1">MM</span>
+                                    </div>
+                                    <div class="contact box2">
+                                        <span id="contactInitials2">MM</span>
+                                    </div>
+                                </div>
+                                <div class="taskPriority"><img src="../../assets/img/board/iconLow.png"></div>
+                            </div>
+                        </div> -->
                     </div>
                 </div>
+
                 <div class="singleCategory" id="inProgress">
                     <div class="singleCategoryHeader">
                         <span>In Progress</span>
                         <img src="../../assets/img/board/plus button v1.png">
                     </div>
+                    <div class="statusCard" id="inProgressTasks"></div>
                 </div>
+
                 <div class="singleCategory" id="awaitFeedback">
                     <div class="singleCategoryHeader">
                         <span>Await Feedback</span>
                         <img src="../../assets/img/board/plus button v1.png">
                     </div>
+                    <div class="statusCard" id="awaitFeedbackTasks"></div>
                 </div>
                 <div class="singleCategory" id="done">
                     <div class="singleCategoryHeader">
                         <span>Done</span>
                         <img src="../../assets/img/board/plus button v1.png">
                     </div>
+                    <div class="statusCard" id="doneTasks"></div>
                 </div>
             </div>
 
@@ -85,4 +101,7 @@
 
 </body>
 
+<script src="/storage.js"></script>
+<script src="/main.js"></script>
+<script src="board.js"></script>
 </html>

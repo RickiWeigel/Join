@@ -39,7 +39,7 @@ const colorActions = {
 };
 
 async function addTaskInit() {
-  mainInit();
+  await mainInit();
   renderSubtasks();
 }
 
@@ -349,7 +349,6 @@ function deleteSubtasks() {
 }
 
 async function renderSubtasks() {
-  setTimeout(() => {
     document.getElementById("addedSubtasks").innerHTML = "";
     for (let i = users[activeUser].subtasks.length - 1; i >= 0; i--) {
       document.getElementById("addedSubtasks").innerHTML += `
@@ -359,7 +358,6 @@ async function renderSubtasks() {
         </div>
       `;
     }
-  }, 400);
 }
 
 function addToSelectedSubtasks(id) {

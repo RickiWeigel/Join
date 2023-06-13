@@ -145,9 +145,9 @@ async function addTask() {
     subtasks: selectedSubtasks,
     progressStatus: "toDo",
   });
- 
-  resetInput();
   await setItem(`users`, JSON.stringify(users));
+  resetInput();
+ 
 }
 
 function resetInput() {

@@ -179,9 +179,7 @@
 }
 
 .contact {
-    box-sizing: border-box;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 10px 8px;
@@ -189,18 +187,23 @@
     width: 35px;
     height: 35px;
     border: 2px solid #FFFFFF;
-    border-radius: 58px;
+    border-radius: 50%;
 }
 
 .box0 {
-    background: #0190E0;
+    /* background: #0190E0; */
     order: 0;
 }
 
 .box1{
-    background: #53e001;
+    /* background: #53e001; */
     order: 1;
     margin: 0px -6px;   
+}
+
+.boxRest{
+    order: 2;  
+    background: #ff9900;
 }
 
 .contact span {

@@ -1,6 +1,10 @@
 //loadJSONFromServer();  TODO
 let userlogin = false;
 let activeUser;
+let tasksInTodo = 0;
+let tasksInProgress = 0;
+let tasksInAwaitFeedback = 0;
+let tasksInDone = 0;
 
 async function mainInit() {
   await includeHTML();

@@ -1,6 +1,7 @@
 let completedTask = [];
 let currentSubtasks = [];
 
+
 async function boardInit() {
   await mainInit();
   groupTasksByProgressStatus(users[activeUser]);
@@ -15,25 +16,29 @@ function groupTasksByProgressStatus(user) {
   }
 }
 
-function sortProgress(task, i) {
+function sortProgress(task, id) {
   switch (task.progressStatus) {
     case "toDo":
-      renderTodoTasks("toDoTasks", i);
+      renderTodoTasks("toDoTasks", id);
+      tasksInTodo++
       break;
     case "inProgress":
-      renderTodoTasks("inProgressTasks", i);
+      renderTodoTasks("inProgressTasks", id);
+      tasksInProgress++
       break;
     case "awaitFeedback":
-      renderTodoTasks("awaitFeedbackTasks", i);
+      renderTodoTasks("awaitFeedbackTasks", id);
+      tasksInAwaitFeedback++
       break;
     case "done":
-      renderTodoTasks("doneTasks", i);
+      renderTodoTasks("doneTasks", id);
+      tasksInDone++
       break;
   }
 }
 
-function renderTodoTasks(taskStatus, i) {
-  let userTask = users[activeUser].userTasks[i];
+function renderTodoTasks(taskStatus, id) {
+  let userTask = users[activeUser].userTasks[id];
   let priorityImageUrl = getPriorityImageUrl(userTask.priority);
   document.getElementById(taskStatus).innerHTML +=`
   <div class="taskCard">
@@ -51,18 +56,47 @@ function renderTodoTasks(taskStatus, i) {
         <span>0/${userTask.subtasks.length} Done</span>
     </div>
     <div class="taskFooter">
-        <div class="taskContacts" id="taskContacts">
-            <div class="contact box0">
-                <span id="contactInitials1">SM</span>
-            </div>
-            <div class="contact box1">
-                <span id="contactInitials2">BM</span>
-            </div>
+        <div class="taskContacts" id="taskContacts${id}">
+            
         </div>
         <div class="taskPriority"><img src="${priorityImageUrl}"></div>
     </div>
   </div>
   `;
+  renderContactInitials(id)
+}
+
+function renderContactInitials(id){
+  document.getElementById(`taskContacts${id}`).innerHTML = ``;
+  let userContact = users[activeUser].userTasks[id].assignedTo;
+
+  for (let j = 0; j < userContact.length; j++) {
+    let newColor = userContact[j].color;
+
+
+    if (userContact.length < 3) {
+    
+      document.getElementById(`taskContacts${id}`).innerHTML += `
+      <div class="contact box${j}" style="background-color: ${newColor};">
+        <span id="contactInitials">${userContact[j].initials}</span>
+      </div>`;
+    } else {
+        document.getElementById(`taskContacts${id}`).innerHTML = `
+        <div class="contact box${0}" style="background-color: ${newColor};">
+          <span id="contactInitials">${userContact[0].initials}</span>
+        </div>
+        <div class="contact box${1}" style="background-color: ${newColor};">
+          <span id="contactInitials">${userContact[1].initials}</span>
+        </div>        
+        `;
+
+      document.getElementById(`taskContacts${id}`).innerHTML += `
+      <div class="contact boxRest">
+        <span id="contactInitials">+${userContact.length-2}</span>
+      </div>             
+      `;
+    }
+  }
 }
 
 

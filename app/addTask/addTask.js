@@ -343,7 +343,7 @@ async function addNewSubTasks() {
 }
 
 function deleteSubtasks() {
-  if (users[activeUser].subtasks.length > 4) {
+  if (users[activeUser].subtasks.length > 6) {
     users[activeUser].subtasks.shift();
   }
 }

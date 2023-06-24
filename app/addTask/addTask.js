@@ -78,6 +78,28 @@ function renderContactsToAssign() {
     document.getElementById("contactsToAssign").innerHTML = ``;
     contactsSelektorOpen = false;
   }
+  updateCheckboxStatus();
+}
+
+function updateCheckboxStatus() {
+  const contactsToAssign = document.getElementById("contactsToAssign");
+  const dropdownItems =
+    contactsToAssign.getElementsByClassName("dropdown-content");
+
+  for (let i = 0; i < dropdownItems.length; i++) {
+    const contactSelectorElement = document.getElementById(
+      `contactSelector[${i}]`
+    );
+    const selectedContact = users[activeUser].contacts[i];
+    const index = selectedContactsToAssign.indexOf(selectedContact);
+    if (index > -1) {
+      contactSelectorElement.src =
+        "/assets/img/functionButtons/checkButtonChecked.png";
+    } else {
+      contactSelectorElement.src =
+        "/assets/img/functionButtons/checkButton.png";
+    }
+  }
 }
 
 function renderCategories() {
@@ -100,15 +122,13 @@ function renderCategories() {
   }
 }
 
-
 function setSelectedCategory(id) {
   selectedCategory = {
     color: users[activeUser].taskCategories[id].color,
-    name: users[activeUser].taskCategories[id].name, 
-  }
+    name: users[activeUser].taskCategories[id].name,
+  };
   insertSelectedCategory();
 }
-
 
 function selectContactsToAssign(id) {
   const contactSelectorElement = document.getElementById(
@@ -147,11 +167,10 @@ async function addTask() {
   });
   await setItem(`users`, JSON.stringify(users));
   resetInput();
- 
 }
 
 function resetInput() {
-  window.location.href = '/app/board/board.html';
+  window.location.href = "/app/board/board.html";
   // taskInputTitle = document.getElementById("taskTitle").value = "";
   // date = document.getElementById("datepicker").value = "";
   // description = document.getElementById("description").value = "";
@@ -182,7 +201,6 @@ async function addNewInviteContact() {
   renderContactsToAssign();
 }
 
-
 function addNewCategoryName() {
   newCategoryName = document.getElementById("addNewCategory").value;
 }
@@ -209,14 +227,12 @@ async function addNewCategoryFunction() {
   insertSelectedCategory();
 }
 
-
 function renderShowCategory() {
   document.getElementById("showCategory").innerHTML = `
     <div id="currentCategory"><span>Select task category</span></div>
     <img src="../../assets/img/functionButtons/selectorArrow.png"> 
   `;
 }
-
 
 function showNewCategory() {
   document.getElementById("showNewCategory").classList.remove("d-none");
@@ -233,7 +249,7 @@ function hideNewCategory() {
   renderCategories();
 }
 
-function insertSelectedCategory(){
+function insertSelectedCategory() {
   document.getElementById("showCategory").innerHTML = `
     <div id="currentCategory">
       <span>${selectedCategory.name}</span>
@@ -241,9 +257,8 @@ function insertSelectedCategory(){
     </div>
     <img src="../../assets/img/functionButtons/selectorArrow.png"> 
   `;
-  renderCategories()
+  renderCategories();
 }
-
 
 function renderPrioritySelected(priority) {
   prioritySelect = priority;
@@ -349,15 +364,15 @@ function deleteSubtasks() {
 }
 
 async function renderSubtasks() {
-    document.getElementById("addedSubtasks").innerHTML = "";
-    for (let i = users[activeUser].subtasks.length - 1; i >= 0; i--) {
-      document.getElementById("addedSubtasks").innerHTML += `
+  document.getElementById("addedSubtasks").innerHTML = "";
+  for (let i = users[activeUser].subtasks.length - 1; i >= 0; i--) {
+    document.getElementById("addedSubtasks").innerHTML += `
         <div onclick="addToSelectedSubtasks(${i})" class="subtasks">
           <img id=checkbox[${i}] src="../../assets/img/functionButtons/checkbox.png">
           <span id="subtasks">${users[activeUser].subtasks[i]}</span>
         </div>
       `;
-    }
+  }
 }
 
 function addToSelectedSubtasks(id) {
@@ -373,12 +388,12 @@ function addToSelectedSubtasks(id) {
   }
 }
 
-function toggleSubtasks(index, checkbox){
-  if (index > -1) {
-    selectedSubtasks.splice(index, 1);
-    checkbox.src = `/assets/img/functionButtons/checkbox.png`;
-  } else {
-    selectedSubtasks.push(subtask);
-    checkbox.src = `/assets/img/functionButtons/checkboxActive.png`;
-  }
-}
+// function toggleSubtasks(index, checkbox){
+//   if (index > -1) {
+//     selectedSubtasks.splice(index, 1);
+//     checkbox.src = `/assets/img/functionButtons/checkbox.png`;
+//   } else {
+//     selectedSubtasks.push(subtask);
+//     checkbox.src = `/assets/img/functionButtons/checkboxActive.png`;
+//   }
+// }

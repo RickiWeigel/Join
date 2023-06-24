@@ -135,13 +135,17 @@
     margin-bottom: 10px;
 }
 
-.taskDescription {
+
+.boxDescription {
     color: #A8A8A8;
-    height: 100%;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
     margin-bottom: 24px;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
 }
+
 
 
 .progressStatus {
@@ -149,7 +153,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 0px;
-    margin-bottom: 20px;
+    margin-bottom: 8px;
     gap: 12px;
 }
 
@@ -226,40 +230,115 @@
     align-items: center;
     background-color: rgba(255, 255, 255, 0.8);
     opacity: 0;
-    transition: opacity 0.3s, transform 0.3s;
+    transition: all 0.3s, transform 0.3s;
     z-index: -1;
 }
 
 .popupTask {
+    position: relative;
     width: 622px;
     height: 818px;
     padding: 50px;
-    flex-direction: column;
-    align-items: center;
-    gap: 25px;
     border-radius: 30px;
     background-color: #ffffff;
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
-    transform: translateY(100%);
-    transition: transform 0.3s;
-
+    top: 100%;
 }
 
-.popupActive .popupTask {
-    transform: translateY(0);
+.popupTaskSlideIn {
+    animation-name: slideInPopup;
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
 }
 
-.popupActive {
-    z-index: 2;
+.popupTaskSlideOut {
+    animation-name: slideOutPopup;
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes slideInPopup {
+    from {
+        top: 100%;
+    }
+
+    to {
+        top: 0%;
+    }
+}
+
+@keyframes slideOutPopup {
+    from {
+        top: 0%;
+    }
+
+    to {
+        top: 100%;
+    }
+}
+
+.containerPopupActive {
+    z-index: 9999;
     opacity: 1;
 }
 
-.popupContainer.hidePopup {
+.popupContainer .hidePopup {
     opacity: 0;
     pointer-events: none;
 }
 
-.popupContainer.hidePopup .popupTask {
-    transform: translateY(100%);
-    z-index: 0;
+
+
+.popupCategoryHeadline {
+    color: #FFF;
+    display: inline-block;
+    font-size: 23px;
+    padding: 4px 36.5px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+}
+
+.popupTaskHeadline {
+    font-size: clamp(48px, 3vw, 61px);
+    ;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+.popupBoxDescription {
+    font-size: 21px;
+}
+
+.popupDivContainer {
+    margin-top: 25px;
+    font-size: 21px;
+    display: flex;
+    gap: 25px;
+}
+
+.popupDivContainer span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.popupTaskPriority {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popupSubtaskContainer {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.subtask{
+    display: flex;
+    gap: 25px;
+    align-items: center; 
+    margin-bottom: 6px;   
 }

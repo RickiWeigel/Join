@@ -40,16 +40,14 @@ function renderTodoTasks(taskStatus, id) {
   let userTask = users[activeUser].userTasks[id];
   let priorityImageUrl = getPriorityImageUrl(userTask.priority);
   document.getElementById(taskStatus).innerHTML += `
-  <div class="taskCard">
+  <div class="taskCard" id="taskCard${id}" onclick="openPopupTask(${id})">
     <div class="categoryHeadline" style="background: ${userTask.category.color};">
         <span>${userTask.category.name}</span>
     </div>
     <div class="taskHeadline">
         <span>${userTask.taskTitle}</span>
     </div>
-    <div class="taskDescription">
-        <span>${userTask.taskDescription}</span>
-    </div>
+    <span class="boxDescription">${userTask.taskDescription}</span>
     <div class="progressStatus">
         <div class="progress">
           <div class="progressCompleted" style="width: 80%;"></div>
@@ -58,7 +56,6 @@ function renderTodoTasks(taskStatus, id) {
     </div>
     <div class="taskFooter">
         <div class="taskContacts" id="taskContacts${id}">
-            
         </div>
         <div class="taskPriority"><img src="${priorityImageUrl}"></div>
     </div>
@@ -115,19 +112,104 @@ function getPriorityImageUrl(priority) {
   }
 }
 
-function openPopupTask() {
-  const popupContainer = document.getElementById('popupContainer');
+function getPriorityImageUrlPopup(priority) {
+  if (priority == "Low") {
+    return "../../assets/img/board/LowPopUpicon.png";
+  } else if (priority == "Medium") {
+    return "../../assets/img/board/MidPopUpicon.png";
+  } else if (priority == "Urgent") {
+    return "../../assets/img/board/HardPopUpicon.png";
+  }
+}
+
+function openPopupTask(id) {
+  renderPopup(id);
+  const popupContainer = document.getElementById("popupContainer");
+  const popupTask = document.getElementById("popupTask");
+  popupContainer.classList.remove("hidePopup");
+  popupContainer.classList.add("containerPopupActive");
+  popupTask.classList.add("popupTaskSlideIn");
+}
+
+function hidePopupTask() {
+  const popupContainer = document.getElementById("popupContainer");
+  const popupTask = document.getElementById("popupTask");
+  popupTask.classList.add("popupTaskSlideOut");
+  popupContainer.classList.remove("containerPopupActive");
+  popupContainer.classList.add("hidePopup");
+}
+
+function renderPopup(id) {
+  let userTask = users[activeUser].userTasks[id];
+  let priorityImageUrl = getPriorityImageUrlPopup(userTask.priority);
+  document.getElementById("popupContainer").innerHTML = `
+    <div class="popupTask" id="popupTask" onclick="event.stopPropagation()">
+      <div class="popupCategoryHeadline" style="background: ${userTask.category.color};">
+        <span>${userTask.category.name}</span>
+      </div>
+      <div class="popupTaskHeadline">
+        <span>${userTask.taskTitle}</span>
+      </div>
+      <span class="popupBoxDescription">${userTask.taskDescription}</span>
+      <div class="popupDivContainer">
+        <span><b>Due date: </b></span>
+        <span>${userTask.toDueDate}</span>
+      </div>
+      <div class="popupDivContainer">
+        <span><b>Priority: </b></span>
+        <div class="popupTaskPriority"><img src="${priorityImageUrl}"></div>
+      </div>
+      <div class="popupSubtaskContainer">
+        <span><b>Subtasks:</b></span>
+          <div id="popupSubtasks"></div>
+
+      </div>
+    </div>
+
+  `;
+  renderSubtasks(id)
+}
+
+async function renderSubtasks(id){
   
-  popupContainer.classList.remove('hidePopup');
-  popupContainer.classList.add('popupActive');
+  document.getElementById('popupSubtasks').innerHTML = "";
+  for (let i = 0; i < users[activeUser].userTasks[id].subtasks.length; i++) {
+    document.getElementById('popupSubtasks').innerHTML += `
+    <div class="subtask" onclick="addToSelectedSubtasks(${id}, ${i})">
+      <img id='checkbox[${i}]' src="../../assets/img/functionButtons/checkbox.png">
+      <span>${users[activeUser].userTasks[id].subtasks[i]}</span>
+    </div>
+    `;
+  }
+  updateCheckboxStatus(id);
 }
 
-function hidePopupTask(){
-  const popupContainer = document.getElementById('popupContainer');
-  popupContainer.classList.remove('popupActive');
-  popupContainer.classList.add('hidePopup');
+async function addToSelectedSubtasks(id, i) {
+  const completedTasks = users[activeUser].userTasks[id].completedTasks;
+  const subtask = users[activeUser].userTasks[id].subtasks[i];
+  
+  if (completedTasks.includes(subtask)) {
+    const index = completedTasks.indexOf(subtask);
+    completedTasks.splice(index, 1);
+    const checkbox = document.getElementById(`checkbox[${i}]`);
+    checkbox.src = `../../assets/img/functionButtons/checkbox.png`;
+  } else {
+    completedTasks.push(subtask);
+    const checkbox = document.getElementById(`checkbox[${i}]`);
+    checkbox.src = `../../assets/img/functionButtons/checkboxActive.png`;
+  }
+  await setItem(`users`, JSON.stringify(users));
 }
 
-// white-space: nowrap; /* Verhindert den Zeilenumbruch */
-// overflow: hidden; /* Versteckt den überschüssigen Text */
-// text-overflow: ellipsis;
+function updateCheckboxStatus(id) {
+  const completedTasks = users[activeUser].userTasks[id].completedTasks;
+  const subtasks = users[activeUser].userTasks[id].subtasks;
+  for (let i = 0; i < subtasks.length; i++) {
+    const checkbox = document.getElementById(`checkbox[${i}]`);
+    if (completedTasks.includes(subtasks[i])) {
+      checkbox.src = `../../assets/img/functionButtons/checkboxActive.png`;
+    } else {
+      checkbox.src = `../../assets/img/functionButtons/checkbox.png`;
+    }
+  }
+}

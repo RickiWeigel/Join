@@ -41,6 +41,7 @@ const colorActions = {
 async function addTaskInit() {
   await mainInit();
   renderSubtasks();
+  highlightedNavbar(3);
 }
 
 // Show Date (jquery)

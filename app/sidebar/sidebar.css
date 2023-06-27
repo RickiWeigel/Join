@@ -41,3 +41,8 @@ body {
     background: #D2E3FF;
     border-radius: 8px;
 }
+
+.navHighlighted {
+    background-color: #d2e3ff;
+    border-radius: 0.5em;
+}

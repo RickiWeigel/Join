@@ -61,6 +61,24 @@
 
 .statusCard {
     width: 100%;
+    min-height: 500px;
+    border-radius: 30px;
+    border-color: #3780ff56;
+    
+    padding: 10px 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+}
+
+.statusCardHighlight{
+    background-color: #3780ff10;
+    border-style: dashed;
+    border-width: 1px;
+}
+
+.removeStatusCardHighlight{
+    background-color: #ffffff00;
 }
 
 .statusCategories {
@@ -69,21 +87,20 @@
     justify-content: space-between;
     height: 70vh;
     gap: 40px;
-
 }
 
 .singleCategory {
     display: flex;
     gap: 35px;
-    width: 20vw;
-    display: flex;
+    width: 25vw;
+    min-height: 480px;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    user-select: none;
 }
 
 .singleCategoryHeader {
-    height: 80px;
+    height: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -94,14 +111,6 @@
     color: #42526E;
 }
 
-#toDoTasks {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 35px;
-    width: 100%;
-    padding-bottom: 25px;
-}
 
 .taskCard {
     display: flex;
@@ -352,5 +361,15 @@
 }
 
 .popupAssignedToContainer{
+    display: flex;
+    flex-direction: column;
     margin-top: 25px;
+    gap: 10px;
+}
+
+
+.popupAssignedTo{
+    display: flex;
+    gap: 20px;
+    align-items: center;
 }

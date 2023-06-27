@@ -1,3 +1,4 @@
-function summaryInit() {
-    mainInit();
+async function summaryInit() {
+    await mainInit();
+    highlightedNavbar(1);
 }

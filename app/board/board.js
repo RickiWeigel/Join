@@ -1,4 +1,3 @@
-let completedTask = [];
 let currentSubtasks = [];
 
 async function boardInit() {
@@ -38,6 +37,9 @@ function sortProgress(task, id) {
 
 function renderTodoTasks(taskStatus, id) {
   let userTask = users[activeUser].userTasks[id];
+  let completedTasks = userTask.completedTasks.length;
+  let subtaskLength = userTask.subtasks.length;
+  let completedProgress = completedProgresses(completedTasks, subtaskLength);
   let priorityImageUrl = getPriorityImageUrl(userTask.priority);
   document.getElementById(taskStatus).innerHTML += `
   <div class="taskCard" id="taskCard${id}" onclick="openPopupTask(${id})">
@@ -50,9 +52,9 @@ function renderTodoTasks(taskStatus, id) {
     <span class="boxDescription">${userTask.taskDescription}</span>
     <div class="progressStatus">
         <div class="progress">
-          <div class="progressCompleted" style="width: 80%;"></div>
+          <div class="progressCompleted" style="width: ${completedProgress}%;"></div>
         </div>
-        <span>0/${userTask.subtasks.length} Done</span>
+        <span>${completedTasks}/${subtaskLength} Done</span>
     </div>
     <div class="taskFooter">
         <div class="taskContacts" id="taskContacts${id}">
@@ -62,7 +64,14 @@ function renderTodoTasks(taskStatus, id) {
   </div>
   `;
   renderContactInitials(id);
+  console.log(completedProgress);
 }
+
+function completedProgresses(completedTasks, subtaskLength){
+  let progress = completedTasks/subtaskLength*100;
+  return progress
+}
+
 
 function renderContactInitials(id) {
   document.getElementById(`taskContacts${id}`).innerHTML = ``;
@@ -137,6 +146,8 @@ function hidePopupTask() {
   popupTask.classList.add("popupTaskSlideOut");
   popupContainer.classList.remove("containerPopupActive");
   popupContainer.classList.add("hidePopup");
+  groupTasksByProgressStatus(users[activeUser]);
+
 }
 
 function renderPopup(id) {
@@ -144,6 +155,7 @@ function renderPopup(id) {
   let priorityImageUrl = getPriorityImageUrlPopup(userTask.priority);
   document.getElementById("popupContainer").innerHTML = `
     <div class="popupTask" id="popupTask" onclick="event.stopPropagation()">
+    <div class="popupTaskContent" id="popupTaskContent">
       <div class="popupCategoryHeadline" style="background: ${userTask.category.color};">
         <span>${userTask.category.name}</span>
       </div>
@@ -162,9 +174,14 @@ function renderPopup(id) {
       <div class="popupSubtaskContainer">
         <span><b>Subtasks:</b></span>
           <div id="popupSubtasks"></div>
-
       </div>
+      <div class="popupAssignedToContainer">
+      <span><b>Assigned To:</b></span>
+        <div id="popupSubtasks"></div>
     </div>
+
+    </div>
+  </div>
 
   `;
   renderSubtasks(id)

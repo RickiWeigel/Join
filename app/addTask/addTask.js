@@ -153,6 +153,7 @@ async function addTask() {
   let description = document.getElementById("description");
   users[activeUser].userTasks.push({
     taskTitle: taskInputTitle.value,
+    completedTasks: [],
     taskDescription: description.value,
     toDueDate: date.value,
     taskID: users[activeUser].userTasks.length,
@@ -397,3 +398,4 @@ function addToSelectedSubtasks(id) {
 //     checkbox.src = `/assets/img/functionButtons/checkboxActive.png`;
 //   }
 // }
+

@@ -61,23 +61,22 @@
 
 .statusCard {
     width: 100%;
-    min-height: 500px;
+    min-height: 60vh;
     border-radius: 30px;
     border-color: #3780ff56;
-    
     padding: 10px 5px;
     display: flex;
     flex-direction: column;
     gap: 35px;
 }
 
-.statusCardHighlight{
+.statusCardHighlight {
     background-color: #3780ff10;
     border-style: dashed;
     border-width: 1px;
 }
 
-.removeStatusCardHighlight{
+.removeStatusCardHighlight {
     background-color: #ffffff00;
 }
 
@@ -109,8 +108,13 @@
     font-weight: 700;
     text-align: center;
     color: #42526E;
+
 }
 
+.singleCategoryHeader img:hover {
+    cursor: pointer;
+    animation: rotate-center 0.4s;
+}
 
 .taskCard {
     display: flex;
@@ -170,7 +174,7 @@
     background: #F4F4F4;
     border-radius: 2px;
     height: 8px;
-    width: 100px;
+    width: 100%;
 }
 
 .progressCompleted {
@@ -243,7 +247,7 @@
     z-index: -1;
 }
 
-.popupTaskContent{
+.popupTaskContent {
     overflow: auto;
     scrollbar-width: thin;
     height: 100%;
@@ -353,14 +357,14 @@
     gap: 12px;
 }
 
-.subtask{
+.subtask {
     display: flex;
     gap: 25px;
-    align-items: center; 
-    margin-bottom: 6px;   
+    align-items: center;
+    margin-bottom: 6px;
 }
 
-.popupAssignedToContainer{
+.popupAssignedToContainer {
     display: flex;
     flex-direction: column;
     margin-top: 25px;
@@ -368,8 +372,25 @@
 }
 
 
-.popupAssignedTo{
+.popupAssignedTo {
     display: flex;
     gap: 20px;
     align-items: center;
+}
+
+
+
+
+.rotate-center {
+    animation: rotate-center 0.4s
+}
+
+@keyframes rotate-center {
+    0% {
+        transform: rotate(0)
+    }
+
+    100% {
+        transform: rotate(90deg)
+    }
 }

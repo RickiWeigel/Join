@@ -1,7 +1,9 @@
 let currentSubtasks = [];
+let currentDraggedElement;
 
 async function boardInit() {
   await mainInit();
+  highlightedNavbar(2);
   groupTasksByProgressStatus(users[activeUser]);
 }
 
@@ -42,7 +44,7 @@ function renderTodoTasks(taskStatus, id) {
   let completedProgress = completedProgresses(completedTasks, subtaskLength);
   let priorityImageUrl = getPriorityImageUrl(userTask.priority);
   document.getElementById(taskStatus).innerHTML += `
-  <div class="taskCard" id="taskCard${id}" onclick="openPopupTask(${id})">
+  <div draggable="true" ondragstart="startDragging(${id})" class="taskCard" id="taskCard${id}" onclick="openPopupTask(${id})">
     <div class="categoryHeadline" style="background: ${userTask.category.color};">
         <span>${userTask.category.name}</span>
     </div>
@@ -64,8 +66,28 @@ function renderTodoTasks(taskStatus, id) {
   </div>
   `;
   renderContactInitials(id);
-  console.log(completedProgress);
 }
+
+function startDragging(id){
+  currentDraggedElement = id;
+  
+}
+
+function moveTo(status, StatusCardId){
+  let userTask = users[activeUser].userTasks[currentDraggedElement];
+  userTask.progressStatus = status;
+  document.getElementById(StatusCardId).classList.remove('statusCardHighlight');
+  groupTasksByProgressStatus(users[activeUser]);
+}
+
+function statusCardHighlight(StatusCardId){
+  document.getElementById(StatusCardId).classList.add('statusCardHighlight');
+}
+
+function removeHighlight(StatusCardId){
+  document.getElementById(StatusCardId).classList.remove('statusCardHighlight');
+}
+
 
 function completedProgresses(completedTasks, subtaskLength){
   let progress = completedTasks/subtaskLength*100;
@@ -175,16 +197,14 @@ function renderPopup(id) {
         <span><b>Subtasks:</b></span>
           <div id="popupSubtasks"></div>
       </div>
-      <div class="popupAssignedToContainer">
-      <span><b>Assigned To:</b></span>
-        <div id="popupSubtasks"></div>
-    </div>
 
+      <div class="popupAssignedToContainer" id="popupAssignedTo">
+        <span><b>Assigned To:</b></span>
     </div>
   </div>
-
   `;
-  renderSubtasks(id)
+  renderSubtasks(id);
+  renderContactsPopup(id);
 }
 
 async function renderSubtasks(id){
@@ -230,3 +250,24 @@ function updateCheckboxStatus(id) {
     }
   }
 }
+
+function renderContactsPopup(id){
+  let userContact = users[activeUser].userTasks[id].assignedTo;
+  
+  for (let j = 0; j < userContact.length; j++) {
+    let contactColor = userContact[j].color;
+    document.getElementById('popupAssignedTo').innerHTML +=`
+    <div class="popupAssignedTo" >
+      <div class="contact box" style="background-color: ${contactColor}">
+      <span id="contactInitials">${userContact[j].initials}</span>
+      </div>
+      <span>${userContact[j].name}</span>
+    </div>
+    `;
+  }
+}
+
+function allowDrop(ev) {
+  ev.preventDefault();
+}
+

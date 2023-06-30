@@ -16,6 +16,42 @@ function groupTasksByProgressStatus(user) {
   }
 }
 
+function searchTasks() {
+  let searchInput = document.getElementById("searchInput").value.toLowerCase();
+  let taskCards = document.getElementsByClassName("taskCard");
+  
+  for (let i = 0; i < taskCards.length; i++) {
+    let taskTitle = taskCards[i].getElementsByClassName("taskHeadline")[0].innerText.toLowerCase();
+    
+    if (startsWithLetters(taskTitle, searchInput)) {
+      taskCards[i].style.display = "block";
+    } else {
+      taskCards[i].style.display = "none";
+    }
+  }
+}
+
+function startsWithLetters(taskTitle, searchInput) {
+  let taskWords = taskTitle.split(" ");
+  
+  for (let i = 0; i < searchInput.length; i++) {
+    let char = searchInput[i];
+    let found = false;
+    
+    for (let j = 0; j < taskWords.length; j++) {
+      let word = taskWords[j];
+      if (word.length >= i + 1 && word[i] === char) {
+        found = true;
+        break;
+      }
+    }    
+    if (!found) {
+      return false;
+    }
+  }  
+  return true;
+}
+
 function sortProgress(task, id) {
   switch (task.progressStatus) {
     case "toDo":
@@ -68,32 +104,29 @@ function renderTodoTasks(taskStatus, id) {
   renderContactInitials(id);
 }
 
-function startDragging(id){
+function startDragging(id) {
   currentDraggedElement = id;
-  
 }
 
-function moveTo(status, StatusCardId){
+function moveTo(status, StatusCardId) {
   let userTask = users[activeUser].userTasks[currentDraggedElement];
   userTask.progressStatus = status;
-  document.getElementById(StatusCardId).classList.remove('statusCardHighlight');
+  document.getElementById(StatusCardId).classList.remove("statusCardHighlight");
   groupTasksByProgressStatus(users[activeUser]);
 }
 
-function statusCardHighlight(StatusCardId){
-  document.getElementById(StatusCardId).classList.add('statusCardHighlight');
+function statusCardHighlight(StatusCardId) {
+  document.getElementById(StatusCardId).classList.add("statusCardHighlight");
 }
 
-function removeHighlight(StatusCardId){
-  document.getElementById(StatusCardId).classList.remove('statusCardHighlight');
+function removeHighlight(StatusCardId) {
+  document.getElementById(StatusCardId).classList.remove("statusCardHighlight");
 }
 
-
-function completedProgresses(completedTasks, subtaskLength){
-  let progress = completedTasks/subtaskLength*100;
-  return progress
+function completedProgresses(completedTasks, subtaskLength) {
+  let progress = (completedTasks / subtaskLength) * 100;
+  return progress;
 }
-
 
 function renderContactInitials(id) {
   document.getElementById(`taskContacts${id}`).innerHTML = ``;
@@ -169,7 +202,6 @@ function hidePopupTask() {
   popupContainer.classList.remove("containerPopupActive");
   popupContainer.classList.add("hidePopup");
   groupTasksByProgressStatus(users[activeUser]);
-
 }
 
 function renderPopup(id) {
@@ -207,11 +239,10 @@ function renderPopup(id) {
   renderContactsPopup(id);
 }
 
-async function renderSubtasks(id){
-  
-  document.getElementById('popupSubtasks').innerHTML = "";
+async function renderSubtasks(id) {
+  document.getElementById("popupSubtasks").innerHTML = "";
   for (let i = 0; i < users[activeUser].userTasks[id].subtasks.length; i++) {
-    document.getElementById('popupSubtasks').innerHTML += `
+    document.getElementById("popupSubtasks").innerHTML += `
     <div class="subtask" onclick="addToSelectedSubtasks(${id}, ${i})">
       <img id='checkbox[${i}]' src="../../assets/img/functionButtons/checkbox.png">
       <span>${users[activeUser].userTasks[id].subtasks[i]}</span>
@@ -224,7 +255,7 @@ async function renderSubtasks(id){
 async function addToSelectedSubtasks(id, i) {
   const completedTasks = users[activeUser].userTasks[id].completedTasks;
   const subtask = users[activeUser].userTasks[id].subtasks[i];
-  
+
   if (completedTasks.includes(subtask)) {
     const index = completedTasks.indexOf(subtask);
     completedTasks.splice(index, 1);
@@ -251,12 +282,12 @@ function updateCheckboxStatus(id) {
   }
 }
 
-function renderContactsPopup(id){
+function renderContactsPopup(id) {
   let userContact = users[activeUser].userTasks[id].assignedTo;
-  
+
   for (let j = 0; j < userContact.length; j++) {
     let contactColor = userContact[j].color;
-    document.getElementById('popupAssignedTo').innerHTML +=`
+    document.getElementById("popupAssignedTo").innerHTML += `
     <div class="popupAssignedTo" >
       <div class="contact box" style="background-color: ${contactColor}">
       <span id="contactInitials">${userContact[j].initials}</span>
@@ -270,4 +301,3 @@ function renderContactsPopup(id){
 function allowDrop(ev) {
   ev.preventDefault();
 }
-

@@ -37,7 +37,7 @@
                 <div class="singleCategory" id="toDo">
                     <div class="singleCategoryHeader">
                         <span>To do</span>
-                        <img src="../../assets/img/board/plus button v1.png">
+                        <img id="plusButton" src="../../assets/img/board/plus button v1.png" >
                     </div>
                     <div class="statusCard" id="toDoTasks" ondragover="allowDrop(event); statusCardHighlight('toDoTasks')" ondragleave="removeHighlight('toDoTasks')"  ondrop="moveTo('toDo','toDoTasks')">
                     </div>
@@ -73,11 +73,8 @@
 
     
     </main>
-    <div  class="popupContainer" id="popupContainer" onclick="hidePopupTask()">
-        <!-- <div class="popupTaskContent" id="popupTaskContent">
-
-        </div> -->
-    </div>
+    <div  class="popupContainer" id="popupContainer" onclick="hidePopupTask()"></div>
+    <div class="addTaskPopupContainer" id="addTaskPopupContainer"></div>
         
 </body>
 

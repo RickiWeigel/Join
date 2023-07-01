@@ -210,7 +210,7 @@ function renderPopup(id) {
   document.getElementById("popupContainer").innerHTML = `
     <div class="popupTask" id="popupTask" onclick="event.stopPropagation()">
     <div class="popupTaskContent" id="popupTaskContent">
-      <div class="popupCategoryHeadline" style="background: ${userTask.category.color};">
+      <div onclick="deleteCurrentTask(${id})" class="popupCategoryHeadline" style="background: ${userTask.category.color};">
         <span>${userTask.category.name}</span>
       </div>
       <div class="popupTaskHeadline">
@@ -300,4 +300,11 @@ function renderContactsPopup(id) {
 
 function allowDrop(ev) {
   ev.preventDefault();
+}
+
+async function deleteCurrentTask(id){
+  hidePopupTask();
+  users[activeUser].userTasks.splice(id,1);
+  // await setItem(`users`, JSON.stringify(users)); 
+  groupTasksByProgressStatus(users[activeUser]);
 }

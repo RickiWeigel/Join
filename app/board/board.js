@@ -232,6 +232,16 @@ function renderPopup(id) {
       <div class="popupAssignedToContainer" id="popupAssignedTo">
         <span><b>Assigned To:</b></span>
       </div>
+
+      <div class="deleteEdit">
+        <div class="deleteContainer">
+          <img id="deleteImage" src="../../assets/img/functionButtons/deleteButton.png">
+        </div>
+        <div class="editContainer">
+          <img id="editImage" src="../../assets/img/functionButtons/editButton.png">
+        </div>
+        
+      </div>
     </div>
   </div>
   `;

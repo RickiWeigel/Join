@@ -207,8 +207,8 @@ function hidePopupTask() {
 function renderPopup(id) {
   let userTask = users[activeUser].userTasks[id];
   let priorityImageUrl = getPriorityImageUrlPopup(userTask.priority);
-  document.getElementById("popupContainer").innerHTML = `
-    <div class="popupTask" id="popupTask" onclick="event.stopPropagation()">
+  document.getElementById("popupContainer").innerHTML = /*html*/ `
+  <div class="popupTask" id="popupTask" onclick="event.stopPropagation()">
     <div class="popupTaskContent" id="popupTaskContent">
       <div onclick="deleteCurrentTask(${id})" class="popupCategoryHeadline" style="background: ${userTask.category.color};">
         <span>${userTask.category.name}</span>
@@ -229,9 +229,9 @@ function renderPopup(id) {
         <span><b>Subtasks:</b></span>
           <div id="popupSubtasks"></div>
       </div>
-
       <div class="popupAssignedToContainer" id="popupAssignedTo">
         <span><b>Assigned To:</b></span>
+      </div>
     </div>
   </div>
   `;

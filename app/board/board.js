@@ -1,11 +1,22 @@
 let currentSubtasks = [];
 let currentDraggedElement;
 
+
+
 async function boardInit() {
   await mainInit();
   highlightedNavbar(2);
   groupTasksByProgressStatus(users[activeUser]);
 }
+
+// Show Date (jquery)
+$(function () {
+  $("#datepicker").datepicker({
+    inline: true,
+    changeMonth: true,
+    changeYear: true,
+  });
+});
 
 function groupTasksByProgressStatus(user) {
   resetTaskContainers();
@@ -19,10 +30,12 @@ function groupTasksByProgressStatus(user) {
 function searchTasks() {
   let searchInput = document.getElementById("searchInput").value.toLowerCase();
   let taskCards = document.getElementsByClassName("taskCard");
-  
+
   for (let i = 0; i < taskCards.length; i++) {
-    let taskTitle = taskCards[i].getElementsByClassName("taskHeadline")[0].innerText.toLowerCase();
-    
+    let taskTitle = taskCards[i]
+      .getElementsByClassName("taskHeadline")[0]
+      .innerText.toLowerCase();
+
     if (startsWithLetters(taskTitle, searchInput)) {
       taskCards[i].style.display = "block";
     } else {
@@ -33,22 +46,22 @@ function searchTasks() {
 
 function startsWithLetters(taskTitle, searchInput) {
   let taskWords = taskTitle.split(" ");
-  
+
   for (let i = 0; i < searchInput.length; i++) {
     let char = searchInput[i];
     let found = false;
-    
+
     for (let j = 0; j < taskWords.length; j++) {
       let word = taskWords[j];
       if (word.length >= i + 1 && word[i] === char) {
         found = true;
         break;
       }
-    }    
+    }
     if (!found) {
       return false;
     }
-  }  
+  }
   return true;
 }
 
@@ -195,6 +208,15 @@ function openPopupTask(id) {
   popupTask.classList.add("popupTaskSlideIn");
 }
 
+function openEdit(id) {
+  renderEditPopup(id);
+  const popupContainer = document.getElementById("popupContainer");
+  const popupTask = document.getElementById("popupTask");
+  popupContainer.classList.remove("hidePopup");
+  popupContainer.classList.add("containerPopupActive");
+  popupTask.classList.add("popupTaskSlideIn");
+}
+
 function hidePopupTask() {
   const popupContainer = document.getElementById("popupContainer");
   const popupTask = document.getElementById("popupTask");
@@ -204,7 +226,7 @@ function hidePopupTask() {
   groupTasksByProgressStatus(users[activeUser]);
 }
 
-function renderPopup(id) {
+async function renderPopup(id) {
   let userTask = users[activeUser].userTasks[id];
   let priorityImageUrl = getPriorityImageUrlPopup(userTask.priority);
   document.getElementById("popupContainer").innerHTML = /*html*/ `
@@ -234,18 +256,148 @@ function renderPopup(id) {
       </div>
 
       <div class="deleteEdit">
-        <div class="deleteContainer" onclick="deleteCurrentTask(id)" id="deleteButton"></div>
-        <div class="editContainer" id="editButton"></div>
+        <div class="deleteContainer" onclick="deleteCurrentTask(${id})" id="deleteButton"></div>
+        <div class="editContainer" onclick="openEdit(${id})" id="editButton"></div>
       </div>
-
     </div>
   </div>
   `;
-  renderSubtasks(id);
+  renderSubtasksTask(id);
   renderContactsPopup(id);
 }
 
-async function renderSubtasks(id) {
+async function renderEditPopup(id) {
+  $(function () {
+    $("#datepicker").datepicker({
+      dateFormat: "dd/mm/yy", // Format des ausgewählten Datums
+      inline: true,
+      changeMonth: true,
+      changeYear: true,
+    });
+  });
+  let userTask = users[activeUser].userTasks[id];
+  document.getElementById("popupContainer").innerHTML = /*html*/ `
+  <div class="popupTask" id="popupTask" onclick="event.stopPropagation()">
+    <div class="popupTaskContent" id="popupTaskContent">
+                <div class="enterTitle">
+                    <input id="taskTitle" type="text" placeholder="Enter a title" value="${userTask.taskTitle}" required>
+                </div>
+
+                <div class="descriptionContainer">
+                    <span>Description</span>
+                    <textarea required name="descriptionTextarea" id="description"
+                        cols="30" rows="10">${userTask.taskDescription}</textarea>
+                </div>
+
+                <div class="dueDate">
+                  <span>Due date</span>
+                  <div class="dateContainer">
+                      <input type="text" placeholder="dd/mm/yyyy" id="datepicker" value="${userTask.toDueDate}" autocomplete="off" required>
+                      <img src="../../assets/img/board/calendar.png">
+                    </div>
+                </div>
+
+                <div id="showPriorities" class="priorityContainer">
+                    <img onmouseover="priorityMouseHover('red')" onmouseleave="priorityMouseLeave('priorityUrgent')"
+                        onclick="renderPrioritySelected('Urgent')" class="priority priorityUrgent" id="priorityUrgent"
+                        src="../../assets/img/addTask/TaskValueHard.png">
+                    <img onmouseover="priorityMouseHover('orange')" onmouseleave="priorityMouseLeave('priorityMedium')"
+                        onclick="renderPrioritySelected('Medium')" class="priority priorityMedium" id="priorityMedium"
+                        src="../../assets/img/addTask/TaskValueMid.png">
+                    <img onmouseover="priorityMouseHover('green')" onmouseleave="priorityMouseLeave('priorityLow')"
+                        onclick="renderPrioritySelected('Low')" class="priority priorityLow" id="priorityLow"
+                        src="../../assets/img/addTask/TaskValueLow.png">
+                </div>
+
+                <div id="showInviteNewContact" class="selectContacts d-none">
+                    <input id="inviteNewContact" type="text" placeholder="Contact email" style="font-size: 19px;">
+                    <img onclick="toggleInviteNewContact()" src="/assets/img/functionButtons/cancelBlue.png">
+                    <img style="padding-left: 8px; padding-right: 8px;"
+                        src="/assets/img/functionButtons/trennstrich.png">
+                    <img onclick="addNewInviteContact()" src="/assets/img/functionButtons/checkedIconSelector.png">
+                </div>
+
+                <div class="selectContacts" id="selectContacts" onclick="renderContactsToAssign();">
+                    <span>Select contacts to assign</span>
+                    <img src="../../assets/img/functionButtons/selectorArrow.png">
+                </div>
+
+                <div class="dropDownContainer">
+                    <div>
+                        <div style="max-height: 204px; overflow: auto;" id="contactsToAssign">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="category">
+                    <span>Category</span>
+                    <div id="showCategory" class="selectCategory" onclick="renderCategories()">
+                        <div id="currentCategory"><span>Select task category</span></div>
+                        <img src="../../assets/img/functionButtons/selectorArrow.png">
+                    </div>
+                </div>
+
+                <div id="showNewCategory" class="selectCategory d-none">
+                    <input id="addNewCategory" type="text" placeholder="New category name" style="font-size: 19px;">
+                    <img onclick="hideNewCategory()" src="/assets/img/functionButtons/cancelBlue.png">
+                    <img style="padding-left: 8px; padding-right: 8px;"
+                        src="/assets/img/functionButtons/trennstrich.png">
+                    <img onclick="addNewCategoryFunction()" src="/assets/img/functionButtons/checkedIconSelector.png">
+                </div>
+
+                <div class="dropDownContainer">
+                    <div>
+                        <div id="colorCircle" class="circle-content d-none">
+                            <div id="lightblue" onclick="addCategoryColor('lightblue')" class="colorCircle"
+                                style="background: #8AA4FF;"></div>
+                            <div id="red" onclick="addCategoryColor('red')" class="colorCircle"
+                                style="background: #FF0000;"></div>
+                            <div id="green" onclick="addCategoryColor('green')" class="colorCircle"
+                                style="background: #2AD300;"></div>
+                            <div id="orange" onclick="addCategoryColor('orange')" class="colorCircle"
+                                style="background: #FF8A00;"></div>
+                            <div id="pink" onclick="addCategoryColor('pink')" class="colorCircle"
+                                style="background: #E200BE;"></div>
+                            <div id="blue" onclick="addCategoryColor('blue')" class="colorCircle"
+                                style="background: #0038FF;"></div>
+                        </div>
+
+                        <div style="max-height: 204px; overflow: auto;" id="selectTaskCategory">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subtaskContainer">
+                    <span>Subtasks</span>
+
+                    <div id="subtask" class="addSubtask">
+                        <input id="subtaskInput" onclick="subtaskActiveInput()" type="text"
+                            placeholder="Add new subtask">
+                        <div id="subtaskButtons" style="display: flex; align-items: center;">
+                            <img src="../../assets/img/functionButtons/add.png">
+                        </div>
+                    </div>
+
+                </div>
+                <div id="addedSubtasks" class="subtaskContent">
+                </div>
+            </div>
+            <div class="btn-container">
+                <div onmouseover="clearBtnOnHover()" onmouseleave="clearBtnLeaveHover()" class="btn-white">
+                    <span>Clear</span><img id="clearBtn" src="/assets/img/functionButtons/icon_cancel.png">
+                </div>
+                <button class="btn-blue">Creat Task <img
+                        src="/assets/img/functionButtons/akar-icons_check.png"></button>
+            </div>
+        </form>
+    </div>
+  </div>
+  `;
+  await renderSubtasks(id);
+  renderPrioritySelected(userTask.priority);
+}
+
+async function renderSubtasksTask(id) {
   document.getElementById("popupSubtasks").innerHTML = "";
   for (let i = 0; i < users[activeUser].userTasks[id].subtasks.length; i++) {
     document.getElementById("popupSubtasks").innerHTML += `
@@ -255,7 +407,7 @@ async function renderSubtasks(id) {
     </div>
     `;
   }
-  updateCheckboxStatus(id);
+  updateCheckboxStatusTask(id);
 }
 
 async function addToSelectedSubtasks(id, i) {
@@ -275,7 +427,7 @@ async function addToSelectedSubtasks(id, i) {
   await setItem(`users`, JSON.stringify(users));
 }
 
-function updateCheckboxStatus(id) {
+function updateCheckboxStatusTask(id) {
   const completedTasks = users[activeUser].userTasks[id].completedTasks;
   const subtasks = users[activeUser].userTasks[id].subtasks;
   for (let i = 0; i < subtasks.length; i++) {
@@ -304,19 +456,18 @@ function renderContactsPopup(id) {
   }
 }
 
-function editDeleteButtonHover(button){
+function editDeleteButtonHover(button) {
   const hover = document.getElementById(button);
-  hover.src = `../../assets/img/functionButtons/${button}Hover.png`; 
+  hover.src = `../../assets/img/functionButtons/${button}Hover.png`;
 }
-
 
 function allowDrop(ev) {
   ev.preventDefault();
 }
 
-async function deleteCurrentTask(id){
+async function deleteCurrentTask(id) {
   hidePopupTask();
-  users[activeUser].userTasks.splice(id,1);
-  await setItem(`users`, JSON.stringify(users)); 
+  users[activeUser].userTasks.splice(id, 1);
+  await setItem(`users`, JSON.stringify(users));
   groupTasksByProgressStatus(users[activeUser]);
 }

@@ -96,10 +96,11 @@ function updateCheckboxStatus() {
     if (index > -1) {
       contactSelectorElement.src =
         "/assets/img/functionButtons/checkButtonChecked.png";
-    } else {
-      contactSelectorElement.src =
-        "/assets/img/functionButtons/checkButton.png";
-    }
+      }
+    //  else {
+    //   contactSelectorElement.src =
+    //     "/assets/img/functionButtons/checkButton.png";
+    // }
   }
 }
 

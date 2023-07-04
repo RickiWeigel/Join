@@ -210,7 +210,7 @@ function renderPopup(id) {
   document.getElementById("popupContainer").innerHTML = /*html*/ `
   <div class="popupTask" id="popupTask" onclick="event.stopPropagation()">
     <div class="popupTaskContent" id="popupTaskContent">
-      <div onclick="deleteCurrentTask(${id})" class="popupCategoryHeadline" style="background: ${userTask.category.color};">
+      <div class="popupCategoryHeadline" style="background: ${userTask.category.color};">
         <span>${userTask.category.name}</span>
       </div>
       <div class="popupTaskHeadline">
@@ -234,14 +234,10 @@ function renderPopup(id) {
       </div>
 
       <div class="deleteEdit">
-        <div class="deleteContainer">
-          <img id="deleteImage" src="../../assets/img/functionButtons/deleteButton.png">
-        </div>
-        <div class="editContainer">
-          <img id="editImage" src="../../assets/img/functionButtons/editButton.png">
-        </div>
-        
+        <div class="deleteContainer" onclick="deleteCurrentTask(id)" id="deleteButton"></div>
+        <div class="editContainer" id="editButton"></div>
       </div>
+
     </div>
   </div>
   `;
@@ -307,6 +303,12 @@ function renderContactsPopup(id) {
     `;
   }
 }
+
+function editDeleteButtonHover(button){
+  const hover = document.getElementById(button);
+  hover.src = `../../assets/img/functionButtons/${button}Hover.png`; 
+}
+
 
 function allowDrop(ev) {
   ev.preventDefault();

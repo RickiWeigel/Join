@@ -381,57 +381,54 @@
     align-items: center;
 }
 
-#deleteImage {
-    background-image: url('../../assets/img/functionButtons/deleteButtonHover.png');
-    width: 57px;
-    height: 57px;
-    border-radius: 10px 0px 0px 10px;
-    background-size: cover;
-    background-position: left center;
-    background-repeat: no-repeat;
-}
-
-.deleteContainer {
-    width: 57px;
-    /* Breite des Containers */
-    height: 57px;
-    /* Höhe des Containers */
-    overflow: hidden;
-    /* Überlauf verstecken */
-    border-radius: 10px 0px 0px 10px;
-}
-
-.editContainer{
-    width: 57px;
-    /* Breite des Containers */
-    height: 57px;
-    /* Höhe des Containers */
-    overflow: hidden;
-    /* Überlauf verstecken */
-    border-radius: 0px 10px 10px 0px;
-}
-
-#deleteImage, #editImage{
-    width: 57px;
-    /* Bildbreite auf 100% des Containers setzen */
-    height: 57px;
-    /* Bildhöhe auf 100% des Containers setzen */
-    object-fit: cover;
-    /* Bildgröße anpassen, um den Container auszufüllen */
-    border: 1px solid #4589FF
-}
-
 .deleteEdit {
     display: flex;
     width: 114px;
     height: 57px;
-    justify-content: center;
-    align-items: flex-start;
     position: absolute;
     right: 50px;
     bottom: 42px;
 }
 
+
+.editContainer {
+    background: url("../../assets/img/functionButtons/editButton.png") center no-repeat;
+    width: 57px;
+    height: 57px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0px 10px 10px 0px;
+    background-color: #4589FF;
+    border: 1px solid #4589FF;
+    cursor: pointer;
+}
+
+.deleteContainer {
+    background: url("../../assets/img/functionButtons/deleteButton.png") center no-repeat;
+    width: 57px;
+    height: 57px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px 0px 0px 10px;
+    border: 1px solid #4589FF;
+    cursor: pointer;
+}
+
+.deleteContainer:hover {
+    background-image: url("../../assets/img/functionButtons/deleteButtonHover.png");
+}
+
+.editContainer:hover,
+.deleteContainer:hover {
+    background-color: #005DFF;
+    border: 1px solid #005DFF;
+}
+
+
+
+/* #4589FF */
 .addTaskPopupContainer {
     border-radius: 30px 0px 30px 30px;
     background: #FFF;

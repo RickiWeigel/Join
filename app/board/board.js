@@ -317,6 +317,6 @@ function allowDrop(ev) {
 async function deleteCurrentTask(id){
   hidePopupTask();
   users[activeUser].userTasks.splice(id,1);
-  // await setItem(`users`, JSON.stringify(users)); 
+  await setItem(`users`, JSON.stringify(users)); 
   groupTasksByProgressStatus(users[activeUser]);
 }

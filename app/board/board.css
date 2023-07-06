@@ -390,6 +390,16 @@
     bottom: 42px;
 }
 
+.edit-btn-container {
+    margin-top: 25px;
+    height: 60px;
+    top: 70vh;
+    display: flex;
+    justify-content: end;
+    width: 60%;
+    gap: 25px;
+}
+
 
 .editContainer {
     background: url("../../assets/img/functionButtons/editButton.png") center no-repeat;

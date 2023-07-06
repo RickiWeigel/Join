@@ -121,11 +121,12 @@ function startDragging(id) {
   currentDraggedElement = id;
 }
 
-function moveTo(status, StatusCardId) {
+async function moveTo(status, StatusCardId) {
   let userTask = users[activeUser].userTasks[currentDraggedElement];
   userTask.progressStatus = status;
   document.getElementById(StatusCardId).classList.remove("statusCardHighlight");
   groupTasksByProgressStatus(users[activeUser]);
+  await setItem(`users`, JSON.stringify(users));
 }
 
 function statusCardHighlight(StatusCardId) {
@@ -277,7 +278,8 @@ async function renderEditPopup(id) {
   });
   let userTask = users[activeUser].userTasks[id];
   document.getElementById("popupContainer").innerHTML = /*html*/ `
-  <div class="popupTask" id="popupTask" onclick="event.stopPropagation()">
+  <!-- <div class="popupTask" id="popupTask" onclick="event.stopPropagation()"> -->
+  <form onsubmit="; return false;" class="popupTask" id="popupTask" onclick="event.stopPropagation()">
     <div class="popupTaskContent" id="popupTaskContent">
                 <div class="enterTitle">
                     <input id="taskTitle" type="text" placeholder="Enter a title" value="${userTask.taskTitle}" required>
@@ -381,17 +383,13 @@ async function renderEditPopup(id) {
                 </div>
                 <div id="addedSubtasks" class="subtaskContent">
                 </div>
-            </div>
-            <div class="btn-container">
-                <div onmouseover="clearBtnOnHover()" onmouseleave="clearBtnLeaveHover()" class="btn-white">
-                    <span>Clear</span><img id="clearBtn" src="/assets/img/functionButtons/icon_cancel.png">
+                <div class="edit-btn-container">
+                  <button class="btn-blue">Creat Task 
+                  <img src="/assets/img/functionButtons/akar-icons_check.png"></button>
                 </div>
-                <button class="btn-blue">Creat Task <img
-                        src="/assets/img/functionButtons/akar-icons_check.png"></button>
             </div>
-        </form>
-    </div>
-  </div>
+    </form>
+  <!-- </div> -->
   `;
   await renderSubtasks(id);
   renderPrioritySelected(userTask.priority);
@@ -401,7 +399,7 @@ async function renderSubtasksTask(id) {
   document.getElementById("popupSubtasks").innerHTML = "";
   for (let i = 0; i < users[activeUser].userTasks[id].subtasks.length; i++) {
     document.getElementById("popupSubtasks").innerHTML += `
-    <div class="subtask" onclick="addToSelectedSubtasks(${id}, ${i})">
+    <div class="subtask" onclick="addToSelectedSubtasksBoard(${id}, ${i})">
       <img id='checkbox[${i}]' src="../../assets/img/functionButtons/checkbox.png">
       <span>${users[activeUser].userTasks[id].subtasks[i]}</span>
     </div>
@@ -410,7 +408,7 @@ async function renderSubtasksTask(id) {
   updateCheckboxStatusTask(id);
 }
 
-async function addToSelectedSubtasks(id, i) {
+async function addToSelectedSubtasksBoard(id, i) {
   const completedTasks = users[activeUser].userTasks[id].completedTasks;
   const subtask = users[activeUser].userTasks[id].subtasks[i];
 

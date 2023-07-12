@@ -1,8 +1,6 @@
 let currentSubtasks = [];
 let currentDraggedElement;
 
-
-
 async function boardInit() {
   await mainInit();
   highlightedNavbar(2);
@@ -278,7 +276,6 @@ async function renderEditPopup(id) {
   });
   let userTask = users[activeUser].userTasks[id];
   document.getElementById("popupContainer").innerHTML = /*html*/ `
-  <!-- <div class="popupTask" id="popupTask" onclick="event.stopPropagation()"> -->
   <form onsubmit="; return false;" class="popupTask" id="popupTask" onclick="event.stopPropagation()">
     <div class="popupTaskContent" id="popupTaskContent">
                 <div class="enterTitle">
@@ -319,22 +316,13 @@ async function renderEditPopup(id) {
                     <img onclick="addNewInviteContact()" src="/assets/img/functionButtons/checkedIconSelector.png">
                 </div>
 
-                <div class="selectContacts" id="selectContacts" onclick="renderContactsToAssign();">
-                    <span>Select contacts to assign</span>
-                    <img src="../../assets/img/functionButtons/selectorArrow.png">
-                </div>
-
-                <div class="dropDownContainer">
-                    <div>
-                        <div style="max-height: 204px; overflow: auto;" id="contactsToAssign">
-                        </div>
-                    </div>
-                </div>
-
                 <div class="category">
                     <span>Category</span>
                     <div id="showCategory" class="selectCategory" onclick="renderCategories()">
-                        <div id="currentCategory"><span>Select task category</span></div>
+                        <div id="currentCategory">
+                          <span>${userTask.category.name}</span>
+                          <div class="colorCircle" style="background: ${userTask.category.color};"></div>
+                        </div>
                         <img src="../../assets/img/functionButtons/selectorArrow.png">
                     </div>
                 </div>
@@ -381,19 +369,65 @@ async function renderEditPopup(id) {
                     </div>
 
                 </div>
-                <div id="addedSubtasks" class="subtaskContent">
+                <div id="popupSubtasksEdit" class="subtaskContent">
                 </div>
+
+                <div class="category">
+                    <span>Assigned to</span>
+                    <div class="selectContacts" id="selectContacts" onclick="renderContactsToAssign();">
+                      <span>Select contacts to assign</span>
+                      <img src="../../assets/img/functionButtons/selectorArrow.png">
+                    </div>
+                </div>
+
+                <div class="dropDownContainer">
+                    <div>
+                        <div style="max-height: 204px; overflow: auto;" id="contactsToAssign">
+                        </div>
+                    </div>
+                </div>
+
                 <div class="edit-btn-container">
                   <button class="btn-blue">Creat Task 
                   <img src="/assets/img/functionButtons/akar-icons_check.png"></button>
                 </div>
             </div>
     </form>
-  <!-- </div> -->
   `;
-  await renderSubtasks(id);
+  await renderSubtasksTaskEdit(id);
   renderPrioritySelected(userTask.priority);
 }
+
+async function renderSubtasksTaskEdit(id) {
+  document.getElementById("popupSubtasksEdit").innerHTML = "";
+  for (let i = 0; i < users[activeUser].userTasks[id].subtasks.length; i++) {
+    document.getElementById("popupSubtasksEdit").innerHTML += `
+    <div class="subtask" onclick="">
+      <img id='checkboxEdit[${i}]' src="../../assets/img/functionButtons/checkbox.png">
+      <span>${users[activeUser].userTasks[id].subtasks[i]}</span>
+    </div>
+    `;
+  }
+  await updateCheckboxStatusSubtasksEdit(id);
+}
+
+async function updateCheckboxStatusSubtasksEdit(id) {
+  const selectedTasks = users[activeUser].userTasks[id].subtasks;
+  const subtasks = users[activeUser].userTasks[id].subtasks;
+  for (let i = 0; i < subtasks.length; i++) {
+    const checkbox = document.getElementById(`checkboxEdit[${i}]`);
+    if (selectedTasks.includes(subtasks[i])) {
+      checkbox.src = `../../assets/img/functionButtons/checkboxActive.png`;
+    } else {
+      checkbox.src = `../../assets/img/functionButtons/checkbox.png`;
+    }
+  }
+}
+
+function editSubtasks(){
+  
+}
+
 
 async function renderSubtasksTask(id) {
   document.getElementById("popupSubtasks").innerHTML = "";
@@ -438,6 +472,7 @@ function updateCheckboxStatusTask(id) {
   }
 }
 
+
 function renderContactsPopup(id) {
   let userContact = users[activeUser].userTasks[id].assignedTo;
 
@@ -469,3 +504,14 @@ async function deleteCurrentTask(id) {
   await setItem(`users`, JSON.stringify(users));
   groupTasksByProgressStatus(users[activeUser]);
 }
+
+// function editTask(){
+//   let userTask = users[activeUser].userTasks[id];
+// userTask.taskTitle = document.getElementById('taskTitle').value;
+// userTask.toDueDate = document.getElementById('taskTitle').value;
+// userTask.category.name = document.getElementById('taskTitle').value;
+// userTask.category.color = document.getElementById('taskTitle').value;
+//  userTask.taskDescription = document.getElementById('taskTitle').value;
+//  userTask.category.color = document.getElementById('taskTitle').value;
+//  userTask.category.color = document.getElementById('taskTitle').value;
+// }

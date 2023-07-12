@@ -97,10 +97,6 @@ function updateCheckboxStatus() {
       contactSelectorElement.src =
         "/assets/img/functionButtons/checkButtonChecked.png";
       }
-    //  else {
-    //   contactSelectorElement.src =
-    //     "/assets/img/functionButtons/checkButton.png";
-    // }
   }
 }
 

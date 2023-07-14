@@ -275,11 +275,11 @@ async function renderEditPopup(id) {
     });
   });
   let userTask = users[activeUser].userTasks[id];
-  document.getElementById("popupContainer").innerHTML = /*html*/ `
+  document.getElementById("popupContainer").innerHTML = `
   <form onsubmit="; return false;" class="popupTask" id="popupTask" onclick="event.stopPropagation()">
     <div class="popupTaskContent" id="popupTaskContent">
                 <div class="enterTitle">
-                    <input id="taskTitle" type="text" placeholder="Enter a title" value="${userTask.taskTitle}" required>
+                    <input id="taskTitleEdit" type="text" placeholder="Enter a title" value="${userTask.taskTitle}" required>
                 </div>
 
                 <div class="descriptionContainer">
@@ -424,10 +424,19 @@ async function updateCheckboxStatusSubtasksEdit(id) {
   }
 }
 
-function editSubtasks(){
-  
+async function editTask(userTask){
+  editTaskTitle(userTask);
+  await setItem(`users`, JSON.stringify(users));
+  groupTasksByProgressStatus(users[activeUser]);
 }
 
+function editTaskTitle(userTask) {
+  let userTaskTitle = userTask.taskTitle;
+  let currentInput = document.getElementById("taskTitleEdit").value;
+  if (currentInput != userTaskTitle) {
+    userTask.taskTitle = currentInput;
+  }
+}
 
 async function renderSubtasksTask(id) {
   document.getElementById("popupSubtasks").innerHTML = "";
@@ -471,7 +480,6 @@ function updateCheckboxStatusTask(id) {
     }
   }
 }
-
 
 function renderContactsPopup(id) {
   let userContact = users[activeUser].userTasks[id].assignedTo;

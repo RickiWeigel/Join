@@ -276,7 +276,7 @@ async function renderEditPopup(id) {
   });
   let userTask = users[activeUser].userTasks[id];
   document.getElementById("popupContainer").innerHTML = `
-  <form onsubmit="; return false;" class="popupTask" id="popupTask" onclick="event.stopPropagation()">
+  <form onsubmit="editTask(users[${activeUser}].userTasks[${id}], ${id}); return false;" class="popupTask" id="popupTask" onclick="event.stopPropagation()">
     <div class="popupTaskContent" id="popupTaskContent">
                 <div class="enterTitle">
                     <input id="taskTitleEdit" type="text" placeholder="Enter a title" value="${userTask.taskTitle}" required>
@@ -424,13 +424,14 @@ async function updateCheckboxStatusSubtasksEdit(id) {
   }
 }
 
-async function editTask(userTask){
-  editTaskTitle(userTask);
+async function editTask(userTask, id){
+  await editTaskTitle(userTask);
   await setItem(`users`, JSON.stringify(users));
-  groupTasksByProgressStatus(users[activeUser]);
+  hidePopupTask();
+  openPopupTask(id)
 }
 
-function editTaskTitle(userTask) {
+async function editTaskTitle(userTask) {
   let userTaskTitle = userTask.taskTitle;
   let currentInput = document.getElementById("taskTitleEdit").value;
   if (currentInput != userTaskTitle) {

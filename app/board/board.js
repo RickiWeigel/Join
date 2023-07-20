@@ -361,7 +361,7 @@ async function renderEditPopup(id) {
                     <span>Subtasks</span>
 
                     <div id="subtask" class="addSubtask">
-                        <input id="subtaskInput" onclick="subtaskActiveInput()" type="text"
+                        <input id="subtaskInput" onclick="subtaskActiveInputEdit(${id})" type="text"
                             placeholder="Add new subtask">
                         <div id="subtaskButtons" style="display: flex; align-items: center;">
                             <img src="../../assets/img/functionButtons/add.png">
@@ -402,13 +402,22 @@ async function renderSubtasksTaskEdit(id) {
   document.getElementById("popupSubtasksEdit").innerHTML = "";
   for (let i = 0; i < users[activeUser].userTasks[id].subtasks.length; i++) {
     document.getElementById("popupSubtasksEdit").innerHTML += `
-    <div class="subtask" onclick="">
+    <div class="subtask" onclick="" onmouseover="subtaskEditHover(${i})"  onmouseleave="subtaskEditLeave(${i})">
       <img id='checkboxEdit[${i}]' src="../../assets/img/functionButtons/checkbox.png">
       <span>${users[activeUser].userTasks[id].subtasks[i]}</span>
+      <span class="deleteBtn d-none" id="deleteBtn-${i}">delete</span>
     </div>
     `;
   }
   await updateCheckboxStatusSubtasksEdit(id);
+}
+
+function subtaskEditHover(id){
+  document.getElementById(`deleteBtn-${id}`).classList.remove('d-none');
+}
+
+function subtaskEditLeave(id){
+  document.getElementById(`deleteBtn-${id}`).classList.add('d-none');
 }
 
 async function updateCheckboxStatusSubtasksEdit(id) {
@@ -423,6 +432,26 @@ async function updateCheckboxStatusSubtasksEdit(id) {
     }
   }
 }
+
+function subtaskActiveInputEdit(id) {
+  document.getElementById("subtaskButtons").innerHTML = `
+    <img onclick="clearSubtaskInput()"
+      src="/assets/img/functionButtons/cancelBlue.png">
+    <img style="padding-left: 8px; padding-right: 8px;"
+      src="/assets/img/functionButtons/trennstrich.png">
+    <img onclick="addNewSubTasksOnEdit(${id})" src="/assets/img/functionButtons/checkedIconSelector.png">
+  `;
+}
+
+async function addNewSubTasksOnEdit(id){
+  let newSubtask = document.getElementById("subtaskInput").value;
+  users[activeUser].userTasks[id].subtasks.push(newSubtask);
+  await setItem(`users`, JSON.stringify(users));
+  newSubtask = document.getElementById("subtaskInput").value = "";
+  clearSubtaskInput();
+  await renderSubtasksTaskEdit(id);
+}
+
 
 async function editTask(userTask, id){
   await editTaskTitle(userTask);

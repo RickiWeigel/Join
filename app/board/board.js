@@ -284,7 +284,7 @@ async function renderEditPopup(id) {
 
                 <div class="descriptionContainer">
                     <span>Description</span>
-                    <textarea required name="descriptionTextarea" id="description"
+                    <textarea required name="descriptionTextarea" id="descriptionEdit"
                         cols="30" rows="10">${userTask.taskDescription}</textarea>
                 </div>
 
@@ -455,7 +455,11 @@ async function addNewSubTasksOnEdit(id){
 
 async function editTask(userTask, id){
   await editTaskTitle(userTask);
+  userTask.taskDescription = document.getElementById('descriptionEdit').value;
+  userTask.toDueDate = document.getElementById('datepicker').value;
+  userTask.priority = prioritySelect;
   await setItem(`users`, JSON.stringify(users));
+  
   hidePopupTask();
   openPopupTask(id)
 }
@@ -545,11 +549,9 @@ async function deleteCurrentTask(id) {
 
 // function editTask(){
 //   let userTask = users[activeUser].userTasks[id];
-// userTask.taskTitle = document.getElementById('taskTitle').value;
 // userTask.toDueDate = document.getElementById('taskTitle').value;
 // userTask.category.name = document.getElementById('taskTitle').value;
 // userTask.category.color = document.getElementById('taskTitle').value;
-//  userTask.taskDescription = document.getElementById('taskTitle').value;
 //  userTask.category.color = document.getElementById('taskTitle').value;
 //  userTask.category.color = document.getElementById('taskTitle').value;
 // }

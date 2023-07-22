@@ -169,7 +169,7 @@ async function addTask() {
 }
 
 function resetInput() {
-  window.location.href = "/app/board/board.html";
+  window.location.href = "/app/board/board.html"; 
   // taskInputTitle = document.getElementById("taskTitle").value = "";
   // date = document.getElementById("datepicker").value = "";
   // description = document.getElementById("description").value = "";

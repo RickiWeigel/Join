@@ -160,7 +160,7 @@ input {
     margin-bottom: 25px;
 }
 
-#description {
+.descriptionContainer textarea {
     font-family: 'Open Sans';
     border: 1px solid #D1D1D1;
     border-radius: 0px 10px 10px 10px;

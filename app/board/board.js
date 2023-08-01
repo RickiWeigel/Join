@@ -186,6 +186,7 @@ function getPriorityImageUrl(priority) {
   } else if (priority == "Urgent") {
     return "../../assets/img/board/iconHard.png";
   }
+
 }
 
 function getPriorityImageUrlPopup(priority) {
@@ -374,7 +375,7 @@ async function renderEditPopup(id) {
 
                 <div class="category">
                     <span>Assigned to</span>
-                    <div class="selectContacts" id="selectContacts" onclick="renderContactsToAssign();">
+                    <div class="selectContacts" id="selectContacts" onclick="renderContactsToAssignEdit(${id});">
                       <span>Select contacts to assign</span>
                       <img src="../../assets/img/functionButtons/selectorArrow.png">
                     </div>
@@ -412,12 +413,12 @@ async function renderSubtasksTaskEdit(id) {
   await updateCheckboxStatusSubtasksEdit(id);
 }
 
-function subtaskEditHover(id){
-  document.getElementById(`deleteBtn-${id}`).classList.remove('d-none');
+function subtaskEditHover(id) {
+  document.getElementById(`deleteBtn-${id}`).classList.remove("d-none");
 }
 
-function subtaskEditLeave(id){
-  document.getElementById(`deleteBtn-${id}`).classList.add('d-none');
+function subtaskEditLeave(id) {
+  document.getElementById(`deleteBtn-${id}`).classList.add("d-none");
 }
 
 async function updateCheckboxStatusSubtasksEdit(id) {
@@ -443,7 +444,7 @@ function subtaskActiveInputEdit(id) {
   `;
 }
 
-async function addNewSubTasksOnEdit(id){
+async function addNewSubTasksOnEdit(id) {
   let newSubtask = document.getElementById("subtaskInput").value;
   users[activeUser].userTasks[id].subtasks.push(newSubtask);
   await setItem(`users`, JSON.stringify(users));
@@ -452,16 +453,15 @@ async function addNewSubTasksOnEdit(id){
   await renderSubtasksTaskEdit(id);
 }
 
-
-async function editTask(userTask, id){
+async function editTask(userTask, id) {
   await editTaskTitle(userTask);
-  userTask.taskDescription = document.getElementById('descriptionEdit').value;
-  userTask.toDueDate = document.getElementById('datepicker').value;
+  userTask.taskDescription = document.getElementById("descriptionEdit").value;
+  userTask.toDueDate = document.getElementById("datepicker").value;
   userTask.priority = prioritySelect;
   await setItem(`users`, JSON.stringify(users));
-  
+
   hidePopupTask();
-  openPopupTask(id)
+  openPopupTask(id);
 }
 
 async function editTaskTitle(userTask) {
@@ -517,7 +517,6 @@ function updateCheckboxStatusTask(id) {
 
 function renderContactsPopup(id) {
   let userContact = users[activeUser].userTasks[id].assignedTo;
-
   for (let j = 0; j < userContact.length; j++) {
     let contactColor = userContact[j].color;
     document.getElementById("popupAssignedTo").innerHTML += `
@@ -545,6 +544,49 @@ async function deleteCurrentTask(id) {
   users[activeUser].userTasks.splice(id, 1);
   await setItem(`users`, JSON.stringify(users));
   groupTasksByProgressStatus(users[activeUser]);
+}
+
+function renderContactsToAssignEdit(id) {
+  document.getElementById("contactsToAssign").classList.remove("d-none");
+  if (!contactsSelektorOpen) {
+    for (let i = 0; i < users[activeUser].contacts.length; i++) {
+      document.getElementById("contactsToAssign").innerHTML += `
+      <div onclick="selectContactsToAssign(${i})" class="dropdown-content"><span>${users[activeUser].contacts[i].name}</span><img id="contactSelector[${i}]" src="/assets/img/functionButtons/checkButton.png"></div>
+      `;
+    }
+    document.getElementById("contactsToAssign").innerHTML += `
+    <div onclick="toggleInviteNewContact()" class="dropdown-content"><span>Invite new contact</span><img src="/assets/img/functionButtons/contactIcon.png"></div>
+    `;
+    contactsSelektorOpen = true;
+  } else {
+    document.getElementById("contactsToAssign").innerHTML = ``;
+    contactsSelektorOpen = false;
+  }
+  updateCheckboxStatusAssignedTo(id);
+}
+
+function updateCheckboxStatusAssignedTo(id) {
+  const contacts = users[activeUser].contacts;
+  const assignedTo = users[activeUser].userTasks[id].assignedTo;
+
+  for (let i = 0; i < contacts.length; i++) {
+    let isAssigned = false;
+    for (const assigned of assignedTo) {
+      if (
+        contacts[i].email === assigned.email
+      ) {
+        isAssigned = true;
+      }
+    }
+    const contactSelector = document.getElementById(`contactSelector[${i}]`);
+    if (contactSelector) {
+      if (isAssigned) {
+        contactSelector.src = "/assets/img/functionButtons/checkButtonChecked.png";
+      } else {
+        contactSelector.src = "/assets/img/functionButtons/checkButton.png";
+      }
+    }
+  }
 }
 
 // function editTask(){

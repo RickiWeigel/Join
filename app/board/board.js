@@ -229,7 +229,7 @@ function hidePopupTask() {
 async function renderPopup(id) {
   let userTask = users[activeUser].userTasks[id];
   let priorityImageUrl = getPriorityImageUrlPopup(userTask.priority);
-  document.getElementById("popupContainer").innerHTML = /*html*/ `
+  document.getElementById("popupContainer").innerHTML = `
   <div class="popupTask" id="popupTask" onclick="event.stopPropagation()">
     <div class="popupTaskContent" id="popupTaskContent">
       <div class="popupCategoryHeadline" style="background: ${userTask.category.color};">
@@ -319,7 +319,7 @@ async function renderEditPopup(id) {
 
                 <div class="category">
                     <span>Category</span>
-                    <div id="showCategory" class="selectCategory" onclick="renderCategories()">
+                    <div id="showCategory" class="selectCategory" onclick="renderCategoriesEdit()">
                         <div id="currentCategory">
                           <span>${userTask.category.name}</span>
                           <div class="colorCircle" style="background: ${userTask.category.color};"></div>
@@ -399,6 +399,35 @@ async function renderEditPopup(id) {
   renderPrioritySelected(userTask.priority);
 }
 
+function renderCategoriesEdit() {
+  if (!categorySelektorOpen) {
+    document.getElementById("selectTaskCategory").innerHTML = `
+      <div onclick="showNewCategory()" class="dropdown-content"><span>New category</span></div>
+  `;
+    for (let i = 0; i < users[activeUser].taskCategories.length; i++) {
+      document.getElementById("selectTaskCategory").innerHTML += `
+        <div onclick="setSelectedCategoryEdit('${i}')" class="dropdown-content">
+          <span>${users[activeUser].taskCategories[i].name}</span>
+          <div class="colorCircle" style="background: ${users[activeUser].taskCategories[i].color};"></div>
+        </div>
+      `;
+    }
+    categorySelektorOpen = true;
+  } else {
+    document.getElementById("selectTaskCategory").innerHTML = ``;
+    categorySelektorOpen = false;
+  }
+}
+
+function setSelectedCategoryEdit(id) {
+  selectedCategory = {
+    color: users[activeUser].taskCategories[id].color,
+    name: users[activeUser].taskCategories[id].name,
+  };
+  insertSelectedCategory();
+}
+
+
 async function renderSubtasksTaskEdit(id) {
   document.getElementById("popupSubtasksEdit").innerHTML = "";
   for (let i = 0; i < users[activeUser].userTasks[id].subtasks.length; i++) {
@@ -406,7 +435,7 @@ async function renderSubtasksTaskEdit(id) {
     <div class="subtask" onclick="" onmouseover="subtaskEditHover(${i})"  onmouseleave="subtaskEditLeave(${i})">
       <img id='checkboxEdit[${i}]' src="../../assets/img/functionButtons/checkbox.png">
       <span>${users[activeUser].userTasks[id].subtasks[i]}</span>
-      <span class="deleteBtn d-none" id="deleteBtn-${i}">delete</span>
+      <span onclick="subtaskDeleteEdit(${id},${i})" class="deleteBtn d-none" id="deleteBtn-${i}">delete</span>
     </div>
     `;
   }
@@ -419,6 +448,21 @@ function subtaskEditHover(id) {
 
 function subtaskEditLeave(id) {
   document.getElementById(`deleteBtn-${id}`).classList.add("d-none");
+}
+
+function subtaskDeleteEdit(id, i) {
+  let currentSubtask = users[activeUser].userTasks[id].subtasks;
+  const deletedSubtask = currentSubtask.splice(i, 1)[0]; // Das gelöschte Subtask-Element
+
+  // Durchsuche completedTasks und entferne das entsprechende Element
+  const completedTasks = users[activeUser].userTasks[id].completedTasks;
+  for (let j = 0; j < completedTasks.length; j++) {
+    if (completedTasks[j] === deletedSubtask) {
+      completedTasks.splice(j, 1);
+      break;
+    }
+  }
+  renderSubtasksTaskEdit(id);
 }
 
 async function updateCheckboxStatusSubtasksEdit(id) {
@@ -458,8 +502,9 @@ async function editTask(userTask, id) {
   userTask.taskDescription = document.getElementById("descriptionEdit").value;
   userTask.toDueDate = document.getElementById("datepicker").value;
   userTask.priority = prioritySelect;
+  userTask.category.color = selectedCategory.color;
+  userTask.category.name = selectedCategory.name;
   await setItem(`users`, JSON.stringify(users));
-
   hidePopupTask();
   openPopupTask(id);
 }
@@ -589,6 +634,9 @@ function updateCheckboxStatusAssignedTo(id) {
   }
 }
 
+function addAssignedToEdit(){
+
+}
 // function editTask(){
 //   let userTask = users[activeUser].userTasks[id];
 // userTask.toDueDate = document.getElementById('taskTitle').value;

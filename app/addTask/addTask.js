@@ -96,7 +96,7 @@ function updateCheckboxStatus() {
     if (index > -1) {
       contactSelectorElement.src =
         "/assets/img/functionButtons/checkButtonChecked.png";
-      }
+    }
   }
 }
 
@@ -169,7 +169,7 @@ async function addTask() {
 }
 
 function resetInput() {
-  window.location.href = "/app/board/board.html"; 
+  window.location.href = "/app/board/board.html";
   // taskInputTitle = document.getElementById("taskTitle").value = "";
   // date = document.getElementById("datepicker").value = "";
   // description = document.getElementById("description").value = "";
@@ -348,12 +348,16 @@ function clearSubtaskInput() {
 
 async function addNewSubTasks() {
   let newSubtask = document.getElementById("subtaskInput").value;
-  users[activeUser].subtasks.push(newSubtask);
-  deleteSubtasks();
-  await setItem(`users`, JSON.stringify(users));
-  newSubtask = document.getElementById("subtaskInput").value = "";
-  clearSubtaskInput();
-  renderSubtasks();
+  if (newSubtask.length < 2) {
+    console.log("Zu kurz"); //Fehlt noch die Meldung im Browser
+  } else {
+    users[activeUser].subtasks.push(newSubtask);
+    deleteSubtasks();
+    await setItem(`users`, JSON.stringify(users));
+    newSubtask = document.getElementById("subtaskInput").value = "";
+    clearSubtaskInput();
+    renderSubtasks();
+  }
 }
 
 function deleteSubtasks() {
@@ -396,4 +400,3 @@ function addToSelectedSubtasks(id) {
 //     checkbox.src = `/assets/img/functionButtons/checkboxActive.png`;
 //   }
 // }
-

@@ -186,7 +186,6 @@ function getPriorityImageUrl(priority) {
   } else if (priority == "Urgent") {
     return "../../assets/img/board/iconHard.png";
   }
-
 }
 
 function getPriorityImageUrlPopup(priority) {
@@ -427,7 +426,6 @@ function setSelectedCategoryEdit(id) {
   insertSelectedCategory();
 }
 
-
 async function renderSubtasksTaskEdit(id) {
   document.getElementById("popupSubtasksEdit").innerHTML = "";
   for (let i = 0; i < users[activeUser].userTasks[id].subtasks.length; i++) {
@@ -596,7 +594,7 @@ function renderContactsToAssignEdit(id) {
   if (!contactsSelektorOpen) {
     for (let i = 0; i < users[activeUser].contacts.length; i++) {
       document.getElementById("contactsToAssign").innerHTML += `
-      <div onclick="selectContactsToAssign(${i})" class="dropdown-content"><span>${users[activeUser].contacts[i].name}</span><img id="contactSelector[${i}]" src="/assets/img/functionButtons/checkButton.png"></div>
+      <div onclick="selectContactsToAssignEdit(${id},${i})" class="dropdown-content"><span>${users[activeUser].contacts[i].name}</span><img id="contactSelector[${i}]" src="/assets/img/functionButtons/checkButton.png"></div>
       `;
     }
     document.getElementById("contactsToAssign").innerHTML += `
@@ -617,16 +615,15 @@ function updateCheckboxStatusAssignedTo(id) {
   for (let i = 0; i < contacts.length; i++) {
     let isAssigned = false;
     for (const assigned of assignedTo) {
-      if (
-        contacts[i].email === assigned.email
-      ) {
+      if (contacts[i].email === assigned.email) {
         isAssigned = true;
       }
     }
     const contactSelector = document.getElementById(`contactSelector[${i}]`);
     if (contactSelector) {
       if (isAssigned) {
-        contactSelector.src = "/assets/img/functionButtons/checkButtonChecked.png";
+        contactSelector.src =
+          "/assets/img/functionButtons/checkButtonChecked.png";
       } else {
         contactSelector.src = "/assets/img/functionButtons/checkButton.png";
       }
@@ -634,9 +631,28 @@ function updateCheckboxStatusAssignedTo(id) {
   }
 }
 
-function addAssignedToEdit(){
+function selectContactsToAssignEdit(id, currentContactId) {
+  const currentContactEmail = users[activeUser].contacts[currentContactId].email;
+  const contactAssignedTo = users[activeUser].userTasks[id].assignedTo;
 
+  let isContactAssigned = false;
+  for (let i = 0; i < contactAssignedTo.length; i++) {
+    if (contactAssignedTo[i].email === currentContactEmail) {
+      isContactAssigned = true;
+      break;
+    }
+  }
+  if (isContactAssigned) {
+    contactAssignedTo.splice(currentContactId, 1)
+  } else {
+    contactAssignedTo.push(users[activeUser].contacts[currentContactId])
+  }
+  document.getElementById("contactsToAssign").innerHTML = ``;
+  contactsSelektorOpen = false;
+  renderContactsToAssignEdit(id);
 }
+
+
 // function editTask(){
 //   let userTask = users[activeUser].userTasks[id];
 // userTask.toDueDate = document.getElementById('taskTitle').value;
@@ -644,4 +660,4 @@ function addAssignedToEdit(){
 // userTask.category.color = document.getElementById('taskTitle').value;
 //  userTask.category.color = document.getElementById('taskTitle').value;
 //  userTask.category.color = document.getElementById('taskTitle').value;
-// }
+// 

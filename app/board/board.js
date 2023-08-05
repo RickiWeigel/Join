@@ -631,7 +631,7 @@ function updateCheckboxStatusAssignedTo(id) {
   }
 }
 
-function selectContactsToAssignEdit(id, currentContactId) {
+async function selectContactsToAssignEdit(id, currentContactId) {
   const currentContactEmail = users[activeUser].contacts[currentContactId].email;
   const contactAssignedTo = users[activeUser].userTasks[id].assignedTo;
 
@@ -647,9 +647,11 @@ function selectContactsToAssignEdit(id, currentContactId) {
   } else {
     contactAssignedTo.push(users[activeUser].contacts[currentContactId])
   }
+  await setItem(`users`, JSON.stringify(users));
   document.getElementById("contactsToAssign").innerHTML = ``;
   contactsSelektorOpen = false;
   renderContactsToAssignEdit(id);
+
 }
 
 

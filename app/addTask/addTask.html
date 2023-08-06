@@ -28,26 +28,11 @@
                     <input id="taskTitle" type="text" placeholder="Enter a title" required>
                 </div>
 
-                <div id="showInviteNewContact" class="selectContacts d-none">
-                    <input id="inviteNewContact" type="text" placeholder="Contact email" style="font-size: 19px;">
-                    <img onclick="toggleInviteNewContact()" src="/assets/img/functionButtons/cancelBlue.png">
-                    <img style="padding-left: 8px; padding-right: 8px;"
-                        src="/assets/img/functionButtons/trennstrich.png">
-                    <img onclick="addNewInviteContact()" src="/assets/img/functionButtons/checkedIconSelector.png">
+                <div class="descriptionContainer">
+                    <span>Description</span>
+                    <textarea required name="descriptionTextarea" placeholder="Enter a description" id="description"
+                        cols="30" rows="10"></textarea>
                 </div>
-
-                <div class="selectContacts" id="selectContacts" onclick="renderContactsToAssign()">
-                    <span>Select contacts to assign</span>
-                    <img src="../../assets/img/functionButtons/selectorArrow.png">
-                </div>
-
-                <div class="dropDownContainer">
-                    <div>
-                        <div style="max-height: 204px; overflow: auto;" id="contactsToAssign">
-                        </div>
-                    </div>
-                </div>
-
 
                 <div class="dueDate">
                     <span>Due date</span>
@@ -57,90 +42,114 @@
                     </div>
                 </div>
 
+                <div class="priorityClass">
+                    <span>Priority</span>
+                    <div id="showPriorities" class="priorityContainer">
+                        <img onmouseover="priorityMouseHover('red')" onmouseleave="priorityMouseLeave('priorityUrgent')"
+                            onclick="renderPrioritySelected('Urgent')" class="priority priorityUrgent"
+                            id="priorityUrgent" src="../../assets/img/addTask/TaskValueHard.png">
+                        <img onmouseover="priorityMouseHover('orange')"
+                            onmouseleave="priorityMouseLeave('priorityMedium')"
+                            onclick="renderPrioritySelected('Medium')" class="priority priorityMedium"
+                            id="priorityMedium" src="../../assets/img/addTask/TaskValueMid.png">
+                        <img onmouseover="priorityMouseHover('green')" onmouseleave="priorityMouseLeave('priorityLow')"
+                            onclick="renderPrioritySelected('Low')" class="priority priorityLow" id="priorityLow"
+                            src="../../assets/img/addTask/TaskValueLow.png">
+                    </div>
+                </div>
 
-                <div class="category">
-                    <span>Category</span>
-                    <div id="showCategory" class="selectCategory" onclick="renderCategories()">
-                        <div id="currentCategory"><span>Select task category</span></div>
+                <div class="assignedTo">
+                    <span>Assigne to</span>
+                    <div id="showInviteNewContact" class="selectContacts d-none">
+                        <input id="inviteNewContact" type="text" placeholder="Contact email" style="font-size: 19px;">
+                        <img onclick="toggleInviteNewContact()" src="/assets/img/functionButtons/cancelBlue.png">
+                        <img style="padding-left: 8px; padding-right: 8px;"
+                            src="/assets/img/functionButtons/trennstrich.png">
+                        <img onclick="addNewInviteContact()" src="/assets/img/functionButtons/checkedIconSelector.png">
+                    </div>
+
+                    <div class="selectContacts" id="selectContacts" onclick="renderContactsToAssign()">
+                        <span>Select contacts to assign</span>
                         <img src="../../assets/img/functionButtons/selectorArrow.png">
                     </div>
-                </div>
 
-
-                <div id="showNewCategory" class="selectCategory d-none">
-                    <input id="addNewCategory" type="text" placeholder="New category name" style="font-size: 19px;">
-                    <img onclick="hideNewCategory()" src="/assets/img/functionButtons/cancelBlue.png">
-                    <img style="padding-left: 8px; padding-right: 8px;"
-                        src="/assets/img/functionButtons/trennstrich.png">
-                    <img onclick="addNewCategoryFunction()" src="/assets/img/functionButtons/checkedIconSelector.png">
-                </div>
-
-                <div class="dropDownContainer">
-                    <div>
-                        <div id="colorCircle" class="circle-content d-none">
-                            <div id="lightblue" onclick="addCategoryColor('lightblue')" class="colorCircle"
-                                style="background: #8AA4FF;"></div>
-                            <div id="red" onclick="addCategoryColor('red')" class="colorCircle"
-                                style="background: #FF0000;"></div>
-                            <div id="green" onclick="addCategoryColor('green')" class="colorCircle"
-                                style="background: #2AD300;"></div>
-                            <div id="orange" onclick="addCategoryColor('orange')" class="colorCircle"
-                                style="background: #FF8A00;"></div>
-                            <div id="pink" onclick="addCategoryColor('pink')" class="colorCircle"
-                                style="background: #E200BE;"></div>
-                            <div id="blue" onclick="addCategoryColor('blue')" class="colorCircle"
-                                style="background: #0038FF;"></div>
-                        </div>
-
-
-                        <div style="max-height: 204px; overflow: auto;" id="selectTaskCategory">
+                    <div class="dropDownContainer">
+                        <div>
+                            <div style="max-height: 204px; overflow: auto;" id="contactsToAssign">
+                            </div>
                         </div>
                     </div>
                 </div>
 
 
-                <div id="showPriorities" class="priorityContainer">
-                    <img onmouseover="priorityMouseHover('red')" onmouseleave="priorityMouseLeave('priorityUrgent')"
-                        onclick="renderPrioritySelected('Urgent')" class="priority priorityUrgent" id="priorityUrgent"
-                        src="../../assets/img/addTask/TaskValueHard.png">
-                    <img onmouseover="priorityMouseHover('orange')" onmouseleave="priorityMouseLeave('priorityMedium')"
-                        onclick="renderPrioritySelected('Medium')" class="priority priorityMedium" id="priorityMedium"
-                        src="../../assets/img/addTask/TaskValueMid.png">
-                    <img onmouseover="priorityMouseHover('green')" onmouseleave="priorityMouseLeave('priorityLow')"
-                        onclick="renderPrioritySelected('Low')" class="priority priorityLow" id="priorityLow"
-                        src="../../assets/img/addTask/TaskValueLow.png">
-                </div>
 
 
-                <div class="descriptionContainer">
-                    <span>Description</span>
-                    <textarea required name="descriptionTextarea" placeholder="Enter a description" id="description"
-                        cols="30" rows="10"></textarea>
-                </div>
 
+                    <div class="category">
+                        <span>Category</span>
+                        <div id="showCategory" class="selectCategory" onclick="renderCategories()">
+                            <div id="currentCategory"><span>Select task category</span></div>
+                            <img src="../../assets/img/functionButtons/selectorArrow.png">
 
-                <div class="subtaskContainer">
-                    <span>Subtasks</span>
-
-                    <div id="subtask" class="addSubtask">
-                        <input id="subtaskInput" onclick="subtaskActiveInput()" type="text"
-                            placeholder="Add new subtask">
-                        <div id="subtaskButtons" style="display: flex; align-items: center;">
-                            <img src="../../assets/img/functionButtons/add.png">
+                        </div>
+                        <div id="showNewCategory" class="selectCategory d-none">
+                            <input id="addNewCategory" type="text" placeholder="New category name"
+                                style="font-size: 19px;">
+                            <img onclick="hideNewCategory()" src="/assets/img/functionButtons/cancelBlue.png">
+                            <img style="padding-left: 8px; padding-right: 8px;"
+                                src="/assets/img/functionButtons/trennstrich.png">
+                            <img onclick="addNewCategoryFunction()"
+                                src="/assets/img/functionButtons/checkedIconSelector.png">
+                        </div>
+                        <div class="dropDownContainer">
+                            <div>
+                                <div id="colorCircle" class="circle-content d-none">
+                                    <div id="lightblue" onclick="addCategoryColor('lightblue')" class="colorCircle"
+                                        style="background: #8AA4FF;"></div>
+                                    <div id="red" onclick="addCategoryColor('red')" class="colorCircle"
+                                        style="background: #FF0000;"></div>
+                                    <div id="green" onclick="addCategoryColor('green')" class="colorCircle"
+                                        style="background: #2AD300;"></div>
+                                    <div id="orange" onclick="addCategoryColor('orange')" class="colorCircle"
+                                        style="background: #FF8A00;"></div>
+                                    <div id="pink" onclick="addCategoryColor('pink')" class="colorCircle"
+                                        style="background: #E200BE;"></div>
+                                    <div id="blue" onclick="addCategoryColor('blue')" class="colorCircle"
+                                        style="background: #0038FF;"></div>
+                                </div>
+                                <div style="max-height: 204px; overflow: auto;" id="selectTaskCategory">
+                                </div>
+                            </div>
                         </div>
                     </div>
 
+
+
+
+
+
+                    <div class="subtaskContainer">
+                        <span>Subtasks</span>
+
+                        <div id="subtask" class="addSubtask">
+                            <input id="subtaskInput" onclick="subtaskActiveInput()" type="text"
+                                placeholder="Add new subtask">
+                            <div id="subtaskButtons" style="display: flex; align-items: center;">
+                                <img src="../../assets/img/functionButtons/add.png">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div id="addedSubtasks" class="subtaskContent">
+                    </div>
                 </div>
-                <div id="addedSubtasks" class="subtaskContent">
+                <div class="btn-container">
+                    <div onmouseover="clearBtnOnHover()" onmouseleave="clearBtnLeaveHover()" class="btn-white">
+                        <span>Clear</span><img id="clearBtn" src="/assets/img/functionButtons/icon_cancel.png">
+                    </div>
+                    <button class="btn-blue">Creat Task <img
+                            src="/assets/img/functionButtons/akar-icons_check.png"></button>
                 </div>
-            </div>
-            <div class="btn-container">
-                <div onmouseover="clearBtnOnHover()" onmouseleave="clearBtnLeaveHover()" class="btn-white">
-                    <span>Clear</span><img id="clearBtn" src="/assets/img/functionButtons/icon_cancel.png">
-                </div>
-                <button class="btn-blue">Creat Task <img
-                        src="/assets/img/functionButtons/akar-icons_check.png"></button>
-            </div>
         </form>
     </main>
     <script src="/storage.js"></script>

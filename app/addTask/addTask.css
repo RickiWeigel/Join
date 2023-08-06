@@ -13,6 +13,7 @@ body {
 .addTaskSection {
     display: flex;
     flex-direction: column;
+    gap: 24px;
     align-items: flex-start;
     width: 422px;
     height: fit-content;
@@ -28,7 +29,6 @@ body {
     border-bottom: 1px solid #D1D1D1;
     padding: 10px 21px;
     cursor: pointer;
-    margin-bottom: 25px;
 }
 
 .enterTitle input {
@@ -68,7 +68,6 @@ input {
     color: #42526E;
     font-weight: 700;
     font-size: 19px;
-    margin-bottom: 40px;
 }
 
 .dateContainer {
@@ -107,7 +106,11 @@ input {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    margin-bottom: 25px;
+}
+
+.priorityContainer img {
+    width: 136px;
+    height: 51px;
 }
 
 .priority {
@@ -119,6 +122,8 @@ input {
     border-top: none;
     border-left: none;
     border-right: none;
+    width: 136px;
+    height: 51px;
 }
 
 .priorityUrgent:hover {
@@ -156,8 +161,6 @@ input {
     padding: 0px;
     gap: 8px;
     width: 422px;
-    height: 154px;
-    margin-bottom: 25px;
 }
 
 .descriptionContainer textarea {
@@ -181,9 +184,7 @@ input {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 8px;
-    border-bottom: 1px solid #D1D1D1;
-    margin-bottom: 25px;
+    gap: 6px;
 }
 
 
@@ -259,20 +260,34 @@ input {
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
+.priorityClass,
+.assignedTo {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+    color: #42526E;
+    font-weight: 700;
+    font-size: 19px;
+}
+
 
 .dropDownContainer {
     font-size: 19px;
     width: 100%;
-    margin-bottom: 25px;
 }
 
 .dropdown-content {
     display: flex;
+    font-size: 16px;
+    font-weight: 400;
+    color: black;
     gap: 15px;
     align-items: center;
     width: 100%;
     height: 51px;
-    padding: 18px 21px;
+    padding-left: 21px;
     cursor: pointer;
 }
 
@@ -322,5 +337,4 @@ input {
     column-gap: 20px;
     max-height: 300px;
     width: 100%;
-    margin-bottom: 25px;
 }

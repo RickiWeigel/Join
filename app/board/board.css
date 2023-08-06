@@ -251,6 +251,10 @@
 }
 
 .popupTaskContent {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
     overflow: auto;
     scrollbar-width: thin;
     height: 100%;
@@ -261,7 +265,7 @@
 .popupTask {
     position: relative;
     width: 622px;
-    height: 818px;
+    /* height: 818px; */
     padding: 30px 0px;
     border-radius: 30px;
     background-color: #ffffff;
@@ -319,14 +323,12 @@
     font-size: 23px;
     padding: 4px 36.5px;
     border-radius: 8px;
-    margin-bottom: 25px;
 }
 
 .popupTaskHeadline {
     font-size: clamp(48px, 3vw, 61px);
     ;
     font-weight: 700;
-    margin-bottom: 25px;
 }
 
 .popupBoxDescription {
@@ -334,7 +336,6 @@
 }
 
 .popupDivContainer {
-    margin-top: 25px;
     font-size: 21px;
     display: flex;
     gap: 25px;
@@ -354,15 +355,17 @@
 }
 
 .popupSubtaskContainer {
-    margin-top: 25px;
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
 
 .subtask {
+    padding: 15px 21px;
     display: flex;
     gap: 25px;
+    font-size: 16px;
+    font-weight: 400;
     align-items: center;
     margin-bottom: 6px;
     cursor: pointer;
@@ -371,7 +374,6 @@
 .popupAssignedToContainer {
     display: flex;
     flex-direction: column;
-    margin-top: 25px;
     gap: 10px;
 }
 
@@ -392,7 +394,6 @@
 }
 
 .edit-btn-container {
-    margin-top: 25px;
     height: 60px;
     top: 70vh;
     display: flex;

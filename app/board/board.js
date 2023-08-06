@@ -367,10 +367,10 @@ async function renderEditPopup(id) {
                             <img src="../../assets/img/functionButtons/add.png">
                         </div>
                     </div>
-
+                  <div id="popupSubtasksEdit" class="subtaskContent"></div>
                 </div>
-                <div id="popupSubtasksEdit" class="subtaskContent">
-                </div>
+                
+                
 
                 <div class="category">
                     <span>Assigned to</span>

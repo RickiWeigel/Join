@@ -188,13 +188,23 @@ function getPriorityImageUrl(priority) {
   }
 }
 
-function getPriorityImageUrlPopup(priority) {
+async function getPriorityImageUrlPopup(priority) {
+  let element = document.getElementById("popupTaskPriority");
   if (priority == "Low") {
-    return "../../assets/img/board/LowPopUpicon.png";
+    return (element.innerHTML = `
+    <span>Low</span>
+    <img src="../../assets/img/board/iconLowSmall.png">
+    `);
   } else if (priority == "Medium") {
-    return "../../assets/img/board/MidPopUpicon.png";
+    return (element.innerHTML = `
+    <span>Low</span>
+    <img src="../../assets/img/board/iconMediumSmall.png">
+    `);
   } else if (priority == "Urgent") {
-    return "../../assets/img/board/HardPopUpicon.png";
+    return (element.innerHTML = `
+    <span>Low</span>
+    <img src="../../assets/img/board/iconUrgentSmall.png">
+    `);
   }
 }
 
@@ -207,7 +217,12 @@ function openPopupTask(id) {
   popupTask.classList.add("popupTaskSlideIn");
 }
 
-function openEdit(id) {
+function openEdit(userTaskCategoryName, userTaskCategoryColor, id) {
+  selectedCategory = {
+    color: userTaskCategoryColor,
+    name: userTaskCategoryName,
+  };
+
   renderEditPopup(id);
   const popupContainer = document.getElementById("popupContainer");
   const popupTask = document.getElementById("popupTask");
@@ -227,7 +242,7 @@ function hidePopupTask() {
 
 async function renderPopup(id) {
   let userTask = users[activeUser].userTasks[id];
-  let priorityImageUrl = getPriorityImageUrlPopup(userTask.priority);
+  // let priorityImageUrl = getPriorityImageUrlPopup(userTask.priority);
   document.getElementById("popupContainer").innerHTML = `
   <div class="popupTask" id="popupTask" onclick="event.stopPropagation()">
     <div class="popupTaskContent" id="popupTaskContent">
@@ -239,28 +254,41 @@ async function renderPopup(id) {
       </div>
       <span class="popupBoxDescription">${userTask.taskDescription}</span>
       <div class="popupDivContainer">
-        <span><b>Due date: </b></span>
+        <span class="subHeading">Due date:</span>
         <span>${userTask.toDueDate}</span>
       </div>
+
       <div class="popupDivContainer">
-        <span><b>Priority: </b></span>
-        <div class="popupTaskPriority"><img src="${priorityImageUrl}"></div>
-      </div>
-      <div class="popupSubtaskContainer">
-        <span><b>Subtasks:</b></span>
-          <div id="popupSubtasks"></div>
+        <span class="subHeading">Priority:</span>
+        <div class="popupTaskPriority" id="popupTaskPriority">
+          
+        </div>
+
       </div>
       <div class="popupAssignedToContainer" id="popupAssignedTo">
-        <span><b>Assigned To:</b></span>
+        <span class="subHeading">Assigned To:</span>
+      </div>
+
+      <div class="popupSubtaskContainer">
+        <span class="subHeading">Subtasks:</span>
+          <div id="popupSubtasks"></div>
       </div>
 
       <div class="deleteEdit">
-        <div class="deleteContainer" onclick="deleteCurrentTask(${id})" id="deleteButton"></div>
-        <div class="editContainer" onclick="openEdit(${id})" id="editButton"></div>
+        <div onmouseover="btnHover('deleteButton')" onmouseleave="btnLeave('deleteButton')" class="deleteContainer" onclick="deleteCurrentTask(${id})" >
+          <img id="deleteButton" src="../../assets/img/functionButtons/delete.png">
+          <span style="width: 50px;">Delete</span>
+        </div>
+        <img src="../../assets/img/functionButtons/trennstrich.png" height="24px">
+        <div onmouseover="btnHover('editButton')" onmouseleave="btnLeave('editButton')" class="editContainer" onclick="openEdit('${userTask.category.name}','${userTask.category.color}',${id})" >
+          <img id="editButton" src="../../assets/img/functionButtons/edit.png">
+          <span style="width: 35px;">Edit</span>
+        </div>
       </div>
     </div>
   </div>
   `;
+  await getPriorityImageUrlPopup(userTask.priority);
   renderSubtasksTask(id);
   renderContactsPopup(id);
 }
@@ -370,8 +398,6 @@ async function renderEditPopup(id) {
                   <div id="popupSubtasksEdit" class="subtaskContent"></div>
                 </div>
                 
-                
-
                 <div class="category">
                     <span>Assigned to</span>
                     <div class="selectContacts" id="selectContacts" onclick="renderContactsToAssignEdit(${id});">
@@ -396,6 +422,24 @@ async function renderEditPopup(id) {
   `;
   await renderSubtasksTaskEdit(id);
   renderPrioritySelected(userTask.priority);
+}
+
+function btnHover(imgID) {
+  let button = document.getElementById(imgID);
+  if (imgID == "deleteButton") {
+    button.src = "../../assets/img/functionButtons/deleteHover.png";
+  } else {
+    button.src = "../../assets/img/functionButtons/editHover.png";
+  }
+}
+
+function btnLeave(imgID) {
+  let button = document.getElementById(imgID);
+  if (imgID == "deleteButton") {
+    button.src = "../../assets/img/functionButtons/delete.png";
+  } else {
+    button.src = "../../assets/img/functionButtons/edit.png";
+  }
 }
 
 function renderCategoriesEdit() {
@@ -500,11 +544,21 @@ async function editTask(userTask, id) {
   userTask.taskDescription = document.getElementById("descriptionEdit").value;
   userTask.toDueDate = document.getElementById("datepicker").value;
   userTask.priority = prioritySelect;
-  userTask.category.color = selectedCategory.color;
-  userTask.category.name = selectedCategory.name;
+  setUserTaskCategoryEdit(userTask)
   await setItem(`users`, JSON.stringify(users));
   hidePopupTask();
   openPopupTask(id);
+}
+
+function setUserTaskCategoryEdit(userTask) {
+
+  if (selectedCategory.name != 0) {
+    userTask.category.color = selectedCategory.color;
+    userTask.category.name = selectedCategory.name;
+  }else{
+    userTask.category.color = userTask.category.color;
+    userTask.category.name = userTask.category.name;
+  }
 }
 
 async function editTaskTitle(userTask) {
@@ -573,11 +627,6 @@ function renderContactsPopup(id) {
   }
 }
 
-function editDeleteButtonHover(button) {
-  const hover = document.getElementById(button);
-  hover.src = `../../assets/img/functionButtons/${button}Hover.png`;
-}
-
 function allowDrop(ev) {
   ev.preventDefault();
 }
@@ -632,7 +681,8 @@ function updateCheckboxStatusAssignedTo(id) {
 }
 
 async function selectContactsToAssignEdit(id, currentContactId) {
-  const currentContactEmail = users[activeUser].contacts[currentContactId].email;
+  const currentContactEmail =
+    users[activeUser].contacts[currentContactId].email;
   const contactAssignedTo = users[activeUser].userTasks[id].assignedTo;
 
   let isContactAssigned = false;
@@ -643,17 +693,15 @@ async function selectContactsToAssignEdit(id, currentContactId) {
     }
   }
   if (isContactAssigned) {
-    contactAssignedTo.splice(currentContactId, 1)
+    contactAssignedTo.splice(currentContactId, 1);
   } else {
-    contactAssignedTo.push(users[activeUser].contacts[currentContactId])
+    contactAssignedTo.push(users[activeUser].contacts[currentContactId]);
   }
   await setItem(`users`, JSON.stringify(users));
   document.getElementById("contactsToAssign").innerHTML = ``;
   contactsSelektorOpen = false;
   renderContactsToAssignEdit(id);
-
 }
-
 
 // function editTask(){
 //   let userTask = users[activeUser].userTasks[id];
@@ -662,4 +710,4 @@ async function selectContactsToAssignEdit(id, currentContactId) {
 // userTask.category.color = document.getElementById('taskTitle').value;
 //  userTask.category.color = document.getElementById('taskTitle').value;
 //  userTask.category.color = document.getElementById('taskTitle').value;
-// 
+//

@@ -258,14 +258,13 @@
     overflow: auto;
     scrollbar-width: thin;
     height: 100%;
-    padding: 20px 50px;
+    padding: 18px 40px;
 }
 
 
 .popupTask {
     position: relative;
-    width: 622px;
-    /* height: 818px; */
+    min-width: 422px;
     padding: 30px 0px;
     border-radius: 30px;
     background-color: #ffffff;
@@ -315,13 +314,11 @@
     pointer-events: none;
 }
 
-
-
 .popupCategoryHeadline {
     color: #FFF;
     display: inline-block;
     font-size: 23px;
-    padding: 4px 36.5px;
+    padding: 4px 24px;
     border-radius: 8px;
 }
 
@@ -332,11 +329,11 @@
 }
 
 .popupBoxDescription {
-    font-size: 21px;
+    font-size: 19px;
 }
 
 .popupDivContainer {
-    font-size: 21px;
+    font-size: 19px;
     display: flex;
     gap: 25px;
 }
@@ -350,6 +347,7 @@
 
 .popupTaskPriority {
     display: flex;
+    gap: 10px;
     justify-content: center;
     align-items: center;
 }
@@ -361,36 +359,41 @@
 }
 
 .subtask {
-    padding: 15px 21px;
+    padding: 6px 21px;
     display: flex;
-    gap: 25px;
+    gap: 20px;
     font-size: 16px;
     font-weight: 400;
     align-items: center;
-    margin-bottom: 6px;
     cursor: pointer;
 }
 
 .popupAssignedToContainer {
     display: flex;
     flex-direction: column;
-    gap: 10px;
 }
 
+.subHeading{
+    color: #42526E;
+    font-size: 21px;
+    font-weight: 700;
+}
 
 .popupAssignedTo {
     display: flex;
     gap: 20px;
     align-items: center;
+    padding: 7px 16px;
 }
 
 .deleteEdit {
+    width: 158px;
+    height: 24px;
     display: flex;
-    width: 114px;
-    height: 57px;
-    position: absolute;
-    right: 50px;
-    bottom: 42px;
+    align-items: center;
+    justify-content:space-between;
+    gap: 8px;
+    margin-left: auto;
 }
 
 .edit-btn-container {
@@ -402,40 +405,28 @@
     gap: 25px;
 }
 
+.deleteContainer img,
+.editContainer img {
+  width: 16px;
+  height: 18px;
+}
 
-.editContainer {
-    background: url("../../assets/img/functionButtons/editButton.png") center no-repeat;
-    width: 57px;
-    height: 57px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 0px 10px 10px 0px;
-    background-color: #4589FF;
-    border: 1px solid #4589FF;
+.editContainer img {
+    padding-left: 3px;
+}
+
+
+.deleteContainer, .editContainer {
     cursor: pointer;
-}
-
-.deleteContainer {
-    background: url("../../assets/img/functionButtons/deleteButton.png") center no-repeat;
-    width: 57px;
-    height: 57px;
     display: flex;
-    justify-content: center;
     align-items: center;
-    border-radius: 10px 0px 0px 10px;
-    border: 1px solid #4589FF;
-    cursor: pointer;
+    gap: 8px;
+    color: #2A3647;
 }
 
-.deleteContainer:hover {
-    background-image: url("../../assets/img/functionButtons/deleteButtonHover.png");
-}
-
-.editContainer:hover,
-.deleteContainer:hover {
-    background-color: #005DFF;
-    border: 1px solid #005DFF;
+.deleteContainer:hover, .editContainer:hover {
+    color: #005DFF;
+    font-weight: 700;
 }
 
 
@@ -447,12 +438,12 @@
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
 }
 
-.deleteBtn{
+.deleteBtn {
     font-size: 14px;
     color: lightgray;
     font-weight: 600;
 }
 
-.deleteBtn:hover{
+.deleteBtn:hover {
     color: grey;
 }

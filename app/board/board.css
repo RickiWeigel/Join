@@ -322,6 +322,27 @@
     border-radius: 8px;
 }
 
+.closePopup{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.closePopupEdit{
+    cursor: pointer;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: end;
+}
+
+.headline{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .popupTaskHeadline {
     font-size: clamp(48px, 3vw, 61px);
     ;

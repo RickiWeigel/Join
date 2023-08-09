@@ -246,8 +246,11 @@ async function renderPopup(id) {
   document.getElementById("popupContainer").innerHTML = `
   <div class="popupTask" id="popupTask" onclick="event.stopPropagation()">
     <div class="popupTaskContent" id="popupTaskContent">
-      <div class="popupCategoryHeadline" style="background: ${userTask.category.color};">
-        <span>${userTask.category.name}</span>
+      <div class="headline">
+        <div class="popupCategoryHeadline" style="background: ${userTask.category.color};">
+          <span>${userTask.category.name}</span>
+        </div>
+        <div class="closePopup" ><img id="closeBtn" onmouseover="closeHover()" onmouseleave="closeLeave()" onclick="hidePopupTask()" src="../../assets/img/functionButtons/close.png"></div>
       </div>
       <div class="popupTaskHeadline">
         <span>${userTask.taskTitle}</span>
@@ -260,8 +263,7 @@ async function renderPopup(id) {
 
       <div class="popupDivContainer">
         <span class="subHeading">Priority:</span>
-        <div class="popupTaskPriority" id="popupTaskPriority">
-          
+        <div class="popupTaskPriority" id="popupTaskPriority"> 
         </div>
 
       </div>
@@ -305,7 +307,9 @@ async function renderEditPopup(id) {
   let userTask = users[activeUser].userTasks[id];
   document.getElementById("popupContainer").innerHTML = `
   <form onsubmit="editTask(users[${activeUser}].userTasks[${id}], ${id}); return false;" class="popupTask" id="popupTask" onclick="event.stopPropagation()">
+    
     <div class="popupTaskContent" id="popupTaskContent">
+                <div class="closePopupEdit" ><img id="closeBtn" onmouseover="closeHover()" onmouseleave="closeLeave()" onclick="hidePopupTask()" src="../../assets/img/functionButtons/close.png"></div>
                 <div class="enterTitle">
                     <input id="taskTitleEdit" type="text" placeholder="Enter a title" value="${userTask.taskTitle}" required>
                 </div>
@@ -353,15 +357,14 @@ async function renderEditPopup(id) {
                         </div>
                         <img src="../../assets/img/functionButtons/selectorArrow.png">
                     </div>
-                </div>
-
-                <div id="showNewCategory" class="selectCategory d-none">
+                    <div id="showNewCategory" class="selectCategory d-none">
                     <input id="addNewCategory" type="text" placeholder="New category name" style="font-size: 19px;">
                     <img onclick="hideNewCategory()" src="/assets/img/functionButtons/cancelBlue.png">
                     <img style="padding-left: 8px; padding-right: 8px;"
                         src="/assets/img/functionButtons/trennstrich.png">
                     <img onclick="addNewCategoryFunction()" src="/assets/img/functionButtons/checkedIconSelector.png">
-                </div>
+                
+                    </div>
 
                 <div class="dropDownContainer">
                     <div>
@@ -379,15 +382,31 @@ async function renderEditPopup(id) {
                             <div id="blue" onclick="addCategoryColor('blue')" class="colorCircle"
                                 style="background: #0038FF;"></div>
                         </div>
-
                         <div style="max-height: 204px; overflow: auto;" id="selectTaskCategory">
                         </div>
                     </div>
                 </div>
+                </div>
+
+                
+
+                <div class="category">
+                    <span>Assigned to</span>
+                    <div class="selectContacts" id="selectContacts" onclick="renderContactsToAssignEdit(${id});">
+                      <span>Select contacts to assign</span>
+                      <img src="../../assets/img/functionButtons/selectorArrow.png">
+                    </div>
+                    <div class="dropDownContainer">
+                      <div>
+                        <div style="max-height: 204px; overflow: auto;" id="contactsToAssign">
+                        </div>
+                      </div>
+                    </div>
+                </div>
+
 
                 <div class="subtaskContainer">
                     <span>Subtasks</span>
-
                     <div id="subtask" class="addSubtask">
                         <input id="subtaskInput" onclick="subtaskActiveInputEdit(${id})" type="text"
                             placeholder="Add new subtask">
@@ -398,20 +417,7 @@ async function renderEditPopup(id) {
                   <div id="popupSubtasksEdit" class="subtaskContent"></div>
                 </div>
                 
-                <div class="category">
-                    <span>Assigned to</span>
-                    <div class="selectContacts" id="selectContacts" onclick="renderContactsToAssignEdit(${id});">
-                      <span>Select contacts to assign</span>
-                      <img src="../../assets/img/functionButtons/selectorArrow.png">
-                    </div>
-                </div>
 
-                <div class="dropDownContainer">
-                    <div>
-                        <div style="max-height: 204px; overflow: auto;" id="contactsToAssign">
-                        </div>
-                    </div>
-                </div>
 
                 <div class="edit-btn-container">
                   <button class="btn-blue">Creat Task 
@@ -440,6 +446,16 @@ function btnLeave(imgID) {
   } else {
     button.src = "../../assets/img/functionButtons/edit.png";
   }
+}
+
+function closeHover() {
+  let button = document.getElementById('closeBtn');
+  button.src = "../../assets/img/functionButtons/closeHover.png";
+}
+
+function closeLeave() {
+  let button = document.getElementById('closeBtn');
+  button.src = "../../assets/img/functionButtons/close.png";
 }
 
 function renderCategoriesEdit() {

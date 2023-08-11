@@ -256,15 +256,15 @@
     align-items: flex-start;
     gap: 24px;
     overflow: auto;
-    scrollbar-width: thin;
-    height: 100%;
+    max-height: 780px;
     padding: 18px 40px;
 }
 
 
 .popupTask {
     position: relative;
-    min-width: 422px;
+    width: 525px;
+    max-height: 908px;
     padding: 30px 0px;
     border-radius: 30px;
     background-color: #ffffff;
@@ -322,6 +322,32 @@
     border-radius: 8px;
 }
 
+.section1{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.descriptionContainer{
+    display: flex;
+    flex-direction: column;
+}
+
+.titleContainer{
+    display: flex;
+    flex-direction: column;
+}
+
+.required{
+    font-size: 13px;
+    color: red;
+    margin-top: 4px;
+}
+
+.subHeadline{
+    margin-bottom: 8px;
+}
+
 .closePopup{
     cursor: pointer;
     display: flex;
@@ -329,6 +355,7 @@
 }
 
 .closePopupEdit{
+    padding: 4px;
     cursor: pointer;
     display: flex;
     width: 100%;

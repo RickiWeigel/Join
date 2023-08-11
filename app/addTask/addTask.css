@@ -27,13 +27,18 @@ body {
 .enterTitle {
     font-size: 40px;
     border-bottom: 1px solid #D1D1D1;
-    padding: 10px 21px;
+    padding: 13px 16px;
     cursor: pointer;
 }
 
+.titleContainer{
+    display: flex;
+    flex-direction: column;
+}
+
 .enterTitle input {
-    font-size: 40px;
-    height: 55px;
+    font-size: 32px;
+    font-weight: 600;
 }
 
 input {
@@ -52,7 +57,7 @@ input {
     align-items: center;
     justify-content: space-between;
     font-size: 19px;
-    padding: 10px 21px;
+    padding: 12px 16px;
     border-bottom: 1px solid #D1D1D1;
     width: 100%;
     font-weight: 400;
@@ -63,8 +68,10 @@ input {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 8px;
     width: 100%;
+}
+
+.dueDate span{
     color: #42526E;
     font-weight: 700;
     font-size: 19px;
@@ -77,7 +84,7 @@ input {
     font-weight: 400;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 21px;
+    padding: 12px 16px;
     gap: 10px;
     width: 100%;
     border-bottom: 1px solid #D1D1D1;
@@ -92,8 +99,6 @@ input {
 .category {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
     width: 100%;
     color: #42526E;
     font-weight: 700;
@@ -151,7 +156,7 @@ input {
     cursor: pointer;
 }
 
-.descriptionContainer {
+.descriptionContent {
     color: #42526E;
     font-weight: 700;
     font-size: 19px;
@@ -159,15 +164,14 @@ input {
     flex-direction: column;
     align-items: flex-start;
     padding: 0px;
-    gap: 8px;
-    width: 422px;
+    width: 100%;
 }
 
-.descriptionContainer textarea {
+.descriptionContent textarea {
     font-family: 'Open Sans';
     border: 1px solid #D1D1D1;
     border-radius: 0px 10px 10px 10px;
-    width: 422px;
+    width: 100%;
     height: 103px;
     resize: none;
     font-size: 19px;
@@ -184,7 +188,6 @@ input {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 6px;
 }
 
 
@@ -334,7 +337,7 @@ input {
 
 .subtaskContent {
     column-count: 2;
-    column-gap: 20px;
+    column-gap: 10px;
     max-height: 300px;
     width: 100%;
 }

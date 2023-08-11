@@ -307,25 +307,36 @@ async function renderEditPopup(id) {
   let userTask = users[activeUser].userTasks[id];
   document.getElementById("popupContainer").innerHTML = `
   <form onsubmit="editTask(users[${activeUser}].userTasks[${id}], ${id}); return false;" class="popupTask" id="popupTask" onclick="event.stopPropagation()">
-    
+    <div style=padding-right:40px; class="closePopupEdit" ><img id="closeBtn" onmouseover="closeHover()" onmouseleave="closeLeave()" onclick="hidePopupTask()" src="../../assets/img/functionButtons/close.png"></div>
     <div class="popupTaskContent" id="popupTaskContent">
-                <div class="closePopupEdit" ><img id="closeBtn" onmouseover="closeHover()" onmouseleave="closeLeave()" onclick="hidePopupTask()" src="../../assets/img/functionButtons/close.png"></div>
-                <div class="enterTitle">
-                    <input id="taskTitleEdit" type="text" placeholder="Enter a title" value="${userTask.taskTitle}" required>
-                </div>
-
-                <div class="descriptionContainer">
-                    <span>Description</span>
-                    <textarea required name="descriptionTextarea" id="descriptionEdit"
-                        cols="30" rows="10">${userTask.taskDescription}</textarea>
-                </div>
-
-                <div class="dueDate">
-                  <span>Due date</span>
-                  <div class="dateContainer">
-                      <input type="text" placeholder="dd/mm/yyyy" id="datepicker" value="${userTask.toDueDate}" autocomplete="off" required>
-                      <img src="../../assets/img/board/calendar.png">
+                
+                
+                <div class="section1">
+                  <div class="titleContainer">
+                    <div class="enterTitle">
+                        <input id="taskTitleEdit" type="text" placeholder="Enter a title" value="${userTask.taskTitle}" required>                        
                     </div>
+                    <div class="required">required</div>
+                  </div>
+
+                  <div class="descriptionContainer">
+                    <div class="descriptionContent">
+                        <span class="subHeadline">Description</span>
+                        <textarea required name="descriptionTextarea" id="descriptionEdit"
+                            cols="30" rows="10">${userTask.taskDescription}</textarea>
+                    </div>
+                    <div class="required">required</div>
+                  </div>
+
+                  <div class="dueDate">
+                    <span>Due date</span>
+                    <div class="dateContainer">
+                        <input type="text" placeholder="dd/mm/yyyy" id="datepicker" value="${userTask.toDueDate}" autocomplete="off" required>
+                        <img src="../../assets/img/board/calendar.png">
+                    </div>
+                    <div class="required">required</div>
+                  </div>
+                    
                 </div>
 
                 <div id="showPriorities" class="priorityContainer">
@@ -349,7 +360,7 @@ async function renderEditPopup(id) {
                 </div>
 
                 <div class="category">
-                    <span>Category</span>
+                    <span class="subHeadline">Category</span>
                     <div id="showCategory" class="selectCategory" onclick="renderCategoriesEdit()">
                         <div id="currentCategory">
                           <span>${userTask.category.name}</span>

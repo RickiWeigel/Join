@@ -245,9 +245,30 @@
     justify-content: center;
     align-items: center;
     background-color: rgba(255, 255, 255, 0.8);
+
     opacity: 0;
+    /* opacity: 100; */
     transition: all 0.3s, transform 0.3s;
     z-index: -1;
+    /* z-index: 500; */
+}
+
+.addTaskPopupContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.8);
+
+    /* opacity: 0; */
+    opacity: 100;
+    transition: all 0.3s, transform 0.3s;
+    /* z-index: -1; */
+    z-index: 500;
 }
 
 .popupTaskContent {
@@ -322,39 +343,39 @@
     border-radius: 8px;
 }
 
-.section1{
+.section1 {
     display: flex;
     flex-direction: column;
     gap: 16px;
 }
 
-.descriptionContainer{
+.descriptionContainer {
     display: flex;
     flex-direction: column;
 }
 
-.titleContainer{
+.titleContainer {
     display: flex;
     flex-direction: column;
 }
 
-.required{
+.required {
     font-size: 13px;
     color: red;
     margin-top: 4px;
 }
 
-.subHeadline{
+.subHeadline {
     margin-bottom: 8px;
 }
 
-.closePopup{
+.closePopup {
     cursor: pointer;
     display: flex;
     align-items: center;
 }
 
-.closePopupEdit{
+.closePopupEdit {
     padding: 4px;
     cursor: pointer;
     display: flex;
@@ -363,7 +384,7 @@
     justify-content: end;
 }
 
-.headline{
+.headline {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -421,7 +442,7 @@
     flex-direction: column;
 }
 
-.subHeading{
+.subHeading {
     color: #42526E;
     font-size: 21px;
     font-weight: 700;
@@ -439,7 +460,7 @@
     height: 24px;
     display: flex;
     align-items: center;
-    justify-content:space-between;
+    justify-content: space-between;
     gap: 8px;
     margin-left: auto;
 }
@@ -455,8 +476,8 @@
 
 .deleteContainer img,
 .editContainer img {
-  width: 16px;
-  height: 18px;
+    width: 16px;
+    height: 18px;
 }
 
 .editContainer img {
@@ -464,7 +485,8 @@
 }
 
 
-.deleteContainer, .editContainer {
+.deleteContainer,
+.editContainer {
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -472,7 +494,8 @@
     color: #2A3647;
 }
 
-.deleteContainer:hover, .editContainer:hover {
+.deleteContainer:hover,
+.editContainer:hover {
     color: #005DFF;
     font-weight: 700;
 }
@@ -494,4 +517,100 @@
 
 .deleteBtn:hover {
     color: grey;
+}
+
+.popupAddTask {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 100%;
+    /* Hier wurde "100vw" durch "100%" ersetzt */
+    width: 518px;
+    border-radius: 30px 0px 30px 30px;
+    background: #FFF;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+    z-index: 1000;
+    /* Optional, um sicherzustellen, dass das Popup über anderen Inhalten liegt */
+}
+
+.popupAddTaskSlideIn {
+    animation-name: slideInPopupAddTask;
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
+}
+
+.popupAddTaskSlideOut {
+    animation-name: slideOutPopupAddTask;
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes slideInPopupAddTask {
+    from {
+        left: 100%;
+        /* Startposition - aus dem Sichtbereich schieben */
+    }
+
+    to {
+        left: calc(100% - 512px);
+        /* Endposition - ganz rechts anzeigen */
+    }
+}
+
+@keyframes slideOutPopupAddTask {
+    from {
+        left: calc(100% - 512px);
+        /* Startposition - ganz rechts anzeigen */
+    }
+
+    to {
+        left: 100%;
+        /* Endposition - aus dem Sichtbereich schieben */
+    }
+}
+
+.titleAddTask {
+    display: flex;
+    width: 518px;
+    height: 156px;
+    padding: 0px 40px;
+    align-items: center;
+    gap: 49px;
+    font-size: 48px;
+    font-weight: 700;
+}
+
+.boardAddTaskContent {
+    display: flex;
+    width: 100%;
+    height: auto;
+}
+
+.addTaskForm {
+
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+.boardAddTaskSection {
+    display: flex;
+    flex-direction: column;
+    height: 769px;
+    overflow: auto;
+    gap: 24px;
+    align-items: flex-start;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    /* Firefox Scrollleiste ausblenden */
+    -ms-overflow-style: none;
+    /* Internet Explorer Scrollleiste ausblenden */
+}
+
+.boardAddTaskSection::-webkit-scrollbar {
+    width: 0;
+    /* Breite auf 0 setzen, um die Scrollleiste zu verbergen */
 }

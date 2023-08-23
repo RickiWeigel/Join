@@ -12,11 +12,14 @@ body {
 
 .addTaskSection {
     display: flex;
+    scroll-behavior: smooth;
     flex-direction: column;
     gap: 24px;
     align-items: flex-start;
     width: 422px;
-    height: fit-content;
+    height: 828px;
+    overflow: auto;
+    padding-right: 12px;
 }
 
 ::placeholder {

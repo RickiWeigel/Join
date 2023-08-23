@@ -2,7 +2,7 @@
 
 -----Board
 - requiredContainer function
-- implement add task
+- implement add task ( variable mit status, die abgefragt wird)
 
 -----Summary
 - functions

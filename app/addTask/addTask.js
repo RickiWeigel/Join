@@ -5,6 +5,7 @@ let taskCategories = [];
 let categorySelektorOpen;
 let priority;
 let taskStatus;
+let newSubtasks = [];
 let selectedCategory = {};
 let selectedColor;
 let categoryColor;
@@ -351,8 +352,7 @@ async function addNewSubTasks() {
   if (newSubtask.length < 2) {
     console.log("Zu kurz"); //Fehlt noch die Meldung im Browser
   } else {
-    users[activeUser].subtasks.push(newSubtask);
-    deleteSubtasks();
+    newSubtasks.push(newSubtask);
     await setItem(`users`, JSON.stringify(users));
     newSubtask = document.getElementById("subtaskInput").value = "";
     clearSubtaskInput();
@@ -360,27 +360,25 @@ async function addNewSubTasks() {
   }
 }
 
-function deleteSubtasks() {
-  if (users[activeUser].subtasks.length > 6) {
-    users[activeUser].subtasks.shift();
-  }
-}
-
 async function renderSubtasks() {
   document.getElementById("addedSubtasks").innerHTML = "";
-  for (let i = users[activeUser].subtasks.length - 1; i >= 0; i--) {
-    document.getElementById("addedSubtasks").innerHTML += `
-        <div onclick="addToSelectedSubtasks(${i})" class="subtasks">
-          <img id=checkbox[${i}] src="../../assets/img/functionButtons/checkbox.png">
-          <span id="subtasks">${users[activeUser].subtasks[i]}</span>
-        </div>
+  for (let i = newSubtasks.length - 1; i >= 0; i--) {
+      document.getElementById("addedSubtasks").innerHTML += `
+          <div onclick="addToSelectedSubtasks(${i})" class="subtasks">
+              <img id="checkbox[${i}]" src="../../assets/img/functionButtons/checkbox.png">
+              <span id="subtasks">${newSubtasks[i]}</span>
+          </div>
       `;
   }
+
+    // Scrollen Sie den "addTaskSection"-Container nach unten
+  const addTaskContent = document.getElementById("addTaskSection");
+  addTaskContent.scrollTop = addTaskContent.scrollHeight;
 }
 
 function addToSelectedSubtasks(id) {
   const checkbox = document.getElementById(`checkbox[${id}]`);
-  const subtask = users[activeUser].subtasks[id];
+  const subtask = newSubtasks[id];
   const index = selectedSubtasks.indexOf(subtask);
   if (index > -1) {
     selectedSubtasks.splice(index, 1);

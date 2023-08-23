@@ -231,6 +231,13 @@ function openEdit(userTaskCategoryName, userTaskCategoryColor, id) {
   popupTask.classList.add("popupTaskSlideIn");
 }
 
+function hidePopup(variableFunction){
+ if (variableFunction == 'hidePopupTask()') {
+  hidePopupTask()
+ };
+ 
+}
+
 function hidePopupTask() {
   const popupContainer = document.getElementById("popupContainer");
   const popupTask = document.getElementById("popupTask");
@@ -239,6 +246,8 @@ function hidePopupTask() {
   popupContainer.classList.add("hidePopup");
   groupTasksByProgressStatus(users[activeUser]);
 }
+
+
 
 async function renderPopup(id) {
   let userTask = users[activeUser].userTasks[id];
@@ -250,7 +259,7 @@ async function renderPopup(id) {
         <div class="popupCategoryHeadline" style="background: ${userTask.category.color};">
           <span>${userTask.category.name}</span>
         </div>
-        <div class="closePopup" ><img id="closeBtn" onmouseover="closeHover()" onmouseleave="closeLeave()" onclick="hidePopupTask()" src="../../assets/img/functionButtons/close.png"></div>
+        <div class="closePopup" ><img id="closeBtn" onmouseover="closeHover()" onmouseleave="closeLeave()" onclick=hidePopup('hidePopupTask()') src="../../assets/img/functionButtons/close.png"></div>
       </div>
       <div class="popupTaskHeadline">
         <span>${userTask.taskTitle}</span>
@@ -307,7 +316,7 @@ async function renderEditPopup(id) {
   let userTask = users[activeUser].userTasks[id];
   document.getElementById("popupContainer").innerHTML = `
   <form onsubmit="editTask(users[${activeUser}].userTasks[${id}], ${id}); return false;" class="popupTask" id="popupTask" onclick="event.stopPropagation()">
-    <div style=padding-right:40px; class="closePopupEdit" ><img id="closeBtn" onmouseover="closeHover()" onmouseleave="closeLeave()" onclick="hidePopupTask()" src="../../assets/img/functionButtons/close.png"></div>
+    <div style=padding-right:40px; class="closePopupEdit" ><img id="closeBtn" onmouseover="closeHover()" onmouseleave="closeLeave()" onclick=hidePopup("hidePopupTask()") src="../../assets/img/functionButtons/close.png"></div>
     <div class="popupTaskContent" id="popupTaskContent">
                 
                 
@@ -573,7 +582,7 @@ async function editTask(userTask, id) {
   userTask.priority = prioritySelect;
   setUserTaskCategoryEdit(userTask)
   await setItem(`users`, JSON.stringify(users));
-  hidePopupTask();
+  hidePopup('hidePopupTask()');
   openPopupTask(id);
 }
 
@@ -659,7 +668,7 @@ function allowDrop(ev) {
 }
 
 async function deleteCurrentTask(id) {
-  hidePopupTask();
+  hidePopup('hidePopupTask()');
   users[activeUser].userTasks.splice(id, 1);
   await setItem(`users`, JSON.stringify(users));
   groupTasksByProgressStatus(users[activeUser]);
@@ -730,11 +739,201 @@ async function selectContactsToAssignEdit(id, currentContactId) {
   renderContactsToAssignEdit(id);
 }
 
-// function editTask(){
-//   let userTask = users[activeUser].userTasks[id];
-// userTask.toDueDate = document.getElementById('taskTitle').value;
-// userTask.category.name = document.getElementById('taskTitle').value;
-// userTask.category.color = document.getElementById('taskTitle').value;
-//  userTask.category.color = document.getElementById('taskTitle').value;
-//  userTask.category.color = document.getElementById('taskTitle').value;
-//
+function subtaskActiveInputBoard() {
+  document.getElementById("subtaskButtons").innerHTML = `
+    <img onclick="clearSubtaskInput()"
+      src="/assets/img/functionButtons/cancelBlue.png">
+    <img style="padding-left: 8px; padding-right: 8px;"
+      src="/assets/img/functionButtons/trennstrich.png">
+    <img onclick="addNewSubTasksBoard()" src="/assets/img/functionButtons/checkedIconSelector.png">
+  `;
+}
+
+async function addNewSubTasksBoard() {
+  let newSubtask = document.getElementById("subtaskInput").value;
+  if (newSubtask.length < 2) {
+    console.log("Zu kurz"); //Fehlt noch die Meldung im Browser
+  } else {
+    newSubtasks.push(newSubtask);
+    await setItem(`users`, JSON.stringify(users));
+    newSubtask = document.getElementById("subtaskInput").value = "";
+    clearSubtaskInput();
+    renderSubtasksBoard();
+  }
+}
+
+async function renderSubtasksBoard() {
+  document.getElementById("addedSubtasks").innerHTML = "";
+  for (let i = newSubtasks.length - 1; i >= 0; i--) {
+      document.getElementById("addedSubtasks").innerHTML += `
+          <div onclick="addToSelectedSubtasks(${i})" class="subtasks">
+              <img id="checkbox[${i}]" src="../../assets/img/functionButtons/checkbox.png">
+              <span id="subtasks">${newSubtasks[i]}</span>
+          </div>
+      `;
+  }
+  // Scrollen Sie den "boardAddTaskSection"-Container nach unten
+  const addTaskContentBoard = document.getElementById("boardAddTaskSection");
+  addTaskContentBoard.scrollTop = addTaskContentBoard.scrollHeight;
+}
+
+function renderPopupAddTask() {
+  document.getElementById("popupContainer").innerHTML = `
+  <div class="popupAddTask" id="popupAddTask" onclick="event.stopPropagation()">
+    <div class="titleAddTask">Add Task</div>
+    <form onsubmit="addTask(); return false;" class="addTaskForm">
+        <div  class="boardAddTaskContent" id="addTaskContent">
+            <div class="boardAddTaskSection" id="boardAddTaskSection">
+                <div class="enterTitle">
+                    <input id="taskTitle" type="text" placeholder="Enter a title" required>
+                </div>
+
+                <div class="descriptionContent">
+                    <span>Description</span>
+                    <textarea required name="descriptionTextarea" placeholder="Enter a description" id="description"
+                        cols="30" rows="10"></textarea>
+                </div>
+
+                <div class="dueDate">
+                    <span>Due date</span>
+                    <div class="dateContainer">
+                        <input type="text" placeholder="dd/mm/yyyy" id="datepicker" autocomplete="off"
+                            required></input>
+                        <img src="../../assets/img/board/calendar.png">
+                    </div>
+                </div>
+
+                <div class="priorityClass">
+                    <span>Priority</span>
+                    <div id="showPriorities" class="priorityContainer">
+                        <img onmouseover="priorityMouseHover('red')"
+                            onmouseleave="priorityMouseLeave('priorityUrgent')"
+                            onclick="renderPrioritySelected('Urgent')" class="priority priorityUrgent"
+                            id="priorityUrgent" src="../../assets/img/addTask/TaskValueHard.png">
+                        <img onmouseover="priorityMouseHover('orange')"
+                            onmouseleave="priorityMouseLeave('priorityMedium')"
+                            onclick="renderPrioritySelected('Medium')" class="priority priorityMedium"
+                            id="priorityMedium" src="../../assets/img/addTask/TaskValueMid.png">
+                        <img onmouseover="priorityMouseHover('green')"
+                            onmouseleave="priorityMouseLeave('priorityLow')" onclick="renderPrioritySelected('Low')"
+                            class="priority priorityLow" id="priorityLow"
+                            src="../../assets/img/addTask/TaskValueLow.png">
+                    </div>
+                </div>
+
+                <div class="assignedTo">
+                    <span>Assigne to</span>
+                    <div id="showInviteNewContact" class="selectContacts d-none">
+                        <input id="inviteNewContact" type="text" placeholder="Contact email"
+                            style="font-size: 19px;">
+                        <img onclick="toggleInviteNewContact()" src="/assets/img/functionButtons/cancelBlue.png">
+                        <img style="padding-left: 8px; padding-right: 8px;"
+                            src="/assets/img/functionButtons/trennstrich.png">
+                        <img onclick="addNewInviteContact()"
+                            src="/assets/img/functionButtons/checkedIconSelector.png">
+                    </div>
+
+                    <div class="selectContacts" id="selectContacts" onclick="renderContactsToAssign()">
+                        <span>Select contacts to assign</span>
+                        <img src="../../assets/img/functionButtons/selectorArrow.png">
+                    </div>
+
+                    <div class="dropDownContainer">
+                        <div>
+                            <div style="max-height: 204px; overflow: auto;" id="contactsToAssign">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="category">
+                    <span>Category</span>
+                    <div id="showCategory" class="selectCategory" onclick="renderCategories()">
+                        <div id="currentCategory"><span>Select task category</span></div>
+                        <img src="../../assets/img/functionButtons/selectorArrow.png">
+
+                    </div>
+                    <div id="showNewCategory" class="selectCategory d-none">
+                        <input id="addNewCategory" type="text" placeholder="New category name"
+                            style="font-size: 19px;">
+                        <img onclick="hideNewCategory()" src="/assets/img/functionButtons/cancelBlue.png">
+                        <img style="padding-left: 8px; padding-right: 8px;"
+                            src="/assets/img/functionButtons/trennstrich.png">
+                        <img onclick="addNewCategoryFunction()"
+                            src="/assets/img/functionButtons/checkedIconSelector.png">
+                    </div>
+                    <div class="dropDownContainer">
+                        <div>
+                            <div id="colorCircle" class="circle-content d-none">
+                                <div id="lightblue" onclick="addCategoryColor('lightblue')" class="colorCircle"
+                                    style="background: #8AA4FF;"></div>
+                                <div id="red" onclick="addCategoryColor('red')" class="colorCircle"
+                                    style="background: #FF0000;"></div>
+                                <div id="green" onclick="addCategoryColor('green')" class="colorCircle"
+                                    style="background: #2AD300;"></div>
+                                <div id="orange" onclick="addCategoryColor('orange')" class="colorCircle"
+                                    style="background: #FF8A00;"></div>
+                                <div id="pink" onclick="addCategoryColor('pink')" class="colorCircle"
+                                    style="background: #E200BE;"></div>
+                                <div id="blue" onclick="addCategoryColor('blue')" class="colorCircle"
+                                    style="background: #0038FF;"></div>
+                            </div>
+                            <div style="max-height: 204px; overflow: auto;" id="selectTaskCategory">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subtaskContainer">
+                    <span>Subtasks</span>
+
+                    <div id="subtask" class="addSubtask">
+                        <input id="subtaskInput" onclick="subtaskActiveInputBoard()" type="text"
+                            placeholder="Add new subtask">
+                        <div id="subtaskButtons" style="display: flex; align-items: center;">
+                            <img src="../../assets/img/functionButtons/add.png">
+                        </div>
+                    </div>
+                    
+                </div>
+                <div id="addedSubtasks" class="subtaskContent"></div>
+                
+            </div>
+        </div>
+        
+        <div class="btn-container-AddTask">
+            <button class="btn-blue">Creat Task <img
+                    src="/assets/img/functionButtons/akar-icons_check.png"></button>
+        </div>
+    </form>
+  </div>
+  `
+}
+
+function openPopupAddTask() {
+  renderPopupAddTask();
+  const popupContainer = document.getElementById("popupContainer");
+  const popupTask = document.getElementById("popupAddTask");
+  popupContainer.classList.remove("hidePopup");
+  popupContainer.classList.add("containerPopupActive");
+  popupTask.classList.add("popupAddTaskSlideIn");
+}
+
+function hidePopupAddTask() {
+  const popupContainer = document.getElementById("popupContainer");
+  const popupTask = document.getElementById("popupAddTask");
+  popupTask.classList.add("popupAddTaskSlideOut");
+  popupContainer.classList.remove("containerPopupActive");
+  popupContainer.classList.add("hidePopup");
+}
+
+// function hidePopupAddTask() {
+//   const popupContainer = document.getElementById("popupContainer");
+//   const popupTask = document.getElementById("popupTask");
+//   popupTask.classList.add("popupTaskSlideOut");
+//   popupContainer.classList.remove("containerPopupActive");
+//   popupContainer.classList.add("hidePopup");
+//   groupTasksByProgressStatus(users[activeUser]);
+// }
+
+

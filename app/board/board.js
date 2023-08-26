@@ -1,5 +1,6 @@
 let currentSubtasks = [];
 let currentDraggedElement;
+let hidePopupStatus;
 
 async function boardInit() {
   await mainInit();
@@ -209,6 +210,7 @@ async function getPriorityImageUrlPopup(priority) {
 }
 
 function openPopupTask(id) {
+   hidePopupStatus = 0;
   renderPopup(id);
   const popupContainer = document.getElementById("popupContainer");
   const popupTask = document.getElementById("popupTask");
@@ -222,7 +224,6 @@ function openEdit(userTaskCategoryName, userTaskCategoryColor, id) {
     color: userTaskCategoryColor,
     name: userTaskCategoryName,
   };
-
   renderEditPopup(id);
   const popupContainer = document.getElementById("popupContainer");
   const popupTask = document.getElementById("popupTask");
@@ -231,10 +232,12 @@ function openEdit(userTaskCategoryName, userTaskCategoryColor, id) {
   popupTask.classList.add("popupTaskSlideIn");
 }
 
-function hidePopup(variableFunction){
- if (variableFunction == 'hidePopupTask()') {
+function hidePopup(){
+ if (hidePopupStatus == 0) {
   hidePopupTask()
- };
+ } else {
+  hidePopupAddTask()
+ }
  
 }
 
@@ -245,6 +248,7 @@ function hidePopupTask() {
   popupContainer.classList.remove("containerPopupActive");
   popupContainer.classList.add("hidePopup");
   groupTasksByProgressStatus(users[activeUser]);
+  hidePopupStatus = 0;
 }
 
 
@@ -259,7 +263,7 @@ async function renderPopup(id) {
         <div class="popupCategoryHeadline" style="background: ${userTask.category.color};">
           <span>${userTask.category.name}</span>
         </div>
-        <div class="closePopup" ><img id="closeBtn" onmouseover="closeHover()" onmouseleave="closeLeave()" onclick=hidePopup('hidePopupTask()') src="../../assets/img/functionButtons/close.png"></div>
+        <div class="closePopup" ><img id="closeBtn" onmouseover="closeHover()" onmouseleave="closeLeave()" onclick=hidePopup() src="../../assets/img/functionButtons/close.png"></div>
       </div>
       <div class="popupTaskHeadline">
         <span>${userTask.taskTitle}</span>
@@ -582,7 +586,7 @@ async function editTask(userTask, id) {
   userTask.priority = prioritySelect;
   setUserTaskCategoryEdit(userTask)
   await setItem(`users`, JSON.stringify(users));
-  hidePopup('hidePopupTask()');
+  hidePopup();
   openPopupTask(id);
 }
 
@@ -668,7 +672,7 @@ function allowDrop(ev) {
 }
 
 async function deleteCurrentTask(id) {
-  hidePopup('hidePopupTask()');
+  hidePopup();
   users[activeUser].userTasks.splice(id, 1);
   await setItem(`users`, JSON.stringify(users));
   groupTasksByProgressStatus(users[activeUser]);
@@ -917,6 +921,7 @@ function openPopupAddTask() {
   popupContainer.classList.remove("hidePopup");
   popupContainer.classList.add("containerPopupActive");
   popupTask.classList.add("popupAddTaskSlideIn");
+  hidePopupStatus = 1;
 }
 
 function hidePopupAddTask() {
@@ -925,6 +930,7 @@ function hidePopupAddTask() {
   popupTask.classList.add("popupAddTaskSlideOut");
   popupContainer.classList.remove("containerPopupActive");
   popupContainer.classList.add("hidePopup");
+  hidePopupStatus = 0;
 }
 
 // function hidePopupAddTask() {

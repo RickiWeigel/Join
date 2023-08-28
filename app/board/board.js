@@ -890,7 +890,7 @@ async function renderSubtasksBoard() {
         </div>
         
         <div class="btn-container-AddTask">
-            <button class="btn-blue">Creat Task <img
+            <button class="btn-blue btn-blue-AddTask">Creat Task <img
                     src="/assets/img/functionButtons/akar-icons_check.png"></button>
         </div>
     </form>

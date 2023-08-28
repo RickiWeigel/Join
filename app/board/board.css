@@ -151,6 +151,10 @@
     margin-bottom: 10px;
 }
 
+.btn-blue-AddTask{
+    position: relative;
+    bottom: 16px;
+}
 
 .boxDescription {
     color: #A8A8A8;

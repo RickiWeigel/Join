@@ -34,7 +34,7 @@ body {
     cursor: pointer;
 }
 
-.titleContainer{
+.titleContainer {
     display: flex;
     flex-direction: column;
 }
@@ -74,7 +74,7 @@ input {
     width: 100%;
 }
 
-.dueDate span{
+.dueDate span {
     color: #42526E;
     font-weight: 700;
     font-size: 19px;
@@ -344,3 +344,36 @@ input {
 }
 
 
+input[type='date'] {
+    position: relative;
+    cursor: pointer;
+    color: black;
+}
+
+
+input[type='date']::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: auto;
+    height: auto;
+    color: transparent;
+    background: transparent;
+}
+
+.inputGrey {
+    font-family: 'Open Sans';
+    font-size: 19px;
+    font-weight: 400;
+    color: #D1D1D1;
+}
+
+.inputGrey::placeholder{
+    color: #D1D1D1;
+    font-family: 'Open Sans';
+    font-size: 19px;
+    font-weight: 400;
+}

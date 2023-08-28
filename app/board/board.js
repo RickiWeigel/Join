@@ -299,14 +299,6 @@ async function renderPopup(id) {
 }
 
 async function renderEditPopup(id) {
-  $(function () {
-    $("#datepicker").datepicker({
-      dateFormat: "dd/mm/yy", // Format des ausgewählten Datums
-      inline: true,
-      changeMonth: true,
-      changeYear: true,
-    });
-  });
   let userTask = users[activeUser].userTasks[id];
   document.getElementById("popupContainer").innerHTML = `
   <form onsubmit="editTask(users[${activeUser}].userTasks[${id}], ${id}); return false;" class="popupTask" id="popupTask" onclick="event.stopPropagation()">
@@ -773,14 +765,6 @@ async function renderSubtasksBoard() {
 
 
  function renderPopupAddTask(addTaskStatus) {
-  $(function () {
-    $("#datepicker2").datepicker({
-      dateFormat: "dd/mm/yy", // Format des ausgewählten Datums
-      inline: true,
-      changeMonth: true,
-      changeYear: true,
-    });
-  });
   selectProgressStatus = addTaskStatus;
   document.getElementById("popupContainer").innerHTML = `
   <div class="popupAddTask" id="popupAddTask" onclick="event.stopPropagation()">

@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="/app/sidebar/sidebar.css">
     <link rel="stylesheet" href="board.css">
     <link rel="stylesheet" href="/jquery/jquery-ui.min.css">
-
+    <script src="/jquery/external/jquery/jquery.js"></script>
+    <script src="/jquery/jquery-ui.min.js"></script>
 
     <title>Join - Board</title>
 </head>
@@ -30,13 +31,14 @@
                     <input type="text" id="searchInput" placeholder="Find Task" onkeyup="searchTasks()">
                     <img src="../../assets/img/board/lens.png">
                 </div>
-                <div class="btn" onclick="openPopupAddTask()"><span>Add Task +</span></div>
+                <div class="btn" onclick="openPopupAddTask('toDo')"><span>Add Task +</span></div>
             </div>
             <div class="statusCategories">
                 <div class="singleCategory" id="toDo">
                     <div class="singleCategoryHeader">
                         <span>To do</span>
-                        <img id="plusButton" src="../../assets/img/board/plus button v1.png">
+                        <img onclick="openPopupAddTask('toDo')" id="plusButton"
+                            src="../../assets/img/board/plus button v1.png">
                     </div>
                     <div class="statusCard" id="toDoTasks"
                         ondragover="allowDrop(event); statusCardHighlight('toDoTasks')"
@@ -46,7 +48,7 @@
                 <div class="singleCategory" id="inProgress">
                     <div class="singleCategoryHeader">
                         <span>In Progress</span>
-                        <img src="../../assets/img/board/plus button v1.png">
+                        <img onclick="openPopupAddTask('inProgess')" src="../../assets/img/board/plus button v1.png">
                     </div>
                     <div class="statusCard" id="inProgressTasks"
                         ondragover="allowDrop(event); statusCardHighlight('inProgressTasks')"
@@ -57,7 +59,8 @@
                 <div class="singleCategory" id="awaitFeedback">
                     <div class="singleCategoryHeader">
                         <span>Await Feedback</span>
-                        <img src="../../assets/img/board/plus button v1.png">
+                        <img onclick="openPopupAddTask('awaitFeedback')"
+                            src="../../assets/img/board/plus button v1.png">
                     </div>
                     <div class="statusCard" id="awaitFeedbackTasks"
                         ondragover="allowDrop(event); statusCardHighlight('awaitFeedbackTasks')"
@@ -68,7 +71,7 @@
                 <div class="singleCategory" id="done">
                     <div class="singleCategoryHeader">
                         <span>Done</span>
-                        <img src="../../assets/img/board/plus button v1.png">
+                        <img onclick="openPopupAddTask('done')" src="../../assets/img/board/plus button v1.png">
                     </div>
                     <div class="statusCard" id="doneTasks"
                         ondragover="allowDrop(event); statusCardHighlight('doneTasks')"
@@ -81,17 +84,17 @@
     </main>
     <div class="popupContainer" id="popupContainer" onclick="hidePopup('hidePopupTask()')">
     </div>
- 
+
     <!-- <div class="addTaskPopupContainer" id="addTaskPopupContainer" onclick="hidePopup('hidePopupAddTask()')"></div> -->
 </body>
 
-<script src="/storage.js"></script>
+
 <script src="/jquery/external/jquery/jquery.js"></script>
 <script src="/jquery/jquery-ui.min.js"></script>
-
+<script src="/storage.js"></script>
 <script src="/main.js"></script>
-<script src="board.js"></script>
 <script src="../addTask/addTask.js"></script>
+<script src="board.js"></script>
 <script src="../sidebar/sidebar.js"></script>
 
 </html>

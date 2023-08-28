@@ -8,14 +8,7 @@ async function boardInit() {
   groupTasksByProgressStatus(users[activeUser]);
 }
 
-// Show Date (jquery)
-$(function () {
-  $("#datepicker").datepicker({
-    inline: true,
-    changeMonth: true,
-    changeYear: true,
-  });
-});
+
 
 function groupTasksByProgressStatus(user) {
   resetTaskContainers();
@@ -210,7 +203,7 @@ async function getPriorityImageUrlPopup(priority) {
 }
 
 function openPopupTask(id) {
-   hidePopupStatus = 0;
+  hidePopupStatus = 0;
   renderPopup(id);
   const popupContainer = document.getElementById("popupContainer");
   const popupTask = document.getElementById("popupTask");
@@ -232,13 +225,12 @@ function openEdit(userTaskCategoryName, userTaskCategoryColor, id) {
   popupTask.classList.add("popupTaskSlideIn");
 }
 
-function hidePopup(){
- if (hidePopupStatus == 0) {
-  hidePopupTask()
- } else {
-  hidePopupAddTask()
- }
- 
+function hidePopup() {
+  if (hidePopupStatus == 0) {
+    hidePopupTask();
+  } else {
+    hidePopupAddTask();
+  }
 }
 
 function hidePopupTask() {
@@ -250,8 +242,6 @@ function hidePopupTask() {
   groupTasksByProgressStatus(users[activeUser]);
   hidePopupStatus = 0;
 }
-
-
 
 async function renderPopup(id) {
   let userTask = users[activeUser].userTasks[id];
@@ -473,12 +463,12 @@ function btnLeave(imgID) {
 }
 
 function closeHover() {
-  let button = document.getElementById('closeBtn');
+  let button = document.getElementById("closeBtn");
   button.src = "../../assets/img/functionButtons/closeHover.png";
 }
 
 function closeLeave() {
-  let button = document.getElementById('closeBtn');
+  let button = document.getElementById("closeBtn");
   button.src = "../../assets/img/functionButtons/close.png";
 }
 
@@ -584,18 +574,17 @@ async function editTask(userTask, id) {
   userTask.taskDescription = document.getElementById("descriptionEdit").value;
   userTask.toDueDate = document.getElementById("datepicker").value;
   userTask.priority = prioritySelect;
-  setUserTaskCategoryEdit(userTask)
+  setUserTaskCategoryEdit(userTask);
   await setItem(`users`, JSON.stringify(users));
   hidePopup();
   openPopupTask(id);
 }
 
 function setUserTaskCategoryEdit(userTask) {
-
   if (selectedCategory.name != 0) {
     userTask.category.color = selectedCategory.color;
     userTask.category.name = selectedCategory.name;
-  }else{
+  } else {
     userTask.category.color = userTask.category.color;
     userTask.category.name = userTask.category.name;
   }
@@ -769,7 +758,7 @@ async function addNewSubTasksBoard() {
 async function renderSubtasksBoard() {
   document.getElementById("addedSubtasks").innerHTML = "";
   for (let i = newSubtasks.length - 1; i >= 0; i--) {
-      document.getElementById("addedSubtasks").innerHTML += `
+    document.getElementById("addedSubtasks").innerHTML += `
           <div onclick="addToSelectedSubtasks(${i})" class="subtasks">
               <img id="checkbox[${i}]" src="../../assets/img/functionButtons/checkbox.png">
               <span id="subtasks">${newSubtasks[i]}</span>
@@ -781,7 +770,18 @@ async function renderSubtasksBoard() {
   addTaskContentBoard.scrollTop = addTaskContentBoard.scrollHeight;
 }
 
-function renderPopupAddTask() {
+
+
+ function renderPopupAddTask(addTaskStatus) {
+  $(function () {
+    $("#datepicker2").datepicker({
+      dateFormat: "dd/mm/yy", // Format des ausgewählten Datums
+      inline: true,
+      changeMonth: true,
+      changeYear: true,
+    });
+  });
+  selectProgressStatus = addTaskStatus;
   document.getElementById("popupContainer").innerHTML = `
   <div class="popupAddTask" id="popupAddTask" onclick="event.stopPropagation()">
     <div class="titleAddTask">Add Task</div>
@@ -801,7 +801,7 @@ function renderPopupAddTask() {
                 <div class="dueDate">
                     <span>Due date</span>
                     <div class="dateContainer">
-                        <input type="text" placeholder="dd/mm/yyyy" id="datepicker" autocomplete="off"
+                        <input type="text" placeholder="dd/mm/yyyy" id="datepicker2" autocomplete="off"
                             required></input>
                         <img src="../../assets/img/board/calendar.png">
                     </div>
@@ -911,11 +911,12 @@ function renderPopupAddTask() {
         </div>
     </form>
   </div>
-  `
+  `;
+ 
 }
 
-function openPopupAddTask() {
-  renderPopupAddTask();
+async function openPopupAddTask(addTaskStatus) {
+  renderPopupAddTask(addTaskStatus);
   const popupContainer = document.getElementById("popupContainer");
   const popupTask = document.getElementById("popupAddTask");
   popupContainer.classList.remove("hidePopup");
@@ -941,5 +942,3 @@ function hidePopupAddTask() {
 //   popupContainer.classList.add("hidePopup");
 //   groupTasksByProgressStatus(users[activeUser]);
 // }
-
-

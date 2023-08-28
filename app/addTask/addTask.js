@@ -11,6 +11,7 @@ let selectedColor;
 let categoryColor;
 let newCategoryName;
 let prioritySelect;
+let selectProgressStatus = "toDo";
 let selectedSubtasks = [];
 const colorActions = {
   lightblue: () => {
@@ -45,14 +46,14 @@ async function addTaskInit() {
   highlightedNavbar(3);
 }
 
-// Show Date (jquery)
-$(function () {
-  $("#datepicker").datepicker({
-    inline: true,
-    changeMonth: true,
-    changeYear: true,
-  });
-});
+function openCalendar() {
+  let minDate = new Date().toISOString().split('T');
+
+  document.getElementById('datepicker').type = 'date';
+  document.getElementById('datepicker').min = minDate[0];
+  document.getElementById('datepicker').max = '2024-12-31';
+  document.getElementById('datepicker').focus();
+}
 
 function clearBtnOnHover() {
   document.getElementById("clearBtn").src =
@@ -163,7 +164,7 @@ async function addTask() {
     },
     priority: prioritySelect,
     subtasks: selectedSubtasks,
-    progressStatus: "toDo",
+    progressStatus: selectProgressStatus,
   });
   await setItem(`users`, JSON.stringify(users));
   resetInput();

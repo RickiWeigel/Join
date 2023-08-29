@@ -369,7 +369,6 @@ input[type='date']::-webkit-calendar-picker-indicator {
     font-family: 'Open Sans';
     font-size: 19px;
     font-weight: 400;
-    color: #D1D1D1;
 }
 
 .inputGrey::placeholder{

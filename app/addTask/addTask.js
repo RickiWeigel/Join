@@ -46,10 +46,12 @@ async function addTaskInit() {
   highlightedNavbar(3);
 }
 
+function changeTypInDate(){
+  document.getElementById('datepicker').type='date';
+}
+
 function openCalendar() {
   let minDate = new Date().toISOString().split('T');
-
-  document.getElementById('datepicker').type = 'date';
   document.getElementById('datepicker').min = minDate[0];
   document.getElementById('datepicker').max = '2024-12-31';
   document.getElementById('datepicker').focus();

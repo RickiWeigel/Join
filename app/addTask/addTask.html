@@ -35,11 +35,12 @@
 
                 <div class="dueDate">
                     <span>Due date</span>
-                    <div class="dateContainer" onclick="openCalendar()" >
-                        <input class="inputGrey" type="date" placeholder="dd/mm/yyyy" id="datepicker" onfocus="openCalendar();this.showPicker();" autocomplete="off" required></input>
+                    <div class="dateContainer" onclick="openCalendar()">
+                        <input class="inputGrey" type="text" placeholder="Enter Date" id="datepicker" onfocus="changeTypInDate();this.showPicker();" onblur="(this.type='text')" autocomplete="off" required></input>
                         <img src="../../assets/img/board/calendar.png">
                     </div>
                 </div>
+                
 
                 <div class="priorityClass">
                     <span>Priority</span>

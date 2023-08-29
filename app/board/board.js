@@ -304,8 +304,7 @@ async function renderEditPopup(id) {
   <form onsubmit="editTask(users[${activeUser}].userTasks[${id}], ${id}); return false;" class="popupTask" id="popupTask" onclick="event.stopPropagation()">
     <div style=padding-right:40px; class="closePopupEdit" ><img id="closeBtn" onmouseover="closeHover()" onmouseleave="closeLeave()" onclick=hidePopup("hidePopupTask()") src="../../assets/img/functionButtons/close.png"></div>
     <div class="popupTaskContent" id="popupTaskContent">
-                
-                
+
                 <div class="section1">
                   <div class="titleContainer">
                     <div class="enterTitle">
@@ -324,13 +323,12 @@ async function renderEditPopup(id) {
                   </div>
 
                   <div class="dueDate">
-                    <span>Due date</span>
-                    <div class="dateContainer">
-                        <input type="text" placeholder="dd/mm/yyyy" id="datepicker" value="${userTask.toDueDate}" autocomplete="off" required>
-                        <img src="../../assets/img/board/calendar.png">
-                    </div>
-                    <div class="required">required</div>
+                      <span>Due date</span>
+                      <div class="dateContainer" onclick="openCalendar()">
+                      <input class="inputGrey" type="text" value="${userTask.toDueDate}" id="datepicker" onfocus="changeTypInDate();this.showPicker();" onblur="retainDateValue(this);" autocomplete="off" required></input>
+                      <img src="../../assets/img/board/calendar.png">
                   </div>
+                </div>
                     
                 </div>
 
@@ -434,6 +432,24 @@ async function renderEditPopup(id) {
   `;
   await renderSubtasksTaskEdit(id);
   renderPrioritySelected(userTask.priority);
+}
+
+function retainDateValue(input) {
+  const dateValue = input.value;
+  if (dateValue) {
+    // Überprüfen, ob der eingegebene Wert ein gültiges Datum ist (ISO-8601-Format)
+    const isValidDate = /^(\d{4})-(\d{2})-(\d{2})$/.test(dateValue);
+    if (isValidDate) {
+      // Der eingegebene Wert ist ein gültiges Datum, daher den Typ auf 'date' ändern
+      input.type = 'date';
+    } else {
+      // Der eingegebene Wert ist nicht im erwarteten Format, daher den Wert behalten
+      input.value = dateValue;
+    }
+  } else {
+    // Das Eingabefeld ist leer, daher den Typ auf 'text' ändern
+    input.type = 'text';
+  }
 }
 
 function btnHover(imgID) {
@@ -784,9 +800,8 @@ async function renderSubtasksBoard() {
 
                 <div class="dueDate">
                     <span>Due date</span>
-                    <div class="dateContainer">
-                        <input type="text" placeholder="dd/mm/yyyy" id="datepicker2" autocomplete="off"
-                            required></input>
+                    <div class="dateContainer" onclick="openCalendar()" >
+                        <input class="inputGrey" type="date" format="dd/mm/yyyy" placeholder="dd/mm/yyyy" id="datepicker" onfocus="openCalendar();this.showPicker();" autocomplete="off" required></input>
                         <img src="../../assets/img/board/calendar.png">
                     </div>
                 </div>

@@ -63,7 +63,6 @@ function getUserInitials(signUpName) {
   return initials;
 }
 
-
 /**
  * generating random rgb-colors
  * @returns string with rgb-color

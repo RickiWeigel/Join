@@ -392,6 +392,15 @@ function addToSelectedSubtasks(id) {
   }
 }
 
+function checkRequiredTitle(){
+  let title = document.getElementById('taskTitle').value;
+
+  if (!title){
+    let required = document.getElementById('requiredTitle');
+    required.classList.remove('d-none');
+  }
+}
+
 // function toggleSubtasks(index, checkbox){
 //   if (index > -1) {
 //     selectedSubtasks.splice(index, 1);

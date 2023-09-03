@@ -27,6 +27,10 @@ h2 {
     display: none !important;
 }
 
+.v-none {
+    visibility: hidden;
+}
+
 .no-opacity {
     opacity: 0 !important;
 }

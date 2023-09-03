@@ -46,15 +46,15 @@ async function addTaskInit() {
   highlightedNavbar(3);
 }
 
-function changeTypInDate(){
-  document.getElementById('datepicker').type='date';
+function changeTypInDate() {
+  document.getElementById("datepicker").type = "date";
 }
 
 function openCalendar() {
-  let minDate = new Date().toISOString().split('T');
-  document.getElementById('datepicker').min = minDate[0];
-  document.getElementById('datepicker').max = '2024-12-31';
-  document.getElementById('datepicker').focus();
+  let minDate = new Date().toISOString().split("T");
+  document.getElementById("datepicker").min = minDate[0];
+  document.getElementById("datepicker").max = "2024-12-31";
+  document.getElementById("datepicker").focus();
 }
 
 function clearBtnOnHover() {
@@ -366,7 +366,7 @@ async function addNewSubTasks() {
 async function renderSubtasks() {
   document.getElementById("addedSubtasks").innerHTML = "";
   for (let i = newSubtasks.length - 1; i >= 0; i--) {
-      document.getElementById("addedSubtasks").innerHTML += `
+    document.getElementById("addedSubtasks").innerHTML += `
           <div onclick="addToSelectedSubtasks(${i})" class="subtasks">
               <img id="checkbox[${i}]" src="../../assets/img/functionButtons/checkbox.png">
               <span id="subtasks">${newSubtasks[i]}</span>
@@ -374,7 +374,7 @@ async function renderSubtasks() {
       `;
   }
 
-    // Scrollen Sie den "addTaskSection"-Container nach unten
+  // Scrollen Sie den "addTaskSection"-Container nach unten
   const addTaskContent = document.getElementById("addTaskSection");
   addTaskContent.scrollTop = addTaskContent.scrollHeight;
 }
@@ -392,21 +392,28 @@ function addToSelectedSubtasks(id) {
   }
 }
 
-function checkRequiredTitle(){
-  let title = document.getElementById('taskTitle').value;
+function checkRequiredField(fieldId, requiredMessageId) {
+  let fieldValue = document.getElementById(fieldId).value;
+  let requiredMessage = document.getElementById(requiredMessageId);
 
-  if (!title){
-    let required = document.getElementById('requiredTitle');
-    required.classList.remove('d-none');
+  if (!fieldValue) {
+    requiredMessage.classList.remove("v-none");
+    return true;
   }
+
+  return false;
 }
 
-// function toggleSubtasks(index, checkbox){
-//   if (index > -1) {
-//     selectedSubtasks.splice(index, 1);
-//     checkbox.src = `/assets/img/functionButtons/checkbox.png`;
-//   } else {
-//     selectedSubtasks.push(subtask);
-//     checkbox.src = `/assets/img/functionButtons/checkboxActive.png`;
-//   }
-// }
+function checkRequired() {
+  document.getElementById("requiredTitle").classList.add("v-none");
+  document.getElementById("requiredDescription").classList.add("v-none");
+  document.getElementById("requiredDate").classList.add("v-none");
+
+  const titleRequired = checkRequiredField("taskTitle", "requiredTitle");
+  const descriptionRequired = checkRequiredField("description", "requiredDescription");
+  const dateRequired = checkRequiredField("datepicker", "requiredDate");
+
+  if (!titleRequired && !descriptionRequired && !dateRequired) {
+    addTask();
+  }
+}

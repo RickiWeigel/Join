@@ -114,6 +114,7 @@ input {
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    margin-top: 8px;
 }
 
 .priorityContainer img {
@@ -384,7 +385,9 @@ input[type='date']::-webkit-calendar-picker-indicator {
 
 .descriptionContainer,
 .titleContainer,
-.dueDateContainer {
+.dueDateContainer,
+.prioritySection,
+.assignedToContainer {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -395,4 +398,5 @@ input[type='date']::-webkit-calendar-picker-indicator {
     height: 18px;
     color: red;
     margin-top: 4px;
+    font-weight: normal;
 }

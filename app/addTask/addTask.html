@@ -21,7 +21,7 @@
     </aside>
 
     <main>
-        <form onsubmit="addTask(); return false;" class="addTaskContent" id="addTaskContent">
+        <form onsubmit="checkRequired(); return false;" class="addTaskContent" id="addTaskContent">
             <div class="addTaskSection" id="addTaskSection">
                 <div class="section1">
                     <div class="titleContainer">
@@ -34,8 +34,8 @@
                     <div class="descriptionContainer">
                         <div class="descriptionContent">
                             <span>Description</span>
-                            <textarea name="descriptionTextarea" placeholder="Enter a description"
-                                id="description" cols="30" rows="10"></textarea>
+                            <textarea name="descriptionTextarea" placeholder="Enter a description" id="description"
+                                cols="30" rows="10"></textarea>
                         </div>
                         <div id="requiredDescription" class="required v-none">Please enter a description!</div>
                     </div>
@@ -45,8 +45,8 @@
                             <span>Due date</span>
                             <div class="dateContainer" onclick="openCalendar()">
                                 <input class="inputGrey" type="date" format="dd/mm/yyyy" placeholder="dd/mm/yyyy"
-                                    id="datepicker" onfocus="openCalendar();this.showPicker();" autocomplete="off"
-                                    ></input>
+                                    id="datepicker" onfocus="openCalendar();this.showPicker();"
+                                    autocomplete="off"></input>
                                 <img src="../../assets/img/board/calendar.png">
                             </div>
                         </div>
@@ -56,41 +56,51 @@
 
 
                 <div class="priorityClass">
-                    <span>Priority</span>
-                    <div id="showPriorities" class="priorityContainer">
-                        <img onmouseover="priorityMouseHover('red')" onmouseleave="priorityMouseLeave('priorityUrgent')"
-                            onclick="renderPrioritySelected('Urgent')" class="priority priorityUrgent"
-                            id="priorityUrgent" src="../../assets/img/addTask/TaskValueHard.png">
-                        <img onmouseover="priorityMouseHover('orange')"
-                            onmouseleave="priorityMouseLeave('priorityMedium')"
-                            onclick="renderPrioritySelected('Medium')" class="priority priorityMedium"
-                            id="priorityMedium" src="../../assets/img/addTask/TaskValueMid.png">
-                        <img onmouseover="priorityMouseHover('green')" onmouseleave="priorityMouseLeave('priorityLow')"
-                            onclick="renderPrioritySelected('Low')" class="priority priorityLow" id="priorityLow"
-                            src="../../assets/img/addTask/TaskValueLow.png">
+                    <div class="prioritySection">
+                        <span>Priority</span>
+                        <div id="showPriorities" class="priorityContainer">
+                            <img onmouseover="priorityMouseHover('red')"
+                                onmouseleave="priorityMouseLeave('priorityUrgent')"
+                                onclick="renderPrioritySelected('Urgent')" class="priority priorityUrgent"
+                                id="priorityUrgent" src="../../assets/img/addTask/TaskValueHard.png">
+                            <img onmouseover="priorityMouseHover('orange')"
+                                onmouseleave="priorityMouseLeave('priorityMedium')"
+                                onclick="renderPrioritySelected('Medium')" class="priority priorityMedium"
+                                id="priorityMedium" src="../../assets/img/addTask/TaskValueMid.png">
+                            <img onmouseover="priorityMouseHover('green')"
+                                onmouseleave="priorityMouseLeave('priorityLow')" onclick="renderPrioritySelected('Low')"
+                                class="priority priorityLow" id="priorityLow"
+                                src="../../assets/img/addTask/TaskValueLow.png">
+                        </div>
+                        <div id="requiredPriority" class="required v-none">Please select an urgency!</div>
                     </div>
                 </div>
 
                 <div class="assignedTo">
-                    <span>Assigne to</span>
-                    <div id="showInviteNewContact" class="selectContacts d-none">
-                        <input id="inviteNewContact" type="text" placeholder="Contact email" style="font-size: 19px;">
-                        <img onclick="toggleInviteNewContact()" src="/assets/img/functionButtons/cancelBlue.png">
-                        <img style="padding-left: 8px; padding-right: 8px;"
-                            src="/assets/img/functionButtons/trennstrich.png">
-                        <img onclick="addNewInviteContact()" src="/assets/img/functionButtons/checkedIconSelector.png">
-                    </div>
+                    <div class="assignedToContainer">
+                        <span>Assigne to</span>
+                        <div id="showInviteNewContact" class="selectContacts d-none">
+                            <input id="inviteNewContact" type="text" placeholder="Contact email"
+                                style="font-size: 19px;">
+                            <img onclick="toggleInviteNewContact()" src="/assets/img/functionButtons/cancelBlue.png">
+                            <img style="padding-left: 8px; padding-right: 8px;"
+                                src="/assets/img/functionButtons/trennstrich.png">
+                            <img onclick="addNewInviteContact()"
+                                src="/assets/img/functionButtons/checkedIconSelector.png">
+                        </div>
 
-                    <div class="selectContacts" id="selectContacts" onclick="renderContactsToAssign()">
-                        <span>Select contacts to assign</span>
-                        <img src="../../assets/img/functionButtons/selectorArrow.png">
-                    </div>
+                        <div class="selectContacts" id="selectContacts" onclick="renderContactsToAssign()">
+                            <span>Select contacts to assign</span>
+                            <img src="../../assets/img/functionButtons/selectorArrow.png">
+                        </div>
 
-                    <div class="dropDownContainer">
-                        <div>
-                            <div style="max-height: 204px; overflow: auto;" id="contactsToAssign">
+                        <div class="dropDownContainer">
+                            <div>
+                                <div style="max-height: 204px; overflow: auto;" id="contactsToAssign">
+                                </div>
                             </div>
                         </div>
+                        <div id="requiredAssignedTo" class="required v-none">Please select an urgency!</div>
                     </div>
                 </div>
 

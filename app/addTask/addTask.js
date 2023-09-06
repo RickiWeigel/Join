@@ -404,16 +404,42 @@ function checkRequiredField(fieldId, requiredMessageId) {
   return false;
 }
 
+function checkRequiredFieldWithVariable(variableToBeChecked,requiredMessageId) {
+  let requiredMessage = document.getElementById(requiredMessageId);
+
+  if (!variableToBeChecked) {
+    requiredMessage.classList.remove("v-none");
+    return true;
+  }
+
+  return false;
+}
+
+function checkRequiredFieldWithArray(ArrayToBeChecked,requiredMessageId) {
+  let requiredMessage = document.getElementById(requiredMessageId);
+
+  if (ArrayToBeChecked.length == 0) {
+    requiredMessage.classList.remove("v-none");
+    return true;
+  }
+
+  return false;
+}
+
 function checkRequired() {
   document.getElementById("requiredTitle").classList.add("v-none");
   document.getElementById("requiredDescription").classList.add("v-none");
   document.getElementById("requiredDate").classList.add("v-none");
+  document.getElementById("requiredPriority").classList.add("v-none");
+  document.getElementById("requiredAssignedTo").classList.add("v-none");
 
   const titleRequired = checkRequiredField("taskTitle", "requiredTitle");
   const descriptionRequired = checkRequiredField("description", "requiredDescription");
   const dateRequired = checkRequiredField("datepicker", "requiredDate");
+  const priorityRequired = checkRequiredFieldWithVariable(prioritySelect, "requiredPriority");
+  const assignedToRequired = checkRequiredFieldWithArray(selectedContactsToAssign,"requiredAssignedTo");
 
-  if (!titleRequired && !descriptionRequired && !dateRequired) {
+  if (!titleRequired && !descriptionRequired && !dateRequired && !priorityRequired && !assignedToRequired) {
     addTask();
   }
 }

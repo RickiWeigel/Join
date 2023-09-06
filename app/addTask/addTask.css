@@ -204,7 +204,6 @@ input {
     gap: 16px;
     font-size: 16px;
     cursor: pointer;
-    padding-bottom: 4px;
     break-inside: avoid;
 }
 
@@ -339,8 +338,14 @@ input {
 }
 
 .subtaskContent {
+    display: flex;
+    gap: 8px;
+    flex-direction: column;
+    color: black;
     max-height: 300px;
     width: 100%;
+    font-weight: normal;
+    padding: 8px 8px 20px;
 }
 
 
@@ -387,7 +392,8 @@ input[type='date']::-webkit-calendar-picker-indicator {
 .titleContainer,
 .dueDateContainer,
 .prioritySection,
-.assignedToContainer {
+.assignedToContainer,
+.categoryContainer {
     width: 100%;
     display: flex;
     flex-direction: column;

@@ -84,6 +84,8 @@ function renderContactsToAssign() {
     contactsSelektorOpen = false;
   }
   updateCheckboxStatus();
+  const addTaskContent = document.getElementById("addTaskContent");
+  addTaskContent.scrollTop += addTaskContent.clientHeight;
 }
 
 function updateCheckboxStatus() {
@@ -122,6 +124,8 @@ function renderCategories() {
     document.getElementById("selectTaskCategory").innerHTML = ``;
     categorySelektorOpen = false;
   }
+  const addTaskContent = document.getElementById("addTaskContent");
+  addTaskContent.scrollTop += addTaskContent.clientHeight;
 }
 
 function setSelectedCategory(id) {
@@ -374,9 +378,8 @@ async function renderSubtasks() {
       `;
   }
 
-  // Scrollen Sie den "addTaskSection"-Container nach unten
-  const addTaskContent = document.getElementById("addTaskSection");
-  addTaskContent.scrollTop = addTaskContent.scrollHeight;
+  const addTaskContent = document.getElementById("addTaskContent");
+  addTaskContent.scrollTop += addTaskContent.clientHeight;
 }
 
 function addToSelectedSubtasks(id) {
@@ -392,11 +395,13 @@ function addToSelectedSubtasks(id) {
   }
 }
 
-function checkRequiredField(fieldId, requiredMessageId) {
-  let fieldValue = document.getElementById(fieldId).value;
+function checkRequiredField(valueToCheck, requiredMessageId) {
   let requiredMessage = document.getElementById(requiredMessageId);
 
-  if (!fieldValue) {
+  if (
+    !valueToCheck ||
+    (Array.isArray(valueToCheck) && valueToCheck.length === 0)
+  ) {
     requiredMessage.classList.remove("v-none");
     return true;
   }
@@ -404,42 +409,98 @@ function checkRequiredField(fieldId, requiredMessageId) {
   return false;
 }
 
-function checkRequiredFieldWithVariable(variableToBeChecked,requiredMessageId) {
-  let requiredMessage = document.getElementById(requiredMessageId);
-
-  if (!variableToBeChecked) {
-    requiredMessage.classList.remove("v-none");
-    return true;
-  }
-
-  return false;
+function resetCategoryRendering() {
+  document.getElementById("showCategory").innerHTML = `
+  <div id="currentCategory">
+    <span>Select task category</span>
+  </div>
+  <img src="../../assets/img/functionButtons/selectorArrow.png"> 
+`;
 }
 
-function checkRequiredFieldWithArray(ArrayToBeChecked,requiredMessageId) {
-  let requiredMessage = document.getElementById(requiredMessageId);
+function resetAllFields() {
+  // Setzen Sie alle globalen Variablen auf ihre ursprünglichen Werte zurück
+  tasks = [];
+  selectedContactsToAssign = [];
+  contactsSelektorOpen = false;
+  taskCategories = [];
+  categorySelektorOpen = false;
+  priority = null;
+  taskStatus = null;
+  newSubtasks = [];
+  selectedCategory = {};
+  selectedColor = null;
+  categoryColor = null;
+  newCategoryName = null;
+  prioritySelect = null;
+  selectedSubtasks = [];
 
-  if (ArrayToBeChecked.length == 0) {
-    requiredMessage.classList.remove("v-none");
-    return true;
-  }
+  // Setzen Sie alle Eingabefelder auf ihre ursprünglichen Werte zurück
+  document.getElementById("taskTitle").value = "";
+  document.getElementById("datepicker").value = "";
+  document.getElementById("description").value = "";
+  document.getElementById("inviteNewContact").value = "";
+  document.getElementById("subtaskInput").value = "";
 
-  return false;
+  // Setzen Sie alle sichtbaren Elemente auf den ursprünglichen Zustand zurück
+  document.getElementById("contactsToAssign").classList.add("d-none");
+  document.getElementById("showInviteNewContact").classList.add("d-none");
+  document.getElementById("selectContacts").classList.remove("d-none");
+  document.getElementById("contactsToAssign").classList.add("d-none");
+  document.getElementById("selectTaskCategory").innerHTML = "";
+  resetCategoryRendering();
+  renderSubtasks();
+}
+
+function hideRequiredFields() {
+  const fieldIds = [
+    "requiredTitle",
+    "requiredDescription",
+    "requiredDate",
+    "requiredPriority",
+    "requiredAssignedTo",
+    "requiredCategory",
+  ];
+  fieldIds.forEach((fieldId) => {
+    const element = document.getElementById(fieldId);
+    element.classList.add("v-none");
+  });
 }
 
 function checkRequired() {
-  document.getElementById("requiredTitle").classList.add("v-none");
-  document.getElementById("requiredDescription").classList.add("v-none");
-  document.getElementById("requiredDate").classList.add("v-none");
-  document.getElementById("requiredPriority").classList.add("v-none");
-  document.getElementById("requiredAssignedTo").classList.add("v-none");
+  hideRequiredFields();
 
-  const titleRequired = checkRequiredField("taskTitle", "requiredTitle");
-  const descriptionRequired = checkRequiredField("description", "requiredDescription");
-  const dateRequired = checkRequiredField("datepicker", "requiredDate");
-  const priorityRequired = checkRequiredFieldWithVariable(prioritySelect, "requiredPriority");
-  const assignedToRequired = checkRequiredFieldWithArray(selectedContactsToAssign,"requiredAssignedTo");
+  let taskTitle = document.getElementById("taskTitle").value;
+  let description = document.getElementById("description").value;
+  let date = document.getElementById("datepicker").value;
 
-  if (!titleRequired && !descriptionRequired && !dateRequired && !priorityRequired && !assignedToRequired) {
+  const titleRequired = checkRequiredField(taskTitle, "requiredTitle");
+  const descriptionRequired = checkRequiredField(
+    description,
+    "requiredDescription"
+  );
+  const dateRequired = checkRequiredField(date, "requiredDate");
+  const priorityRequired = checkRequiredField(
+    prioritySelect,
+    "requiredPriority"
+  );
+  const assignedToRequired = checkRequiredField(
+    selectedContactsToAssign,
+    "requiredAssignedTo"
+  );
+  const categoryRequired = checkRequiredField(
+    selectedCategory.name,
+    "requiredCategory"
+  );
+
+  if (
+    !titleRequired &&
+    !descriptionRequired &&
+    !dateRequired &&
+    !priorityRequired &&
+    !assignedToRequired &&
+    !categoryRequired
+  ) {
     addTask();
   }
 }

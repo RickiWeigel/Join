@@ -100,43 +100,47 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="requiredAssignedTo" class="required v-none">Please select an urgency!</div>
+                        <div id="requiredAssignedTo" class="required v-none">Please select a contact!</div>
                     </div>
                 </div>
 
                 <div class="category">
-                    <span>Category</span>
-                    <div id="showCategory" class="selectCategory" onclick="renderCategories()">
-                        <div id="currentCategory"><span>Select task category</span></div>
-                        <img src="../../assets/img/functionButtons/selectorArrow.png">
-
-                    </div>
-                    <div id="showNewCategory" class="selectCategory d-none">
-                        <input id="addNewCategory" type="text" placeholder="New category name" style="font-size: 19px;">
-                        <img onclick="hideNewCategory()" src="/assets/img/functionButtons/cancelBlue.png">
-                        <img style="padding-left: 8px; padding-right: 8px;"
-                            src="/assets/img/functionButtons/trennstrich.png">
-                        <img onclick="addNewCategoryFunction()"
-                            src="/assets/img/functionButtons/checkedIconSelector.png">
-                    </div>
-                    <div class="dropDownContainer">
-                        <div>
-                            <div id="colorCircle" class="circle-content d-none">
-                                <div id="lightblue" onclick="addCategoryColor('lightblue')" class="colorCircle"
-                                    style="background: #8AA4FF;"></div>
-                                <div id="red" onclick="addCategoryColor('red')" class="colorCircle"
-                                    style="background: #FF0000;"></div>
-                                <div id="green" onclick="addCategoryColor('green')" class="colorCircle"
-                                    style="background: #2AD300;"></div>
-                                <div id="orange" onclick="addCategoryColor('orange')" class="colorCircle"
-                                    style="background: #FF8A00;"></div>
-                                <div id="pink" onclick="addCategoryColor('pink')" class="colorCircle"
-                                    style="background: #E200BE;"></div>
-                                <div id="blue" onclick="addCategoryColor('blue')" class="colorCircle"
-                                    style="background: #0038FF;"></div>
+                    <div class="categoryContainer">
+                        <span>Category</span>
+                        <div id="showCategory" class="selectCategory" onclick="renderCategories()">
+                            <div id="currentCategory"><span>Select task category</span></div>
+                            <img src="../../assets/img/functionButtons/selectorArrow.png">
+                        </div>
+                        <div id="showNewCategory" class="selectCategory d-none">
+                            <input id="addNewCategory" type="text" placeholder="New category name"
+                                style="font-size: 19px;">
+                            <img onclick="hideNewCategory()" src="/assets/img/functionButtons/cancelBlue.png">
+                            <img style="padding-left: 8px; padding-right: 8px;"
+                                src="/assets/img/functionButtons/trennstrich.png">
+                            <img onclick="addNewCategoryFunction()"
+                                src="/assets/img/functionButtons/checkedIconSelector.png">
+                        </div>
+                        <div class="dropDownContainer">
+                            <div>
+                                <div id="colorCircle" class="circle-content d-none">
+                                    <div id="lightblue" onclick="addCategoryColor('lightblue')" class="colorCircle"
+                                        style="background: #8AA4FF;"></div>
+                                    <div id="red" onclick="addCategoryColor('red')" class="colorCircle"
+                                        style="background: #FF0000;"></div>
+                                    <div id="green" onclick="addCategoryColor('green')" class="colorCircle"
+                                        style="background: #2AD300;"></div>
+                                    <div id="orange" onclick="addCategoryColor('orange')" class="colorCircle"
+                                        style="background: #FF8A00;"></div>
+                                    <div id="pink" onclick="addCategoryColor('pink')" class="colorCircle"
+                                        style="background: #E200BE;"></div>
+                                    <div id="blue" onclick="addCategoryColor('blue')" class="colorCircle"
+                                        style="background: #0038FF;"></div>
+                                </div>
+                                <div style="max-height: 204px; overflow: auto;" id="selectTaskCategory">
+                                </div>
                             </div>
-                            <div style="max-height: 204px; overflow: auto;" id="selectTaskCategory">
-                            </div>
+                        </div>
+                        <div id="requiredCategory" class="required v-none">Please select a category or add a new one!
                         </div>
                     </div>
                 </div>
@@ -151,13 +155,13 @@
                             <img src="../../assets/img/functionButtons/add.png">
                         </div>
                     </div>
+                    <div id="addedSubtasks" class="subtaskContent"></div>
+                </div>
 
-                </div>
-                <div id="addedSubtasks" class="subtaskContent">
-                </div>
+            </div>
             </div>
             <div class="btn-container">
-                <div onmouseover="clearBtnOnHover()" onmouseleave="clearBtnLeaveHover()" class="btn-white">
+                <div onclick="resetAllFields()" onmouseover="clearBtnOnHover()" onmouseleave="clearBtnLeaveHover()" class="btn-white">
                     <span>Clear</span><img id="clearBtn" src="/assets/img/functionButtons/icon_cancel.png">
                 </div>
                 <button class="btn-blue">Creat Task <img

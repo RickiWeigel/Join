@@ -7,7 +7,6 @@
     padding: 63px 0px;
 }
 
-
 .greeting {
     padding-top: 60px;
     padding-bottom: 10px;
@@ -36,7 +35,7 @@
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
     border-radius: 30px;
     cursor: pointer;
-    transition: all 225ms ease-in-out;
+    transition: all 125ms ease-in-out;
 }
 
 .midInfoBox:hover>* {
@@ -44,7 +43,7 @@
     border-top-left-radius: 0;
     transform: scale(1.07);
     color: #4589ff;
-    transition: all 225ms ease-in-out;
+    transition: all 125ms ease-in-out;
 }
 
 .midInfoBox>* {
@@ -55,14 +54,14 @@
     gap: 40px;
     background-color: #ffffff;
     border-top-left-radius: 0;
-    transform: scale(1.01);
+    transform: scale(1.03);
     color: #4589ff;
-    transition: all 225ms ease-in-out;
+    transition: all 125ms ease-in-out;
 }
 
 .bigInfoBox:hover .midLine {
     background-color: #4589ff;
-    transition: all 225ms ease-in-out;
+    transition: all 125ms ease-in-out;
 }
 
 .secondBox {
@@ -77,7 +76,6 @@
     border-radius: 30px;
     cursor: pointer;
     transition: all 225ms ease-in-out;
-
 }
 
 
@@ -106,7 +104,7 @@
 .smallInfoBox:hover {
     color: white; 
     padding: 40px;
-    transform: scale(1.01);
+    transform: scale(1.03);
     background: #005DFF;
     border-radius: 0px 30px 30px 30px;
     transition: all 225ms ease-in-out;

@@ -5,6 +5,7 @@ let tasksInTodo = 0;
 let tasksInProgress = 0;
 let tasksInAwaitFeedback = 0;
 let tasksInDone = 0;
+let currentDate = getCurrentDate();
 
 async function mainInit() {
   await includeHTML();
@@ -73,4 +74,18 @@ function getRandomColor() {
   let b = Math.floor(Math.random() * 256);
   let rgbColor = 'rgb(' + r + ', ' + g + ', ' + b + ')';
   return rgbColor;
+}
+
+function getCurrentDate() {
+  const today = new Date();
+  const year = today.getFullYear().toString();
+  const month = (today.getMonth() + 1).toString().padStart(2, '0'); // Monate werden von 0 bis 11 gezählt, daher +1
+  const day = today.getDate().toString().padStart(2, '0');
+
+  return year + '-' + month + '-' + day;
+}
+
+function redirectToBoard() {
+  // Leiten Sie auf die gewünschte Seite weiter
+  window.location.href = "/app/board/board.html";
 }

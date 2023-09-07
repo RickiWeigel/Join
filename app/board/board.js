@@ -9,6 +9,10 @@ async function boardInit() {
 }
 
 function groupTasksByProgressStatus(user) {
+  tasksInTodo = 0;
+  tasksInProgress = 0;
+  tasksInAwaitFeedback = 0;
+  tasksInDone = 0;
   resetTaskContainers();
   let userTasks = user.userTasks;
   for (let i = 0; i < userTasks.length; i++) {
@@ -59,19 +63,15 @@ function sortProgress(task, id) {
   switch (task.progressStatus) {
     case "toDo":
       renderTodoTasks("toDoTasks", id);
-      tasksInTodo++;
       break;
     case "inProgress":
       renderTodoTasks("inProgressTasks", id);
-      tasksInProgress++;
       break;
     case "awaitFeedback":
       renderTodoTasks("awaitFeedbackTasks", id);
-      tasksInAwaitFeedback++;
       break;
     case "done":
       renderTodoTasks("doneTasks", id);
-      tasksInDone++;
       break;
   }
 }

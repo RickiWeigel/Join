@@ -299,29 +299,30 @@ async function renderPopup(id) {
 async function renderEditPopup(id) {
   let userTask = users[activeUser].userTasks[id];
   document.getElementById("popupContainer").innerHTML = `
-  <form onsubmit="editTask(users[${activeUser}].userTasks[${id}], ${id}); return false;" class="popupTask"
+  <form onsubmit="checkRequiredEdit(${id}); return false;" class="popupTask"
         id="popupTask" onclick="event.stopPropagation()">
         <div style=padding-right:40px; class="closePopupEdit"><img id="closeBtn" onmouseover="closeHover()"
                 onmouseleave="closeLeave()" onclick=hidePopup("hidePopupTask()")
                 src="../../assets/img/functionButtons/close.png"></div>
+
         <div class="popupTaskContent" id="popupTaskContent">
 
             <div class="section1">
                 <div class="titleContainer">
                     <div class="enterTitle">
                         <input id="taskTitleEdit" type="text" placeholder="Enter a title" value="${userTask.taskTitle}"
-                            required>
+                            >
                     </div>
-                    <div class="required">required</div>
+                    <div id="requiredTitle" class="required v-none">Please enter a title!</div>
                 </div>
 
                 <div class="descriptionContainer">
                     <div class="descriptionContent">
                         <span class="subHeadline">Description</span>
-                        <textarea required name="descriptionTextarea" id="descriptionEdit" cols="30"
+                        <textarea name="descriptionTextarea" id="descriptionEdit" cols="30"
                             rows="10">${userTask.taskDescription}</textarea>
                     </div>
-                    <div class="required">required</div>
+                    <div id="requiredDescription" class="required v-none">Please enter a description!</div>
                 </div>
 
                 <div class="dueDateContainer">
@@ -330,11 +331,11 @@ async function renderEditPopup(id) {
                         <div class="dateContainer" onclick="openCalendar()">
                             <input class="inputGrey" type="text" value="${userTask.toDueDate}" id="datepicker"
                                 onfocus="changeTypInDate();this.showPicker();" onblur="retainDateValue(this);"
-                                autocomplete="off" required></input>
+                                autocomplete="off"></input>
                             <img src="../../assets/img/board/calendar.png">
                         </div>
-                        <div class="required">required</div>
                     </div>
+                    <div id="requiredDate" class="required v-none">Please enter a date!</div>
                 </div>
             </div>
 
@@ -435,6 +436,33 @@ async function renderEditPopup(id) {
   `;
   await renderSubtasksTaskEdit(id);
   renderPrioritySelected(userTask.priority);
+}
+
+function hideRequiredFieldsEdit() {
+  const fieldIds = ["requiredTitle", "requiredDescription", "requiredDate"];
+  fieldIds.forEach((fieldId) => {
+    const element = document.getElementById(fieldId);
+    element.classList.add("v-none");
+  });
+}
+
+async function checkRequiredEdit(id) {
+  hideRequiredFieldsEdit();
+
+  let taskTitle = document.getElementById("taskTitleEdit").value;
+  let description = document.getElementById("descriptionEdit").value;
+  let date = document.getElementById("datepicker").value;
+
+  const titleRequired = checkRequiredField(taskTitle, "requiredTitle");
+  const descriptionRequired = checkRequiredField(
+    description,
+    "requiredDescription"
+  );
+  const dateRequired = checkRequiredField(date, "requiredDate");
+
+  if (!titleRequired && !descriptionRequired && !dateRequired) {
+    editTask(users[activeUser].userTasks[id], id);
+  }
 }
 
 function retainDateValue(input) {

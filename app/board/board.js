@@ -491,8 +491,11 @@ function renderCategoriesEdit() {
     for (let i = 0; i < users[activeUser].taskCategories.length; i++) {
       document.getElementById("selectTaskCategory").innerHTML += `
         <div onclick="setSelectedCategoryEdit('${i}')" class="dropdown-content">
-          <span>${users[activeUser].taskCategories[i].name}</span>
-          <div class="colorCircle" style="background: ${users[activeUser].taskCategories[i].color};"></div>
+          <div class="dropdown-content-left">
+            <span>${users[activeUser].taskCategories[i].name}</span>
+            <div class="colorCircle" style="background: ${users[activeUser].taskCategories[i].color};"></div>
+          </div> 
+          <img class="delete-btn" id="deleteBtn-${i}" src="../../assets/img/functionButtons/delete.png">
         </div>
       `;
     }
@@ -515,10 +518,13 @@ async function renderSubtasksTaskEdit(id) {
   document.getElementById("popupSubtasksEdit").innerHTML = "";
   for (let i = 0; i < users[activeUser].userTasks[id].subtasks.length; i++) {
     document.getElementById("popupSubtasksEdit").innerHTML += `
-    <div class="subtask" onclick="" onmouseover="subtaskEditHover(${i})"  onmouseleave="subtaskEditLeave(${i})">
-      <img id='checkboxEdit[${i}]' src="../../assets/img/functionButtons/checkbox.png">
-      <span>${users[activeUser].userTasks[id].subtasks[i]}</span>
-      <span onclick="subtaskDeleteEdit(${id},${i})" class="deleteBtn d-none" id="deleteBtn-${i}">delete</span>
+    <div class="dropDownContentEdit" onclick="" onmouseover="subtaskEditHover(${i})" onmouseleave="subtaskEditLeave(${i})">
+      <div class="dropdown-content-left">
+        <img id='checkboxEdit[${i}]' src="../../assets/img/functionButtons/checkbox.png">
+        <span>${users[activeUser].userTasks[id].subtasks[i]}</span>
+      </div>
+      
+      <img onclick="subtaskDeleteEdit(${id},${i})" id="deleteBtn-${i}" class="delete-btn d-none" src="../../assets/img/functionButtons/delete.png">
     </div>
     `;
   }

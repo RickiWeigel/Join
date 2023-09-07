@@ -42,7 +42,6 @@ const colorActions = {
 
 async function addTaskInit() {
   await mainInit();
-  renderSubtasks();
   highlightedNavbar(3);
 }
 
@@ -113,10 +112,12 @@ function renderCategories() {
   `;
     for (let i = 0; i < users[activeUser].taskCategories.length; i++) {
       document.getElementById("selectTaskCategory").innerHTML += `
-        <div onclick="setSelectedCategory('${i}')" class="dropdown-content">
+        <div onclick="setSelectedCategory('${i}')" class="dropdown-content" onmouseover="categoryHover(${i})"  onmouseleave="categoryLeave(${i})">
+        <div class="dropdown-content-left">
           <span>${users[activeUser].taskCategories[i].name}</span>
           <div class="colorCircle" style="background: ${users[activeUser].taskCategories[i].color};"></div>
         </div>
+          <img class="delete-btn d-none" id="categoryDeleteBtn-${i}" onclick="deleteCategory(${i}, event)" src="../../assets/img/functionButtons/delete.png">
       `;
     }
     categorySelektorOpen = true;
@@ -126,6 +127,15 @@ function renderCategories() {
   }
   const addTaskContent = document.getElementById("addTaskContent");
   addTaskContent.scrollTop += addTaskContent.clientHeight;
+}
+
+async function deleteCategory(index, event) {
+  event.stopPropagation();
+  // Entferne die Kategorie aus dem Array
+  users[activeUser].taskCategories.splice(index, 1);
+  await setItem(`users`, JSON.stringify(users));
+  // Rendere die Kategorien neu
+  renderCategories();
 }
 
 function setSelectedCategory(id) {
@@ -173,18 +183,7 @@ async function addTask() {
     progressStatus: selectProgressStatus,
   });
   await setItem(`users`, JSON.stringify(users));
-  resetInput();
-}
-
-function resetInput() {
-  window.location.href = "/app/board/board.html";
-  // taskInputTitle = document.getElementById("taskTitle").value = "";
-  // date = document.getElementById("datepicker").value = "";
-  // description = document.getElementById("description").value = "";
-  // renderShowCategory();
-  // selectedContactsToAssign = [];
-  // clearPrioritySelected();
-  // selectedSubtasks = [];
+  resetAllFields();
 }
 
 function toggleInviteNewContact() {
@@ -213,7 +212,6 @@ function addNewCategoryName() {
 }
 
 function addCategoryColor(color) {
-  addNewCategoryName();
   colorActions[color]();
   document.getElementById("lightblue").classList.remove("colorCircleActive");
   document.getElementById("red").classList.remove("colorCircleActive");
@@ -225,6 +223,25 @@ function addCategoryColor(color) {
 }
 
 async function addNewCategoryFunction() {
+  let requiredMessage = document.getElementById("requiredCategory");
+  if (!newCategoryName) {
+    requiredMessage.classList.remove("v-none");
+    requiredMessage.innerHTML = `
+      <span>Please enter a category name!</span>
+    `;
+    console.log("newCategoryName ist nicht definiert oder leer.");
+    return; // Die Funktion wird nicht weiter ausgeführt
+  }
+
+  if (!categoryColor) {
+    requiredMessage.classList.remove("v-none");
+    requiredMessage.innerHTML = `
+      <span>Please select a category color!</span>
+    `;
+    console.log("categoryColor ist nicht definiert oder leer.");
+    return; // Die Funktion wird nicht weiter ausgeführt
+  }
+  resetRequiredMessage();
   selectedCategory.name = newCategoryName;
   selectedCategory.color = categoryColor;
   hideNewCategory();
@@ -232,6 +249,14 @@ async function addNewCategoryFunction() {
   await setItem(`users`, JSON.stringify(users));
   categorySelektorOpen = true;
   insertSelectedCategory();
+}
+
+function resetRequiredMessage() {
+  let requiredMessage = document.getElementById("requiredCategory");
+  requiredMessage.innerHTML = `
+      <span>Please select a category or add a new one!</span>
+    `;
+  requiredMessage.classList.add("v-none");
 }
 
 function renderShowCategory() {
@@ -253,17 +278,23 @@ function hideNewCategory() {
   document.getElementById("colorCircle").classList.add("d-none");
   document.getElementById("showCategory").classList.remove("d-none");
   document.getElementById("selectTaskCategory").classList.remove("d-none");
+  resetRequiredMessage();
   renderCategories();
 }
 
 function insertSelectedCategory() {
-  document.getElementById("showCategory").innerHTML = `
+  document.getElementById("showCategory").innerHTML = ``;
+  if (!selectedCategory || !selectedCategory.name) {
+    resetCategoryRendering();
+  } else {
+    document.getElementById("showCategory").innerHTML = `
     <div id="currentCategory">
       <span>${selectedCategory.name}</span>
       <div class="colorCircle" style="background: ${selectedCategory.color};"></div>
     </div>
     <img src="../../assets/img/functionButtons/selectorArrow.png"> 
   `;
+  }
   renderCategories();
 }
 
@@ -382,6 +413,14 @@ async function renderSubtasks() {
   addTaskContent.scrollTop += addTaskContent.clientHeight;
 }
 
+function categoryHover(id) {
+  document.getElementById(`categoryDeleteBtn-${id}`).classList.remove("d-none");
+}
+
+function categoryLeave(id) {
+  document.getElementById(`categoryDeleteBtn-${id}`).classList.add("d-none");
+}
+
 function addToSelectedSubtasks(id) {
   const checkbox = document.getElementById(`checkbox[${id}]`);
   const subtask = newSubtasks[id];
@@ -448,6 +487,7 @@ function resetAllFields() {
   document.getElementById("selectContacts").classList.remove("d-none");
   document.getElementById("contactsToAssign").classList.add("d-none");
   document.getElementById("selectTaskCategory").innerHTML = "";
+  clearPrioritySelected();
   resetCategoryRendering();
   renderSubtasks();
 }

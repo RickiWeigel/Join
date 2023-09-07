@@ -45,7 +45,7 @@ main {
     background-color: rgb(255, 255, 255);
     padding-left: 232px;
     padding-top: 97.3px;
-    width:  100%;
+    width: 100%;
     height: 100%;
 }
 
@@ -56,21 +56,31 @@ main {
 
 /* Farbe des Scrollbalkens */
 ::-webkit-scrollbar {
-    width: 12px; /* Breite des Scrollbalkens */
-  }
-  
-  /* Hintergrund des Scrollbalkens */
-  ::-webkit-scrollbar-track {
+    width: 12px;
+    /* Breite des Scrollbalkens */
+}
+
+/* Hintergrund des Scrollbalkens */
+::-webkit-scrollbar-track {
     background-color: #f1f1f1;
-  }
-  
-  /* Griff des Scrollbalkens */
-  ::-webkit-scrollbar-thumb {
+}
+
+/* Griff des Scrollbalkens */
+::-webkit-scrollbar-thumb {
     background-color: #888;
-    border-radius: 10px; /* abgerundete Ecken für den Griff */
-  }
-  
-  /* Wenn du Hover-Effekte für den Griff möchtest */
-  ::-webkit-scrollbar-thumb:hover {
+    border-radius: 10px;
+    /* abgerundete Ecken für den Griff */
+}
+
+/* Wenn du Hover-Effekte für den Griff möchtest */
+::-webkit-scrollbar-thumb:hover {
     background-color: #555;
-  }
+}
+
+.delete-btn{
+    z-index: 10;
+}
+
+.delete-btn:hover{
+    content: url("../../assets/img/functionButtons/deleteHover.png");
+}

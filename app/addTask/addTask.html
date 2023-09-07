@@ -95,10 +95,8 @@
                         </div>
 
                         <div class="dropDownContainer">
-                            <div>
                                 <div style="max-height: 204px; overflow: auto;" id="contactsToAssign">
                                 </div>
-                            </div>
                         </div>
                         <div id="requiredAssignedTo" class="required v-none">Please select a contact!</div>
                     </div>
@@ -113,7 +111,7 @@
                         </div>
                         <div id="showNewCategory" class="selectCategory d-none">
                             <input id="addNewCategory" type="text" placeholder="New category name"
-                                style="font-size: 19px;">
+                                style="font-size: 19px;" onblur="addNewCategoryName()">
                             <img onclick="hideNewCategory()" src="/assets/img/functionButtons/cancelBlue.png">
                             <img style="padding-left: 8px; padding-right: 8px;"
                                 src="/assets/img/functionButtons/trennstrich.png">
@@ -140,7 +138,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="requiredCategory" class="required v-none">Please select a category or add a new one!
+                        <div id="requiredCategory" class="required v-none"><span>Please select a category or add a new one!</span>
                         </div>
                     </div>
                 </div>

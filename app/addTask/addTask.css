@@ -17,7 +17,7 @@ body {
     flex-direction: column;
     gap: 24px;
     align-items: flex-start;
-    width: 488px;
+    width: 462px;
     height: 828px;
     padding-right: 40px;
 }
@@ -205,7 +205,15 @@ input {
     font-size: 16px;
     cursor: pointer;
     break-inside: avoid;
+    padding: 8px 16px;
 }
+
+.subtasks:hover {
+    background: #D2E3FF;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
 
 .btn-container {
     position: sticky;
@@ -285,6 +293,7 @@ input {
 
 .dropdown-content {
     display: flex;
+    justify-content: space-between;
     font-size: 16px;
     font-weight: 400;
     color: black;
@@ -292,8 +301,15 @@ input {
     align-items: center;
     width: 100%;
     height: 51px;
-    padding-left: 21px;
+    padding: 0px 21px;
     cursor: pointer;
+    border-radius: 6px;
+}
+
+.dropdown-content-left {
+    display: flex;
+    gap: 15px;
+    align-items: center;
 }
 
 .circle-content {
@@ -338,14 +354,12 @@ input {
 }
 
 .subtaskContent {
-    display: flex;
-    gap: 8px;
     flex-direction: column;
     color: black;
     max-height: 300px;
     width: 100%;
     font-weight: normal;
-    padding: 8px 8px 20px;
+    padding-bottom: 8px;
 }
 
 

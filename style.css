@@ -49,6 +49,54 @@ main {
     height: 100%;
 }
 
+.buttonBlue {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 35px;
+    gap: 10px;
+    height: 48px;
+    background: #4589ff;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 23px;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all 125ms ease-in-out;
+}
+
+.buttonBlue:hover {
+    background: #005dff;
+    transition: all 125ms ease-in-out;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+.buttonWhite {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 35px;
+    gap: 10px;
+    height: 48px;
+    background: #ffffff;
+    border: 1px solid #647188;
+    border-radius: 8px;
+    color: #647188;
+    font-size: 23px;
+    cursor: pointer;
+    transition: all 125ms ease-in-out;
+}
+
+.buttonWhite:hover {
+    transition: all 125ms ease-in-out;
+    border: 2px solid #4589ff;
+    color: #4589ff;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+}
+
 .navHighlighted {
     background-color: #d2e3ff;
     border-radius: 0.5em;

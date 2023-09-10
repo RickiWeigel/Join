@@ -90,11 +90,13 @@ main {
     cursor: pointer;
     transition: all 125ms ease-in-out;
     font-weight: 400;
+    outline: 1px solid #fff; /* Das outline-Attribut fügt eine 2px breite Linie um das Element hinzu */
 }
 
 .buttonWhite:hover {
     transition: all 125ms ease-in-out;
-    border: 2px solid #4589ff;
+    outline: 2px solid #4589ff;
+    border: 1px solid #FFF;
     color: #4589ff;
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
 }

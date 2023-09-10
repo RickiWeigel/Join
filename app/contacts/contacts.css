@@ -6,6 +6,8 @@ main {
     height: 100vh;
 }
 
+
+
 #mainContacts {
     flex-direction: row;
 }
@@ -272,9 +274,9 @@ main {
 
 .slide-container-add-contact-content-buttons {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    gap: 25px;
+    width: 355.448px;
 }
 
 .create-contact-button {
@@ -282,6 +284,8 @@ main {
     justify-content: center;
     align-items: center;
     gap: 10px;
+    padding: 16px 10px;
+    height: 61px;
 }
 
 .buttonWhite svg path {

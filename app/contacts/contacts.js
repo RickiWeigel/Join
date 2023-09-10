@@ -5,3 +5,6 @@ async function contactsInit() {
   highlightedNavbar(4);
 }
 
+function test(){
+  console.log('test')
+}

@@ -105,7 +105,7 @@
           </svg>
         </svg>
 
-        <form class="slide-container-add-contact-content-container">
+        <form onsubmit="test(); return false;" id="add-contact-inputs" class="slide-container-add-contact-content-container">
           <div class="input-container">
             <input type="text" id="add-content-input-name" placeholder="Name" autocomplete="off" required>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
@@ -151,7 +151,7 @@
         </form>
 
         <div class="slide-container-add-contact-content-buttons">
-          <button class="buttonWhite">
+          <button class="buttonWhite create-contact-button">
             <span>Cancel</span>
             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
               <path
@@ -160,7 +160,7 @@
               </path>
             </svg>
           </button>
-          <button class="buttonBlue create-contact-button">
+          <button type="submit" form="add-contact-inputs" class="buttonBlue create-contact-button">
             <span>Create contact</span>
             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
               <mask id="mask0_24479_1578" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25"

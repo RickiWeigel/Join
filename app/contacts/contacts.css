@@ -143,14 +143,30 @@ main {
 
 .contact-detail-edit-delete {
     display: flex;
-    gap: 16px;
+    justify-content: space-between;
+    width: 160px;
     font-size: 16px;
 }
+
+
 
 .contact-detail-edit-delete img {
     width: 24px;
     height: 24px;
 }
+
+.contact-detail-edit:hover .normal-image,
+.contact-detail-delete:hover .normal-image {
+    display: none;
+    /* Verstecke das normale Bild beim Hover */
+}
+
+.contact-detail-edit:hover .hover-image,
+.contact-detail-delete:hover .hover-image {
+    display: block !important;
+    /* Zeige das Hover-Bild beim Hover */
+}
+
 
 .contact-detail-edit,
 .contact-detail-delete {
@@ -158,6 +174,17 @@ main {
     align-items: center;
     gap: 8px;
     cursor: pointer;
+}
+
+
+.contact-detail-delete {
+    width: 75px;
+}
+
+.contact-detail-edit:hover,
+.contact-detail-delete:hover {
+    color: #005DFF;
+    font-weight: 700;
 }
 
 .contact-info-detail {
@@ -190,18 +217,18 @@ main {
 
 
 .popupContainer {
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100vh;
-display: flex;
-background-color: rgba(255, 255, 255, 0.8);
-opacity: 0;
-/* opacity: 100; */
-transition: all 0.3s, transform 0.3s;
-z-index: -1;
-/* z-index: 500; */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    background-color: rgba(255, 255, 255, 0.8);
+    opacity: 0;
+    /* opacity: 100; */
+    transition: all 0.3s, transform 0.3s;
+    z-index: -1;
+    /* z-index: 500; */
 }
 
 
@@ -303,7 +330,7 @@ z-index: -1;
     stroke: #4589ff;
 }
 
-.add-conctact-close{
+.add-conctact-close {
     position: absolute;
     top: 31px;
     right: 31px;
@@ -315,7 +342,7 @@ z-index: -1;
     align-items: center;
 }
 
-.add-conctact-close:hover{
+.add-conctact-close:hover {
     background-color: #4589FF
 }
 

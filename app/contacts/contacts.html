@@ -24,7 +24,7 @@
   <main id="mainContacts">
     <div class="contactsContainer">
       <div class="contactList">
-        <div class="buttonBlue btnNewContact">
+        <div class="buttonBlue btnNewContact" onclick="slideInPopup()">
           <span>Add new contact</span>
           <img src="../../assets/img/functionButtons/person_add.png">
         </div>
@@ -55,11 +55,13 @@
           <span>Max Mustermann</span>
           <div class="contact-detail-edit-delete">
             <div class="contact-detail-edit">
-              <img src="../../assets/img/functionButtons/icon_edit_contact.png">
+              <img class="normal-image" src="../../assets/img/functionButtons/icon_edit_contact.png">
+              <img class="hover-image" style="display: none;" src="../../assets/img/functionButtons/icon_edit_contact_hover.png">
               <span>Edit</span>
             </div>
             <div class="contact-detail-delete">
-              <img src="../../assets/img/functionButtons/icon_delete_contact.png">
+              <img class="normal-image" src="../../assets/img/functionButtons/icon_delete_contact.png">
+              <img  class="hover-image" style="display: none;" src="../../assets/img/functionButtons/icon_delete_contact_hover.png">
               <span>Delete</span>
             </div>
           </div>

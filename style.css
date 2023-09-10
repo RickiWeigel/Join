@@ -136,3 +136,13 @@ main {
 .delete-btn:hover{
     content: url("../../assets/img/functionButtons/deleteHover.png");
 }
+
+.containerPopupActive {
+    z-index: 9999;
+    opacity: 1;
+}
+
+.popupContainer .hidePopup {
+    opacity: 0;
+    pointer-events: none;
+}

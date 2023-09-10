@@ -189,12 +189,12 @@ async function getPriorityImageUrlPopup(priority) {
     `);
   } else if (priority == "Medium") {
     return (element.innerHTML = `
-    <span>Low</span>
+    <span>Medium</span>
     <img src="../../assets/img/board/iconMediumSmall.png">
     `);
   } else if (priority == "Urgent") {
     return (element.innerHTML = `
-    <span>Low</span>
+    <span>Urgent</span>
     <img src="../../assets/img/board/iconUrgentSmall.png">
     `);
   }

@@ -65,6 +65,7 @@ main {
     white-space: nowrap;
     cursor: pointer;
     transition: all 125ms ease-in-out;
+    font-weight: 400;
 }
 
 .buttonBlue:hover {
@@ -88,6 +89,7 @@ main {
     font-size: 23px;
     cursor: pointer;
     transition: all 125ms ease-in-out;
+    font-weight: 400;
 }
 
 .buttonWhite:hover {

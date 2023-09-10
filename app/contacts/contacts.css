@@ -20,7 +20,7 @@ main {
 .contactDetailContainer {
     flex-grow: 1;
     height: 100%;
-    padding: 72px ;
+    padding: 72px;
 }
 
 .contactList {
@@ -76,7 +76,7 @@ main {
     background-color: #D2E3FF;
 }
 
-.profil-pic-min{   
+.profil-pic-min {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -89,34 +89,34 @@ main {
     font-size: 12px;
 }
 
-.profil-data{
+.profil-data {
     display: flex;
     flex-direction: column;
 }
 
-.profil-name{
+.profil-name {
     font-size: 19px;
     color: black;
 }
 
-.profil-email{
+.profil-email {
     font-size: 16px;
     color: #4589FF;
 }
 
-.contactDetailContainer{
+.contactDetailContainer {
     display: flex;
     flex-direction: column;
-    gap: 54px;
+    gap: 21px;
 }
 
-.contact-detail-top{
+.contact-detail-top {
     display: flex;
     align-items: center;
     gap: 54px;
 }
 
-.profil-pic-big{
+.profil-pic-big {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -129,30 +129,167 @@ main {
     font-weight: 500;
 }
 
-.profil-detail-name{
+.profil-detail-name {
     display: flex;
     flex-direction: column;
 }
 
-.profil-detail-name{
+.profil-detail-name {
     font-size: 47px;
     font-weight: 500;
 }
 
-.contact-detail-edit-delete{
+.contact-detail-edit-delete {
     display: flex;
     gap: 16px;
     font-size: 16px;
 }
 
-.contact-detail-edit-delete img{
+.contact-detail-edit-delete img {
     width: 24px;
     height: 24px;
 }
 
-.contact-detail-edit, .contact-detail-delete {
+.contact-detail-edit,
+.contact-detail-delete {
     display: flex;
     align-items: center;
     gap: 8px;
     cursor: pointer;
+}
+
+.contact-info-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.contact-detail-text {
+    font-size: 23px;
+    font-weight: 700;
+}
+
+.profil-detail-email,
+.profil-detail-phone {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contact-profil-email {
+    color: #005DFF;
+    font-weight: 400;
+}
+
+.contact-profil-subheadline {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.bg-container {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    background-color: rgba(255, 255, 255, 0.8);
+    opacity: 100;
+    transition: all 0.3s, transform 0.3s;
+    z-index: 500;
+}
+
+.slide-container-add-contact {
+    position: absolute;
+    right: 0;
+    top: 0;
+    gap: 72px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 584px;
+    height: 100vh;
+    border-radius: 30px 0px 30px 30px;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+    background-color: white;
+}
+
+.slide-container-add-contact-top {
+    display: flex;
+    width: 100%;
+    border-radius: 30px 0 0 0;
+    background-color: #005DFF;
+    padding: 91px 46px;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.slide-container-add-contact-top-headline {
+    color: white;
+    font-size: 48px;
+    font-weight: 700;
+}
+
+.slide-container-add-contact-top-subHeadline {
+    font-size: 27px;
+    font-weight: 400;
+}
+
+.slide-container-add-contact-content-container {
+    display: flex;
+    width: 422px;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+}
+
+.input-container {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #D1D1D1;
+}
+
+.input-container input {
+    padding: 12px 21px;
+    font-size: 19px;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+}
+
+.input-container input:focus {
+    outline: none;
+}
+
+.input-container input::placeholder {
+    color: #D1D1D1;
+}
+
+.slide-container-add-contact-content-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+}
+
+.create-contact-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.buttonWhite svg path {
+    stroke: #647188;
+    transition: stroke 0.125s;
+
+}
+
+.buttonWhite:hover svg path {
+    stroke: #4589ff;
 }

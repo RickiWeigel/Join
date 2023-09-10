@@ -820,39 +820,41 @@ function renderPopupAddTask(addTaskStatus) {
   document.getElementById("popupContainer").innerHTML = `
   <div class="popupAddTask" id="popupAddTask" onclick="event.stopPropagation()">
     <div class="titleAddTask">Add Task</div>
-    <form onsubmit="addTask(); return false;" class="addTaskForm">
+    <form onsubmit="addTaskPopup(); return false;" class="addTaskForm">
         <div  class="boardAddTaskContent" id="addTaskContent">
             <div class="boardAddTaskSection" id="boardAddTaskSection">
+
             <div class="section1">
               <div class="titleContainer">
                 <div class="enterTitle">
-                    <input id="taskTitle" type="text" placeholder="Enter a title" required>
+                    <input id="taskTitle" type="text" placeholder="Enter a title">
                 </div>
-                <div class="required">required</div>
+                <div id="requiredTitle" class="required v-none">Please enter a title!</div>
               </div>
 
               <div class="descriptionContainer">
                 <div class="descriptionContent">
                     <span>Description</span>
-                    <textarea required name="descriptionTextarea" placeholder="Enter a description" id="description"
+                    <textarea name="descriptionTextarea" placeholder="Enter a description" id="description"
                         cols="30" rows="10"></textarea>
                 </div>
-                <div class="required">required</div>
+                <div id="requiredDescription" class="required v-none">Please enter a description!</div>
               </div>
 
               <div class="dueDateContainer">
                 <div class="dueDate">
                     <span>Due date</span>
                     <div class="dateContainer" onclick="openCalendar()" >
-                        <input class="inputGrey" type="date" format="dd/mm/yyyy" placeholder="dd/mm/yyyy" id="datepicker" onfocus="openCalendar();this.showPicker();" autocomplete="off" required></input>
+                        <input class="inputGrey" type="date" format="dd/mm/yyyy" placeholder="dd/mm/yyyy" id="datepicker" onfocus="openCalendar();this.showPicker();" autocomplete="off"></input>
                         <img src="../../assets/img/board/calendar.png">
                     </div>
                 </div>
-                <div class="required">required</div>
+                <div id="requiredDate" class="required v-none">Please enter a date!</div>
               </div>
               </div>
 
                 <div class="priorityClass">
+                  <div class="prioritySection">
                     <span>Priority</span>
                     <div id="showPriorities" class="priorityContainer">
                         <img onmouseover="priorityMouseHover('red')"
@@ -868,9 +870,12 @@ function renderPopupAddTask(addTaskStatus) {
                             class="priority priorityLow" id="priorityLow"
                             src="../../assets/img/addTask/TaskValueLow.png">
                     </div>
+                    <div id="requiredPriority" class="required v-none">Please select an urgency!</div>
+                  </div>  
                 </div>
 
                 <div class="assignedTo">
+                  <div class="assignedToContainer">
                     <span>Assigne to</span>
                     <div id="showInviteNewContact" class="selectContacts d-none">
                         <input id="inviteNewContact" type="text" placeholder="Contact email"
@@ -893,9 +898,12 @@ function renderPopupAddTask(addTaskStatus) {
                             </div>
                         </div>
                     </div>
+                    <div id="requiredAssignedTo" class="required v-none">Please select a contact!</div>
+                  </div>  
                 </div>
 
                 <div class="category">
+                  <div class="categoryContainer">
                     <span>Category</span>
                     <div id="showCategory" class="selectCategory" onclick="renderCategories()">
                         <div id="currentCategory"><span>Select task category</span></div>
@@ -931,6 +939,9 @@ function renderPopupAddTask(addTaskStatus) {
                             </div>
                         </div>
                     </div>
+                    <div id="requiredCategory" class="required v-none"><span>Please select a category or add a new one!</span>
+                    </div>
+                  </div> 
                 </div>
 
                 <div class="subtaskContainer">
@@ -957,6 +968,15 @@ function renderPopupAddTask(addTaskStatus) {
     </form>
   </div>
   `;
+}
+
+async function addTaskPopup(){
+  const requiredFieldsValid = await checkRequired();
+  if (requiredFieldsValid) {
+    addTask();
+    hidePopup('hidePopupTask()');
+    groupTasksByProgressStatus(users[activeUser]);
+  }
 }
 
 async function openPopupAddTask(addTaskStatus) {

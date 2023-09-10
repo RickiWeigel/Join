@@ -10,6 +10,7 @@ function test() {
 }
 
 function slideInPopup() {
+  hidePopupStatus = 1;
   const popupContainer = document.getElementById("popupContainer");
   const popupContent = document.getElementById(
     "slide-container-add-contact"
@@ -27,4 +28,13 @@ function slideOutPopup() {
   popupContent.classList.add("add-contact-slide-out-right");
   popupContainer.classList.remove("containerPopupActive");
   popupContainer.classList.add("hidePopup");
+  hidePopupStatus = 0;
+}
+
+function hidePopup() {
+  if (hidePopupStatus == 0) {
+    slideOutPopup();
+  } else {
+    hidePopupAddTask();
+  }
 }

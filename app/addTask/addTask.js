@@ -507,7 +507,7 @@ function hideRequiredFields() {
   });
 }
 
-function checkRequired() {
+async function checkRequired() {
   hideRequiredFields();
 
   let taskTitle = document.getElementById("taskTitle").value;
@@ -533,14 +533,19 @@ function checkRequired() {
     "requiredCategory"
   );
 
-  if (
+  return (
     !titleRequired &&
     !descriptionRequired &&
     !dateRequired &&
     !priorityRequired &&
     !assignedToRequired &&
     !categoryRequired
-  ) {
+  );
+}
+
+async function requiredAddTask(){
+  const requiredFieldsValid = await checkRequired();
+  if (requiredFieldsValid) {
     addTask();
   }
 }

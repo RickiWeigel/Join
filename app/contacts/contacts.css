@@ -245,14 +245,29 @@ main {
     border-radius: 30px 0px 30px 30px;
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
     background-color: white;
-    opacity: 1;
     transition: transform 0.2s ease-in-out;
 }
 
-.slide-container-add-contact-top {
+.slide-container-edit-contact {
+    position: absolute;
+    left: 0px;
+    top: 0;
+    gap: 72px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 584px;
+    height: 100vh;
+    border-radius: 0px 30px 30px 30px;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+    background-color: white;
+    transition: transform 0.2s ease-in-out;
+}
+
+
+.slide-container-top {
     display: flex;
     width: 100%;
-    border-radius: 30px 0 0 0;
     background-color: #005DFF;
     padding: 91px 46px;
     flex-direction: column;
@@ -260,18 +275,27 @@ main {
     gap: 12px;
 }
 
-.slide-container-add-contact-top-headline {
+.slide-add-contact-top-radius{
+    border-radius: 30px 0 0 0;
+}
+
+.slide-edit-radius{
+    border-radius: 0px 30px 0 0;
+}
+
+.slide-container-top-headline {
     color: white;
     font-size: 48px;
     font-weight: 700;
 }
 
-.slide-container-add-contact-top-subHeadline {
+.slide-container-top-subHeadline {
     font-size: 27px;
     font-weight: 400;
+    color: white;
 }
 
-.slide-container-add-contact-content-container {
+.slide-container-content-container {
     display: flex;
     width: 422px;
     flex-direction: column;
@@ -304,7 +328,7 @@ main {
     color: #D1D1D1;
 }
 
-.slide-container-add-contact-content-buttons {
+.slide-container-content-buttons {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -356,6 +380,21 @@ main {
     pointer-events: none;
 }
 
+.contact-profil-pic{
+    display: flex;
+    width: 120px;
+    height: 120px;
+    border-radius: 100%;
+    background-color: orange;
+    justify-content: center;
+    align-items: center;
+    font-size: 47px;
+    font-weight: 500;
+    color: white;
+}
+
+
+
 .add-contact-slide-in-right {
     animation-name: slideInAddContact;
     animation-duration: 0.3s;
@@ -385,5 +424,37 @@ main {
 
     to {
         left: 100%;
+    }
+}
+
+.edit-slide-in {
+    animation-name: slideInEdit;
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
+}
+
+.edit-slide-out {
+    animation-name: slideOutEdit;
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes slideInEdit {
+    from {
+        left: -584px;
+    }
+
+    to {
+        left: 0;
+    }
+}
+
+@keyframes slideOutEdit {
+    from {
+        left: 0;
+    }
+
+    to {
+        left: -584px;
     }
 }

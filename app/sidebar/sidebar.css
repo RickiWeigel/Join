@@ -31,16 +31,21 @@ body {
     gap: 20px;
 }
 
+.sideBar:hover{
+    background-color: #d2e3ff80;
+    border-radius: 0.5em;
+}
+
 .legalNotice{
     margin-top: 50px;
     width: 200px;
     cursor: pointer;
 }
 
-.navActive {
+/* .navActive {
     background: #D2E3FF;
     border-radius: 8px;
-}
+} */
 
 .navHighlighted {
     background-color: #d2e3ff;

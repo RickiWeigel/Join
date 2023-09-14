@@ -93,11 +93,38 @@ main {
     outline: 1px solid #fff; /* Das outline-Attribut fügt eine 2px breite Linie um das Element hinzu */
 }
 
+.buttonWhiteDelete {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 35px;
+    gap: 10px;
+    height: 48px;
+    background: #ffffff;
+    border: 1px solid #647188;
+    border-radius: 8px;
+    color: #647188;
+    font-size: 23px;
+    cursor: pointer;
+    transition: all 125ms ease-in-out;
+    font-weight: 400;
+    outline: 1px solid #fff; /* Das outline-Attribut fügt eine 2px breite Linie um das Element hinzu */
+}
+
 .buttonWhite:hover {
     transition: all 125ms ease-in-out;
     outline: 2px solid #4589ff;
     border: 1px solid #FFF;
     color: #4589ff;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+.buttonWhiteDelete:hover {
+    transition: all 125ms ease-in-out;
+    outline: 2px solid #f35010;
+    border: 1px solid #FFF;
+    color: #f35010;
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
 }
 

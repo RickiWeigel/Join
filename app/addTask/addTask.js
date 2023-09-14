@@ -181,6 +181,7 @@ async function addTask() {
     priority: prioritySelect,
     subtasks: selectedSubtasks,
     progressStatus: selectProgressStatus,
+    idCounter: 0
   });
   await setItem(`users`, JSON.stringify(users));
   resetAllFields();

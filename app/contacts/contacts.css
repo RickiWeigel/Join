@@ -61,6 +61,12 @@ main {
     font-size: 18px;
 }
 
+.contact-card-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
 .contact-card {
     display: flex;
     justify-content: flex-start;
@@ -125,7 +131,6 @@ main {
     width: 120px;
     height: 120px;
     border-radius: 100%;
-    background-color: orange;
     color: white;
     font-size: 47px;
     font-weight: 500;
@@ -250,7 +255,7 @@ main {
 
 .slide-container-edit-contact {
     position: absolute;
-    left: 0px;
+    left: -584px;
     top: 0;
     gap: 72px;
     display: flex;
@@ -344,14 +349,14 @@ main {
     height: 61px;
 }
 
-.buttonWhite svg path {
+.buttonWhiteDelete svg path {
     stroke: #647188;
     transition: stroke 0.125s;
 
 }
 
-.buttonWhite:hover svg path {
-    stroke: #4589ff;
+.buttonWhiteDelete:hover svg path {
+    stroke: #f35010;
 }
 
 .add-conctact-close {

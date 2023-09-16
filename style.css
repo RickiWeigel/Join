@@ -13,7 +13,7 @@ body {
 }
 
 h1 {
-    font-size: 64px;
+    font-size: 61px;
     margin: 0;
 }
 
@@ -21,6 +21,12 @@ h2 {
     font-size: 48px;
     font-weight: 700;
     margin: 0;
+}
+
+h3{
+    margin: 0;
+    font-size: 33px;
+    font-weight: 700;
 }
 
 .d-none {
@@ -90,7 +96,8 @@ main {
     cursor: pointer;
     transition: all 125ms ease-in-out;
     font-weight: 400;
-    outline: 1px solid #fff; /* Das outline-Attribut fügt eine 2px breite Linie um das Element hinzu */
+    outline: 1px solid #fff;
+    /* Das outline-Attribut fügt eine 2px breite Linie um das Element hinzu */
 }
 
 .buttonWhiteDelete {
@@ -109,7 +116,8 @@ main {
     cursor: pointer;
     transition: all 125ms ease-in-out;
     font-weight: 400;
-    outline: 1px solid #fff; /* Das outline-Attribut fügt eine 2px breite Linie um das Element hinzu */
+    outline: 1px solid #fff;
+    /* Das outline-Attribut fügt eine 2px breite Linie um das Element hinzu */
 }
 
 .buttonWhite:hover {
@@ -156,11 +164,11 @@ main {
     background-color: #555;
 }
 
-.delete-btn{
+.delete-btn {
     z-index: 10;
 }
 
-.delete-btn:hover{
+.delete-btn:hover {
     content: url("../../assets/img/functionButtons/deleteHover.png");
 }
 
@@ -177,13 +185,62 @@ main {
 /* Help */
 
 .info-container {
-        position: absolute;
-        padding: 72px;
-        margin-left: 232px;
-        margin-top: 97.3px;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    padding: 72px;
+    margin-left: 232px;
+    margin-top: 97.3px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ffffff;
+    gap: 48px;
+    overflow: auto;
+}
+
+.back-arrow {
+    position: absolute;
+    top: 92.5px;
+    right: 75px;
+    cursor: pointer;
+}
+
+
+.info-content{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.join-highlight {
+    color: #4589FF;
+}
+
+.what-is-join{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.what-is-join h3{
+    color: #4589FF;
+}
+
+.how-to-use-it-content{
+    display: flex;
+    flex-direction: column;
+    gap: 16px; 
+}
+
+.how-to-use-it-content-sections{
+    display: flex;
+    gap: 35px;
+}
+
+.how-to-use-it-content-sections .subHeadline{
+    font-size: 19px;
+    color: #005DFF;
+    font-weight: 700;
 }

@@ -75,9 +75,14 @@
     position: relative;
 }
 
+.checkbox {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
 #checkboxRememberMe {
-    margin-right: 15px; 
-    margin-bottom: 2px;
+    cursor: pointer;
 }
 
 .loginBoxHeadline::after {

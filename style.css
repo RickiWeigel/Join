@@ -173,3 +173,17 @@ main {
     opacity: 0;
     pointer-events: none;
 }
+
+/* Help */
+
+.info-container {
+        position: absolute;
+        padding: 72px;
+        margin-left: 232px;
+        margin-top: 97.3px;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ffffff;
+}

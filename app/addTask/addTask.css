@@ -7,7 +7,7 @@ body {
     width: 100%;
     height: fit-content;
     overflow: auto;
-    padding: 39.7px 63px 63px;
+    padding: 24px 24px;
 }
 
 .addTaskSection {
@@ -15,7 +15,7 @@ body {
     display: flex;
     scroll-behavior: smooth;
     flex-direction: column;
-    gap: 24px;
+    gap: 8px;
     align-items: flex-start;
     width: 462px;
     height: 828px;
@@ -28,6 +28,8 @@ body {
 }
 
 .enterTitle {
+    display: flex;
+    align-items: center;
     font-size: 40px;
     border-bottom: 1px solid #D1D1D1;
     padding: 13px 16px;
@@ -41,7 +43,7 @@ body {
 
 .enterTitle input {
     font-size: 32px;
-    font-weight: 600;
+    font-weight: 400;
 }
 
 input {
@@ -399,7 +401,7 @@ input[type='date']::-webkit-calendar-picker-indicator {
 .section1 {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 12px;
 }
 
 .descriptionContainer,
@@ -417,6 +419,6 @@ input[type='date']::-webkit-calendar-picker-indicator {
     font-size: 13px;
     height: 18px;
     color: red;
-    margin-top: 4px;
+    /* margin-top: 4px; */
     font-weight: normal;
 }

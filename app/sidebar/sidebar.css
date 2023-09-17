@@ -31,21 +31,34 @@ body {
     gap: 20px;
 }
 
-.sideBar:hover{
+.sideBar:hover {
     background-color: #d2e3ff80;
     border-radius: 0.5em;
 }
 
-.legalNotice{
+.legal-information {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
     margin-top: 50px;
     width: 200px;
     cursor: pointer;
 }
 
-/* .navActive {
-    background: #D2E3FF;
-    border-radius: 8px;
-} */
+
+.legal-information a,
+.legal-information a:link,
+.legal-information a:visited {
+    color: #42526E;
+    text-decoration: none;
+    padding: 8px;
+}
+
+.legal-information a:hover{
+    color: #005DFF;
+}
 
 .navHighlighted {
     background-color: #d2e3ff;

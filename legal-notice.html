@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/app/header/header.css">
+    <link rel="stylesheet" href="/app/sidebar/sidebar.css">
+
+
+    <title>Legal-Notice</title>
+</head>
+
+<body onload="mainInit()">
+    <header>
+        <div w3-include-html="app\header\header-template.html"></div>
+    </header>
+
+    <aside>
+        <div class="sidebarContainer">
+            <div></div>
+            <div class="legal-information">
+                <a class="legal-information-active" href="../../privacy-policy.html">Privacy Policy</a>
+                <a href="../../legal-notice.html">Legal notice</a>
+            </div>
+        </div>
+    </aside>
+
+    <main>
+        <div class="info-container d-none" id="info-container" w3-include-html="..\templates\info-template.html"></div>
+        <div class="contentSummary " id="contentSummary"></div>
+    </main>
+
+    <script src="/main.js"></script>
+    <script src="/storage.js"></script>
+</body>
+
+</html>

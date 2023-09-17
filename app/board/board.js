@@ -998,11 +998,4 @@ function hidePopupAddTask() {
   hidePopupStatus = 0;
 }
 
-// function hidePopupAddTask() {
-//   const popupContainer = document.getElementById("popupContainer");
-//   const popupTask = document.getElementById("popupTask");
-//   popupTask.classList.add("popupTaskSlideOut");
-//   popupContainer.classList.remove("containerPopupActive");
-//   popupContainer.classList.add("hidePopup");
-//   groupTasksByProgressStatus(users[activeUser]);
-// }
+

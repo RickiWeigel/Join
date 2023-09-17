@@ -23,7 +23,7 @@ h2 {
     margin: 0;
 }
 
-h3{
+h3 {
     margin: 0;
     font-size: 33px;
     font-weight: 700;
@@ -199,9 +199,27 @@ main {
     background-color: #ffffff;
     gap: 48px;
     overflow: auto;
+    z-index: 5;
 }
 
-.back-arrow{
+.privacy-policy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: absolute;
+    padding: 72px;
+    margin-left: 232px;
+    margin-top: 97.3px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ffffff;
+    gap: 48px;
+    overflow: auto;
+}
+
+.back-arrow {
     position: absolute;
     top: 92.5px;
     right: 75px;
@@ -210,7 +228,7 @@ main {
     height: 32px;
 }
 
-.info-content{
+.info-content {
     display: flex;
     flex-direction: column;
     gap: 24px;
@@ -220,29 +238,36 @@ main {
     color: #4589FF;
 }
 
-.what-is-join{
+.what-is-join {
     display: flex;
     flex-direction: column;
     gap: 16px;
 }
 
-.what-is-join h3{
+.what-is-join h3 {
     color: #4589FF;
 }
 
-.how-to-use-it-content{
+.how-to-use-it-content {
     display: flex;
     flex-direction: column;
-    gap: 16px; 
+    gap: 16px;
 }
 
-.how-to-use-it-content-sections{
+.how-to-use-it-content-sections {
     display: flex;
     gap: 35px;
 }
 
-.how-to-use-it-content-sections .subHeadline{
+.how-to-use-it-content-sections .subHeadline {
     font-size: 19px;
     color: #005DFF;
     font-weight: 700;
+}
+
+.legal-information-active {
+    color: white!important;
+    font-weight: 700;
+    border-radius: 10px;
+    background: #4589FF;
 }

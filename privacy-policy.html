@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/app/header/header.css">
+    <link rel="stylesheet" href="/app/sidebar/sidebar.css">
+
+
+    <title>Privacy-Policy</title>
+</head>
+
+<body onload="mainInit()">
+    <header>
+        <div w3-include-html="app\header\header-template.html"></div>
+    </header>
+
+    <aside>
+        <div class="sidebarContainer">
+            <div></div>
+            <div class="legal-information">
+                <a class="legal-information-active" href="../../privacy-policy.html">Privacy Policy</a>
+                <a href="../../legal-notice.html">Legal notice</a>
+            </div>
+        </div>
+    </aside>
+
+    <main>
+        <div class="info-container d-none" id="info-container"  w3-include-html="app\templates\info-template.html"></div>
+        <div class="privacy-policy">
+            <div class="info-headline">
+                <h1>Privacy Policy</h1>
+            </div>
+            <div class="info-content">
+
+                <section class="what-is-join">
+                    <h3>Subtitle</h3>
+                    <span>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque odio felis, iaculis ut
+                        massa eget, ornare lacinia urna. In dignissim justo eu velit sagittis, in scelerisque nulla
+                        convallis. Vestibulum eros lorem, sollicitudin eget eros non, varius aliquam mauris. Sed turpis
+                        ipsum, condimentum quis nulla at, lobortis facilisis ipsum. Nunc erat justo, hendrerit vel enim
+                        vitae, feugiat mattis dui. In auctor dignissim luctus. Mauris ornare ipsum at ultrices eleifend.
+                        Praesent tempus congue magna. Quisque libero erat, pharetra a neque et, imperdiet semper justo.
+                    </span>
+                    <h3>Subtitle</h3>
+                    <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque odio felis, iaculis ut
+                        massa eget, ornare lacinia urna. In dignissim justo eu velit sagittis, in scelerisque nulla
+                        convallis. Vestibulum eros lorem, sollicitudin eget eros non, varius aliquam mauris. Sed turpis
+                        ipsum, condimentum quis nulla at, lobortis facilisis ipsum. Nunc erat justo, hendrerit vel enim
+                        vitae, feugiat mattis dui. In auctor dignissim luctus. Mauris ornare ipsum at ultrices eleifend.
+                        Praesent tempus congue magna. Quisque libero erat, pharetra a neque et, imperdiet semper justo.
+                    </span>
+                </section>
+            </div>
+            </h3>
+            <div class="back-arrow" onmouseover="hoverBackArrow()" onmouseleave="leaveBackArrow()"
+                onclick="history.back()">
+                <img id="back-arrow" src="/assets/img/functionButtons/arrowDefault.png" alt="">
+            </div>
+        </div>
+    </main>
+
+    <script src="/main.js"></script>
+    <script src="/storage.js"></script>
+</body>
+
+</html>

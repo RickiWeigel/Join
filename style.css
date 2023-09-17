@@ -187,6 +187,7 @@ main {
 .info-container {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     position: absolute;
     padding: 72px;
     margin-left: 232px;
@@ -200,13 +201,14 @@ main {
     overflow: auto;
 }
 
-.back-arrow {
+.back-arrow{
     position: absolute;
     top: 92.5px;
     right: 75px;
     cursor: pointer;
+    width: 32px;
+    height: 32px;
 }
-
 
 .info-content{
     display: flex;

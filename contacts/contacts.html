@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="/style.css" />
-  <link rel="stylesheet" href="/app/header/header.css" />
-  <link rel="stylesheet" href="/app/sidebar/sidebar.css" />
+  <link rel="stylesheet" href="/header/header.css" />
+  <link rel="stylesheet" href="/sidebar/sidebar.css" />
   <link rel="stylesheet" href="contacts.css" />
 
   <title>Join - Contacts</title>
@@ -15,19 +15,19 @@
 
 <body onload="contactsInit()">
   <header>
-    <div w3-include-html="..\header\header-template.html"></div>
+    <div w3-include-html="\header\header-template.html"></div>
   </header>
   <aside>
-    <div w3-include-html="..\sidebar\sidebar-template.html"></div>
+    <div w3-include-html="\sidebar\sidebar-template.html"></div>
   </aside>
 
   <main id="mainContacts">
-    <div class="info-container d-none" id="info-container" w3-include-html="..\templates\info-template.html"></div>
+    <div class="info-container d-none" id="info-container" w3-include-html="\templates\info-template.html"></div>
     <div class="contactsContainer">
       <div class="contactList">
         <div class="buttonBlue btnNewContact" onclick="slideInPopupAddContact()">
           <span>Add new contact</span>
-          <img src="../../assets/img/functionButtons/person_add.png">
+          <img src="/assets/img/functionButtons/person_add.png">
         </div>
         <div class="contacts-content" id="contacts-content">
 
@@ -44,7 +44,7 @@
   <div class="popupContainer " id="popupContainer">
     <div class="slide-container-add-contact" id="slide-container-add-contact">
       <div class="slide-container-top slide-add-contact-top-radius">
-        <img src="../../assets/img/logo/IconHeader.png" alt="">
+        <img src="/assets/img/logo/IconHeader.png" alt="">
         <span class="slide-container-top-headline">Add contact</span>
         <span class="slide-container-top-subHeadline">Tasks are better with a team</span>
         <div class="add-conctact-close" onclick="slideOutPopupAddContact()">
@@ -119,7 +119,7 @@
         </form>
 
         <div class="slide-container-content-buttons">
-          <button class="buttonWhite create-contact-button">
+          <button onclick="clearAddNewContactInnputs()" class="buttonWhite create-contact-button">
             <span>Cancel</span>
             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
               <path

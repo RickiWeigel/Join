@@ -14,6 +14,7 @@ body {
 
 h1 {
     font-size: 61px;
+    font-weight: 700;
     margin: 0;
 }
 
@@ -128,6 +129,17 @@ main {
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
 }
 
+.buttonWhite svg path {
+    stroke: #647188;
+    transition: stroke 0.125s;
+
+}
+
+.buttonWhite:hover svg path {
+    stroke: #4589ff;
+}
+
+
 .buttonWhiteDelete:hover {
     transition: all 125ms ease-in-out;
     outline: 2px solid #f35010;
@@ -135,6 +147,7 @@ main {
     color: #f35010;
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
 }
+
 
 .navHighlighted {
     background-color: #d2e3ff;
@@ -242,6 +255,10 @@ main {
     display: flex;
     flex-direction: column;
     gap: 16px;
+}
+
+.what-is-join h2 {
+    color: #005DFF;
 }
 
 .what-is-join h3 {

@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/style.css">
-    <link rel="stylesheet" href="/app/header/header.css">
-    <link rel="stylesheet" href="/app/sidebar/sidebar.css">
+    <link rel="stylesheet" href="/header/header.css">
+    <link rel="stylesheet" href="/sidebar/sidebar.css">
 
 
     <title>Legal-Notice</title>
@@ -15,22 +15,46 @@
 
 <body onload="mainInit()">
     <header>
-        <div w3-include-html="app\header\header-template.html"></div>
+        <div w3-include-html="\header\header-template.html"></div>
     </header>
 
     <aside>
         <div class="sidebarContainer">
             <div></div>
             <div class="legal-information">
-                <a class="legal-information-active" href="../../privacy-policy.html">Privacy Policy</a>
-                <a href="../../legal-notice.html">Legal notice</a>
+                <a href="/privacy-policy.html">Privacy Policy</a>
+                <a class="legal-information-active" href="/legal-notice.html">Legal notice</a>
             </div>
         </div>
     </aside>
 
     <main>
-        <div class="info-container d-none" id="info-container" w3-include-html="..\templates\info-template.html"></div>
-        <div class="contentSummary " id="contentSummary"></div>
+        <div class="info-container d-none" id="info-container" w3-include-html="\templates\info-template.html"></div>
+        <div class="privacy-policy">
+            <section class="info-headline">
+                <h1>Legal notice</h1>
+            </section>
+            <div class="info-content">
+
+                <section class="what-is-join">
+
+                    <h2 id="m46">Angaben gemäß § 5 TMG</h2>
+                    <span>Ricki Weigel<br>
+                        Budapesterstraße 20<br>
+                        91056 Erlangen</span>
+
+                    <h2 id="m56">Kontaktmöglichkeiten</h2>
+                    <span>E-Mail-Adresse:<br><br>
+                    <a href="mailto:Ricki.weigel@gmx.de">Ricki.weigel@gmx.de</a><br>
+                    Telefon: 0170 123 456 789</span> 
+
+                </section>
+            </div>
+            <div class="back-arrow" onmouseover="hoverBackArrow()" onmouseleave="leaveBackArrow()"
+                onclick="history.back()">
+                <img id="back-arrow" src="/assets/img/functionButtons/arrowDefault.png" alt="">
+            </div>
+        </div>
     </main>
 
     <script src="/main.js"></script>

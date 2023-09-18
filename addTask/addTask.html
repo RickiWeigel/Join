@@ -6,22 +6,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/style.css">
-    <link rel="stylesheet" href="/app/header/header.css">
-    <link rel="stylesheet" href="/app/sidebar/sidebar.css">
+    <link rel="stylesheet" href="/header/header.css">
+    <link rel="stylesheet" href="/sidebar/sidebar.css">
     <link rel="stylesheet" href="addTask.css">
     <title>Join - Add Task</title>
 </head>
 
 <body onload="addTaskInit()">
     <header>
-        <div w3-include-html="..\header\header-template.html"></div>
+        <div w3-include-html="\header\header-template.html"></div>
     </header>
     <aside>
-        <div w3-include-html="..\sidebar\sidebar-template.html"></div>
+        <div w3-include-html="\sidebar\sidebar-template.html"></div>
     </aside>
 
     <main>
-        <div class="info-container d-none" id="info-container" w3-include-html="..\templates\info-template.html"></div>
+        <div class="info-container d-none" id="info-container" w3-include-html="\templates\info-template.html"></div>
         <form onsubmit="requiredAddTask(); return false;" class="addTaskContent" id="addTaskContent">
             <div class="addTaskSection" id="addTaskSection">
                 <div class="section1">
@@ -48,7 +48,7 @@
                                 <input class="inputGrey" type="date" format="dd/mm/yyyy" placeholder="dd/mm/yyyy"
                                     id="datepicker" onfocus="openCalendar();this.showPicker();"
                                     autocomplete="off"></input>
-                                <img src="../../assets/img/board/calendar.png">
+                                <img src="/assets/img/board/calendar.png">
                             </div>
                         </div>
                         <div id="requiredDate" class="required v-none">Please enter a date!</div>
@@ -63,15 +63,15 @@
                             <img onmouseover="priorityMouseHover('red')"
                                 onmouseleave="priorityMouseLeave('priorityUrgent')"
                                 onclick="renderPrioritySelected('Urgent')" class="priority priorityUrgent"
-                                id="priorityUrgent" src="../../assets/img/addTask/TaskValueHard.png">
+                                id="priorityUrgent" src="/assets/img/addTask/TaskValueHard.png">
                             <img onmouseover="priorityMouseHover('orange')"
                                 onmouseleave="priorityMouseLeave('priorityMedium')"
                                 onclick="renderPrioritySelected('Medium')" class="priority priorityMedium"
-                                id="priorityMedium" src="../../assets/img/addTask/TaskValueMid.png">
+                                id="priorityMedium" src="/assets/img/addTask/TaskValueMid.png">
                             <img onmouseover="priorityMouseHover('green')"
                                 onmouseleave="priorityMouseLeave('priorityLow')" onclick="renderPrioritySelected('Low')"
                                 class="priority priorityLow" id="priorityLow"
-                                src="../../assets/img/addTask/TaskValueLow.png">
+                                src="/assets/img/addTask/TaskValueLow.png">
                         </div>
                         <div id="requiredPriority" class="required v-none">Please select an urgency!</div>
                     </div>
@@ -108,7 +108,7 @@
                         <span>Category</span>
                         <div id="showCategory" class="selectCategory" onclick="renderCategories()">
                             <div id="currentCategory"><span>Select task category</span></div>
-                            <img src="../../assets/img/functionButtons/selectorArrow.png">
+                            <img src="/assets/img/functionButtons/selectorArrow.png">
                         </div>
                         <div id="showNewCategory" class="selectCategory d-none">
                             <input id="addNewCategory" type="text" placeholder="New category name"
@@ -151,7 +151,7 @@
                         <input id="subtaskInput" onclick="subtaskActiveInput()" type="text"
                             placeholder="Add new subtask">
                         <div id="subtaskButtons" style="display: flex; align-items: center;">
-                            <img src="../../assets/img/functionButtons/add.png">
+                            <img src="/assets/img/functionButtons/add.png">
                         </div>
                     </div>
                     <div id="addedSubtasks" class="subtaskContent"></div>
@@ -170,9 +170,8 @@
     </main>
 
     <script src="/storage.js"></script>
-
     <script src="/main.js"></script>
-    <script src="/app/addTask/addTask.js"></script>
+    <script src="/addTask/addTask.js"></script>
 </body>
 
 </html>

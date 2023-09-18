@@ -168,6 +168,5 @@ function formatDate(day, month, year) {
     "Dezember",
   ];
   month = months[month - 1]; // Monatsnamen aus dem Array holen
-
   return `${month} ${day}, ${year}`;
 }

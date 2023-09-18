@@ -6,9 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/style.css">
-    <link rel="stylesheet" href="/app/addTask/addTask.css">
-    <link rel="stylesheet" href="/app/header/header.css">
-    <link rel="stylesheet" href="/app/sidebar/sidebar.css">
+    <link rel="stylesheet" href="/addTask/addTask.css">
+    <link rel="stylesheet" href="/header/header.css">
+    <link rel="stylesheet" href="/sidebar/sidebar.css">
     <link rel="stylesheet" href="board.css">
 
     <title>Join - Board</title>
@@ -16,10 +16,10 @@
 
 <body onload="boardInit()">
     <header>
-        <div w3-include-html="..\header\header-template.html"></div>
+        <div w3-include-html="\header\header-template.html"></div>
     </header>
     <aside>
-        <div w3-include-html="..\sidebar\sidebar-template.html"></div>
+        <div w3-include-html="\sidebar\sidebar-template.html"></div>
     </aside>
     <main>
         <div class="info-container d-none" id="info-container" w3-include-html="..\templates\info-template.html"></div>
@@ -27,7 +27,7 @@
             <div class="findTask">
                 <div class="findTaskInput">
                     <input type="text" id="searchInput" placeholder="Find Task" onkeyup="searchTasks()">
-                    <img src="../../assets/img/board/lens.png">
+                    <img src="/assets/img/board/lens.png">
                 </div>
                 <div class="btn" onclick="openPopupAddTask('toDo')"><span>Add Task +</span></div>
             </div>
@@ -36,7 +36,7 @@
                     <div class="singleCategoryHeader">
                         <span>To do</span>
                         <img onclick="openPopupAddTask('toDo')" id="plusButton"
-                            src="../../assets/img/board/plus button v1.png">
+                            src="/assets/img/board/plus button v1.png">
                     </div>
                     <div class="statusCard" id="toDoTasks"
                         ondragover="allowDrop(event); statusCardHighlight('toDoTasks')"
@@ -46,7 +46,7 @@
                 <div class="singleCategory" id="inProgress">
                     <div class="singleCategoryHeader">
                         <span>In Progress</span>
-                        <img onclick="openPopupAddTask('inProgess')" src="../../assets/img/board/plus button v1.png">
+                        <img onclick="openPopupAddTask('inProgess')" src="/assets/img/board/plus button v1.png">
                     </div>
                     <div class="statusCard" id="inProgressTasks"
                         ondragover="allowDrop(event); statusCardHighlight('inProgressTasks')"
@@ -58,7 +58,7 @@
                     <div class="singleCategoryHeader">
                         <span>Await Feedback</span>
                         <img onclick="openPopupAddTask('awaitFeedback')"
-                            src="../../assets/img/board/plus button v1.png">
+                            src="/assets/img/board/plus button v1.png">
                     </div>
                     <div class="statusCard" id="awaitFeedbackTasks"
                         ondragover="allowDrop(event); statusCardHighlight('awaitFeedbackTasks')"
@@ -69,7 +69,7 @@
                 <div class="singleCategory" id="done">
                     <div class="singleCategoryHeader">
                         <span>Done</span>
-                        <img onclick="openPopupAddTask('done')" src="../../assets/img/board/plus button v1.png">
+                        <img onclick="openPopupAddTask('done')" src="/assets/img/board/plus button v1.png">
                     </div>
                     <div class="statusCard" id="doneTasks"
                         ondragover="allowDrop(event); statusCardHighlight('doneTasks')"
@@ -85,14 +85,12 @@
 
 
     
-
-    <!-- <div class="addTaskPopupContainer" id="addTaskPopupContainer" onclick="hidePopup('hidePopupAddTask()')"></div> -->
 </body>
 
 
 <script src="/storage.js"></script>
 <script src="/main.js"></script>
-<script src="../addTask/addTask.js"></script>
+<script src="/addTask/addTask.js"></script>
 <script src="board.js"></script>
 
 </html>

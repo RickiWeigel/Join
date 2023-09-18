@@ -172,11 +172,11 @@ function resetTaskContainers() {
 
 function getPriorityImageUrl(priority) {
   if (priority == "Low") {
-    return "../../assets/img/board/iconLow.png";
+    return "/assets/img/board/iconLow.png";
   } else if (priority == "Medium") {
-    return "../../assets/img/board/iconMid.png";
+    return "/assets/img/board/iconMid.png";
   } else if (priority == "Urgent") {
-    return "../../assets/img/board/iconHard.png";
+    return "/assets/img/board/iconHard.png";
   }
 }
 
@@ -185,17 +185,17 @@ async function getPriorityImageUrlPopup(priority) {
   if (priority == "Low") {
     return (element.innerHTML = `
     <span>Low</span>
-    <img src="../../assets/img/board/iconLowSmall.png">
+    <img src="/assets/img/board/iconLowSmall.png">
     `);
   } else if (priority == "Medium") {
     return (element.innerHTML = `
     <span>Medium</span>
-    <img src="../../assets/img/board/iconMediumSmall.png">
+    <img src="/assets/img/board/iconMediumSmall.png">
     `);
   } else if (priority == "Urgent") {
     return (element.innerHTML = `
     <span>Urgent</span>
-    <img src="../../assets/img/board/iconUrgentSmall.png">
+    <img src="/assets/img/board/iconUrgentSmall.png">
     `);
   }
 }
@@ -243,7 +243,6 @@ function hidePopupTask() {
 
 async function renderPopup(id) {
   let userTask = users[activeUser].userTasks[id];
-  // let priorityImageUrl = getPriorityImageUrlPopup(userTask.priority);
   document.getElementById("popupContainer").innerHTML = `
   <div class="popupTask" id="popupTask" onclick="event.stopPropagation()">
     <div class="popupTaskContent" id="popupTaskContent">

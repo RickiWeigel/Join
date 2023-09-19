@@ -57,7 +57,7 @@ function login() {
     setRememberMeStorage();
     if (user) {
         saveActiveUserLocal(user);
-        window.location.href = '../summary/summary.html';
+        window.location.href = '/summary.html';
     } else {
         showLoginFault();
     }

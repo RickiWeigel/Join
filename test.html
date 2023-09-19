@@ -1,0 +1,16 @@
+<div class="bigInfoBox midInfoBox" onclick="redirectToBoard()">
+    <div class="section">
+        <div class="boxTop">
+            <img class="img" src="../../assets/img/summary/icon_urgent.png">
+            <h2 id="TasksUrgent">${countUrgentTasks()}</h2>
+        </div>
+        <span>Tasks Urgent</span>
+    </div>
+    <div class="midLine"></div>
+    <div class="rightSection">
+        <span id="upcomingDate">${findClosestDueDate(
+            users[activeUser].userTasks
+            )}</span>
+        <span>Upcoming Deadline</span>
+    </div>
+</div>

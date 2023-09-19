@@ -88,7 +88,7 @@ function getCurrentDate() {
 
 function redirectToBoard() {
   // Leiten Sie auf die gewünschte Seite weiter
-  window.location.href = "/board/board.html";
+  window.location.href = "/board.html";
 }
 
 function renderHeaderProfilInitials() {

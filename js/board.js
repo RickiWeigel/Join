@@ -111,34 +111,21 @@ function completedProgresses(completedTasks, subtaskLength) {
 }
 
 function renderContactInitials(id) {
-  let taskContact = document.getElementById(`taskContacts${id}`);
-  taskContact.innerHTML = ``;
-  let userContact = users[activeUser].userTasks[id].assignedTo;
-  console.log(userContact);
-
-  for (let j = 0; j < userContact.length; j++) {
-    let newColor = userContact[j].color;
-
-    if (userContact.length < 3) {
-      taskContact.innerHTML += `
+  const taskContact = document.getElementById(`taskContacts${id}`);
+  const userContact = users[activeUser].userTasks[id].assignedTo;
+  taskContact.innerHTML = "";
+  for (let j = 0; j < Math.min(userContact.length, 2); j++) {
+    const newColor = userContact[j].color;
+    taskContact.innerHTML += `
       <div class="contact box${j}" style="background-color: ${newColor};">
         <span id="contactInitials">${userContact[j].initials}</span>
       </div>`;
-    } else {
-      taskContact.innerHTML = `
-        <div class="contact box${0}" style="background-color: ${newColor};">
-          <span id="contactInitials">${userContact[0].initials}</span>
-        </div>
-        <div class="contact box${1}" style="background-color: ${newColor};">
-          <span id="contactInitials">${userContact[1].initials}</span>
-        </div>        
-        `;
-      taskContact.innerHTML += `
+  }
+  if (userContact.length > 2) {
+    taskContact.innerHTML += `
       <div class="contact boxRest">
         <span id="contactInitials">+${userContact.length - 2}</span>
-      </div>             
-      `;
-    }
+      </div>`;
   }
 }
 
@@ -160,22 +147,18 @@ function getPriorityImageUrl(priority) {
 }
 
 async function getPriorityImageUrlPopup(priority) {
+  let priorityInfo = {
+    Low: { text: "Low", imgSrc: "/assets/img/board/iconLowSmall.png" },
+    Medium: { text: "Medium", imgSrc: "/assets/img/board/iconMediumSmall.png" },
+    Urgent: { text: "Urgent", imgSrc: "/assets/img/board/iconUrgentSmall.png" },
+  };
   let element = document.getElementById("popupTaskPriority");
-  if (priority == "Low") {
-    return (element.innerHTML = `
-    <span>Low</span>
-    <img src="/assets/img/board/iconLowSmall.png">
-    `);
-  } else if (priority == "Medium") {
-    return (element.innerHTML = `
-    <span>Medium</span>
-    <img src="/assets/img/board/iconMediumSmall.png">
-    `);
-  } else if (priority == "Urgent") {
-    return (element.innerHTML = `
-    <span>Urgent</span>
-    <img src="/assets/img/board/iconUrgentSmall.png">
-    `);
+  let info = priorityInfo[priority];
+  if (info) {
+    element.innerHTML = `
+      <span>${info.text}</span>
+      <img src="${info.imgSrc}">
+    `;
   }
 }
 
@@ -225,49 +208,9 @@ async function renderPopup(id) {
   document.getElementById("popupContainer").innerHTML = `
   <div class="popupTask" id="popupTask" onclick="event.stopPropagation()">
     <div class="popupTaskContent" id="popupTaskContent">
-      <div class="headline">
-        <div class="popupCategoryHeadline" style="background: ${userTask.category.color};">
-          <span>${userTask.category.name}</span>
-        </div>
-        <div class="closePopup" ><img id="closeBtn" onmouseover="closeHover()" onmouseleave="closeLeave()" onclick=hidePopup() src="../../assets/img/functionButtons/close.png"></div>
-      </div>
-      <div class="popupTaskHeadline">
-        <span>${userTask.taskTitle}</span>
-      </div>
-      <span class="popupBoxDescription">${userTask.taskDescription}</span>
-      <div class="popupDivContainer">
-        <span class="subHeading">Due date:</span>
-        <span>${userTask.toDueDate}</span>
-      </div>
-
-      <div class="popupDivContainer">
-        <span class="subHeading">Priority:</span>
-        <div class="popupTaskPriority" id="popupTaskPriority"> 
-        </div>
-
-      </div>
-      <div class="popupAssignedToContainer" id="popupAssignedTo">
-        <span class="subHeading">Assigned To:</span>
-      </div>
-
-      <div class="popupSubtaskContainer">
-        <span class="subHeading">Subtasks:</span>
-          <div id="popupSubtasks"></div>
-      </div>
-
-      <div class="deleteEdit">
-        <div onmouseover="btnHover('deleteButton')" onmouseleave="btnLeave('deleteButton')" class="deleteContainer" onclick="deleteCurrentTask(${id})" >
-          <img id="deleteButton" src="../../assets/img/functionButtons/delete.png">
-          <span style="width: 50px;">Delete</span>
-        </div>
-        <img src="../../assets/img/functionButtons/trennstrich.png" height="24px">
-        <div onmouseover="btnHover('editButton')" onmouseleave="btnLeave('editButton')" class="editContainer" onclick="openEdit('${userTask.category.name}','${userTask.category.color}',${id})" >
-          <img id="editButton" src="../../assets/img/functionButtons/edit.png">
-          <span style="width: 35px;">Edit</span>
-        </div>
-      </div>
-    </div>
-  </div>
+    ${renderPopupTemplateTop(userTask)}
+    ${renderPopupTemplateMid(userTask)}
+    ${renderPopupTemplateBot(userTask, id)}
   `;
   await getPriorityImageUrlPopup(userTask.priority);
   renderSubtasksTask(id);
@@ -278,138 +221,17 @@ async function renderEditPopup(id) {
   let userTask = users[activeUser].userTasks[id];
   document.getElementById("popupContainer").innerHTML = `
   <form onsubmit="checkRequiredEdit(${id}); return false;" class="popupTask"
-        id="popupTask" onclick="event.stopPropagation()">
-        <div style=padding-right:40px; class="closePopupEdit"><img id="closeBtn" onmouseover="closeHover()"
-                onmouseleave="closeLeave()" onclick=hidePopup("hidePopupTask()")
-                src="../../assets/img/functionButtons/close.png"></div>
-
-        <div class="popupTaskContent" id="popupTaskContent">
-
-            <div class="section1">
-                <div class="titleContainer">
-                    <div class="enterTitle">
-                        <input id="taskTitleEdit" type="text" placeholder="Enter a title" value="${userTask.taskTitle}"
-                            >
-                    </div>
-                    <div id="requiredTitle" class="required v-none">Please enter a title!</div>
-                </div>
-
-                <div class="descriptionContainer">
-                    <div class="descriptionContent">
-                        <span class="subHeadline">Description</span>
-                        <textarea name="descriptionTextarea" id="descriptionEdit" cols="30"
-                            rows="10">${userTask.taskDescription}</textarea>
-                    </div>
-                    <div id="requiredDescription" class="required v-none">Please enter a description!</div>
-                </div>
-
-                <div class="dueDateContainer">
-                    <div class="dueDate">
-                        <span>Due date</span>
-                        <div class="dateContainer" onclick="openCalendar()">
-                            <input class="inputGrey" type="text" value="${userTask.toDueDate}" id="datepicker"
-                                onfocus="changeTypInDate();this.showPicker();" onblur="retainDateValue(this);"
-                                autocomplete="off"></input>
-                            <img src="../../assets/img/board/calendar.png">
-                        </div>
-                    </div>
-                    <div id="requiredDate" class="required v-none">Please enter a date!</div>
-                </div>
-            </div>
-
-            <div id="showPriorities" class="priorityContainer">
-                <img onmouseover="priorityMouseHover('red')" onmouseleave="priorityMouseLeave('priorityUrgent')"
-                    onclick="renderPrioritySelected('Urgent')" class="priority priorityUrgent" id="priorityUrgent"
-                    src="../../assets/img/addTask/TaskValueHard.png">
-                <img onmouseover="priorityMouseHover('orange')" onmouseleave="priorityMouseLeave('priorityMedium')"
-                    onclick="renderPrioritySelected('Medium')" class="priority priorityMedium" id="priorityMedium"
-                    src="../../assets/img/addTask/TaskValueMid.png">
-                <img onmouseover="priorityMouseHover('green')" onmouseleave="priorityMouseLeave('priorityLow')"
-                    onclick="renderPrioritySelected('Low')" class="priority priorityLow" id="priorityLow"
-                    src="../../assets/img/addTask/TaskValueLow.png">
-            </div>
-
-            <div id="showInviteNewContact" class="selectContacts d-none">
-                <input id="inviteNewContact" type="text" placeholder="Contact email" style="font-size: 19px;">
-                <img onclick="toggleInviteNewContact()" src="/assets/img/functionButtons/cancelBlue.png">
-                <img style="padding-left: 8px; padding-right: 8px;" src="/assets/img/functionButtons/trennstrich.png">
-                <img onclick="addNewInviteContact()" src="/assets/img/functionButtons/checkedIconSelector.png">
-            </div>
-
-            <div class="category">
-                <span class="subHeadline">Category</span>
-                <div id="showCategory" class="selectCategory" onclick="renderCategoriesEdit()">
-                    <div id="currentCategory">
-                        <span>${userTask.category.name}</span>
-                        <div class="colorCircle" style="background: ${userTask.category.color};"></div>
-                    </div>
-                    <img src="../../assets/img/functionButtons/selectorArrow.png">
-                </div>
-                <div id="showNewCategory" class="selectCategory d-none">
-                    <input id="addNewCategory" type="text" placeholder="New category name" style="font-size: 19px;">
-                    <img onclick="hideNewCategory()" src="/assets/img/functionButtons/cancelBlue.png">
-                    <img style="padding-left: 8px; padding-right: 8px;"
-                        src="/assets/img/functionButtons/trennstrich.png">
-                    <img onclick="addNewCategoryFunction()" src="/assets/img/functionButtons/checkedIconSelector.png">
-
-                </div>
-
-                <div class="dropDownContainer">
-                    <div>
-                        <div id="colorCircle" class="circle-content d-none">
-                            <div id="lightblue" onclick="addCategoryColor('lightblue')" class="colorCircle"
-                                style="background: #8AA4FF;"></div>
-                            <div id="red" onclick="addCategoryColor('red')" class="colorCircle"
-                                style="background: #FF0000;"></div>
-                            <div id="green" onclick="addCategoryColor('green')" class="colorCircle"
-                                style="background: #2AD300;"></div>
-                            <div id="orange" onclick="addCategoryColor('orange')" class="colorCircle"
-                                style="background: #FF8A00;"></div>
-                            <div id="pink" onclick="addCategoryColor('pink')" class="colorCircle"
-                                style="background: #E200BE;"></div>
-                            <div id="blue" onclick="addCategoryColor('blue')" class="colorCircle"
-                                style="background: #0038FF;"></div>
-                        </div>
-                        <div style="max-height: 204px; overflow: auto;" id="selectTaskCategory">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="category">
-                <span>Assigned to</span>
-                <div class="selectContacts" id="selectContacts" onclick="renderContactsToAssignEdit(${id});">
-                    <span>Select contacts to assign</span>
-                    <img src="../../assets/img/functionButtons/selectorArrow.png">
-                </div>
-                <div class="dropDownContainer">
-                    <div>
-                        <div style="max-height: 204px; overflow: auto;" id="contactsToAssign">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="subtaskContainer">
-                <span>Subtasks</span>
-                <div id="subtask" class="addSubtask">
-                    <input id="subtaskInput" onclick="subtaskActiveInputEdit(${id})" type="text"
-                        placeholder="Add new subtask">
-                    <div id="subtaskButtons" style="display: flex; align-items: center;">
-                        <img src="../../assets/img/functionButtons/add.png">
-                    </div>
-                </div>
-                <div id="popupSubtasksEdit" class="subtaskContent"></div>
-            </div>
-
-
-
-            <div class="edit-btn-container">
-                <button class="btn-blue">Creat Task
-                    <img src="/assets/img/functionButtons/akar-icons_check.png"></button>
-            </div>
-        </div>
+    id="popupTask" onclick="event.stopPropagation()">
+    <div style=padding-right:40px; class="closePopupEdit"><img id="closeBtn" onmouseover="closeHover()"
+      onmouseleave="closeLeave()" onclick=hidePopup("hidePopupTask()")
+      src="../../assets/img/functionButtons/close.png"></div>
+    <div class="popupTaskContent" id="popupTaskContent">
+      ${renderEditPopupTemplateTop(userTask)}
+      ${renderEditPopupTemplatePriorities()}
+      ${renderEditPopupTemplateCategories(userTask)}
+      ${renderEditPopupTemplateAssignedTo(id)}
+      ${renderEditPopupTemplateSubtastks(id)}
+  </div>
     </form>
   `;
   await renderSubtasksTaskEdit(id);
@@ -426,18 +248,15 @@ function hideRequiredFieldsEdit() {
 
 async function checkRequiredEdit(id) {
   hideRequiredFieldsEdit();
-
   let taskTitle = document.getElementById("taskTitleEdit").value;
   let description = document.getElementById("descriptionEdit").value;
   let date = document.getElementById("datepicker").value;
-
   const titleRequired = checkRequiredField(taskTitle, "requiredTitle");
   const descriptionRequired = checkRequiredField(
     description,
     "requiredDescription"
   );
   const dateRequired = checkRequiredField(date, "requiredDate");
-
   if (!titleRequired && !descriptionRequired && !dateRequired) {
     editTask(users[activeUser].userTasks[id], id);
   }
@@ -495,21 +314,26 @@ function renderCategoriesEdit() {
       <div onclick="showNewCategory()" class="dropdown-content"><span>New category</span></div>
   `;
     for (let i = 0; i < users[activeUser].taskCategories.length; i++) {
-      document.getElementById("selectTaskCategory").innerHTML += `
-        <div onclick="setSelectedCategoryEdit('${i}')" class="dropdown-content">
-          <div class="dropdown-content-left">
-            <span>${users[activeUser].taskCategories[i].name}</span>
-            <div class="colorCircle" style="background: ${users[activeUser].taskCategories[i].color};"></div>
-          </div> 
-          <img class="delete-btn" id="deleteBtn-${i}" src="../../assets/img/functionButtons/delete.png">
-        </div>
-      `;
+      renderCategoriesEditDropdown();
     }
     categorySelektorOpen = true;
   } else {
     document.getElementById("selectTaskCategory").innerHTML = ``;
     categorySelektorOpen = false;
   }
+}
+
+function renderCategoriesEditDropdown() {
+  userTaskCategory = users[activeUser].taskCategories[i];
+  document.getElementById("selectTaskCategory").innerHTML += `
+  <div onclick="setSelectedCategoryEdit('${i}')" class="dropdown-content">
+    <div class="dropdown-content-left">
+      <span>${userTaskCategory.name}</span>
+      <div class="colorCircle" style="background: ${userTaskCategory.color};"></div>
+    </div> 
+    <img class="delete-btn" id="deleteBtn-${i}" src="../../assets/img/functionButtons/delete.png">
+  </div>
+`;
 }
 
 function setSelectedCategoryEdit(id) {
@@ -529,7 +353,6 @@ async function renderSubtasksTaskEdit(id) {
         <img id='checkboxEdit[${i}]' src="../../assets/img/functionButtons/checkbox.png">
         <span>${users[activeUser].userTasks[id].subtasks[i]}</span>
       </div>
-      
       <img onclick="subtaskDeleteEdit(${id},${i})" id="deleteBtn-${i}" class="delete-btn d-none" src="../../assets/img/functionButtons/delete.png">
     </div>
     `;
@@ -547,9 +370,7 @@ function subtaskEditLeave(id) {
 
 function subtaskDeleteEdit(id, i) {
   let currentSubtask = users[activeUser].userTasks[id].subtasks;
-  const deletedSubtask = currentSubtask.splice(i, 1)[0]; // Das gelöschte Subtask-Element
-
-  // Durchsuche completedTasks und entferne das entsprechende Element
+  const deletedSubtask = currentSubtask.splice(i, 1)[0];
   const completedTasks = users[activeUser].userTasks[id].completedTasks;
   for (let j = 0; j < completedTasks.length; j++) {
     if (completedTasks[j] === deletedSubtask) {
@@ -637,7 +458,6 @@ async function renderSubtasksTask(id) {
 async function addToSelectedSubtasksBoard(id, i) {
   const completedTasks = users[activeUser].userTasks[id].completedTasks;
   const subtask = users[activeUser].userTasks[id].subtasks[i];
-
   if (completedTasks.includes(subtask)) {
     const index = completedTasks.indexOf(subtask);
     completedTasks.splice(index, 1);
@@ -712,7 +532,6 @@ function renderContactsToAssignEdit(id) {
 function updateCheckboxStatusAssignedTo(id) {
   const contacts = users[activeUser].contacts;
   const assignedTo = users[activeUser].userTasks[id].assignedTo;
-
   for (let i = 0; i < contacts.length; i++) {
     let isAssigned = false;
     for (const assigned of assignedTo) {
@@ -733,17 +552,9 @@ function updateCheckboxStatusAssignedTo(id) {
 }
 
 async function selectContactsToAssignEdit(id, currentContactId) {
-  const currentContactEmail =
-    users[activeUser].contacts[currentContactId].email;
+  const { email } = users[activeUser].contacts[currentContactId];
   const contactAssignedTo = users[activeUser].userTasks[id].assignedTo;
-
-  let isContactAssigned = false;
-  for (let i = 0; i < contactAssignedTo.length; i++) {
-    if (contactAssignedTo[i].email === currentContactEmail) {
-      isContactAssigned = true;
-      break;
-    }
-  }
+  const isContactAssigned = contactAssignedTo.some((contact) => contact.email === email);
   if (isContactAssigned) {
     contactAssignedTo.splice(currentContactId, 1);
   } else {
@@ -788,7 +599,7 @@ async function renderSubtasksBoard() {
           </div>
       `;
   }
-  // Scrollen Sie den "boardAddTaskSection"-Container nach unten
+  // Scrollt den "boardAddTaskSection"-Container nach unten
   const addTaskContentBoard = document.getElementById("boardAddTaskSection");
   addTaskContentBoard.scrollTop = addTaskContentBoard.scrollHeight;
 }
@@ -800,148 +611,16 @@ function renderPopupAddTask(addTaskStatus) {
     <div class="titleAddTask">Add Task</div>
     <form onsubmit="addTaskPopup(); return false;" class="addTaskForm">
         <div  class="boardAddTaskContent" id="addTaskContent">
-            <div class="boardAddTaskSection" id="boardAddTaskSection">
-
-            <div class="section1">
-              <div class="titleContainer">
-                <div class="enterTitle">
-                    <input id="taskTitle" type="text" placeholder="Enter a title">
-                </div>
-                <div id="requiredTitle" class="required v-none">Please enter a title!</div>
-              </div>
-
-              <div class="descriptionContainer">
-                <div class="descriptionContent">
-                    <span>Description</span>
-                    <textarea name="descriptionTextarea" placeholder="Enter a description" id="description"
-                        cols="30" rows="10"></textarea>
-                </div>
-                <div id="requiredDescription" class="required v-none">Please enter a description!</div>
-              </div>
-
-              <div class="dueDateContainer">
-                <div class="dueDate">
-                    <span>Due date</span>
-                    <div class="dateContainer" onclick="openCalendar()" >
-                        <input class="inputGrey" type="date" format="dd/mm/yyyy" placeholder="dd/mm/yyyy" id="datepicker" onfocus="openCalendar();this.showPicker();" autocomplete="off"></input>
-                        <img src="../../assets/img/board/calendar.png">
-                    </div>
-                </div>
-                <div id="requiredDate" class="required v-none">Please enter a date!</div>
-              </div>
-              </div>
-
-                <div class="priorityClass">
-                  <div class="prioritySection">
-                    <span>Priority</span>
-                    <div id="showPriorities" class="priorityContainer">
-                        <img onmouseover="priorityMouseHover('red')"
-                            onmouseleave="priorityMouseLeave('priorityUrgent')"
-                            onclick="renderPrioritySelected('Urgent')" class="priority priorityUrgent"
-                            id="priorityUrgent" src="../../assets/img/addTask/TaskValueHard.png">
-                        <img onmouseover="priorityMouseHover('orange')"
-                            onmouseleave="priorityMouseLeave('priorityMedium')"
-                            onclick="renderPrioritySelected('Medium')" class="priority priorityMedium"
-                            id="priorityMedium" src="../../assets/img/addTask/TaskValueMid.png">
-                        <img onmouseover="priorityMouseHover('green')"
-                            onmouseleave="priorityMouseLeave('priorityLow')" onclick="renderPrioritySelected('Low')"
-                            class="priority priorityLow" id="priorityLow"
-                            src="../../assets/img/addTask/TaskValueLow.png">
-                    </div>
-                    <div id="requiredPriority" class="required v-none">Please select an urgency!</div>
-                  </div>  
-                </div>
-
-                <div class="assignedTo">
-                  <div class="assignedToContainer">
-                    <span>Assigne to</span>
-                    <div id="showInviteNewContact" class="selectContacts d-none">
-                        <input id="inviteNewContact" type="text" placeholder="Contact email"
-                            style="font-size: 19px;">
-                        <img onclick="toggleInviteNewContact()" src="/assets/img/functionButtons/cancelBlue.png">
-                        <img style="padding-left: 8px; padding-right: 8px;"
-                            src="/assets/img/functionButtons/trennstrich.png">
-                        <img onclick="addNewInviteContact()"
-                            src="/assets/img/functionButtons/checkedIconSelector.png">
-                    </div>
-
-                    <div class="selectContacts" id="selectContacts" onclick="renderContactsToAssign()">
-                        <span>Select contacts to assign</span>
-                        <img src="../../assets/img/functionButtons/selectorArrow.png">
-                    </div>
-
-                    <div class="dropDownContainer">
-                        <div>
-                            <div style="max-height: 204px; overflow: auto;" id="contactsToAssign">
-                            </div>
-                        </div>
-                    </div>
-                    <div id="requiredAssignedTo" class="required v-none">Please select a contact!</div>
-                  </div>  
-                </div>
-
-                <div class="category">
-                  <div class="categoryContainer">
-                    <span>Category</span>
-                    <div id="showCategory" class="selectCategory" onclick="renderCategories()">
-                        <div id="currentCategory"><span>Select task category</span></div>
-                        <img src="../../assets/img/functionButtons/selectorArrow.png">
-
-                    </div>
-                    <div id="showNewCategory" class="selectCategory d-none">
-                        <input id="addNewCategory" type="text" placeholder="New category name"
-                            style="font-size: 19px;">
-                        <img onclick="hideNewCategory()" src="/assets/img/functionButtons/cancelBlue.png">
-                        <img style="padding-left: 8px; padding-right: 8px;"
-                            src="/assets/img/functionButtons/trennstrich.png">
-                        <img onclick="addNewCategoryFunction()"
-                            src="/assets/img/functionButtons/checkedIconSelector.png">
-                    </div>
-                    <div class="dropDownContainer">
-                        <div>
-                            <div id="colorCircle" class="circle-content d-none">
-                                <div id="lightblue" onclick="addCategoryColor('lightblue')" class="colorCircle"
-                                    style="background: #8AA4FF;"></div>
-                                <div id="red" onclick="addCategoryColor('red')" class="colorCircle"
-                                    style="background: #FF0000;"></div>
-                                <div id="green" onclick="addCategoryColor('green')" class="colorCircle"
-                                    style="background: #2AD300;"></div>
-                                <div id="orange" onclick="addCategoryColor('orange')" class="colorCircle"
-                                    style="background: #FF8A00;"></div>
-                                <div id="pink" onclick="addCategoryColor('pink')" class="colorCircle"
-                                    style="background: #E200BE;"></div>
-                                <div id="blue" onclick="addCategoryColor('blue')" class="colorCircle"
-                                    style="background: #0038FF;"></div>
-                            </div>
-                            <div style="max-height: 204px; overflow: auto;" id="selectTaskCategory">
-                            </div>
-                        </div>
-                    </div>
-                    <div id="requiredCategory" class="required v-none"><span>Please select a category or add a new one!</span>
-                    </div>
-                  </div> 
-                </div>
-
-                <div class="subtaskContainer">
-                    <span>Subtasks</span>
-
-                    <div id="subtask" class="addSubtask">
-                        <input id="subtaskInput" onclick="subtaskActiveInputBoard()" type="text"
-                            placeholder="Add new subtask">
-                        <div id="subtaskButtons" style="display: flex; align-items: center;">
-                            <img src="../../assets/img/functionButtons/add.png">
-                        </div>
-                    </div>
-                    
-                </div>
-                <div id="addedSubtasks" class="subtaskContent"></div>
-                
-            </div>
+          <div class="boardAddTaskSection" id="boardAddTaskSection">
+            ${renderPopupAddTaskTemplateTop()}
+            ${renderPopupAddTaskTemplatePriorities()}
+            ${renderPopupAddTaskTemplateAssignedTo()}
+            ${renderPopupAddTaskTemplateCategories()}
+            ${renderPopupAddTaskTemplateSubtasks()}    
+          </div>
         </div>
-        
         <div class="btn-container-AddTask">
-            <button class="btn-blue btn-blue-AddTask">Creat Task <img
-                    src="/assets/img/functionButtons/akar-icons_check.png"></button>
+            <button class="btn-blue btn-blue-AddTask">Creat Task <img src="/assets/img/functionButtons/akar-icons_check.png"></button>
         </div>
     </form>
   </div>

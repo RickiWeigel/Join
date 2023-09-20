@@ -63,14 +63,11 @@ function findClosestDueDate(userTasks) {
   if (userTasks.length === 0) {
     return "-"; // Rückgabe null, wenn keine Aufgaben vorhanden sind
   }
-
   const currentDate = new Date(); // Aktuelles Datum
   let closestDueDate = new Date(userTasks[0].toDueDate); // Das erste ToDueDate als Ausgangspunkt
-
   // Iteriere durch alle Aufgaben, um das nächstgelegene ToDueDate zu finden
   for (const task of userTasks) {
     const taskDueDate = new Date(task.toDueDate);
-
     // Überprüfe, ob das aktuelle ToDueDate näher am aktuellen Datum liegt
     if (taskDueDate > currentDate && taskDueDate < closestDueDate) {
       closestDueDate = taskDueDate;

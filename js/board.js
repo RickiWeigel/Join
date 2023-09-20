@@ -24,7 +24,6 @@ function groupTasksByProgressStatus(user) {
 function searchTasks() {
   let searchInput = document.getElementById("searchInput").value.toLowerCase();
   let taskCards = document.getElementsByClassName("taskCard");
-
   for (let i = 0; i < taskCards.length; i++) {
     let taskTitle = taskCards[i]
       .getElementsByClassName("taskHeadline")[0]
@@ -39,20 +38,11 @@ function searchTasks() {
 }
 
 function startsWithLetters(taskTitle, searchInput) {
-  let taskWords = taskTitle.split(" ");
+  let taskWords = taskTitle.toLowerCase().split(" ");
 
   for (let i = 0; i < searchInput.length; i++) {
     let char = searchInput[i];
-    let found = false;
-
-    for (let j = 0; j < taskWords.length; j++) {
-      let word = taskWords[j];
-      if (word.length >= i + 1 && word[i] === char) {
-        found = true;
-        break;
-      }
-    }
-    if (!found) {
+    if (!taskWords.some((word) => word[i] === char)) {
       return false;
     }
   }
@@ -62,47 +52,35 @@ function startsWithLetters(taskTitle, searchInput) {
 function sortProgress(task, id) {
   switch (task.progressStatus) {
     case "toDo":
-      renderTodoTasks("toDoTasks", id);
+      renderTaskCardForStatus("toDoTasks", id);
       break;
     case "inProgress":
-      renderTodoTasks("inProgressTasks", id);
+      renderTaskCardForStatus("inProgressTasks", id);
       break;
     case "awaitFeedback":
-      renderTodoTasks("awaitFeedbackTasks", id);
+      renderTaskCardForStatus("awaitFeedbackTasks", id);
       break;
     case "done":
-      renderTodoTasks("doneTasks", id);
+      renderTaskCardForStatus("doneTasks", id);
       break;
   }
 }
 
-function renderTodoTasks(taskStatus, id) {
+function renderTaskCardForStatus(taskStatus, id) {
   let userTask = users[activeUser].userTasks[id];
   let completedTasks = userTask.completedTasks.length;
   let subtaskLength = userTask.subtasks.length;
   let completedProgress = completedProgresses(completedTasks, subtaskLength);
   let priorityImageUrl = getPriorityImageUrl(userTask.priority);
   document.getElementById(taskStatus).innerHTML += `
-  <div draggable="true" ondragstart="startDragging(${id})" class="taskCard" id="taskCard${id}" onclick="openPopupTask(${id})">
-    <div class="categoryHeadline" style="background: ${userTask.category.color};">
-        <span>${userTask.category.name}</span>
-    </div>
-    <div class="taskHeadline">
-        <span>${userTask.taskTitle}</span>
-    </div>
-    <span class="boxDescription">${userTask.taskDescription}</span>
-    <div class="progressStatus">
-        <div class="progress">
-          <div class="progressCompleted" style="width: ${completedProgress}%;"></div>
-        </div>
-        <span>${completedTasks}/${subtaskLength} Done</span>
-    </div>
-    <div class="taskFooter">
-        <div class="taskContacts" id="taskContacts${id}">
-        </div>
-        <div class="taskPriority"><img src="${priorityImageUrl}"></div>
-    </div>
-  </div>
+    ${renderTaskCardForStatusTemplate(
+      userTask,
+      completedTasks,
+      subtaskLength,
+      completedProgress,
+      priorityImageUrl,
+      id
+    )}
   `;
   renderContactInitials(id);
 }
@@ -133,19 +111,21 @@ function completedProgresses(completedTasks, subtaskLength) {
 }
 
 function renderContactInitials(id) {
-  document.getElementById(`taskContacts${id}`).innerHTML = ``;
+  let taskContact = document.getElementById(`taskContacts${id}`);
+  taskContact.innerHTML = ``;
   let userContact = users[activeUser].userTasks[id].assignedTo;
+  console.log(userContact);
 
   for (let j = 0; j < userContact.length; j++) {
     let newColor = userContact[j].color;
 
     if (userContact.length < 3) {
-      document.getElementById(`taskContacts${id}`).innerHTML += `
+      taskContact.innerHTML += `
       <div class="contact box${j}" style="background-color: ${newColor};">
         <span id="contactInitials">${userContact[j].initials}</span>
       </div>`;
     } else {
-      document.getElementById(`taskContacts${id}`).innerHTML = `
+      taskContact.innerHTML = `
         <div class="contact box${0}" style="background-color: ${newColor};">
           <span id="contactInitials">${userContact[0].initials}</span>
         </div>
@@ -153,8 +133,7 @@ function renderContactInitials(id) {
           <span id="contactInitials">${userContact[1].initials}</span>
         </div>        
         `;
-
-      document.getElementById(`taskContacts${id}`).innerHTML += `
+      taskContact.innerHTML += `
       <div class="contact boxRest">
         <span id="contactInitials">+${userContact.length - 2}</span>
       </div>             
@@ -969,11 +948,11 @@ function renderPopupAddTask(addTaskStatus) {
   `;
 }
 
-async function addTaskPopup(){
+async function addTaskPopup() {
   const requiredFieldsValid = await checkRequired();
   if (requiredFieldsValid) {
     addTask();
-    hidePopup('hidePopupTask()');
+    hidePopup("hidePopupTask()");
     groupTasksByProgressStatus(users[activeUser]);
   }
 }
@@ -996,5 +975,3 @@ function hidePopupAddTask() {
   popupContainer.classList.add("hidePopup");
   hidePopupStatus = 0;
 }
-
-

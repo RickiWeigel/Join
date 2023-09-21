@@ -502,30 +502,15 @@ function hideRequiredFields() {
 
 async function checkRequired() {
   hideRequiredFields();
-
   let taskTitle = document.getElementById("taskTitle").value;
   let description = document.getElementById("description").value;
   let date = document.getElementById("datepicker").value;
-
   const titleRequired = checkRequiredField(taskTitle, "requiredTitle");
-  const descriptionRequired = checkRequiredField(
-    description,
-    "requiredDescription"
-  );
+  const descriptionRequired = checkRequiredField(description,"requiredDescription");
   const dateRequired = checkRequiredField(date, "requiredDate");
-  const priorityRequired = checkRequiredField(
-    prioritySelect,
-    "requiredPriority"
-  );
-  const assignedToRequired = checkRequiredField(
-    selectedContactsToAssign,
-    "requiredAssignedTo"
-  );
-  const categoryRequired = checkRequiredField(
-    selectedCategory.name,
-    "requiredCategory"
-  );
-
+  const priorityRequired = checkRequiredField(prioritySelect,"requiredPriority");
+  const assignedToRequired = checkRequiredField(selectedContactsToAssign,"requiredAssignedTo");
+  const categoryRequired = checkRequiredField(selectedCategory.name,"requiredCategory");
   return (
     !titleRequired &&
     !descriptionRequired &&

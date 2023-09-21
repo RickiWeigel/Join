@@ -75,30 +75,28 @@ function clearAddNewContactInnputs() {
 
 function sortContactsIntoAlphabetCards(users) {
   groupedContacts = {};
-  // Durchlaufen Sie die Benutzer und deren Kontakte
-  users.forEach((user) => {
-    if (user.contacts && Array.isArray(user.contacts)) {
-      user.contacts.forEach((contact) => {
-        const initial = contact.name.charAt(0).toUpperCase();
 
-        // Erstellen Sie ein Array für den Anfangsbuchstaben, wenn es noch nicht existiert
-        if (!groupedContacts[initial]) {
-          groupedContacts[initial] = [];
-        }
+  const user = users[activeUser];
 
-        // Fügen Sie den Kontakt zur entsprechenden Gruppe hinzu
-        groupedContacts[initial].push(contact);
-      });
-    }
-  });
+  if (user.contacts && Array.isArray(user.contacts)) {
+    user.contacts.forEach((contact) => {
+      const initial = contact.name.charAt(0).toUpperCase();
 
-  // Rufen Sie die Funktion renderAlphabetCards auf und geben Sie groupedContacts in umgekehrter Reihenfolge weiter
+      if (!groupedContacts[initial]) {
+        groupedContacts[initial] = [];
+      }
+
+      groupedContacts[initial].push(contact);
+    });
+  }
+
   const reversedKeys = Object.keys(groupedContacts).reverse();
   const reversedGroupedContacts = {};
   reversedKeys.forEach((key) => {
     reversedGroupedContacts[key] = groupedContacts[key];
   });
-  renderAlphabetCards(sortGroupedContactsAlphabetically(groupedContacts));
+
+  renderAlphabetCards(sortGroupedContactsAlphabetically(reversedGroupedContacts));
 }
 
 function sortGroupedContactsAlphabetically(groupedContacts) {

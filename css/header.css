@@ -1,4 +1,3 @@
-
 .header {
     z-index: 5;
     display: flex;
@@ -34,7 +33,7 @@
     cursor: pointer;
 }
 
-.headerProfilInitials{
+.headerProfilInitials {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -48,11 +47,13 @@
     height: 50px;
 }
 
-.help{
+.help {
     cursor: pointer;
 }
 
 .help:hover svg {
-    transform: scale(1.1); /* Hier ändern Sie die Vergrößerung nach Ihren Wünschen */
-    transition: transform 0.1s ease-in-out; /* Hier können Sie die Übergangsdauer anpassen */
-  }
+    transform: scale(1.1);
+    /* Hier ändern Sie die Vergrößerung nach Ihren Wünschen */
+    transition: transform 0.1s ease-in-out;
+    /* Hier können Sie die Übergangsdauer anpassen */
+}

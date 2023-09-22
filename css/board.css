@@ -148,7 +148,6 @@
 .taskHeadline {
     color: #4589FF;
     font-weight: 700;
-    margin-bottom: 10px;
 }
 
 .btn-blue-AddTask {
@@ -171,13 +170,14 @@
     justify-content: space-between;
     align-items: center;
     padding: 0px;
-    margin-bottom: 8px;
+    margin-bottom: 24px;
     gap: 12px;
 }
 
 .progress {
     background: #F4F4F4;
-    border-radius: 2px;
+    border: 1px solid #d6d6d6;
+    border-radius: 4px;
     height: 8px;
     width: 100%;
 }
@@ -276,7 +276,7 @@
 .popupTaskContent {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 24px;
     overflow: auto;
     max-height: 780px;
@@ -450,7 +450,6 @@
     top: 70vh;
     display: flex;
     justify-content: end;
-    width: 60%;
     gap: 25px;
 }
 

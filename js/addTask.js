@@ -124,7 +124,7 @@ function renderCategories() {
   addTaskContent.scrollTop += addTaskContent.clientHeight;
 }
 
-function renderTaskCategories() {
+async function renderTaskCategories() {
   for (let i = 0; i < users[activeUser].taskCategories.length; i++) {
     const category = users[activeUser].taskCategories[i];
     const categoryHTML = categoryHTMLTemplate(category, i);
@@ -194,11 +194,12 @@ function toggleInviteNewContact() {
 
 async function addNewInviteContact() {
   let contactEmail = document.getElementById("inviteNewContact").value;
+  let newInitials = getUserInitials(contactEmail);
   users[activeUser].contacts.push({
     name: contactEmail,
-    email: "contactEmail",
+    email: contactEmail,
     phone: "",
-    initials: "",
+    initials: newInitials,
     color: getRandomColor(),
   });
   await setItem(`users`, JSON.stringify(users));
@@ -223,6 +224,7 @@ function addCategoryColor(color) {
 }
 
 async function addNewCategoryFunction() {
+  newCategoryName = document.getElementById('addNewCategory').value;
   const requiredMessage = document.getElementById("requiredCategory");
   if (!newCategoryName || !categoryColor) {
     requiredMessage.classList.remove("v-none");
@@ -371,11 +373,15 @@ function clearSubtaskInput() {
 
 async function addNewSubTasks() {
   let newSubtask = document.getElementById("subtaskInput").value;
+  if (newSubtask.length < 4) {
+    document.getElementById('requiredSubtask').classList.remove('v-none')
+  }else{
   newSubtasks.push(newSubtask);
   await setItem(`users`, JSON.stringify(users));
   newSubtask = document.getElementById("subtaskInput").value = "";
   clearSubtaskInput();
   renderSubtasks();
+}
 }
 
 async function renderSubtasks() {

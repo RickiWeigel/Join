@@ -66,7 +66,7 @@ function sortProgress(task, id) {
   }
 }
 
-function renderTaskCardForStatus(taskStatus, id) {
+async function renderTaskCardForStatus(taskStatus, id) {
   let userTask = users[activeUser].userTasks[id];
   let completedTasks = userTask.completedTasks.length;
   let subtaskLength = userTask.subtasks.length;
@@ -82,8 +82,17 @@ function renderTaskCardForStatus(taskStatus, id) {
       id
     )}
   `;
+  hideProgressStatusIfNoSubtasks(id);
   renderContactInitials(id);
 }
+
+function hideProgressStatusIfNoSubtasks(id) {
+  const progressStatusElement = document.getElementById(`progressStatus${id}`);
+  if (progressStatusElement) {
+    progressStatusElement.style.display = "none";
+  }
+}
+
 
 function startDragging(id) {
   currentDraggedElement = id;
@@ -212,9 +221,17 @@ async function renderPopup(id) {
     ${renderPopupTemplateMid(userTask)}
     ${renderPopupTemplateBot(userTask, id)}
   `;
+  hideSubtaskHeadlineIfZeroSubtasks(userTask);
   await getPriorityImageUrlPopup(userTask.priority);
   renderSubtasksTask(id);
   renderContactsPopup(id);
+}
+
+function hideSubtaskHeadlineIfZeroSubtasks(userTask){
+  let subtaskLength = userTask.subtasks.length;
+  if (subtaskLength == 0){
+    document.getElementById('subHeading').classList.add('d-none')
+  }
 }
 
 async function renderEditPopup(id) {
@@ -406,11 +423,15 @@ function subtaskActiveInputEdit(id) {
 
 async function addNewSubTasksOnEdit(id) {
   let newSubtask = document.getElementById("subtaskInput").value;
-  users[activeUser].userTasks[id].subtasks.push(newSubtask);
-  await setItem(`users`, JSON.stringify(users));
-  newSubtask = document.getElementById("subtaskInput").value = "";
-  clearSubtaskInput();
-  await renderSubtasksTaskEdit(id);
+  if (newSubtask.length < 4) {
+    document.getElementById("requiredSubtask").classList.remove("v-none");
+  } else {
+    users[activeUser].userTasks[id].subtasks.push(newSubtask);
+    await setItem(`users`, JSON.stringify(users));
+    newSubtask = document.getElementById("subtaskInput").value = "";
+    clearSubtaskInput();
+    await renderSubtasksTaskEdit(id);
+  }
 }
 
 async function editTask(userTask, id) {
@@ -554,7 +575,9 @@ function updateCheckboxStatusAssignedTo(id) {
 async function selectContactsToAssignEdit(id, currentContactId) {
   const { email } = users[activeUser].contacts[currentContactId];
   const contactAssignedTo = users[activeUser].userTasks[id].assignedTo;
-  const isContactAssigned = contactAssignedTo.some((contact) => contact.email === email);
+  const isContactAssigned = contactAssignedTo.some(
+    (contact) => contact.email === email
+  );
   if (isContactAssigned) {
     contactAssignedTo.splice(currentContactId, 1);
   } else {
@@ -630,10 +653,10 @@ function renderPopupAddTask(addTaskStatus) {
 async function addTaskPopup() {
   const requiredFieldsValid = await checkRequired();
   if (requiredFieldsValid) {
-    addTask();
+    await addTask();
     hidePopup("hidePopupTask()");
-    groupTasksByProgressStatus(users[activeUser]);
   }
+  groupTasksByProgressStatus(users[activeUser]);
 }
 
 async function openPopupAddTask(addTaskStatus) {

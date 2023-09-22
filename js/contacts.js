@@ -213,7 +213,7 @@ function renderContactsEdit(id) {
       <span>${contact.initials}</span>
     </div>
 
-    <form onsubmit="addEditContact(${id}); return false;" id="edit-inputs" class="slide-container-content-container">
+    <form onsubmit="addEditContact(${contact.id}); return false;" id="edit-inputs" class="slide-container-content-container">
       <div class="input-container">
         <input type="text" id="edit-content-input-name" placeholder="Name" value="${contact.name}" autocomplete="off" required>
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
@@ -243,7 +243,7 @@ function renderContactsEdit(id) {
         </svg>
       </div>
       <div class="input-container">
-        <input type="tel" id="edit-content-input-phone" placeholder="Phone" value="${contact.phone}" autocomplete="off" required>
+        <input type="tel" pattern="[0-9]*" id="edit-content-input-phone" placeholder="Phone" value="${contact.phone}" autocomplete="off" required>
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
           <mask id="mask0_24479_2845" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"
             height="25">
@@ -288,7 +288,8 @@ function renderContactsEdit(id) {
 }
 
 async function addEditContact(id) {
-  let contact = findContactById(id);
+  let contactIndex = findContactById(id);
+  let contact = users[activeUser].contacts[contactIndex];
   let newName = document.getElementById("edit-content-input-name").value;
   let newEmail = document.getElementById("edit-content-input-email").value;
   let newPhone = document.getElementById("edit-content-input-phone").value;
@@ -299,6 +300,8 @@ async function addEditContact(id) {
   contact.initials = getUserInitials(newName)
   await setItem(`users`, JSON.stringify(users));
   renderContactsEdit(id);
+  sortContactsIntoAlphabetCards(users);
+  renderContactDetails(id);
   setTimeout(slideOutPopupEdit, 500);
 }
 
@@ -315,10 +318,10 @@ async function contactDelete(id) {
 
 
 
-function findContactById(id) {
+function findContactById(index) {
   const userContacts = users[activeUser].contacts;
   for (let i = 0; i < userContacts.length; i++) {
-    if (userContacts[i].id === id) {
+    if (userContacts[i].id === index) {
       return i;
     }
   }

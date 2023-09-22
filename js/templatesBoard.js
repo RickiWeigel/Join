@@ -15,11 +15,11 @@ function renderTaskCardForStatusTemplate(
         <span>${userTask.taskTitle}</span>
     </div>
     <span class="boxDescription">${userTask.taskDescription}</span>
-    <div class="progressStatus">
-        <div class="progress">
-          <div class="progressCompleted" style="width: ${completedProgress}%;"></div>
-        </div>
-        <span>${completedTasks}/${subtaskLength} Done</span>
+    <div class="progressStatus" id="progressStatus${id}">
+      <div class="progress">
+        <div class="progressCompleted" style="width: ${completedProgress}%;"></div>
+      </div>
+      <span>${completedTasks}/${subtaskLength} Done</span>
     </div>
     <div class="taskFooter">
         <div class="taskContacts" id="taskContacts${id}">
@@ -80,8 +80,8 @@ function renderPopupTemplateMid(userTask) {
 <span class="subHeading">Assigned To:</span>
 </div>
 
-<div class="popupSubtaskContainer">
-<span class="subHeading">Subtasks:</span>
+<div class="popupSubtaskContainer" id="subHeading">
+<span class="subHeading" >Subtasks:</span>
   <div id="popupSubtasks"></div>
 </div>
 `;
@@ -236,10 +236,12 @@ function renderEditPopupTemplateSubtastks(id) {
           <img src="../../assets/img/functionButtons/add.png">
       </div>
   </div>
+  <div id="requiredSubtask" class="required v-none"><span>Enter at least 4 letters!</span>
+  </div>
   <div id="popupSubtasksEdit" class="subtaskContent"></div>
 </div> 
 <div class="edit-btn-container">
-<button class="btn-blue">Creat Task
+<button class="btn-blue">Create Task
     <img src="/assets/img/functionButtons/akar-icons_check.png"></button>
 </div>     
 `;

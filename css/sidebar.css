@@ -27,7 +27,6 @@ body {
     text-decoration: none;
     font-size: 16px;
     color: #42526E;
-    margin-bottom: 10px;
     gap: 20px;
 }
 
@@ -36,31 +35,13 @@ body {
     border-radius: 0.5em;
 }
 
-.legal-information {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-    margin-top: 50px;
-    width: 200px;
-    cursor: pointer;
-}
-
-
-.legal-information a,
-.legal-information a:link,
-.legal-information a:visited {
-    color: #42526E;
-    text-decoration: none;
-    padding: 8px;
-}
-
-.legal-information a:hover{
-    color: #005DFF;
-}
-
 .navHighlighted {
     background-color: #d2e3ff;
     border-radius: 0.5em;
+}
+
+.nav-top{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }

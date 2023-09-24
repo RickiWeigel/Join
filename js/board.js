@@ -93,7 +93,6 @@ function hideProgressStatusIfNoSubtasks(id) {
   }
 }
 
-
 function startDragging(id) {
   currentDraggedElement = id;
 }
@@ -227,10 +226,10 @@ async function renderPopup(id) {
   renderContactsPopup(id);
 }
 
-function hideSubtaskHeadlineIfZeroSubtasks(userTask){
+function hideSubtaskHeadlineIfZeroSubtasks(userTask) {
   let subtaskLength = userTask.subtasks.length;
-  if (subtaskLength == 0){
-    document.getElementById('subHeading').classList.add('d-none')
+  if (subtaskLength == 0) {
+    document.getElementById("subHeading").classList.add("d-none");
   }
 }
 
@@ -647,6 +646,7 @@ function renderPopupAddTask(addTaskStatus) {
         </div>
     </form>
   </div>
+  ${renderAddTaskMessage()}
   `;
 }
 
@@ -654,7 +654,9 @@ async function addTaskPopup() {
   const requiredFieldsValid = await checkRequired();
   if (requiredFieldsValid) {
     await addTask();
-    hidePopup("hidePopupTask()");
+    setTimeout(function() {
+      hidePopupAddTask();
+    }, 1000);
   }
   groupTasksByProgressStatus(users[activeUser]);
 }

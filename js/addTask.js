@@ -184,6 +184,21 @@ async function addTask() {
   });
   await setItem(`users`, JSON.stringify(users));
   resetAllFields();
+  addedTaskMessageSlideIn();
+  setTimeout(function() {
+    addedTaskMessageSlideOut();
+  }, 900);
+}
+
+function addedTaskMessageSlideIn() {
+  document.getElementById("addedTaskMessage").classList.remove("d-none");
+  document
+    .getElementById("addedTaskMessage")
+    .classList.add("task-added-slide-in");
+}
+
+function addedTaskMessageSlideOut() {
+  document.getElementById("addedTaskMessage").classList.add("d-none");
 }
 
 function toggleInviteNewContact() {
@@ -224,7 +239,7 @@ function addCategoryColor(color) {
 }
 
 async function addNewCategoryFunction() {
-  newCategoryName = document.getElementById('addNewCategory').value;
+  newCategoryName = document.getElementById("addNewCategory").value;
   const requiredMessage = document.getElementById("requiredCategory");
   if (!newCategoryName || !categoryColor) {
     requiredMessage.classList.remove("v-none");
@@ -374,14 +389,14 @@ function clearSubtaskInput() {
 async function addNewSubTasks() {
   let newSubtask = document.getElementById("subtaskInput").value;
   if (newSubtask.length < 4) {
-    document.getElementById('requiredSubtask').classList.remove('v-none')
-  }else{
-  newSubtasks.push(newSubtask);
-  await setItem(`users`, JSON.stringify(users));
-  newSubtask = document.getElementById("subtaskInput").value = "";
-  clearSubtaskInput();
-  renderSubtasks();
-}
+    document.getElementById("requiredSubtask").classList.remove("v-none");
+  } else {
+    newSubtasks.push(newSubtask);
+    await setItem(`users`, JSON.stringify(users));
+    newSubtask = document.getElementById("subtaskInput").value = "";
+    clearSubtaskInput();
+    renderSubtasks();
+  }
 }
 
 async function renderSubtasks() {
@@ -512,11 +527,23 @@ async function checkRequired() {
   let description = document.getElementById("description").value;
   let date = document.getElementById("datepicker").value;
   const titleRequired = checkRequiredField(taskTitle, "requiredTitle");
-  const descriptionRequired = checkRequiredField(description,"requiredDescription");
+  const descriptionRequired = checkRequiredField(
+    description,
+    "requiredDescription"
+  );
   const dateRequired = checkRequiredField(date, "requiredDate");
-  const priorityRequired = checkRequiredField(prioritySelect,"requiredPriority");
-  const assignedToRequired = checkRequiredField(selectedContactsToAssign,"requiredAssignedTo");
-  const categoryRequired = checkRequiredField(selectedCategory.name,"requiredCategory");
+  const priorityRequired = checkRequiredField(
+    prioritySelect,
+    "requiredPriority"
+  );
+  const assignedToRequired = checkRequiredField(
+    selectedContactsToAssign,
+    "requiredAssignedTo"
+  );
+  const categoryRequired = checkRequiredField(
+    selectedCategory.name,
+    "requiredCategory"
+  );
   return (
     !titleRequired &&
     !descriptionRequired &&

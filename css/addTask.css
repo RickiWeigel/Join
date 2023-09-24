@@ -419,3 +419,57 @@ input[type='date']::-webkit-calendar-picker-indicator {
     /* margin-top: 4px; */
     font-weight: normal;
 }
+
+.addedTaskMessage {
+    position: absolute;
+    bottom: -74px;
+    color: white;
+    display: flex;
+    width: 326px;
+    height: 74px;
+    font-size: 23px;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    border-radius: 20px;
+    background: #4589FF;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.15);
+    z-index: 10000;
+    opacity: 1;
+}
+
+
+
+
+.task-added-slide-in {
+    z-index: 999;
+    animation-name: slideInTaskAdded;
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
+}
+
+.task-added-slide-out {
+    animation-name: slideOutTaskAdded;
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes slideInTaskAdded {
+    from {
+        bottom: -74px;
+    }
+
+    to {
+        bottom: 50%;
+    }
+}
+
+@keyframes slideOutTaskAdded {
+    from {
+        bottom: 10%;
+    }
+
+    to {
+        bottom: -74px;
+    }
+}

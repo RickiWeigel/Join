@@ -14,27 +14,27 @@
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="/css/header.css">
     <link rel="stylesheet" href="/css/sidebar.css">
+    <script src="/js/main.js"></script>
 
 
     <title>Legal-Notice</title>
 </head>
 
-<body onload="mainInit()">
+<body onload="legalNoticeInit();">
     <header>
         <div w3-include-html="\templates\header-template.html"></div>
     </header>
 
     <aside>
-        <div class="sidebarContainer">
-            <div></div>
-            <div class="legal-information">
-                <a href="/privacy-policy.html">Privacy Policy</a>
-                <a class="legal-information-active" href="/legal-notice.html">Legal notice</a>
-            </div>
-        </div>
+        <div w3-include-html="\templates\sidebar-template.html"></div>
     </aside>
 
     <main>
+        <div class="headMenu d-none" id="headMenu">
+            <a href="./legal-notice.html"><span class="head-menu-button">Legal Notice</span></a>
+            <a href="./privacy-policy.html"><span class="head-menu-button">Privacy Policy</span></a>
+            <a href="./login.html"><span class="head-menu-button">Log out</span></a>
+        </div>
         <div class="info-container d-none" id="info-container" w3-include-html="\templates\info-template.html"></div>
         <div class="privacy-policy">
             <section class="info-headline">
@@ -63,7 +63,7 @@
         </div>
     </main>
 
-    <script src="/js/main.js"></script>
+
     <script src="/js/storage.js"></script>
 </body>
 

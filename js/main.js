@@ -119,6 +119,9 @@ function highlightedNavbar(item) {
   if (item == 5) {
     highlightSelectedNav("legalNotice");
   }
+  if (item == 6) {
+    highlightSelectedNav("privacyPolicy");
+  }
 }
 
 function highlightSelectedNav(element) {
@@ -134,8 +137,8 @@ function noHighlightNav() {
   }
 }
 
-// Help
 
+// Help
 function hoverBackArrow() {
   let arrow = document.getElementById("back-arrow");
 
@@ -156,4 +159,21 @@ function openInfo() {
 function closeInfo() {
   let container = document.getElementById("info-container");
   container.classList.add("d-none");
+}
+
+// Privacy Policy
+async function privacyPolicyInit(){
+  await mainInit();
+  highlightedNavbar(6)
+}
+
+// Legal Notice
+async function legalNoticeInit(){
+  await mainInit();
+  highlightedNavbar(5)
+}
+
+//Head Menu
+function headMenu(){
+  document.getElementById('headMenu').classList.toggle('d-none')
 }

@@ -28,6 +28,11 @@
         <div w3-include-html="\templates\sidebar-template.html"></div>
     </aside>
     <main>
+        <div class="headMenu d-none" id="headMenu">
+            <a href="./legal-notice.html"><span class="head-menu-button">Legal Notice</span></a>
+            <a href="./privacy-policy.html"><span class="head-menu-button">Privacy Policy</span></a>
+            <a href="./login.html"><span class="head-menu-button">Log out</span></a>
+        </div>
         <div class="info-container d-none" id="info-container" w3-include-html="\templates\info-template.html"></div>
         <div class="contentBoard">
             <div class="findTask">
@@ -83,8 +88,10 @@
                 </div>
             </div>
         </div>
+
     </main>
     <div class="popupContainer" id="popupContainer" onclick="hidePopup('hidePopupTask()')">
+    
     </div>
 
 
@@ -99,4 +106,5 @@
 <script src="/js/board.js"></script>
 <script src="/js/templatesBoard.js"></script>
 <script src="js/addTaskTemplate.js"></script>
+
 </html>

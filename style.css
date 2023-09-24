@@ -324,13 +324,6 @@ main {
     font-weight: 700;
 }
 
-.legal-information-active {
-    color: white !important;
-    font-weight: 700;
-    border-radius: 10px;
-    background: #4589FF;
-}
-
 /* Stile für alle <input>-Elemente und deren Placeholder-Text */
 input {
     font-family: 'Open Sans', sans-serif; /* Schriftart für alle <input>-Elemente */

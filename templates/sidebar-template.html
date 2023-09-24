@@ -1,5 +1,5 @@
-<div class="sidebarContainer">
-    <nav>
+<nav class="sidebarContainer">
+    <div class="nav-top">
         <a href="/summary.html" id="navSummary" class="sideBar" onclick="highlightedNavbar(1)"><img id="iconSummary"
                 src="/../assets/img/sidebar/iconSummary.png">
             <p>Summary</p>
@@ -16,10 +16,12 @@
                 src="../../assets/img/sidebar/iconContacts.png">
             <p>Contacts</p>
         </a>
-    </nav>
-    <div class="legal-information">
-        <a href="/privacy-policy.html">Privacy Policy</a>
-        <a href="/legal-notice.html">Legal notice</a>
     </div>
-
-</div>
+    <div class="nav-bottom">
+        <div class="legal-information">
+            <a href="/privacy-policy.html" class="sideBar" id="privacyPolicy" onclick="highlightedNavbar(6)">Privacy Policy</a>
+            <a href="/legal-notice.html" class="sideBar" id="legalNotice" onclick="highlightedNavbar(5)">Legal
+                notice</a>
+        </div>
+    </div>
+</nav>

@@ -60,7 +60,7 @@ async function addNewContact() {
     initials: newInitials,
     color: newUserColor,
   });
-  users[activeUser].idCounter++
+  users[activeUser].idCounter++;
   await setItem(`users`, JSON.stringify(users));
   slideOutPopupAddContact();
   sortContactsIntoAlphabetCards(users);
@@ -73,30 +73,32 @@ function clearAddNewContactInnputs() {
   document.getElementById("add-content-input-phone").value = "";
 }
 
-function sortContactsIntoAlphabetCards(users) {
+async function sortContactsIntoAlphabetCards(users) {
   groupedContacts = {};
-
   const user = users[activeUser];
 
-  if (user.contacts && Array.isArray(user.contacts)) {
-    user.contacts.forEach((contact) => {
-      const initial = contact.name.charAt(0).toUpperCase();
-
-      if (!groupedContacts[initial]) {
-        groupedContacts[initial] = [];
-      }
-
-      groupedContacts[initial].push(contact);
-    });
-  }
+  await groupContactsByInitial(user, groupedContacts);
 
   const reversedKeys = Object.keys(groupedContacts).reverse();
   const reversedGroupedContacts = {};
   reversedKeys.forEach((key) => {
     reversedGroupedContacts[key] = groupedContacts[key];
   });
+  renderAlphabetCards(
+    sortGroupedContactsAlphabetically(reversedGroupedContacts)
+  );
+}
 
-  renderAlphabetCards(sortGroupedContactsAlphabetically(reversedGroupedContacts));
+async function groupContactsByInitial(user, groupedContacts) {
+  if (user.contacts && Array.isArray(user.contacts)) {
+    user.contacts.forEach((contact) => {
+      const initial = contact.name.charAt(0).toUpperCase();
+      if (!groupedContacts[initial]) {
+        groupedContacts[initial] = [];
+      }
+      groupedContacts[initial].push(contact);
+    });
+  }
 }
 
 function sortGroupedContactsAlphabetically(groupedContacts) {
@@ -132,7 +134,6 @@ function renderAlphabetCards(groupedContacts) {
 function renderContactCards(contacts) {
   // Diese Funktion rendert die Kontaktkarten für die gegebenen Kontakte
   let contactCardsHTML = "";
-
   contacts.forEach((contact) => {
     // Hier können Sie die Darstellung eines einzelnen Kontakts anpassen
     contactCardsHTML += `
@@ -155,41 +156,9 @@ function renderContactDetails(id) {
   let indexInArray = findContactById(id);
   let contact = users[activeUser].contacts[indexInArray];
   document.getElementById("contactDetailContainer").innerHTML = `
-  <div class="contact-detail-top">
-    <div class="profil-pic-big" style="background-color: ${contact.color};">
-      <span>${contact.initials}</span>
-    </div>
-    <div class="profil-detail-name" id="profil-detail-name">
-      <span>${contact.name}</span>
-      <div class="contact-detail-edit-delete">
-        <div class="contact-detail-edit" onclick="slideInPopupEdit(${id})">
-          <img class="normal-image" src="../../assets/img/functionButtons/icon_edit_contact.png">
-          <img class="hover-image" style="display: none;"
-            src="../../assets/img/functionButtons/icon_edit_contact_hover.png">
-          <span>Edit</span>
-        </div>
-        <div class="contact-detail-delete" onclick="contactDelete(${id})">
-          <img class="normal-image" src="../../assets/img/functionButtons/icon_delete_contact.png">
-          <img class="hover-image" style="display: none;"
-            src="../../assets/img/functionButtons/icon_delete_contact_hover.png">
-          <span>Delete</span>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="contact-detail-text">
-    <span>Contact Information</span>
-  </div>
-  <div class="contact-info-detail">
-    <div class="profil-detail-email" id="profil-detail-email">
-      <span class="contact-profil-subheadline">Email</span>
-      <span class="contact-profil-email">${contact.email}</span>
-    </div>
-    <div class="profil-detail-phone" id="profil-detail-phone">
-      <span class="contact-profil-subheadline">Phone</span>
-      <span class="contact-profil-phone">${contact.phone}</span>
-    </div>
-  </div>
+  
+    ${renderContactDetailsTemplateHead(id, contact)}
+    ${renderContactDetailsTemplateInfos(contact)}
   `;
 }
 
@@ -208,11 +177,11 @@ function renderContactsEdit(id) {
       </svg>
     </div>
   </div>
+
   <div class="slide-container-content-container">
     <div class="contact-profil-pic" style="background-color: ${contact.color};">
       <span>${contact.initials}</span>
     </div>
-
     <form onsubmit="addEditContact(${contact.id}); return false;" id="edit-inputs" class="slide-container-content-container">
       <div class="input-container">
         <input type="text" id="edit-content-input-name" placeholder="Name" value="${contact.name}" autocomplete="off" required>
@@ -297,7 +266,7 @@ async function addEditContact(id) {
   contact.name = newName;
   contact.email = newEmail;
   contact.phone = newPhone;
-  contact.initials = getUserInitials(newName)
+  contact.initials = getUserInitials(newName);
   await setItem(`users`, JSON.stringify(users));
   renderContactsEdit(id);
   sortContactsIntoAlphabetCards(users);
@@ -309,14 +278,12 @@ async function contactDelete(id) {
   let indexInArray = findContactById(id);
   let contact = users[activeUser].contacts;
   contact.splice(indexInArray, 1)[0]; // Das gelöschte Subtask-Element
-  
-  document.getElementById('contactDetailContainer').innerHTML =``;
+
+  document.getElementById("contactDetailContainer").innerHTML = ``;
   await setItem(`users`, JSON.stringify(users));
   sortContactsIntoAlphabetCards(users);
   slideOutPopupEdit();
 }
-
-
 
 function findContactById(index) {
   const userContacts = users[activeUser].contacts;
@@ -327,5 +294,3 @@ function findContactById(index) {
   }
   return null;
 }
-
-

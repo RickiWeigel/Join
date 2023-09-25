@@ -88,7 +88,7 @@ async function renderTaskCardForStatus(taskStatus, id) {
 
 function hideProgressStatusIfNoSubtasks(id) {
   const progressStatusElement = document.getElementById(`progressStatus${id}`);
-  if (progressStatusElement) {
+  if (!progressStatusElement) {
     progressStatusElement.style.display = "none";
   }
 }

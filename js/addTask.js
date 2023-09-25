@@ -71,8 +71,6 @@ function renderContactsToAssign() {
   contactToAssigned.classList.remove("d-none");
   renderContactSelectors(contactToAssigned);
   updateCheckboxStatus();
-  const addTaskContent = document.getElementById("addTaskContent");
-  addTaskContent.scrollTop += addTaskContent.clientHeight;
 }
 
 function renderContactSelectors(contactToAssigned) {
@@ -211,12 +209,14 @@ async function addNewInviteContact() {
   let contactEmail = document.getElementById("inviteNewContact").value;
   let newInitials = getUserInitials(contactEmail);
   users[activeUser].contacts.push({
+    id: users[activeUser].idCounter,
     name: contactEmail,
     email: contactEmail,
     phone: "",
     initials: newInitials,
     color: getRandomColor(),
   });
+  users[activeUser].idCounter++;
   await setItem(`users`, JSON.stringify(users));
   document.getElementById("inviteNewContact").value = "";
   toggleInviteNewContact();
@@ -392,20 +392,22 @@ async function addNewSubTasks() {
     document.getElementById("requiredSubtask").classList.remove("v-none");
   } else {
     newSubtasks.push(newSubtask);
+    selectedSubtasks.push(newSubtask);
     await setItem(`users`, JSON.stringify(users));
     newSubtask = document.getElementById("subtaskInput").value = "";
     clearSubtaskInput();
-    renderSubtasks();
+    await renderSubtasks(); 
+    // addToSelectedSubtasks()   
   }
 }
 
 async function renderSubtasks() {
   document.getElementById("addedSubtasks").innerHTML = "";
-  for (let i = newSubtasks.length - 1; i >= 0; i--) {
+  for (let i = selectedSubtasks.length - 1; i >= 0; i--) {
     document.getElementById("addedSubtasks").innerHTML += `
           <div onclick="addToSelectedSubtasks(${i})" class="subtasks">
-              <img id="checkbox[${i}]" src="../../assets/img/functionButtons/checkbox.png">
-              <span id="subtasks">${newSubtasks[i]}</span>
+              <img id="checkbox[${i}]" src="../../assets/img/functionButtons/checkboxActive.png">
+              <span id="subtasks">${selectedSubtasks[i]}</span>
           </div>
       `;
   }

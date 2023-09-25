@@ -136,19 +136,6 @@ function backToLogin() {
 
 
 /**
- * load forget password section 
- */
-function showForgetPasswortSection() {
-    document.getElementById('loginBox').classList.add('d-none');
-    document.getElementById('forgotBox').classList.remove('d-none');
-    document.getElementById('loginLogoWhite').classList.remove('no-opacity');
-    document.getElementById('loginLogoBlue').classList.add('no-opacity');
-    document.getElementById('loginPage').classList.remove('pageColorChange');
-    document.getElementById('loginSignupBox').classList.add('d-none');
-}
-
-
-/**
  * show sign up section 
  */
 function loadSignUpBox() {

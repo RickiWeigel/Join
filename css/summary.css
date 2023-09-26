@@ -25,7 +25,7 @@
     display: flex;
     justify-content: center;
     color: white;
-    font-size: 23px;
+    font-size: clamp(16px, 1.8vw, 23px);
     align-items: center;
     padding: 28px 45px;
     gap: 35px;
@@ -135,7 +135,7 @@
 }
 
 .section span {
-    font-size: 23px;
+    font-size: clamp(16px, 1.8vw, 23px);
     text-align: center;
 }
 
@@ -148,7 +148,7 @@
 }
 
 #upcomingDate {
-    font-size: 33px;
+    font-size: clamp(19px, 1.8vw, 33px)!important;
     font-weight: 700;
 }
 
@@ -159,7 +159,7 @@
 }
 
 .midLine {
-    height: 145px;
+    height: 100%;
     background-color: white;
     width: 3px;
     border-radius: 5px;
@@ -181,5 +181,9 @@
 
     .greeting {
         display: none;
+    }
+
+    .upcomingDate{
+
     }
 }

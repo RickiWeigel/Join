@@ -82,13 +82,16 @@
 
 .statusCategories {
     display: flex;
+    flex-wrap: wrap;
+    gap: 35px;
+    align-items: center;
     gap: 40px;
 }
 
 .singleCategory {
     display: flex;
     gap: 35px;
-    width: 25vw;
+    width: 20vw;
     min-height: 480px;
     justify-content: flex-start;
     flex-direction: column;

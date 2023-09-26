@@ -19,48 +19,56 @@
 
 <body onload="loginInit()">
   <div id="loginPage">
+    <div class="loginLogoBlueContainer"><img id="loginLogoBlue" class="no-opacity" src="/assets/img/logo/login_logo_blue.png" alt="Logo" /></div>
     <img id="loginLogoWhite" src="/assets/img/logo/login_logo_white.png" alt="Logo" />
-    <img id="loginLogoBlue" class="no-opacity" src="/assets/img/logo/login_logo_blue.png" alt="Logo" />
+    
+
+    <!-- login -->
+    <div>
+      <div id="loginBox" class="loginBox no-opacity">
+        <div>
+          <span class="loginBoxHeadline">Log in</span>
+        </div>
+
+        <form class="loginForm" onsubmit="login(); return false;">
+          <div class="loginInputColumn">
+            <input id="loginInputEmail" class="loginInput" type="email" placeholder="Email" required />
+            <img class="loginIcon" src="/assets/img/functionButtons/icon_email.png" alt="E-Mail" />
+          </div>
+          <div class="loginInputColumn">
+            <input id="loginInputPassword" class="loginInput" type="password" placeholder="Password" required />
+            <img id="loginIconPassword" class="loginIcon" src="/assets/img/functionButtons/icon_password.png"
+              alt="Password" />
+            <img id="loginIconPasswordVisibility" class="loginIcon visibilityIcon d-none"
+              src="/assets/img/functionButtons/icon_password_nonvisible.png" alt="Password" onclick="//todo" />
+            <div id="loginFaultPassword" class="loginFault d-none">
+              Wrong password
+            </div>
+            <div id="loginFaultEmail" class="loginFault d-none">
+              This Email is not signed up yet. Please sign up first.
+            </div>
+          </div>
+          <div class="loginOptions">
+            <label class="checkbox" onclick="rememberMeCheckboxToggle()">
+              <img src="/assets/img/functionButtons/checkbox.png" alt="Checkbox" id="checkboxRememberMe">
+              <span class="checkmark">Remember me</span>
+            </label>
+          </div>
+          <div class="loginButton">
+            <button class="buttonBlue">Log in</button>
+            <button id="guestLogin" class="buttonWhite" onclick="guestLog()">
+              Guest log in
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
     <div id="loginSignupBox" class="no-opacity">
       <span class="signupText">Not a Join user?</span>
       <button class="buttonBlue signupButton" onclick="loadSignUpBox()">
         Sign up
       </button>
-    </div>
-    <!-- login -->
-    <div id="loginBox" class="loginBox no-opacity">
-      <span class="loginBoxHeadline">Log in</span>
-      <form class="loginForm" onsubmit="login(); return false;">
-        <div class="loginInputColumn">
-          <input id="loginInputEmail" class="loginInput" type="email" placeholder="Email" required />
-          <img class="loginIcon" src="/assets/img/functionButtons/icon_email.png" alt="E-Mail" />
-        </div>
-        <div class="loginInputColumn">
-          <input id="loginInputPassword" class="loginInput" type="password" placeholder="Password" required />
-          <img id="loginIconPassword" class="loginIcon" src="/assets/img/functionButtons/icon_password.png"
-            alt="Password" />
-          <img id="loginIconPasswordVisibility" class="loginIcon visibilityIcon d-none"
-            src="/assets/img/functionButtons/icon_password_nonvisible.png" alt="Password" onclick="//todo" />
-          <div id="loginFaultPassword" class="loginFault d-none">
-            Wrong password
-          </div>
-          <div id="loginFaultEmail" class="loginFault d-none">
-            This Email is not signed up yet. Please sign up first.
-          </div>
-        </div>
-        <div class="loginOptions">
-          <label class="checkbox" onclick="rememberMeCheckboxToggle()">
-            <img src="/assets/img/functionButtons/checkbox.png" alt="Checkbox" id="checkboxRememberMe">
-            <span class="checkmark">Remember me</span>
-          </label>
-        </div>
-        <div class="loginButton">
-          <button class="buttonBlue">Log in</button>
-          <button id="guestLogin" class="buttonWhite" onclick="guestLog()">
-            Guest log in
-          </button>
-        </div>
-      </form>
     </div>
     <!-- sign up -->
     <div id="signupBox" class="loginBox d-none">

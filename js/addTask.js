@@ -185,7 +185,7 @@ async function addTask() {
   addedTaskMessageSlideIn();
   setTimeout(function() {
     addedTaskMessageSlideOut();
-  }, 900);
+  }, 800);
 }
 
 function addedTaskMessageSlideIn() {

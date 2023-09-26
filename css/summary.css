@@ -5,6 +5,7 @@
     align-items: center;
     gap: 35px;
     padding: 63px 0px;
+    overflow: hidden;
 }
 
 .greeting {
@@ -25,7 +26,7 @@
     display: flex;
     justify-content: center;
     color: white;
-    font-size: clamp(16px, 1.8vw, 23px);
+    font-size: clamp(16px, 2vw, 23px);
     align-items: center;
     padding: 28px 45px;
     gap: 35px;
@@ -112,12 +113,16 @@
 
 
 .information {
+    min-width: 431px;
+    height: 100%;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 35px;
     align-items: center;
     max-width: 937px;
+    overflow-x: hidden;
+
 }
 
 .boxTop img {
@@ -182,8 +187,51 @@
     .greeting {
         display: none;
     }
+}
 
-    .upcomingDate{
+@media (max-width: 1000px){
+    .contentSummary{
+        padding: 20px 0;
+    }
+    .smallInfoBox{
+        height: 140px;
+    }
+    .information{
+        padding-bottom: 80px;
+    }
+    .rightSection{
+        gap: 6px;
+    }
+}
 
+@media (max-width: 800px){
+    .midInfoBox{
+        height: 150px;
+        width: 330px;
+        padding: 14px 14px;
+    }
+    .bigInfoBox{
+        gap: 16px;
+    }
+    .rightSection{
+        align-items: flex-start;
+    }
+    .information img{
+        width: 46px;
+        height: 46px;
+    }
+    .smallInfoBox{
+        height: 140px;
+        width: 160px;
+        padding: 20px;
+    }
+    h2{
+        font-size: 36px;
+    }
+}
+
+@media (max-width:400px){
+    .sideBar{
+        padding: 8px 8px!important;
     }
 }

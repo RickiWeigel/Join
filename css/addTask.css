@@ -16,10 +16,8 @@ body {
     scroll-behavior: smooth;
     flex-direction: column;
     gap: 8px;
-    align-items: flex-start;
+    align-items: center;
     width: 462px;
-    height: 828px;
-    padding-right: 40px;
 }
 
 ::placeholder {
@@ -218,12 +216,12 @@ input {
 
 
 .btn-container {
-    position: sticky;
+    position: absolute;
     height: 60px;
-    top: 70vh;
+    right: 60px;
+    bottom: 10vh;
     display: flex;
     justify-content: end;
-    width: 60%;
     gap: 25px;
 }
 
@@ -471,5 +469,26 @@ input[type='date']::-webkit-calendar-picker-indicator {
 
     to {
         bottom: -74px;
+    }
+}
+
+@media (max-width: 1150px) {
+    .btn-container {
+        position: static;
+        top: 0;
+        right: 0;
+    }
+}
+
+@media (max-width: 800px) {
+    .btn-container {
+        padding-bottom: 180px;
+    }
+}
+
+@media (max-width: 500px) {
+    .priorityContainer{
+        flex-direction: column;
+        gap: 6px;
     }
 }

@@ -2,7 +2,7 @@
     height: 100vh;
     width: 100vw;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     flex-direction: column;
     background-color: #4589ff;
@@ -60,6 +60,7 @@
     align-items: center;
     padding: 32px 16px;
     gap: 35px;
+    width: 45vw;
     min-width: 320px;
     margin: auto;
     background-color: #ffffff;
@@ -307,6 +308,9 @@
 }
 
 @media (max-width: 750px) {
+    #loginPage{
+        justify-content: space-between;
+    }
     #loginSignupBox {
         margin-bottom: 36px;
         margin-top: 16px;

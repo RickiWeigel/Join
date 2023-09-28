@@ -48,7 +48,7 @@
 }
 
 .midInfoBox>* {
-    transition: all 50ms ease-in-out;
+    transition: all 75ms ease-in-out;
 }
 
 .midInfoBox:hover {
@@ -76,7 +76,7 @@
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
     border-radius: 30px;
     cursor: pointer;
-    transition: all 225ms ease-in-out;
+    transition: all 125ms ease-in-out;
 }
 
 
@@ -90,7 +90,7 @@
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
     border-radius: 30px;
     cursor: pointer;
-    transition: all 225ms ease-in-out;
+    transition: all 125ms ease-in-out;
 }
 
 .smallInfoBox span {
@@ -108,7 +108,7 @@
     transform: scale(1.03);
     background: #005DFF;
     border-radius: 0px 30px 30px 30px;
-    transition: all 225ms ease-in-out;
+    transition: all 125ms ease-in-out;
 }
 
 
@@ -121,8 +121,6 @@
     gap: 35px;
     align-items: center;
     max-width: 937px;
-    overflow-x: hidden;
-
 }
 
 .boxTop img {
@@ -176,7 +174,7 @@
 @media (max-width: 1200px) {
     .information {
         gap: 15px;
-        max-width: 431px;
+        max-width: 455px;
     }
 
     .midInfoBox {
@@ -190,6 +188,7 @@
 }
 
 @media (max-width: 1000px){
+ 
     .contentSummary{
         padding: 20px 0;
     }
@@ -197,6 +196,7 @@
         height: 140px;
     }
     .information{
+        overflow-x: auto;
         padding-bottom: 80px;
     }
     .rightSection{
@@ -216,6 +216,7 @@
     .rightSection{
         align-items: flex-start;
     }
+ 
     .information img{
         width: 46px;
         height: 46px;

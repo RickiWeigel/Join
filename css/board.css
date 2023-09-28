@@ -111,12 +111,12 @@
 
 .singleCategoryHeader img {
     cursor: pointer;
-    transition: all 225ms ease-in-out
+    transition: all 125ms ease-in-out
 }
 
 .singleCategoryHeader img:hover {
     cursor: pointer;
-    transition: all 225ms ease-in-out;
+    transition: all 125ms ease-in-out;
     transform: rotate(90deg) !important;
 }
 
@@ -250,7 +250,7 @@
     align-items: center;
     background-color: rgba(255, 255, 255, 0.8);
     opacity: 0;
-    transition: all 0.3s, transform 0.3s;
+    transition: all 0.125s, transform 0.125s;
     z-index: -1;
 
 }
@@ -266,7 +266,7 @@
     align-items: center;
     background-color: rgba(255, 255, 255, 0.8);
     opacity: 100;
-    transition: all 0.3s, transform 0.3s;
+    transition: all 0.125s, transform 0.125s;
     z-index: 500;
 }
 
@@ -303,7 +303,7 @@
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-    transition: background-color 0.2s ease-in-out, border-radius 0.2s ease-in-out;
+    transition: background-color 0.125s ease-in-out, border-radius 0.125s ease-in-out;
 }
 
 .close-btn:hover{
@@ -662,6 +662,9 @@
 }
 
 @media (max-width: 800px){
+    #doneTasks{
+        margin-bottom: 80px;
+    }
     .popupAddTask {
         border-radius: 0;
         left: 100%;

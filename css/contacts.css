@@ -38,7 +38,7 @@ main {
     padding: 32px 24px;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 75px;
+    margin-bottom: 100px;
 }
 
 .btnNewContact {
@@ -240,7 +240,7 @@ main {
     background-color: rgba(255, 255, 255, 0.8);
     opacity: 0;
     /* opacity: 100; */
-    transition: all 0.3s, transform 0.3s;
+    transition: all 0.125s, transform 0.125s;
     z-index: -1;
     /* z-index: 500; */
 }
@@ -259,7 +259,7 @@ main {
     border-radius: 30px 0px 30px 30px;
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
     background-color: white;
-    transition: transform 0.2s ease-in-out;
+    transition: transform 0.125s ease-in-out;
     overflow-y: auto;
 }
 
@@ -276,7 +276,7 @@ main {
     border-radius: 0px 30px 30px 30px;
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
     background-color: white;
-    transition: transform 0.2s ease-in-out;
+    transition: transform 0.125s ease-in-out;
     overflow-y: auto;
 }
 

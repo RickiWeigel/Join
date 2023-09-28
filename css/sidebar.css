@@ -83,17 +83,28 @@ body {
     .sideBar {
         padding: 8px 16px;
         height: auto;
-        width: clamp(100px, 4vw, 130px);
+        width: clamp(80px, 19.5vw, 130px);
         gap: 0;
         flex-direction: column;
     }
 
     .sideBar p {
-        font-size: clamp(14px, 2vw, 16px);
+        font-size: clamp(12px, 3vw, 16px);
         margin: 0;
     }
 
     main {
         padding-left: 0px;
+    }
+}
+
+@media (max-width: 500px){
+    .sideBar {
+        padding: 8px 4px;
+    }
+
+    .nav-top img {
+        width: 20px;
+        height: 20px;
     }
 }

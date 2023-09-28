@@ -46,14 +46,14 @@
       </div>
     </div>
 
-    <div class="contactDetailContainer" id="contactDetailContainer">
+    <div class="contactDetailContainer d-none" id="contactDetailContainer">
 
 
     </div>
   </main>
 
   <div class="popupContainer " id="popupContainer">
-    <div class="slide-container-add-contact" id="slide-container-add-contact">
+    <div class="slide-container-add-contact d-none" id="slide-container-add-contact">
       <div class="slide-container-top slide-add-contact-top-radius">
         <img src="/assets/img/logo/IconHeader.png" alt="">
         <span class="slide-container-top-headline">Add contact</span>
@@ -67,7 +67,7 @@
         </div>
       </div>
       <div class="slide-container-content-container">
-        <svg xmlns="http://www.w3.org/2000/svg" width="120" height="121" viewBox="0 0 120 121" fill="none">
+        <svg class="contactImg" xmlns="http://www.w3.org/2000/svg" width="120" height="121" viewBox="0 0 120 121" fill="none">
           <circle cx="60" cy="60" r="60" fill="#D1D1D1" />
 
           <svg x="28" y="27" xmlns="http://www.w3.org/2000/svg" width="64" height="65" viewBox="0 0 64 65" fill="none">
@@ -84,7 +84,7 @@
         </svg>
 
         <form onsubmit="addNewContact(); return false;" id="add-contact-inputs"
-          class="slide-container-content-container">
+          class="slide-container-content-container-form">
           <div class="input-container">
             <input type="text" id="add-content-input-name" placeholder="Name" autocomplete="off" required>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
@@ -158,7 +158,7 @@
       </div>
     </div>
 
-    <div class="slide-container-edit-contact" id="slide-container-edit-contact">
+    <div class="slide-container-edit-contact d-none" id="slide-container-edit-contact">
 
     </div>
   </div>

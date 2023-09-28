@@ -139,15 +139,13 @@ function noHighlightNav() {
 
 
 // Help
-function hoverBackArrow() {
-  let arrow = document.getElementById("back-arrow");
-
-  // Ändern der Bild-URL beim Hover
-  arrow.src = "/assets/img/functionButtons/arrowHover.png"; // Hier die URL des gehoverten Bildes einfügen
+function hoverBackArrow(arrowID) {
+  let arrow = document.getElementById(arrowID);
+  arrow.src = "../assets/img/functionButtons/arrowHover.png"; // Hier die URL des gehoverten Bildes einfügen
 }
 
-function leaveBackArrow() {
-  let arrow = document.getElementById("back-arrow");
+function leaveBackArrow(arrowID) {
+  let arrow = document.getElementById(arrowID);
   arrow.src = "/assets/img/functionButtons/arrowDefault.png"; // Hier die URL des normalen Bildes einfügen
 }
 
@@ -166,6 +164,7 @@ async function privacyPolicyInit(){
   await mainInit();
   highlightedNavbar(6)
 }
+
 
 // Legal Notice
 async function legalNoticeInit(){

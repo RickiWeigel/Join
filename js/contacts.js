@@ -12,6 +12,7 @@ function slideInPopupAddContact() {
   hidePopupStatus = false;
   const popupContainer = document.getElementById("popupContainer");
   const popupContent = document.getElementById("slide-container-add-contact");
+  popupContent.classList.remove("d-none");
   popupContent.classList.remove("add-contact-slide-out-right");
   popupContainer.classList.add("containerPopupActive");
   popupContent.classList.add("add-contact-slide-in-right");
@@ -23,6 +24,7 @@ function slideOutPopupAddContact() {
   popupContent.classList.remove("add-contact-slide-in-right");
   popupContent.classList.add("add-contact-slide-out-right");
   popupContainer.classList.remove("containerPopupActive");
+  popupContent.classList.add("d-none");
   hidePopupStatus = true;
 }
 
@@ -32,6 +34,7 @@ function slideInPopupEdit(id) {
   const popupContainer = document.getElementById("popupContainer");
   const popupContent = document.getElementById("slide-container-edit-contact");
   popupContent.classList.remove("edit-slide-out");
+  popupContent.classList.remove("d-none");
   popupContainer.classList.add("containerPopupActive");
   popupContent.classList.add("edit-slide-in");
 }
@@ -42,6 +45,7 @@ function slideOutPopupEdit() {
   popupContent.classList.remove("edit-slide-in");
   popupContent.classList.add("edit-slide-out");
   popupContainer.classList.remove("containerPopupActive");
+  popupContent.classList.add("d-none");
   hidePopupStatus = true;
 }
 
@@ -155,11 +159,22 @@ function renderContactCards(contacts) {
 function renderContactDetails(id) {
   let indexInArray = findContactById(id);
   let contact = users[activeUser].contacts[indexInArray];
-  document.getElementById("contactDetailContainer").innerHTML = `
+  let contactDetailContainer = document.getElementById("contactDetailContainer");
+  contactDetailContainer.classList.remove("contacts-details-slide-out-right");
+  contactDetailContainer.classList.add("contacts-details-slide-in-right");
+  contactDetailContainer.classList.remove("d-none");
+  contactDetailContainer.innerHTML = `
   
     ${renderContactDetailsTemplateHead(id, contact)}
     ${renderContactDetailsTemplateInfos(contact)}
   `;
+}
+
+function closeContactsDetails() {
+  let contactDetailContainer = document.getElementById("contactDetailContainer");
+  contactDetailContainer.classList.remove("contacts-details-slide-in-right");
+  contactDetailContainer.classList.add("contacts-details-slide-out-right");
+  contactDetailContainer.classList.add("d-none");
 }
 
 function renderContactsEdit(id) {
@@ -182,7 +197,7 @@ function renderContactsEdit(id) {
     <div class="contact-profil-pic" style="background-color: ${contact.color};">
       <span>${contact.initials}</span>
     </div>
-    <form onsubmit="addEditContact(${contact.id}); return false;" id="edit-inputs" class="slide-container-content-container">
+    <form onsubmit="addEditContact(${contact.id}); return false;" id="edit-inputs" class="slide-container-content-container-form">
       <div class="input-container">
         <input type="text" id="edit-content-input-name" placeholder="Name" value="${contact.name}" autocomplete="off" required>
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">

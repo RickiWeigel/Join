@@ -1,5 +1,10 @@
 function renderContactDetailsTemplateHead(id, contact){
     return `
+    <div class="back-arrow-contacts d-none" onmouseover="hoverBackArrow('back-arrow-contacts')" onmouseleave="leaveBackArrow('back-arrow-contacts')" onclick="closeContactsDetails()">
+        <img id="back-arrow-contacts" src="./assets/img/functionButtons/arrowDefault.png" alt="">
+    </div>
+
+
     <div class="contact-detail-top">
         <div class="profil-pic-big" style="background-color: ${contact.color};">
             <span>${contact.initials}</span>

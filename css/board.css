@@ -152,8 +152,7 @@
 }
 
 .btn-blue-AddTask {
-    position: relative;
-    bottom: 16px;
+    margin-bottom: 16px;
     box-shadow: 0px -10px 10px rgba(255, 255, 255, 0.9);
 }
 
@@ -292,9 +291,9 @@
     top: 100%;
 }
 
-.close-btn{
+.close-btn {
     cursor: pointer;
-    position:absolute;
+    position: absolute;
     top: 30px;
     right: 30px;
     width: 32px;
@@ -306,13 +305,13 @@
     transition: background-color 0.125s ease-in-out, border-radius 0.125s ease-in-out;
 }
 
-.close-btn:hover{
+.close-btn:hover {
     border-radius: 50%;
     background-color: #E3EEFF;
 }
 
-.close-btn:hover svg path{
-    fill:"#005DFF";
+.close-btn:hover svg path {
+    fill: "#005DFF";
 }
 
 .popupTaskSlideIn {
@@ -384,7 +383,7 @@
     justify-content: end;
 }
 
-.headline {
+.headlinePopup {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -392,7 +391,7 @@
 }
 
 .popupTaskHeadline {
-    font-size: clamp(48px, 3vw, 61px);
+    font-size: clamp(36px, 3vw, 42px);
     ;
     font-weight: 700;
 }
@@ -614,7 +613,7 @@
     flex-direction: column;
     overflow: auto;
     gap: 24px;
-    align-items: flex-start;
+    align-items: center;
     scroll-behavior: smooth;
     scrollbar-width: none;
     /* Firefox Scrollleiste ausblenden */
@@ -632,7 +631,7 @@
         flex-direction: column;
     }
 
-    .taskCard{
+    .taskCard {
         min-width: 250px;
         max-width: 250px;
     }
@@ -643,7 +642,7 @@
         height: auto;
     }
 
-    .singleCategory{
+    .singleCategory {
         justify-content: flex-start;
         align-items: flex-start;
         width: 100%;
@@ -653,29 +652,43 @@
 
     }
 
-    .singleCategoryHeader{
+    .singleCategoryHeader {
         padding-left: 19px;
     }
+
     ::-webkit-scrollbar {
-        height: 8px; /* Höhe der Scrollleiste anpassen (falls erforderlich) */
+        height: 8px;
+        /* Höhe der Scrollleiste anpassen (falls erforderlich) */
     }
 }
 
-@media (max-width: 800px){
-    #doneTasks{
+@media (max-width: 800px) {
+    #doneTasks {
         margin-bottom: 80px;
     }
+
+    .btn-blue-AddTask {
+        margin-bottom: 60px;
+    }
+
+    .popupTaskContent {
+        width: 100%;
+        right: 100%;
+    }
+
+
     .popupAddTask {
         border-radius: 0;
         left: 100%;
         width: 100%;
     }
+
     @keyframes slideInPopupAddTask {
         from {
             left: 100%;
             /* Startposition - aus dem Sichtbereich schieben */
         }
-    
+
         to {
             left: 0;
             /* Endposition - ganz rechts anzeigen */
@@ -687,7 +700,7 @@
             left: 0;
             /* Startposition - ganz rechts anzeigen */
         }
-    
+
         to {
             left: 100%;
             /* Endposition - aus dem Sichtbereich schieben */
@@ -695,8 +708,8 @@
     }
 }
 
-@media (max-width: 500px){
-    .btn{
+@media (max-width: 500px) {
+    .btn {
         display: none;
     }
 }

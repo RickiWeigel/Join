@@ -258,6 +258,12 @@ main {
     z-index: 5;
 }
 
+.help{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .privacy-policy {
     display: flex;
     flex-direction: column;

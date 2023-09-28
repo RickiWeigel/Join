@@ -43,7 +43,7 @@ function renderContactInitialsLongTemplate(taskContact, newColor, userContact) {
 
 function renderPopupTemplateTop(userTask) {
   return `
-<header class="headline">
+<header class="headlinePopup">
   <div class="popupCategoryHeadline" style="background: ${userTask.category.color};">
     <span>${userTask.category.name}</span>
   </div>

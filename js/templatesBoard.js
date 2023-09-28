@@ -15,12 +15,7 @@ function renderTaskCardForStatusTemplate(
         <span>${userTask.taskTitle}</span>
     </div>
     <span class="boxDescription">${userTask.taskDescription}</span>
-    <div class="progressStatus" id="progressStatus${id}">
-      <div class="progress">
-        <div class="progressCompleted" style="width: ${completedProgress}%;"></div>
-      </div>
-      <span>${completedTasks}/${subtaskLength} Done</span>
-    </div>
+    ${checkSubtasks(completedTasks, subtaskLength, completedProgress,id)}
     <div class="taskFooter">
         <div class="taskContacts" id="taskContacts${id}">
         </div>

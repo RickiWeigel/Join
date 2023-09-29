@@ -1,5 +1,5 @@
-function renderContactDetailsTemplateHead(id, contact){
-    return `
+function renderContactDetailsTemplateHead(id, contact) {
+  return `
     <div class="back-arrow-contacts d-none" onmouseover="hoverBackArrow('back-arrow-contacts')" onmouseleave="leaveBackArrow('back-arrow-contacts')" onclick="closeContactsDetails()">
         <img id="back-arrow-contacts" src="./assets/img/functionButtons/arrowDefault.png" alt="">
     </div>
@@ -10,7 +10,7 @@ function renderContactDetailsTemplateHead(id, contact){
             <span>${contact.initials}</span>
         </div>
         <div class="profil-detail-name" id="profil-detail-name">
-            <span>${contact.name}</span>
+            <span>${breakLine(contact)}</span>
             <div class="contact-detail-edit-delete">
                 <div class="contact-detail-edit" onclick="slideInPopupEdit(${id})">
                     <img class="normal-image" src="../../assets/img/functionButtons/icon_edit_contact.png">
@@ -27,11 +27,11 @@ function renderContactDetailsTemplateHead(id, contact){
             </div>
         </div>
     </div>
-    `
+    `;
 }
 
-function renderContactDetailsTemplateInfos(contact){
-return `
+function renderContactDetailsTemplateInfos(contact) {
+  return `
 <div class="contact-detail-text">
     <span>Contact Information</span>
 </div>
@@ -45,11 +45,11 @@ return `
         <span class="contact-profil-phone">${contact.phone}</span>
     </div>
 </div>
-`
+`;
 }
 
-function renderContactsEditTemplate(id, contact){
-    return`
+function renderContactsEditTemplate(id, contact) {
+  return `
     <div class="slide-container-top slide-edit-radius">
     <img src="../../assets/img/logo/IconHeader.png" alt="">
     <span class="slide-container-top-headline">Edit contact</span>
@@ -138,5 +138,5 @@ function renderContactsEditTemplate(id, contact){
     </div>
   </div>
     
-    `
-  }
+    `;
+}

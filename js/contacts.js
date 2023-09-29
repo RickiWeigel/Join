@@ -153,6 +153,12 @@ function renderContactCards(contacts) {
   return contactCardsHTML;
 }
 
+function breakLine(contact) {
+  var name = contact.name;
+  var newName = name.replace(/@/g, "@<br>");
+  return newName;
+}
+
 function renderContactDetails(id) {
   let indexInArray = findContactById(id);
   let contact = users[activeUser].contacts[indexInArray];

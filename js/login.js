@@ -92,6 +92,7 @@ async function register() {
     contacts: [],
     userTasks: [],
     taskCategories: [],
+    idCounter: 0,
   });
   await setItem("users", JSON.stringify(users));
   loadRegisterInLogin();

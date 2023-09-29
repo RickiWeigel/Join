@@ -6,8 +6,6 @@ main {
     height: 100vh;
 }
 
-
-
 #mainContacts {
     flex-direction: row;
 }
@@ -29,7 +27,8 @@ main {
     height: 100%;
     padding: 72px;
     align-items: center;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden
 }
 
 .contactList {
@@ -121,10 +120,8 @@ main {
     color: #4589FF;
 }
 
-
-
 .contact-detail-top {
-    width: 440px;
+    width: 500px;
     display: flex;
     align-items: center;
     gap: 54px;
@@ -145,21 +142,16 @@ main {
 .profil-detail-name {
     display: flex;
     flex-direction: column;
-}
-
-.profil-detail-name {
-    font-size: 47px;
+    font-size: clamp(32px, 3vw, 47px);
     font-weight: 500;
 }
 
 .contact-detail-edit-delete {
     display: flex;
     justify-content: space-between;
-    width: 160px;
+    width: 170px;
     font-size: 16px;
 }
-
-
 
 .contact-detail-edit-delete img {
     width: 24px;
@@ -169,15 +161,12 @@ main {
 .contact-detail-edit:hover .normal-image,
 .contact-detail-delete:hover .normal-image {
     display: none;
-    /* Verstecke das normale Bild beim Hover */
 }
 
 .contact-detail-edit:hover .hover-image,
 .contact-detail-delete:hover .hover-image {
     display: block !important;
-    /* Zeige das Hover-Bild beim Hover */
 }
-
 
 .contact-detail-edit,
 .contact-detail-delete {
@@ -186,7 +175,6 @@ main {
     gap: 8px;
     cursor: pointer;
 }
-
 
 .contact-detail-delete {
     width: 75px;
@@ -229,7 +217,6 @@ main {
     font-weight: 700;
 }
 
-
 .popupContainer {
     position: fixed;
     top: 0;
@@ -239,12 +226,9 @@ main {
     display: flex;
     background-color: rgba(255, 255, 255, 0.8);
     opacity: 0;
-    /* opacity: 100; */
     transition: all 0.125s, transform 0.125s;
     z-index: -1;
-    /* z-index: 500; */
 }
-
 
 .slide-container-add-contact {
     position: absolute;
@@ -279,7 +263,6 @@ main {
     transition: transform 0.125s ease-in-out;
     overflow-y: auto;
 }
-
 
 .slide-container-top {
     display: flex;
@@ -487,8 +470,6 @@ main {
     }
 }
 
-
-
 .edit-slide-in {
     animation-name: slideInEdit;
     animation-duration: 0.3s;
@@ -531,7 +512,9 @@ main {
     .profil-detail-name {
         gap: 5px;
         align-items: center;
+        text-align: center;
     }
+
 
     .contact-detail-text {
         text-align: center;
@@ -555,10 +538,18 @@ main {
     }
 }
 
+@media(max-width: 900px) {
+    .contactDetailContainer {
+        padding: 72px 36px;
+    }
+}
+
 @media (max-width: 800px) {
+
     .contactDetailContainer {
         left: 0px !important;
         right: 0px !important;
+        padding: 72px 26px;
     }
 
     .slide-container-add-contact,
@@ -636,6 +627,10 @@ main {
             padding: 0px 16px;
             position: relative;
             transform: translateY(-75px);
+        }
+
+        .contact-detail-top {
+            width: 100%;
         }
     }
 }

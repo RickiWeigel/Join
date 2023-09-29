@@ -113,6 +113,7 @@ async function addTaskPopup() {
 }
 
 async function openPopupAddTask(addTaskStatus) {
+  selectedSubtasks = [];
   renderPopupAddTask(addTaskStatus);
   const popupContainer = document.getElementById("popupContainer");
   const popupTask = document.getElementById("popupAddTask");

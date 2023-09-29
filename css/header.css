@@ -53,9 +53,7 @@
 
 .help:hover svg {
     transform: scale(1.1);
-    /* Hier ändern Sie die Vergrößerung nach Ihren Wünschen */
     transition: transform 0.1s ease-in-out;
-    /* Hier können Sie die Übergangsdauer anpassen */
 }
 
 .headline {

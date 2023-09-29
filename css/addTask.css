@@ -143,7 +143,6 @@ input {
     cursor: pointer;
 }
 
-
 .priorityMedium:hover {
     border: 2px solid #FFA800;
     border-top: none;
@@ -362,9 +361,6 @@ input {
     padding-bottom: 8px;
 }
 
-
-
-
 input[type='date']::-webkit-calendar-picker-indicator {
     cursor: pointer;
     position: absolute;
@@ -377,7 +373,6 @@ input[type='date']::-webkit-calendar-picker-indicator {
     color: transparent;
     background: transparent;
 }
-
 
 .inputGrey {
     font-family: 'Open Sans' !important;
@@ -435,9 +430,6 @@ input[type='date']::-webkit-calendar-picker-indicator {
     z-index: 10000;
     opacity: 1;
 }
-
-
-
 
 .task-added-slide-in {
     z-index: 999;

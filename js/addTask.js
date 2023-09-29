@@ -50,13 +50,17 @@ function renderContactSelectors(contactToAssigned) {
 
 function updateCheckboxStatus() {
   const contactsToAssign = document.getElementById("contactsToAssign");
-  const dropdownItems = contactsToAssign.getElementsByClassName("dropdown-content");
+  const dropdownItems =
+    contactsToAssign.getElementsByClassName("dropdown-content");
   for (let i = 0; i < dropdownItems.length; i++) {
-    const contactSelectorElement = document.getElementById(`contactSelector[${i}]`);
+    const contactSelectorElement = document.getElementById(
+      `contactSelector[${i}]`
+    );
     const selectedContact = users[activeUser].contacts[i];
     const index = selectedContactsToAssign.indexOf(selectedContact);
     if (index > -1) {
-      contactSelectorElement.src ="/assets/img/functionButtons/checkButtonChecked.png";
+      contactSelectorElement.src =
+        "/assets/img/functionButtons/checkButtonChecked.png";
     }
   }
 }
@@ -100,7 +104,9 @@ function setSelectedCategory(id) {
 }
 
 function selectContactsToAssign(id) {
-  const contactSelectorElement = document.getElementById(`contactSelector[${id}]`);
+  const contactSelectorElement = document.getElementById(
+    `contactSelector[${id}]`
+  );
   const selectedContact = users[activeUser].contacts[id];
   const index = selectedContactsToAssign.indexOf(selectedContact);
   if (index > -1) {
@@ -108,7 +114,8 @@ function selectContactsToAssign(id) {
     contactSelectorElement.src = "/assets/img/functionButtons/checkButton.png";
   } else {
     selectedContactsToAssign.push(selectedContact);
-    contactSelectorElement.src ="/assets/img/functionButtons/checkButtonChecked.png";
+    contactSelectorElement.src =
+      "/assets/img/functionButtons/checkButtonChecked.png";
   }
 }
 
@@ -139,7 +146,9 @@ async function addTask() {
 
 function addedTaskMessageSlideIn() {
   document.getElementById("addedTaskMessage").classList.remove("d-none");
-  document.getElementById("addedTaskMessage").classList.add("task-added-slide-in");
+  document
+    .getElementById("addedTaskMessage")
+    .classList.add("task-added-slide-in");
 }
 
 function addedTaskMessageSlideOut() {
@@ -353,8 +362,6 @@ async function renderSubtasks() {
           </div>
       `;
   }
-  const addTaskContent = document.getElementById("addTaskContent");
-  addTaskContent.scrollTop += addTaskContent.clientHeight;
 }
 
 function categoryHover(id) {
@@ -411,11 +418,23 @@ async function checkRequired() {
   let description = document.getElementById("description").value;
   let date = document.getElementById("datepicker").value;
   const titleRequired = checkRequiredField(taskTitle, "requiredTitle");
-  const descriptionRequired = checkRequiredField( description,"requiredDescription");
+  const descriptionRequired = checkRequiredField(
+    description,
+    "requiredDescription"
+  );
   const dateRequired = checkRequiredField(date, "requiredDate");
-  const priorityRequired = checkRequiredField(prioritySelect,"requiredPriority");
-  const assignedToRequired = checkRequiredField(selectedContactsToAssign,"requiredAssignedTo");
-  const categoryRequired = checkRequiredField(selectedCategory.name,"requiredCategory");
+  const priorityRequired = checkRequiredField(
+    prioritySelect,
+    "requiredPriority"
+  );
+  const assignedToRequired = checkRequiredField(
+    selectedContactsToAssign,
+    "requiredAssignedTo"
+  );
+  const categoryRequired = checkRequiredField(
+    selectedCategory.name,
+    "requiredCategory"
+  );
   return (
     !titleRequired &&
     !descriptionRequired &&

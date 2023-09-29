@@ -8,14 +8,16 @@ function renderTaskCardForStatusTemplate(
 ) {
   return `
 <div draggable="true" ondragstart="startDragging(${id})" class="taskCard" id="taskCard${id}" onclick="openPopupTask(${id})">
-    <div class="categoryHeadline" style="background: ${userTask.category.color};">
+    <div class="categoryHeadline" style="background: ${
+      userTask.category.color
+    };">
         <span>${userTask.category.name}</span>
     </div>
     <div class="taskHeadline">
         <span>${userTask.taskTitle}</span>
     </div>
     <span class="boxDescription">${userTask.taskDescription}</span>
-    ${checkSubtasks(completedTasks, subtaskLength, completedProgress,id)}
+    ${checkSubtasks(completedTasks, subtaskLength, completedProgress, id)}
     <div class="taskFooter">
         <div class="taskContacts" id="taskContacts${id}">
         </div>
@@ -242,7 +244,7 @@ function renderEditPopupTemplateSubtastks(id) {
 }
 
 function renderPopupAddTaskTemplateTop() {
-return `
+  return `
   <div class="section1">
   <div class="titleContainer">
     <div class="enterTitle">
@@ -271,8 +273,7 @@ return `
     <div id="requiredDate" class="required v-none">Please enter a date!</div>
   </div>
 </div>
-`
-
+`;
 }
 
 function renderPopupAddTaskTemplatePriorities() {
@@ -332,8 +333,8 @@ function renderPopupAddTaskTemplateAssignedTo() {
     `;
 }
 
-function renderPopupAddTaskTemplateCategories(){
-return `
+function renderPopupAddTaskTemplateCategories() {
+  return `
 <div class="category">
     <div class="categoryContainer">
         <span>Category</span>
@@ -371,11 +372,11 @@ return `
         </div>
     </div>
 </div>
-`
+`;
 }
 
-function renderPopupAddTaskTemplateSubtasks(){
-return `
+function renderPopupAddTaskTemplateSubtasks() {
+  return `
 <div class="subtaskContainer">
   <span>Subtasks</span>
   <div id="subtask" class="addSubtask">
@@ -387,10 +388,10 @@ return `
     </div>
   </div>
 <div id="addedSubtasks" class="subtaskContent"></div>
-`
+`;
 }
 
-function renderAddTaskMessage(){
+function renderAddTaskMessage() {
   return `
 <div class="addedTaskMessage d-none" id="addedTaskMessage">
   <span>Task added to board</span>
@@ -403,11 +404,11 @@ function renderAddTaskMessage(){
           fill="white" />
   </svg>
 </div>
-  `
-  }
+  `;
+}
 
-  function renderEditPopupFormTemplate(id,userTask){
-    return`
+function renderEditPopupFormTemplate(id, userTask) {
+  return `
     <form onsubmit="checkRequiredEdit(${id}); return false;" class="popupTask"
     id="popupTask" onclick="event.stopPropagation()">
     <div style=padding-right:40px; class="closePopupEdit"><img id="closeBtn" onmouseover="closeHover()"
@@ -421,5 +422,5 @@ function renderAddTaskMessage(){
       ${renderEditPopupTemplateSubtastks(id)}
     </div>
   </form>
-    `
-  }
+    `;
+}

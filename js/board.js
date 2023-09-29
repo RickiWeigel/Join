@@ -486,27 +486,29 @@ function subtaskActiveInputBoard() {
 
 async function addNewSubTasksBoard() {
   let newSubtask = document.getElementById("subtaskInput").value;
-  newSubtasks.push(newSubtask);
-  await setItem(`users`, JSON.stringify(users));
-  newSubtask = document.getElementById("subtaskInput").value = "";
-  clearSubtaskInput();
-  renderSubtasksBoard();
+  if (newSubtask.length < 4) {
+    document.getElementById("requiredSubtask").classList.remove("v-none");
+  } else {
+    newSubtasks.push(newSubtask);
+    selectedSubtasks.push(newSubtask);
+    await setItem(`users`, JSON.stringify(users));
+    newSubtask = document.getElementById("subtaskInput").value = "";
+    clearSubtaskInput();
+    await renderSubtasks();
+  }
 }
 
-async function renderSubtasksBoard() {
-  document.getElementById("addedSubtasks").innerHTML = "";
-  for (let i = newSubtasks.length - 1; i >= 0; i--) {
-    document.getElementById("addedSubtasks").innerHTML += `
-          <div onclick="addToSelectedSubtasks(${i})" class="subtasks">
-              <img id="checkbox[${i}]" src="../../assets/img/functionButtons/checkbox.png">
-              <span id="subtasks">${newSubtasks[i]}</span>
-          </div>
-      `;
-  }
-  // Scrollt den "boardAddTaskSection"-Container nach unten
-  const addTaskContentBoard = document.getElementById("boardAddTaskSection");
-  addTaskContentBoard.scrollTop = addTaskContentBoard.scrollHeight;
-}
+// async function renderSubtasksBoard() {
+//   document.getElementById("addedSubtasks").innerHTML = "";
+//   for (let i = newSubtasks.length - 1; i >= 0; i--) {
+//     document.getElementById("addedSubtasks").innerHTML += `
+//           <div onclick="addToSelectedSubtasks(${i})" class="subtasks">
+//               <img id="checkbox[${i}]" src="../../assets/img/functionButtons/checkbox.png">
+//               <span id="subtasks">${selectedSubtasks[i]}</span>
+//           </div>
+//       `;
+//   }
+// }
 
 function checkSubtasks(completedTasks, subtaskLength, completedProgress, id) {
   if (subtaskLength == 0) {

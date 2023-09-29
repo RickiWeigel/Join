@@ -1,45 +1,3 @@
-let tasks = [];
-let selectedContactsToAssign = [];
-let contactsSelektorOpen = false;
-let taskCategories = [];
-let categorySelektorOpen;
-let priority;
-let taskStatus;
-let newSubtasks = [];
-let selectedCategory = {};
-let selectedColor;
-let categoryColor;
-let newCategoryName;
-let prioritySelect;
-let selectProgressStatus = "toDo";
-let selectedSubtasks = [];
-const colorActions = {
-  lightblue: () => {
-    selectedColor = "#8AA4FF";
-    categoryColor = selectedColor;
-  },
-  red: () => {
-    selectedColor = "#FF0000";
-    categoryColor = selectedColor;
-  },
-  green: () => {
-    selectedColor = "#2AD300";
-    categoryColor = selectedColor;
-  },
-  orange: () => {
-    selectedColor = "#FF8A00";
-    categoryColor = selectedColor;
-  },
-  pink: () => {
-    selectedColor = "#E200BE";
-    categoryColor = selectedColor;
-  },
-  blue: () => {
-    selectedColor = "#0038FF";
-    categoryColor = selectedColor;
-  },
-};
-
 async function addTaskInit() {
   await mainInit();
   highlightedNavbar(3);
@@ -92,17 +50,13 @@ function renderContactSelectors(contactToAssigned) {
 
 function updateCheckboxStatus() {
   const contactsToAssign = document.getElementById("contactsToAssign");
-  const dropdownItems =
-    contactsToAssign.getElementsByClassName("dropdown-content");
+  const dropdownItems = contactsToAssign.getElementsByClassName("dropdown-content");
   for (let i = 0; i < dropdownItems.length; i++) {
-    const contactSelectorElement = document.getElementById(
-      `contactSelector[${i}]`
-    );
+    const contactSelectorElement = document.getElementById(`contactSelector[${i}]`);
     const selectedContact = users[activeUser].contacts[i];
     const index = selectedContactsToAssign.indexOf(selectedContact);
     if (index > -1) {
-      contactSelectorElement.src =
-        "/assets/img/functionButtons/checkButtonChecked.png";
+      contactSelectorElement.src ="/assets/img/functionButtons/checkButtonChecked.png";
     }
   }
 }
@@ -132,10 +86,8 @@ async function renderTaskCategories() {
 
 async function deleteCategory(index, event) {
   event.stopPropagation();
-  // Entferne die Kategorie aus dem Array
   users[activeUser].taskCategories.splice(index, 1);
   await setItem(`users`, JSON.stringify(users));
-  // Rendere die Kategorien neu
   renderCategories();
 }
 
@@ -148,9 +100,7 @@ function setSelectedCategory(id) {
 }
 
 function selectContactsToAssign(id) {
-  const contactSelectorElement = document.getElementById(
-    `contactSelector[${id}]`
-  );
+  const contactSelectorElement = document.getElementById(`contactSelector[${id}]`);
   const selectedContact = users[activeUser].contacts[id];
   const index = selectedContactsToAssign.indexOf(selectedContact);
   if (index > -1) {
@@ -158,8 +108,7 @@ function selectContactsToAssign(id) {
     contactSelectorElement.src = "/assets/img/functionButtons/checkButton.png";
   } else {
     selectedContactsToAssign.push(selectedContact);
-    contactSelectorElement.src =
-      "/assets/img/functionButtons/checkButtonChecked.png";
+    contactSelectorElement.src ="/assets/img/functionButtons/checkButtonChecked.png";
   }
 }
 
@@ -183,16 +132,14 @@ async function addTask() {
   await setItem(`users`, JSON.stringify(users));
   resetAllFields();
   addedTaskMessageSlideIn();
-  setTimeout(function() {
+  setTimeout(function () {
     addedTaskMessageSlideOut();
   }, 800);
 }
 
 function addedTaskMessageSlideIn() {
   document.getElementById("addedTaskMessage").classList.remove("d-none");
-  document
-    .getElementById("addedTaskMessage")
-    .classList.add("task-added-slide-in");
+  document.getElementById("addedTaskMessage").classList.add("task-added-slide-in");
 }
 
 function addedTaskMessageSlideOut() {
@@ -262,14 +209,6 @@ async function addNewCategoryFunction() {
   insertSelectedCategory();
 }
 
-function resetRequiredMessage() {
-  let requiredMessage = document.getElementById("requiredCategory");
-  requiredMessage.innerHTML = `
-      <span>Please select a category or add a new one!</span>
-    `;
-  requiredMessage.classList.add("v-none");
-}
-
 function renderShowCategory() {
   document.getElementById("showCategory").innerHTML = `
     <div id="currentCategory"><span>Select task category</span></div>
@@ -299,11 +238,7 @@ function insertSelectedCategory() {
     resetCategoryRendering();
   } else {
     document.getElementById("showCategory").innerHTML = `
-    <div id="currentCategory">
-      <span>${selectedCategory.name}</span>
-      <div class="colorCircle" style="background: ${selectedCategory.color};"></div>
-    </div>
-    <img src="../../assets/img/functionButtons/selectorArrow.png"> 
+      ${showCurrentCategory(selectedCategory)}
   `;
   }
   renderCategories();
@@ -316,24 +251,36 @@ function renderPrioritySelected(priority) {
   let priorityLow = document.getElementById("priorityLow");
   switch (prioritySelect) {
     case "Low":
-      priorityUrgent.src = "../../assets/img/addTask/TaskValueHard.png";
-      priorityMedium.src = "../../assets/img/addTask/TaskValueMid.png";
-      priorityLow.src = "../../assets/img/addTask/TaskValueLowSelected.png";
-      priorityLow.classList.remove("priorityLow");
+      showPrioritySelectedLow(priorityUrgent, priorityMedium, priorityLow);
       break;
     case "Medium":
-      priorityUrgent.src = "../../assets/img/addTask/TaskValueHard.png";
-      priorityMedium.src = "../../assets/img/addTask/TaskValueMidSelected.png";
-      priorityLow.src = "../../assets/img/addTask/TaskValueLow.png";
-      priorityMedium.classList.remove("priorityMedium");
+      showPrioritySelectedMedium(priorityUrgent, priorityMedium, priorityLow);
       break;
     case "Urgent":
-      priorityUrgent.src = "../../assets/img/addTask/TaskValueHardSelected.png";
-      priorityMedium.src = "../../assets/img/addTask/TaskValueMid.png";
-      priorityLow.src = "../../assets/img/addTask/TaskValueLow.png";
-      priorityUrgent.classList.remove("priorityUrgent");
+      showPrioritySelectedUrgent(priorityUrgent, priorityMedium, priorityLow);
       break;
   }
+}
+
+function showPrioritySelectedLow() {
+  priorityUrgent.src = "../../assets/img/addTask/TaskValueHard.png";
+  priorityMedium.src = "../../assets/img/addTask/TaskValueMid.png";
+  priorityLow.src = "../../assets/img/addTask/TaskValueLowSelected.png";
+  priorityLow.classList.remove("priorityLow");
+}
+
+function showPrioritySelectedMedium() {
+  priorityUrgent.src = "../../assets/img/addTask/TaskValueHard.png";
+  priorityMedium.src = "../../assets/img/addTask/TaskValueMidSelected.png";
+  priorityLow.src = "../../assets/img/addTask/TaskValueLow.png";
+  priorityMedium.classList.remove("priorityMedium");
+}
+
+function showPrioritySelectedUrgent() {
+  priorityUrgent.src = "../../assets/img/addTask/TaskValueHardSelected.png";
+  priorityMedium.src = "../../assets/img/addTask/TaskValueMid.png";
+  priorityLow.src = "../../assets/img/addTask/TaskValueLow.png";
+  priorityUrgent.classList.remove("priorityUrgent");
 }
 
 function clearPrioritySelected() {
@@ -371,11 +318,7 @@ function priorityMouseLeave(id) {
 
 function subtaskActiveInput() {
   document.getElementById("subtaskButtons").innerHTML = `
-    <img onclick="clearSubtaskInput()"
-      src="/assets/img/functionButtons/cancelBlue.png">
-    <img style="padding-left: 8px; padding-right: 8px;"
-      src="/assets/img/functionButtons/trennstrich.png">
-    <img onclick="addNewSubTasks()" src="/assets/img/functionButtons/checkedIconSelector.png">
+    ${resetSubtaskActiveInput()}
   `;
 }
 
@@ -396,8 +339,7 @@ async function addNewSubTasks() {
     await setItem(`users`, JSON.stringify(users));
     newSubtask = document.getElementById("subtaskInput").value = "";
     clearSubtaskInput();
-    await renderSubtasks(); 
-    // addToSelectedSubtasks()   
+    await renderSubtasks();
   }
 }
 
@@ -438,7 +380,6 @@ function addToSelectedSubtasks(id) {
 
 function checkRequiredField(valueToCheck, requiredMessageId) {
   let requiredMessage = document.getElementById(requiredMessageId);
-
   if (
     !valueToCheck ||
     (Array.isArray(valueToCheck) && valueToCheck.length === 0)
@@ -446,66 +387,7 @@ function checkRequiredField(valueToCheck, requiredMessageId) {
     requiredMessage.classList.remove("v-none");
     return true;
   }
-
   return false;
-}
-
-function resetCategoryRendering() {
-  document.getElementById("showCategory").innerHTML = `
-  <div id="currentCategory">
-    <span>Select task category</span>
-  </div>
-  <img src="../../assets/img/functionButtons/selectorArrow.png"> 
-`;
-}
-
-function resetAllFields() {
-  // Setzen Sie alle globalen Variablen auf ihre ursprünglichen Werte zurück
-  resetAllVariables();
-  // Setzen Sie alle Eingabefelder auf ihre ursprünglichen Werte zurück
-  resetAllInputs();
-  // Setzen Sie alle sichtbaren Elemente auf den ursprünglichen Zustand zurück
-  resetContactAssignUI();
-  clearPrioritySelected();
-  resetCategoryRendering();
-  renderSubtasks();
-}
-
-function resetAllVariables() {
-  tasks = [];
-  selectedContactsToAssign = [];
-  contactsSelektorOpen = false;
-  taskCategories = [];
-  categorySelektorOpen = false;
-  priority = null;
-  taskStatus = null;
-  newSubtasks = [];
-  selectedCategory = {};
-  selectedColor = null;
-  categoryColor = null;
-  newCategoryName = null;
-  prioritySelect = null;
-  selectedSubtasks = [];
-}
-
-function resetAllInputs() {
-  document.getElementById("taskTitle").value = "";
-  document.getElementById("datepicker").value = "";
-  document.getElementById("description").value = "";
-  document.getElementById("inviteNewContact").value = "";
-  document.getElementById("subtaskInput").value = "";
-}
-
-function resetContactAssignUI() {
-  const contactsToAssign = document.getElementById("contactsToAssign");
-  const showInviteNewContact = document.getElementById("showInviteNewContact");
-  const selectContacts = document.getElementById("selectContacts");
-  const selectTaskCategory = document.getElementById("selectTaskCategory");
-  contactsToAssign.classList.add("d-none");
-  showInviteNewContact.classList.add("d-none");
-  selectContacts.classList.remove("d-none");
-  contactsToAssign.innerHTML = "";
-  selectTaskCategory.innerHTML = "";
 }
 
 function hideRequiredFields() {
@@ -529,23 +411,11 @@ async function checkRequired() {
   let description = document.getElementById("description").value;
   let date = document.getElementById("datepicker").value;
   const titleRequired = checkRequiredField(taskTitle, "requiredTitle");
-  const descriptionRequired = checkRequiredField(
-    description,
-    "requiredDescription"
-  );
+  const descriptionRequired = checkRequiredField( description,"requiredDescription");
   const dateRequired = checkRequiredField(date, "requiredDate");
-  const priorityRequired = checkRequiredField(
-    prioritySelect,
-    "requiredPriority"
-  );
-  const assignedToRequired = checkRequiredField(
-    selectedContactsToAssign,
-    "requiredAssignedTo"
-  );
-  const categoryRequired = checkRequiredField(
-    selectedCategory.name,
-    "requiredCategory"
-  );
+  const priorityRequired = checkRequiredField(prioritySelect,"requiredPriority");
+  const assignedToRequired = checkRequiredField(selectedContactsToAssign,"requiredAssignedTo");
+  const categoryRequired = checkRequiredField(selectedCategory.name,"requiredCategory");
   return (
     !titleRequired &&
     !descriptionRequired &&

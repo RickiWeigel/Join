@@ -579,7 +579,8 @@ main {
         border-radius: 0;
     }
 
-    .contactImg, .contact-profil-pic {
+    .contactImg,
+    .contact-profil-pic {
         width: 90px;
         height: 90px;
     }

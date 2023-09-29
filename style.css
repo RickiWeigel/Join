@@ -258,7 +258,7 @@ main {
     z-index: 5;
 }
 
-.help{
+.help {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -336,96 +336,111 @@ main {
 
 /* Stile für alle <input>-Elemente und deren Placeholder-Text */
 input {
-    font-family: 'Open Sans', sans-serif; /* Schriftart für alle <input>-Elemente */
-  }
-  
-  /* Stile für den Placeholder-Text aller <input>-Elemente (für Chrome und Edge) */
-  input::-webkit-input-placeholder {
-    font-family: 'Open Sans', sans-serif; /* Schriftart für Chrome und Edge */
-  }
-  
-  /* Stile für den Placeholder-Text aller <input>-Elemente (für Firefox) */
-  input::-moz-placeholder {
-    font-family: 'Open Sans', sans-serif; /* Schriftart für Firefox */
-  }
-  
-  /* Stile für den Placeholder-Text aller <input>-Elemente (für Safari) */
-  input::-webkit-input-placeholder {
-    font-family: 'Open Sans', sans-serif; /* Schriftart für Safari */
-  }
-  
-  /* Stile für den Placeholder-Text aller <input>-Elemente (für Edge) */
-  input::-ms-input-placeholder {
-    font-family: 'Open Sans', sans-serif; /* Schriftart für Edge */
-  }
+    font-family: 'Open Sans', sans-serif;
+    /* Schriftart für alle <input>-Elemente */
+}
 
-  /* Allgemeine Stile für input[type='date'] */
+/* Stile für den Placeholder-Text aller <input>-Elemente (für Chrome und Edge) */
+input::-webkit-input-placeholder {
+    font-family: 'Open Sans', sans-serif;
+    /* Schriftart für Chrome und Edge */
+}
+
+/* Stile für den Placeholder-Text aller <input>-Elemente (für Firefox) */
+input::-moz-placeholder {
+    font-family: 'Open Sans', sans-serif;
+    /* Schriftart für Firefox */
+}
+
+/* Stile für den Placeholder-Text aller <input>-Elemente (für Safari) */
+input::-webkit-input-placeholder {
+    font-family: 'Open Sans', sans-serif;
+    /* Schriftart für Safari */
+}
+
+/* Stile für den Placeholder-Text aller <input>-Elemente (für Edge) */
+input::-ms-input-placeholder {
+    font-family: 'Open Sans', sans-serif;
+    /* Schriftart für Edge */
+}
+
+/* Allgemeine Stile für input[type='date'] */
 input[type='date'] {
     position: relative;
     cursor: pointer;
     color: black;
-  }
-  
-  /* Stile für den Datepicker-Pfeil (für Chrome und Edge) */
-  input[type='date']::-webkit-calendar-picker-indicator,
-  input[type='date']::-webkit-inner-spin-button,
-  input[type='date']::-webkit-clear-button {
-    display: none; /* Versteckt den Pfeil in Chrome und Edge */
-  }
-  
-  /* Stile für den Datepicker-Pfeil (für Firefox) */
-  input[type='date']::-webkit-calendar-picker-indicator,
-  input[type='date']::-webkit-clear-button {
-    display: none; /* Versteckt den Pfeil in Firefox */
-  }
-  
-  /* Stile für den Datepicker-Pfeil (für Safari) */
-  input[type='date']::-webkit-inner-spin-button,
-  input[type='date']::-webkit-calendar-picker-indicator {
-    display: none; /* Versteckt den Pfeil in Safari */
-  }
-  
-  /* Stile für den Datepicker-Pfeil (für Firefox und Edge) */
-  input[type='date']::-webkit-clear-button {
-    -webkit-appearance: none;
-    appearance: none;
-    display: none; /* Versteckt den Pfeil in Firefox und Edge */
-  }
-  
-  /* Stile für den Datepicker-Pfeil (für Firefox und Safari) */
-  input[type='date']::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    appearance: none;
-    display: none; /* Versteckt den Pfeil in Firefox und Safari */
-  }
+}
 
-  @media (max-width:800px){
-    .back-arrow{
+/* Stile für den Datepicker-Pfeil (für Chrome und Edge) */
+input[type='date']::-webkit-calendar-picker-indicator,
+input[type='date']::-webkit-inner-spin-button,
+input[type='date']::-webkit-clear-button {
+    display: none;
+    /* Versteckt den Pfeil in Chrome und Edge */
+}
+
+/* Stile für den Datepicker-Pfeil (für Firefox) */
+input[type='date']::-webkit-calendar-picker-indicator,
+input[type='date']::-webkit-clear-button {
+    display: none;
+    /* Versteckt den Pfeil in Firefox */
+}
+
+/* Stile für den Datepicker-Pfeil (für Safari) */
+input[type='date']::-webkit-inner-spin-button,
+input[type='date']::-webkit-calendar-picker-indicator {
+    display: none;
+    /* Versteckt den Pfeil in Safari */
+}
+
+/* Stile für den Datepicker-Pfeil (für Firefox und Edge) */
+input[type='date']::-webkit-clear-button {
+    -webkit-appearance: none;
+    appearance: none;
+    display: none;
+    /* Versteckt den Pfeil in Firefox und Edge */
+}
+
+/* Stile für den Datepicker-Pfeil (für Firefox und Safari) */
+input[type='date']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+    display: none;
+    /* Versteckt den Pfeil in Firefox und Safari */
+}
+
+@media (max-width:800px) {
+    .back-arrow {
         position: absolute;
         top: 25px;
         right: 36px;
     }
-    .info-container{
+
+    .info-container {
         margin-left: 0;
     }
-    .privacy-policy{
+
+    .privacy-policy {
         margin-left: 0;
         padding: 48px;
     }
-  }
+}
 
-  @media (max-width:500px){
-    .privacy-policy{
+@media (max-width:500px) {
+    .privacy-policy {
         margin-left: 0;
         padding: 36px;
     }
-    h1{
+
+    h1 {
         font-size: 36px;
     }
-    h2{
+
+    h2 {
         font-size: 22px;
     }
-    .what-is-join{
+
+    .what-is-join {
         font-size: 14px;
     }
-  }
+}

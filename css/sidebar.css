@@ -98,7 +98,7 @@ body {
     }
 }
 
-@media (max-width: 500px){
+@media (max-width: 500px) {
     .sideBar {
         padding: 8px 4px;
     }

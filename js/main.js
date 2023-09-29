@@ -1,4 +1,3 @@
-//loadJSONFromServer();  TODO
 let userlogin = false;
 let activeUser;
 let tasksInTodo = 0;
@@ -6,6 +5,47 @@ let tasksInProgress = 0;
 let tasksInAwaitFeedback = 0;
 let tasksInDone = 0;
 let currentDate = getCurrentDate();
+let tasks = [];
+let selectedContactsToAssign = [];
+let contactsSelektorOpen = false;
+let taskCategories = [];
+let categorySelektorOpen;
+let priority;
+let taskStatus;
+let newSubtasks = [];
+let selectedCategory = {};
+let selectedColor;
+let categoryColor;
+let newCategoryName;
+let prioritySelect;
+let selectProgressStatus = "toDo";
+let selectedSubtasks = [];
+const colorActions = {
+  lightblue: () => {
+    selectedColor = "#8AA4FF";
+    categoryColor = selectedColor;
+  },
+  red: () => {
+    selectedColor = "#FF0000";
+    categoryColor = selectedColor;
+  },
+  green: () => {
+    selectedColor = "#2AD300";
+    categoryColor = selectedColor;
+  },
+  orange: () => {
+    selectedColor = "#FF8A00";
+    categoryColor = selectedColor;
+  },
+  pink: () => {
+    selectedColor = "#E200BE";
+    categoryColor = selectedColor;
+  },
+  blue: () => {
+    selectedColor = "#0038FF";
+    categoryColor = selectedColor;
+  },
+};
 
 async function mainInit() {
   await includeHTML();
@@ -55,13 +95,11 @@ function getUserInitials(signUpName) {
   let stringName = signUpName;
   let stringLetters = stringName.match(/\b(\w)/g);
   let initials;
-
   if (stringLetters && stringLetters.length > 0) {
     initials = stringLetters.map((letter) => letter.toUpperCase()).join("");
   } else {
     initials = "";
   }
-
   return initials;
 }
 
@@ -82,7 +120,6 @@ function getCurrentDate() {
   const year = today.getFullYear().toString();
   const month = (today.getMonth() + 1).toString().padStart(2, "0"); // Monate werden von 0 bis 11 gezählt, daher +1
   const day = today.getDate().toString().padStart(2, "0");
-
   return year + "-" + month + "-" + day;
 }
 
@@ -99,7 +136,6 @@ function renderHeaderProfilInitials() {
 
 function highlightedNavbar(item) {
   noHighlightNav();
-
   if (item == 1) {
     highlightSelectedNav("navSummary");
     // highlightSelectedNav('navSummary-mobile');
@@ -130,13 +166,11 @@ function highlightSelectedNav(element) {
 
 function noHighlightNav() {
   let navElements = document.querySelectorAll("a.sidebarBox");
-
   for (let i = 0; i < navElements.length; i++) {
     const element = navElements[i];
     element.classList.remove("navHighlighted");
   }
 }
-
 
 // Help
 function hoverBackArrow(arrowID) {
@@ -160,19 +194,18 @@ function closeInfo() {
 }
 
 // Privacy Policy
-async function privacyPolicyInit(){
+async function privacyPolicyInit() {
   await mainInit();
-  highlightedNavbar(6)
+  highlightedNavbar(6);
 }
 
-
 // Legal Notice
-async function legalNoticeInit(){
+async function legalNoticeInit() {
   await mainInit();
-  highlightedNavbar(5)
+  highlightedNavbar(5);
 }
 
 //Head Menu
-function headMenu(){
-  document.getElementById('headMenu').classList.toggle('d-none')
+function headMenu() {
+  document.getElementById("headMenu").classList.toggle("d-none");
 }

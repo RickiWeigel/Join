@@ -94,7 +94,7 @@
 }
 
 .smallInfoBox span {
-    color:  #4589ff;
+    color: #4589ff;
 }
 
 .smallInfoBox:hover * {
@@ -103,7 +103,7 @@
 }
 
 .smallInfoBox:hover {
-    color: white; 
+    color: white;
     padding: 40px;
     transform: scale(1.03);
     background: #005DFF;
@@ -151,7 +151,7 @@
 }
 
 #upcomingDate {
-    font-size: clamp(19px, 1.8vw, 33px)!important;
+    font-size: clamp(19px, 1.8vw, 33px) !important;
     font-weight: 700;
 }
 
@@ -187,55 +187,63 @@
     }
 }
 
-@media (max-width: 1000px){
- 
-    .contentSummary{
+@media (max-width: 1000px) {
+
+    .contentSummary {
         padding: 20px 0;
     }
-    .smallInfoBox{
+
+    .smallInfoBox {
         height: 140px;
     }
-    .information{
+
+    .information {
         overflow-x: auto;
         padding-bottom: 80px;
     }
-    .rightSection{
+
+    .rightSection {
         gap: 6px;
     }
 }
 
-@media (max-width: 800px){
-    .midInfoBox{
+@media (max-width: 800px) {
+    .midInfoBox {
         height: 150px;
         width: 330px;
         padding: 14px 14px;
     }
-    .bigInfoBox{
+
+    .bigInfoBox {
         gap: 16px;
     }
-    .rightSection{
+
+    .rightSection {
         align-items: flex-start;
     }
- 
-    .information img{
+
+    .information img {
         width: 46px;
         height: 46px;
     }
-    .smallInfoBox{
+
+    .smallInfoBox {
         height: 140px;
         width: 160px;
         padding: 20px;
     }
-    h2{
+
+    h2 {
         font-size: 36px;
     }
 }
 
-@media (max-width:400px){
-    .sideBar{
-        padding: 8px 8px!important;
+@media (max-width:400px) {
+    .sideBar {
+        padding: 8px 8px !important;
     }
-    .information{
+
+    .information {
         min-width: 350px;
     }
 }

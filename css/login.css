@@ -308,9 +308,10 @@
 }
 
 @media (max-width: 750px) {
-    #loginPage{
+    #loginPage {
         justify-content: space-between;
     }
+
     #loginSignupBox {
         margin-bottom: 36px;
         margin-top: 16px;

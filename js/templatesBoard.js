@@ -405,3 +405,21 @@ function renderAddTaskMessage(){
 </div>
   `
   }
+
+  function renderEditPopupFormTemplate(id,userTask){
+    return`
+    <form onsubmit="checkRequiredEdit(${id}); return false;" class="popupTask"
+    id="popupTask" onclick="event.stopPropagation()">
+    <div style=padding-right:40px; class="closePopupEdit"><img id="closeBtn" onmouseover="closeHover()"
+      onmouseleave="closeLeave()" onclick=hidePopup("hidePopupTask()")
+      src="../../assets/img/functionButtons/close.png"></div>
+    <div class="popupTaskContent" id="popupTaskContent">
+      ${renderEditPopupTemplateTop(userTask)}
+      ${renderEditPopupTemplatePriorities()}
+      ${renderEditPopupTemplateCategories(userTask)}
+      ${renderEditPopupTemplateAssignedTo(id)}
+      ${renderEditPopupTemplateSubtastks(id)}
+    </div>
+  </form>
+    `
+  }

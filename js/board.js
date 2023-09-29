@@ -28,7 +28,6 @@ function searchTasks() {
     let taskTitle = taskCards[i]
       .getElementsByClassName("taskHeadline")[0]
       .innerText.toLowerCase();
-
     if (startsWithLetters(taskTitle, searchInput)) {
       taskCards[i].style.display = "block";
     } else {
@@ -39,7 +38,6 @@ function searchTasks() {
 
 function startsWithLetters(taskTitle, searchInput) {
   let taskWords = taskTitle.toLowerCase().split(" ");
-
   for (let i = 0; i < searchInput.length; i++) {
     let char = searchInput[i];
     if (!taskWords.some((word) => word[i] === char)) {
@@ -154,104 +152,11 @@ function getPriorityImageUrl(priority) {
   }
 }
 
-async function getPriorityImageUrlPopup(priority) {
-  let priorityInfo = {
-    Low: { text: "Low", imgSrc: "/assets/img/board/iconLowSmall.png" },
-    Medium: { text: "Medium", imgSrc: "/assets/img/board/iconMediumSmall.png" },
-    Urgent: { text: "Urgent", imgSrc: "/assets/img/board/iconUrgentSmall.png" },
-  };
-  let element = document.getElementById("popupTaskPriority");
-  let info = priorityInfo[priority];
-  if (info) {
-    element.innerHTML = `
-      <span>${info.text}</span>
-      <img src="${info.imgSrc}">
-    `;
-  }
-}
-
-function openPopupTask(id) {
-  hidePopupStatus = 0;
-  renderPopup(id);
-  const popupContainer = document.getElementById("popupContainer");
-  const popupTask = document.getElementById("popupTask");
-  popupContainer.classList.remove("hidePopup");
-  popupContainer.classList.add("containerPopupActive");
-  popupTask.classList.add("popupTaskSlideIn");
-}
-
-function openEdit(userTaskCategoryName, userTaskCategoryColor, id) {
-  selectedCategory = {
-    color: userTaskCategoryColor,
-    name: userTaskCategoryName,
-  };
-  renderEditPopup(id);
-  const popupContainer = document.getElementById("popupContainer");
-  const popupTask = document.getElementById("popupTask");
-  popupContainer.classList.remove("hidePopup");
-  popupContainer.classList.add("containerPopupActive");
-  popupTask.classList.add("popupTaskSlideIn");
-}
-
-function hidePopup() {
-  if (hidePopupStatus == 0) {
-    hidePopupTask();
-  } else {
-    hidePopupAddTask();
-  }
-}
-
-function hidePopupTask() {
-  const popupContainer = document.getElementById("popupContainer");
-  const popupTask = document.getElementById("popupTask");
-  popupTask.classList.add("popupTaskSlideOut");
-  popupContainer.classList.remove("containerPopupActive");
-  popupContainer.classList.add("hidePopup");
-  groupTasksByProgressStatus(users[activeUser]);
-  hidePopupStatus = 0;
-}
-
-async function renderPopup(id) {
-  let userTask = users[activeUser].userTasks[id];
-  document.getElementById("popupContainer").innerHTML = `
-  <div class="popupTask" id="popupTask" onclick="event.stopPropagation()">
-    <div class="popupTaskContent" id="popupTaskContent">
-    ${renderPopupTemplateTop(userTask)}
-    ${renderPopupTemplateMid(userTask)}
-    ${renderPopupTemplateBot(userTask, id)}
-  `;
-  hideSubtaskHeadlineIfZeroSubtasks(userTask);
-  await getPriorityImageUrlPopup(userTask.priority);
-  renderSubtasksTask(id);
-  renderContactsPopup(id);
-}
-
 function hideSubtaskHeadlineIfZeroSubtasks(userTask) {
   let subtaskLength = userTask.subtasks.length;
   if (subtaskLength == 0) {
     document.getElementById("subHeading").classList.add("d-none");
   }
-}
-
-async function renderEditPopup(id) {
-  let userTask = users[activeUser].userTasks[id];
-  document.getElementById("popupContainer").innerHTML = `
-  <form onsubmit="checkRequiredEdit(${id}); return false;" class="popupTask"
-    id="popupTask" onclick="event.stopPropagation()">
-    <div style=padding-right:40px; class="closePopupEdit"><img id="closeBtn" onmouseover="closeHover()"
-      onmouseleave="closeLeave()" onclick=hidePopup("hidePopupTask()")
-      src="../../assets/img/functionButtons/close.png"></div>
-    <div class="popupTaskContent" id="popupTaskContent">
-      ${renderEditPopupTemplateTop(userTask)}
-      ${renderEditPopupTemplatePriorities()}
-      ${renderEditPopupTemplateCategories(userTask)}
-      ${renderEditPopupTemplateAssignedTo(id)}
-      ${renderEditPopupTemplateSubtastks(id)}
-  </div>
-    </form>
-  `;
-  await renderSubtasksTaskEdit(id);
-  renderPrioritySelected(userTask.priority);
 }
 
 function hideRequiredFieldsEdit() {
@@ -281,17 +186,13 @@ async function checkRequiredEdit(id) {
 function retainDateValue(input) {
   const dateValue = input.value;
   if (dateValue) {
-    // Überprüfen, ob der eingegebene Wert ein gültiges Datum ist (ISO-8601-Format)
     const isValidDate = /^(\d{4})-(\d{2})-(\d{2})$/.test(dateValue);
     if (isValidDate) {
-      // Der eingegebene Wert ist ein gültiges Datum, daher den Typ auf 'date' ändern
       input.type = "date";
     } else {
-      // Der eingegebene Wert ist nicht im erwarteten Format, daher den Wert behalten
       input.value = dateValue;
     }
   } else {
-    // Das Eingabefeld ist leer, daher den Typ auf 'text' ändern
     input.type = "text";
   }
 }
@@ -504,21 +405,6 @@ function updateCheckboxStatusTask(id) {
   }
 }
 
-function renderContactsPopup(id) {
-  let userContact = users[activeUser].userTasks[id].assignedTo;
-  for (let j = 0; j < userContact.length; j++) {
-    let contactColor = userContact[j].color;
-    document.getElementById("popupAssignedTo").innerHTML += `
-    <div class="popupAssignedTo" >
-      <div class="contact box" style="background-color: ${contactColor}">
-      <span id="contactInitials">${userContact[j].initials}</span>
-      </div>
-      <span>${userContact[j].name}</span>
-    </div>
-    `;
-  }
-}
-
 function allowDrop(ev) {
   ev.preventDefault();
 }
@@ -600,15 +486,11 @@ function subtaskActiveInputBoard() {
 
 async function addNewSubTasksBoard() {
   let newSubtask = document.getElementById("subtaskInput").value;
-  if (newSubtask.length < 2) {
-    console.log("Zu kurz"); //Fehlt noch die Meldung im Browser
-  } else {
-    newSubtasks.push(newSubtask);
-    await setItem(`users`, JSON.stringify(users));
-    newSubtask = document.getElementById("subtaskInput").value = "";
-    clearSubtaskInput();
-    renderSubtasksBoard();
-  }
+  newSubtasks.push(newSubtask);
+  await setItem(`users`, JSON.stringify(users));
+  newSubtask = document.getElementById("subtaskInput").value = "";
+  clearSubtaskInput();
+  renderSubtasksBoard();
 }
 
 async function renderSubtasksBoard() {
@@ -626,80 +508,19 @@ async function renderSubtasksBoard() {
   addTaskContentBoard.scrollTop = addTaskContentBoard.scrollHeight;
 }
 
-function renderPopupAddTask(addTaskStatus) {
-  selectProgressStatus = addTaskStatus;
-  document.getElementById("popupContainer").innerHTML = `
-  <div class="popupAddTask" id="popupAddTask" onclick="event.stopPropagation()">
-    <div class="titleAddTask">Add Task</div>
-    <form onsubmit="addTaskPopup(); return false;" class="addTaskForm" id="addTaskForm">
-        <div  class="boardAddTaskContent" id="addTaskContent">
-          <div class="boardAddTaskSection" id="boardAddTaskSection">
-            ${renderPopupAddTaskTemplateTop()}
-            ${renderPopupAddTaskTemplatePriorities()}
-            ${renderPopupAddTaskTemplateAssignedTo()}
-            ${renderPopupAddTaskTemplateCategories()}
-            ${renderPopupAddTaskTemplateSubtasks()}   
-            <button form="addTaskForm" class="btn-blue btn-blue-AddTask">Creat Task <img src="/assets/img/functionButtons/akar-icons_check.png"></button>
-
-          </div>
-
-        </div>
-
-    </form>
-  <div class="close-btn" onclick="hidePopup('hidePopupTask()')">
-    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-      <path d="M9.00007 10.8642L2.46673 17.389C2.22229 17.6331 1.91118 17.7552 1.5334 17.7552C1.15562 17.7552 0.84451 17.6331 0.600065 17.389C0.355621 17.1449 0.233398 16.8342 0.233398 16.4569C0.233398 16.0796 0.355621 15.7689 0.600065 15.5248L7.1334 9.00002L0.600065 2.47527C0.355621 2.23115 0.233398 1.92045 0.233398 1.54316C0.233398 1.16588 0.355621 0.855181 0.600065 0.611058C0.84451 0.366935 1.15562 0.244873 1.5334 0.244873C1.91118 0.244873 2.22229 0.366935 2.46673 0.611058L9.00007 7.13581L15.5334 0.611058C15.7778 0.366935 16.089 0.244873 16.4667 0.244873C16.8445 0.244873 17.1556 0.366935 17.4001 0.611058C17.6445 0.855181 17.7667 1.16588 17.7667 1.54316C17.7667 1.92045 17.6445 2.23115 17.4001 2.47527L10.8667 9.00002L17.4001 15.5248C17.6445 15.7689 17.7667 16.0796 17.7667 16.4569C17.7667 16.8342 17.6445 17.1449 17.4001 17.389C17.1556 17.6331 16.8445 17.7552 16.4667 17.7552C16.089 17.7552 15.7778 17.6331 15.5334 17.389L9.00007 10.8642Z" fill="#4589FF"/>
-    </svg>
-  </div>
-  </div>
-  ${renderAddTaskMessage()}
-  `;
-}
-
-function checkSubtasks(completedTasks, subtaskLength, completedProgress, id){
-  if(subtaskLength==0){
+function checkSubtasks(completedTasks, subtaskLength, completedProgress, id) {
+  if (subtaskLength == 0) {
     return `
     <div class="progressStatus d-none" id="progressStatus${id}"></div>
-    `
-  }
-  else{
-    return`
+    `;
+  } else {
+    return `
     <div class="progressStatus" id="progressStatus${id}">
         <div class="progress">
           <div class="progressCompleted" style="width: ${completedProgress}%;"></div>
         </div>
       <span>${completedTasks}/${subtaskLength} Done</span>
     </div>
-    `
+    `;
   }
-}
-
-async function addTaskPopup() {
-  const requiredFieldsValid = await checkRequired();
-  if (requiredFieldsValid) {
-    await addTask();
-    setTimeout(function () {
-      hidePopupAddTask();
-    }, 1000);
-  }
-  groupTasksByProgressStatus(users[activeUser]);
-}
-
-async function openPopupAddTask(addTaskStatus) {
-  renderPopupAddTask(addTaskStatus);
-  const popupContainer = document.getElementById("popupContainer");
-  const popupTask = document.getElementById("popupAddTask");
-  popupContainer.classList.remove("hidePopup");
-  popupContainer.classList.add("containerPopupActive");
-  popupTask.classList.add("popupAddTaskSlideIn");
-  hidePopupStatus = 1;
-}
-
-function hidePopupAddTask() {
-  const popupContainer = document.getElementById("popupContainer");
-  const popupTask = document.getElementById("popupAddTask");
-  popupTask.classList.add("popupAddTaskSlideOut");
-  popupContainer.classList.remove("containerPopupActive");
-  popupContainer.classList.add("hidePopup");
-  hidePopupStatus = 0;
 }

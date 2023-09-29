@@ -58,19 +58,19 @@
     /* Hier können Sie die Übergangsdauer anpassen */
 }
 
-.headline{
+.headline {
     font-size: clamp(12px, 2vw, 19px);
 }
 
-@media (max-width: 1000px){
-    .headerRightContainer{
+@media (max-width: 1000px) {
+    .headerRightContainer {
         gap: 16px;
     }
 }
 
-@media (max-width: 800px){
-    .headline{
-        display: none!important;
+@media (max-width: 800px) {
+    .headline {
+        display: none !important;
     }
 
 }

@@ -124,7 +124,6 @@ function getCurrentDate() {
 }
 
 function redirectToBoard() {
-  // Leiten Sie auf die gewünschte Seite weiter
   window.location.href = "/board.html";
 }
 
@@ -138,19 +137,16 @@ function highlightedNavbar(item) {
   noHighlightNav();
   if (item == 1) {
     highlightSelectedNav("navSummary");
-    // highlightSelectedNav('navSummary-mobile');
   }
   if (item == 2) {
     highlightSelectedNav("navBoard");
-    // highlightSelectedNav('navBoard-mobile');
   }
   if (item == 3) {
     highlightSelectedNav("navTask");
-    // highlightSelectedNav('navTask-mobile');
   }
   if (item == 4) {
     highlightSelectedNav("navContacts");
-    // highlightSelectedNav('navContacts-mobile');
+
   }
   if (item == 5) {
     highlightSelectedNav("legalNotice");
@@ -175,12 +171,12 @@ function noHighlightNav() {
 // Help
 function hoverBackArrow(arrowID) {
   let arrow = document.getElementById(arrowID);
-  arrow.src = "../assets/img/functionButtons/arrowHover.png"; // Hier die URL des gehoverten Bildes einfügen
+  arrow.src = "../assets/img/functionButtons/arrowHover.png";
 }
 
 function leaveBackArrow(arrowID) {
   let arrow = document.getElementById(arrowID);
-  arrow.src = "/assets/img/functionButtons/arrowDefault.png"; // Hier die URL des normalen Bildes einfügen
+  arrow.src = "/assets/img/functionButtons/arrowDefault.png";
 }
 
 function openInfo() {

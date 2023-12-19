@@ -121,7 +121,6 @@ function renderAlphabetCards(groupedContacts) {
   const alphabetContainer = document.getElementById("contacts-content");
 
   for (const initial in groupedContacts) {
-    // Fügen Sie für jeden Buchstaben eine Alphabet-Karte hinzu
     alphabetContainer.innerHTML += `
               <div class="alphabet-card">
                   <span>${initial}</span>
@@ -211,7 +210,7 @@ async function addEditContact(id) {
 async function contactDelete(id) {
   let indexInArray = findContactById(id);
   let contact = users[activeUser].contacts;
-  contact.splice(indexInArray, 1)[0]; // Das gelöschte Subtask-Element
+  contact.splice(indexInArray, 1)[0];
 
   document.getElementById("contactDetailContainer").innerHTML = ``;
   await setItem(`users`, JSON.stringify(users));

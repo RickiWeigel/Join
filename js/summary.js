@@ -53,28 +53,25 @@ function countUrgentTasks() {
 }
 
 function getFirstName() {
-  const words = users[activeUser].name.split(" "); // Aufteilen des Namens anhand von Leerzeichen
+  const words = users[activeUser].name.split(" ");
   if (words.length > 0) {
-    return words[0]; // Das erste Wort zurückgeben
+    return words[0];
   }
 }
 
 function findClosestDueDate(userTasks) {
   if (userTasks.length === 0) {
-    return "-"; // Rückgabe null, wenn keine Aufgaben vorhanden sind
+    return "-";
   }
   const currentDate = new Date(); // Aktuelles Datum
-  let closestDueDate = new Date(userTasks[0].toDueDate); // Das erste ToDueDate als Ausgangspunkt
-  // Iteriere durch alle Aufgaben, um das nächstgelegene ToDueDate zu finden
+  let closestDueDate = new Date(userTasks[0].toDueDate);
   for (const task of userTasks) {
     const taskDueDate = new Date(task.toDueDate);
-    // Überprüfe, ob das aktuelle ToDueDate näher am aktuellen Datum liegt
     if (taskDueDate > currentDate && taskDueDate < closestDueDate) {
       closestDueDate = taskDueDate;
     }
   }
 
-  // Formatieren und zurückgeben des nächstgelegenen ToDueDate
   const year = closestDueDate.getFullYear();
   const month = (closestDueDate.getMonth() + 1).toString().padStart(2, "0");
   const day = closestDueDate.getDate().toString().padStart(2, "0");
@@ -96,6 +93,6 @@ function formatDate(day, month, year) {
     "November",
     "Dezember",
   ];
-  month = months[month - 1]; // Monatsnamen aus dem Array holen
+  month = months[month - 1];
   return `${month} ${day}, ${year}`;
 }

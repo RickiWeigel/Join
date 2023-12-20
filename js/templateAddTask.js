@@ -57,3 +57,10 @@ function renderPopupAddTaskTemplate() {
 ${renderAddTaskMessage()}
   `;
 }
+
+function renderShowCategory() {
+  document.getElementById("showCategory").innerHTML = `
+    <div id="currentCategory"><span>Select task category</span></div>
+    <img src="../../assets/img/functionButtons/selectorArrow.png"> 
+  `;
+}

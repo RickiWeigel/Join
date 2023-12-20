@@ -34,7 +34,7 @@
             <a href="./login.html"><span class="head-menu-button">Log out</span></a>
         </div>
         <div class="info-container d-none" id="info-container" w3-include-html="\templates\info-template.html"></div>
-        <form onsubmit="requiredAddTask(); return false;" class="addTaskContent" id="addTaskContent">
+        <form onsubmit="requiredAddTask(); return false;" class="addTaskContent" id="addTaskContent" onclick="closeDropdown()">
             <div class="addTaskSection" id="addTaskSection">
                 <div class="section1">
                     <div class="titleContainer">
@@ -89,7 +89,7 @@
                     </div>
                 </div>
 
-                <div class="assignedTo">
+                <div class="assignedTo" onclick="stopClosing()">
                     <div class="assignedToContainer">
                         <span>Assigne to</span>
                         <div id="showInviteNewContact" class="selectContacts d-none">
@@ -115,7 +115,7 @@
                     </div>
                 </div>
 
-                <div class="category">
+                <div class="category" onclick="stopClosing()">
                     <div class="categoryContainer">
                         <span>Category</span>
                         <div id="showCategory" class="selectCategory" onclick="renderCategories()">

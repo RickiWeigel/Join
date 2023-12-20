@@ -9,7 +9,7 @@ let tasks = [];
 let selectedContactsToAssign = [];
 let contactsSelektorOpen = false;
 let taskCategories = [];
-let categorySelektorOpen;
+let categorySelektorOpen = false;
 let priority;
 let taskStatus;
 let newSubtasks = [];
@@ -132,6 +132,7 @@ function renderHeaderProfilInitials() {
       <span>${users[activeUser].initials}</span>
   `;
 }
+
 
 function highlightedNavbar(item) {
   noHighlightNav();

@@ -8,11 +8,13 @@ function renderTaskCardForStatusTemplate(
 ) {
   return `
 <div draggable="true" ondragstart="startDragging(${id})" class="taskCard" id="taskCard${id}" onclick="openPopupTask(${id})">
-    <div class="categoryHeadline" style="background: ${
-      userTask.category.color
-    };">
-        <span>${userTask.category.name}</span>
+    <div class="categoryHeadlineContainer">
+      <div class="categoryHeadline" style="background: ${userTask.category.color};">
+          <span>${userTask.category.name}</span>
+      </div>
+      <img onclick="event.stopPropagation(); openDragMenu()" class="drag-icon" src="assets/img/functionButtons/drag-and-drop-responsiv.png">
     </div>
+    
     <div class="taskHeadline">
         <span>${userTask.taskTitle}</span>
     </div>

@@ -84,31 +84,15 @@ async function renderTaskCardForStatus(taskStatus, id) {
   renderContactInitials(id);
 }
 
+function openDragMenu(){
+  console.log('test')
+}
+
 function hideProgressStatusIfNoSubtasks(id) {
   const progressStatusElement = document.getElementById(`progressStatus${id}`);
   if (!progressStatusElement) {
     progressStatusElement.style.display = "none";
   }
-}
-
-function startDragging(id) {
-  currentDraggedElement = id;
-}
-
-async function moveTo(status, StatusCardId) {
-  let userTask = users[activeUser].userTasks[currentDraggedElement];
-  userTask.progressStatus = status;
-  document.getElementById(StatusCardId).classList.remove("statusCardHighlight");
-  groupTasksByProgressStatus(users[activeUser]);
-  await setItem(`users`, JSON.stringify(users));
-}
-
-function statusCardHighlight(StatusCardId) {
-  document.getElementById(StatusCardId).classList.add("statusCardHighlight");
-}
-
-function removeHighlight(StatusCardId) {
-  document.getElementById(StatusCardId).classList.remove("statusCardHighlight");
 }
 
 function completedProgresses(completedTasks, subtaskLength) {
@@ -405,9 +389,7 @@ function updateCheckboxStatusTask(id) {
   }
 }
 
-function allowDrop(ev) {
-  ev.preventDefault();
-}
+
 
 async function deleteCurrentTask(id) {
   hidePopup();
@@ -498,17 +480,6 @@ async function addNewSubTasksBoard() {
   }
 }
 
-// async function renderSubtasksBoard() {
-//   document.getElementById("addedSubtasks").innerHTML = "";
-//   for (let i = newSubtasks.length - 1; i >= 0; i--) {
-//     document.getElementById("addedSubtasks").innerHTML += `
-//           <div onclick="addToSelectedSubtasks(${i})" class="subtasks">
-//               <img id="checkbox[${i}]" src="../../assets/img/functionButtons/checkbox.png">
-//               <span id="subtasks">${selectedSubtasks[i]}</span>
-//           </div>
-//       `;
-//   }
-// }
 
 function checkSubtasks(completedTasks, subtaskLength, completedProgress, id) {
   if (subtaskLength == 0) {

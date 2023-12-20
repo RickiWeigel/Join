@@ -391,7 +391,7 @@
 }
 
 .popupTaskHeadline {
-    font-size: clamp(36px, 3vw, 42px);
+    font-size: clamp(30px, 3vw, 42px);
     ;
     font-weight: 700;
 }

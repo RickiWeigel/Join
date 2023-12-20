@@ -1,6 +1,7 @@
 async function addTaskInit() {
   await mainInit();
   highlightedNavbar(3);
+  renderPrioritySelected('Medium');
 }
 
 function changeTypInDate() {

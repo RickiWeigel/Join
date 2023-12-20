@@ -140,9 +140,16 @@ async function addTask() {
   await setItem(`users`, JSON.stringify(users));
   resetAllFields();
   addedTaskMessageSlideIn();
+  forwardingOnBoard();
+}
+
+function forwardingOnBoard(){
   setTimeout(function () {
     addedTaskMessageSlideOut();
-  }, 800);
+  }, 700);
+  setTimeout(() => {
+    window.location.href = '/board.html';
+  }, 700);
 }
 
 function addedTaskMessageSlideIn() {

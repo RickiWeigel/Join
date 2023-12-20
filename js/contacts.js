@@ -138,7 +138,7 @@ function renderContactCards(contacts) {
   let contactCardsHTML = "";
   contacts.forEach((contact) => {
     contactCardsHTML += `
-      <div class="contact-card" onclick="renderContactDetails(${contact.id})" id="profil-data-${contact.id}">
+      <div class="contact-card" onclick="renderContactDetails(${contact.id}); toggleHover(this, ${contact.id})" id="profil-data-${contact.id}">
       <div class="profil-pic-min" style="background-color: ${contact.color};">
         <span>${contact.initials}</span>
       </div>
@@ -150,6 +150,14 @@ function renderContactCards(contacts) {
       `;
   });
   return contactCardsHTML;
+}
+
+function toggleHover(element, contactId) {
+  const allElements = document.querySelectorAll('.contact-card');
+  allElements.forEach(el => el.classList.remove('contact-card-highlight'));
+  element.classList.add('contact-card-highlight');
+  renderContactDetails(contactId);
+  contactHighlighted(contactId);
 }
 
 function breakLine(contact) {

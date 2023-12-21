@@ -636,24 +636,20 @@
 @keyframes slideInPopupAddTask {
     from {
         left: 100%;
-        /* Startposition - aus dem Sichtbereich schieben */
     }
 
     to {
         left: calc(100% - 512px);
-        /* Endposition - ganz rechts anzeigen */
     }
 }
 
 @keyframes slideOutPopupAddTask {
     from {
         left: calc(100% - 512px);
-        /* Startposition - ganz rechts anzeigen */
     }
 
     to {
         left: 100%;
-        /* Endposition - aus dem Sichtbereich schieben */
     }
 }
 

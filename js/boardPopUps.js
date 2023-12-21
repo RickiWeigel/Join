@@ -121,6 +121,7 @@ async function openPopupAddTask(addTaskStatus) {
   popupContainer.classList.add("containerPopupActive");
   popupTask.classList.add("popupAddTaskSlideIn");
   hidePopupStatus = 1;
+  renderPrioritySelected('Medium');
 }
 
 function hidePopupAddTask() {

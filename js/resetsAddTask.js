@@ -14,6 +14,7 @@ function resetAllFields() {
   clearPrioritySelected();
   resetCategoryRendering();
   renderSubtasks();
+  renderPrioritySelected("Medium");
 }
 
 function resetAllVariables() {

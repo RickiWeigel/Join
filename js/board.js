@@ -123,7 +123,7 @@ function getStatusCardId(index) {
 
 function renderNoTasks(StatusCardId) {
   document.getElementById(StatusCardId).innerHTML = `
-    <div class="noTasks">no tasks available</div>
+    <div class="noTasks"><span>no tasks available</span></div>
   `;
 }
 

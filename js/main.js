@@ -118,7 +118,7 @@ function getRandomColor() {
 function getCurrentDate() {
   const today = new Date();
   const year = today.getFullYear().toString();
-  const month = (today.getMonth() + 1).toString().padStart(2, "0"); // Monate werden von 0 bis 11 gezählt, daher +1
+  const month = (today.getMonth() + 1).toString().padStart(2, "0");
   const day = today.getDate().toString().padStart(2, "0");
   return year + "-" + month + "-" + day;
 }
@@ -169,7 +169,7 @@ function noHighlightNav() {
   }
 }
 
-// Help
+
 function hoverBackArrow(arrowID) {
   let arrow = document.getElementById(arrowID);
   arrow.src = "../assets/img/functionButtons/arrowHover.png";
@@ -190,19 +190,18 @@ function closeInfo() {
   container.classList.add("d-none");
 }
 
-// Privacy Policy
+
 async function privacyPolicyInit() {
   await mainInit();
   highlightedNavbar(6);
 }
 
-// Legal Notice
 async function legalNoticeInit() {
   await mainInit();
   highlightedNavbar(5);
 }
 
-//Head Menu
+
 function headMenu() {
   document.getElementById("headMenu").classList.toggle("d-none");
 }

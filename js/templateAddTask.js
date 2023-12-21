@@ -64,3 +64,12 @@ function renderShowCategory() {
     <img src="../../assets/img/functionButtons/selectorArrow.png"> 
   `;
 }
+
+function renderSubtasksTemplate(i) {
+  document.getElementById("addedSubtasks").innerHTML += `
+  <div onclick="addToSelectedSubtasks(${i})" class="subtasks">
+      <img id="checkbox[${i}]" src="../../assets/img/functionButtons/checkboxActive.png">
+      <span id="subtasks">${selectedSubtasks[i]}</span>
+  </div>
+`;
+}

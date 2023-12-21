@@ -7,7 +7,7 @@ function renderTaskCardForStatusTemplate(
   id
 ) {
   return `
-<div draggable="true" ondragstart="startDragging(${id})" class="taskCard" id="taskCard${id}" onclick="">
+<div draggable="true" ondragstart="startDragging(${id})" class="taskCard" id="taskCard${id}" onclick="openPopupTask(${id})">
 
 <div class="dragMenu" style="display: none;" onclick="doNotCloseOverlay(event)">
     <div class="drag-menu-title">Move To:</div>

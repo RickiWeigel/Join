@@ -364,12 +364,7 @@ async function addNewSubTasks() {
 async function renderSubtasks() {
   document.getElementById("addedSubtasks").innerHTML = "";
   for (let i = selectedSubtasks.length - 1; i >= 0; i--) {
-    document.getElementById("addedSubtasks").innerHTML += `
-          <div onclick="addToSelectedSubtasks(${i})" class="subtasks">
-              <img id="checkbox[${i}]" src="../../assets/img/functionButtons/checkboxActive.png">
-              <span id="subtasks">${selectedSubtasks[i]}</span>
-          </div>
-      `;
+    renderSubtasksTemplate(i);
   }
 }
 

@@ -42,13 +42,9 @@ function countTasksByProgressStatus() {
 
 function countUrgentTasks() {
   const userTasks = users[activeUser].userTasks;
-
-  // Filtern Sie die Tasks nach priority
   const counterUrgentTasks = userTasks.filter(
     (task) => task.priority === "Urgent"
   ).length;
-
-  // Geben Sie die Anzahl der Tasks mit priority: "Urgent" zurück
   return counterUrgentTasks;
 }
 
@@ -63,7 +59,7 @@ function findClosestDueDate(userTasks) {
   if (userTasks.length === 0) {
     return "-";
   }
-  const currentDate = new Date(); // Aktuelles Datum
+  const currentDate = new Date();
   let closestDueDate = new Date(userTasks[0].toDueDate);
   for (const task of userTasks) {
     const taskDueDate = new Date(task.toDueDate);

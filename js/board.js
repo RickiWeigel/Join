@@ -468,22 +468,17 @@ function renderContactsToAssignEdit(id) {
 function updateCheckboxStatusAssignedTo(id) {
   const contacts = users[activeUser].contacts;
   const assignedTo = users[activeUser].userTasks[id].assignedTo;
-  for (let i = 0; i < contacts.length; i++) {
-    let isAssigned = false;
-    for (const assigned of assignedTo) {
-      if (contacts[i].email === assigned.email) {
-        isAssigned = true;
-      }
-    }
+
+  contacts.forEach((contact, i) => {
+    const isAssigned = assignedTo.some((assigned) => contact.email === assigned.email);
     const contactSelector = document.getElementById(`contactSelector[${i}]`);
+
     if (contactSelector) {
-      if (isAssigned) {
-        contactSelector.src = "/assets/img/functionButtons/checkButtonChecked.png";
-      } else {
-        contactSelector.src = "/assets/img/functionButtons/checkButton.png";
-      }
+      contactSelector.src = isAssigned
+        ? "/assets/img/functionButtons/checkButtonChecked.png"
+        : "/assets/img/functionButtons/checkButton.png";
     }
-  }
+  });
 }
 
 async function selectContactsToAssignEdit(id, currentContactId) {

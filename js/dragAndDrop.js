@@ -12,6 +12,7 @@ function allowDrop(ev) {
     document.getElementById(StatusCardId).classList.remove("statusCardHighlight");
     groupTasksByProgressStatus(users[activeUser]);
     await setItem(`users`, JSON.stringify(users));
+    checkEmptyTasks();
   }
   
   function statusCardHighlight(StatusCardId) {

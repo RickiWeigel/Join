@@ -1,18 +1,21 @@
 let currentSubtasks = [];
 let currentDraggedElement;
 let hidePopupStatus;
+let statusVariables = [toDoTasks, inProgressTasks, awaitFeedbackTasks, doneTasks];
 
 async function boardInit() {
   await mainInit();
   highlightedNavbar(2);
   groupTasksByProgressStatus(users[activeUser]);
+  checkEmptyTasks();
 }
 
 function groupTasksByProgressStatus(user) {
-  tasksInTodo = 0;
-  tasksInProgress = 0;
-  tasksInAwaitFeedback = 0;
-  tasksInDone = 0;
+  toDoTasks = 0;
+  inProgressTasks = 0;
+  awaitFeedbackTasks = 0;
+  doneTasks = 0;
+  statusVariables = [toDoTasks, inProgressTasks, awaitFeedbackTasks, doneTasks];
   resetTaskContainers();
   let userTasks = user.userTasks;
   for (let i = 0; i < userTasks.length; i++) {
@@ -25,14 +28,50 @@ function searchTasks() {
   let searchInput = document.getElementById("searchInput").value.toLowerCase();
   let taskCards = document.getElementsByClassName("taskCard");
   for (let i = 0; i < taskCards.length; i++) {
-    let taskTitle = taskCards[i]
-      .getElementsByClassName("taskHeadline")[0]
-      .innerText.toLowerCase();
+    let taskTitle = taskCards[i].getElementsByClassName("taskHeadline")[0].innerText.toLowerCase();
     if (startsWithLetters(taskTitle, searchInput)) {
       taskCards[i].style.display = "block";
     } else {
       taskCards[i].style.display = "none";
     }
+  }
+}
+
+function doNotCloseOverlay(event) {
+  event.stopPropagation();
+}
+
+function openDragMenu(el) {
+  let dragMenu = el.closest(".taskCard").querySelectorAll(".dragMenu");
+
+  for (let i = 0; i < dragMenu.length; i++) {
+    if (dragMenu[i].style.display === "none") {
+      closeAllDragMenu();
+      dragMenu[i].style.display = "flex";
+    } else {
+      dragMenu[i].style.display = "none";
+    }
+  }
+  isSameStatus(el);
+}
+
+function isSameStatus(el) {
+  let status = el.closest(".processSection").querySelectorAll(".status-responsiv");
+  let currentStatus = el.closest(".singleCategory").querySelector(".singleCategoryHeader div");
+
+  for (let i = 0; i < status.length; i++) {
+    if (currentStatus.innerHTML == status[i].innerHTML) {
+      status[i].style.opacity = "0.3";
+      status[i].style.pointerEvents = "none";
+    }
+  }
+}
+
+function closeAllDragMenu() {
+  let dragMenu = document.querySelectorAll(".dragMenu");
+
+  for (let i = 0; i < dragMenu.length; i++) {
+    dragMenu[i].style.display = "none";
   }
 }
 
@@ -50,18 +89,43 @@ function startsWithLetters(taskTitle, searchInput) {
 function sortProgress(task, id) {
   switch (task.progressStatus) {
     case "toDo":
+      toDoTasks++;
       renderTaskCardForStatus("toDoTasks", id);
       break;
     case "inProgress":
+      inProgressTasks++;
       renderTaskCardForStatus("inProgressTasks", id);
       break;
     case "awaitFeedback":
+      awaitFeedbackTasks++;
       renderTaskCardForStatus("awaitFeedbackTasks", id);
       break;
     case "done":
+      doneTasks++;
       renderTaskCardForStatus("doneTasks", id);
       break;
   }
+  statusVariables = [toDoTasks, inProgressTasks, awaitFeedbackTasks, doneTasks];
+}
+
+function checkEmptyTasks() {
+    for (let i = 0; i < statusVariables.length; i++) {
+    if (statusVariables[i] == 0) {
+      renderNoTasks(getStatusCardId(i));
+    }
+  }
+  
+}
+
+function getStatusCardId(index) {
+  var statusCardIds = ["toDoTasks", "inProgressTasks", "awaitFeedbackTasks", "doneTasks"];
+  return statusCardIds[index];
+}
+
+function renderNoTasks(StatusCardId) {
+  document.getElementById(StatusCardId).innerHTML = `
+    <div class="noTasks">no tasks available</div>
+  `;
 }
 
 async function renderTaskCardForStatus(taskStatus, id) {
@@ -71,21 +135,10 @@ async function renderTaskCardForStatus(taskStatus, id) {
   let completedProgress = completedProgresses(completedTasks, subtaskLength);
   let priorityImageUrl = getPriorityImageUrl(userTask.priority);
   document.getElementById(taskStatus).innerHTML += `
-    ${renderTaskCardForStatusTemplate(
-      userTask,
-      completedTasks,
-      subtaskLength,
-      completedProgress,
-      priorityImageUrl,
-      id
-    )}
+    ${renderTaskCardForStatusTemplate(userTask, completedTasks, subtaskLength, completedProgress, priorityImageUrl, id)}
   `;
   hideProgressStatusIfNoSubtasks(id);
   renderContactInitials(id);
-}
-
-function openDragMenu(){
-  console.log('test')
 }
 
 function hideProgressStatusIfNoSubtasks(id) {
@@ -157,10 +210,7 @@ async function checkRequiredEdit(id) {
   let description = document.getElementById("descriptionEdit").value;
   let date = document.getElementById("datepicker").value;
   const titleRequired = checkRequiredField(taskTitle, "requiredTitle");
-  const descriptionRequired = checkRequiredField(
-    description,
-    "requiredDescription"
-  );
+  const descriptionRequired = checkRequiredField(description, "requiredDescription");
   const dateRequired = checkRequiredField(date, "requiredDate");
   if (!titleRequired && !descriptionRequired && !dateRequired) {
     editTask(users[activeUser].userTasks[id], id);
@@ -389,8 +439,6 @@ function updateCheckboxStatusTask(id) {
   }
 }
 
-
-
 async function deleteCurrentTask(id) {
   hidePopup();
   users[activeUser].userTasks.splice(id, 1);
@@ -430,8 +478,7 @@ function updateCheckboxStatusAssignedTo(id) {
     const contactSelector = document.getElementById(`contactSelector[${i}]`);
     if (contactSelector) {
       if (isAssigned) {
-        contactSelector.src =
-          "/assets/img/functionButtons/checkButtonChecked.png";
+        contactSelector.src = "/assets/img/functionButtons/checkButtonChecked.png";
       } else {
         contactSelector.src = "/assets/img/functionButtons/checkButton.png";
       }
@@ -442,9 +489,7 @@ function updateCheckboxStatusAssignedTo(id) {
 async function selectContactsToAssignEdit(id, currentContactId) {
   const { email } = users[activeUser].contacts[currentContactId];
   const contactAssignedTo = users[activeUser].userTasks[id].assignedTo;
-  const isContactAssigned = contactAssignedTo.some(
-    (contact) => contact.email === email
-  );
+  const isContactAssigned = contactAssignedTo.some((contact) => contact.email === email);
   if (isContactAssigned) {
     contactAssignedTo.splice(currentContactId, 1);
   } else {
@@ -479,7 +524,6 @@ async function addNewSubTasksBoard() {
     await renderSubtasks();
   }
 }
-
 
 function checkSubtasks(completedTasks, subtaskLength, completedProgress, id) {
   if (subtaskLength == 0) {

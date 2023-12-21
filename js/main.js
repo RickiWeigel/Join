@@ -1,9 +1,9 @@
 let userlogin = false;
 let activeUser;
-let tasksInTodo = 0;
-let tasksInProgress = 0;
-let tasksInAwaitFeedback = 0;
-let tasksInDone = 0;
+let toDoTasks = 0;
+let inProgressTasks = 0;
+let awaitFeedbackTasks = 0;
+let doneTasks = 0;
 let currentDate = getCurrentDate();
 let tasks = [];
 let selectedContactsToAssign = [];

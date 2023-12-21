@@ -7,12 +7,21 @@ function renderTaskCardForStatusTemplate(
   id
 ) {
   return `
-<div draggable="true" ondragstart="startDragging(${id})" class="taskCard" id="taskCard${id}" onclick="openPopupTask(${id})">
+<div draggable="true" ondragstart="startDragging(${id})" class="taskCard" id="taskCard${id}" onclick="">
+
+<div class="dragMenu" style="display: none;" onclick="doNotCloseOverlay(event)">
+    <div class="drag-menu-title">Move To:</div>
+    <div onclick="moveTo('toDo','toDoTasks')" class="status-responsiv">ToDo</div>
+    <div onclick="moveTo('inProgress','inProgressTasks')" class="status-responsiv">In Progress</div>
+    <div onclick="moveTo('awaitFeedback','awaitFeedbackTasks')" class="status-responsiv">Awaiting Feedback</div>
+    <div onclick="moveTo('done','doneTasks')" class="status-responsiv">Done</div>
+</div>
+
     <div class="categoryHeadlineContainer">
       <div class="categoryHeadline" style="background: ${userTask.category.color};">
           <span>${userTask.category.name}</span>
       </div>
-      <img onclick="event.stopPropagation(); openDragMenu()" class="drag-icon" src="assets/img/functionButtons/drag-and-drop-responsiv.png">
+      <img onclick="startDragging(${id}); openDragMenu(this); doNotCloseOverlay(event);" class="drag-icon" src="assets/img/functionButtons/drag-and-drop-responsiv.png">
     </div>
     
     <div class="taskHeadline">
@@ -28,6 +37,7 @@ function renderTaskCardForStatusTemplate(
 </div>
     `;
 }
+
 
 function renderContactInitialsLongTemplate(taskContact, newColor, userContact) {
   taskContact.innerHTML = `

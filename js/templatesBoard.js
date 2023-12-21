@@ -315,7 +315,7 @@ function renderPopupAddTaskTemplatePriorities() {
 
 function renderPopupAddTaskTemplateAssignedTo() {
   return `
-<div class="assignedTo">
+<div class="assignedTo" onclick="stopClosing()">
   <div class="assignedToContainer">
     <span>Assigne to</span>
     <div id="showInviteNewContact" class="selectContacts d-none">
@@ -328,7 +328,7 @@ function renderPopupAddTaskTemplateAssignedTo() {
             src="/assets/img/functionButtons/checkedIconSelector.png">
     </div>
 
-    <div class="selectContacts" id="selectContacts" onclick="renderContactsToAssign()">
+    <div class="selectContacts" id="selectContacts" onclick="renderContactsToAssign(); closeDropDownCategories()">
         <span>Select contacts to assign</span>
         <img src="../../assets/img/functionButtons/selectorArrow.png">
     </div>
@@ -347,10 +347,10 @@ function renderPopupAddTaskTemplateAssignedTo() {
 
 function renderPopupAddTaskTemplateCategories() {
   return `
-<div class="category">
+<div class="category" onclick="stopClosing()">
     <div class="categoryContainer">
         <span>Category</span>
-        <div id="showCategory" class="selectCategory" onclick="renderCategories()">
+        <div id="showCategory" class="selectCategory" onclick="renderCategories(); closeDropDownContacts()">
             <div id="currentCategory"><span>Select task category</span></div>
             <img src="../../assets/img/functionButtons/selectorArrow.png">
         </div>

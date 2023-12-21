@@ -36,7 +36,7 @@ function renderPopupAddTaskTemplate() {
   return `
   <div class="popupAddTask" id="popupAddTask" onclick="event.stopPropagation()">
   <div class="titleAddTask">Add Task</div>
-  <form onsubmit="addTaskPopup(); return false;" class="addTaskForm" id="addTaskForm">
+  <form onsubmit="addTaskPopup(); return false;" class="addTaskForm" id="addTaskForm" onclick="closeDropdown()">
       <div  class="boardAddTaskContent" id="addTaskContent">
         <div class="boardAddTaskSection" id="boardAddTaskSection">
           ${renderPopupAddTaskTemplateTop()}

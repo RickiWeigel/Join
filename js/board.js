@@ -109,12 +109,11 @@ function sortProgress(task, id) {
 }
 
 function checkEmptyTasks() {
-    for (let i = 0; i < statusVariables.length; i++) {
+  for (let i = 0; i < statusVariables.length; i++) {
     if (statusVariables[i] == 0) {
       renderNoTasks(getStatusCardId(i));
     }
   }
-  
 }
 
 function getStatusCardId(index) {
@@ -474,9 +473,7 @@ function updateCheckboxStatusAssignedTo(id) {
     const contactSelector = document.getElementById(`contactSelector[${i}]`);
 
     if (contactSelector) {
-      contactSelector.src = isAssigned
-        ? "/assets/img/functionButtons/checkButtonChecked.png"
-        : "/assets/img/functionButtons/checkButton.png";
+      contactSelector.src = isAssigned ? "/assets/img/functionButtons/checkButtonChecked.png" : "/assets/img/functionButtons/checkButton.png";
     }
   });
 }

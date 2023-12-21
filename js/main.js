@@ -169,7 +169,6 @@ function noHighlightNav() {
   }
 }
 
-
 function hoverBackArrow(arrowID) {
   let arrow = document.getElementById(arrowID);
   arrow.src = "../assets/img/functionButtons/arrowHover.png";
@@ -178,6 +177,14 @@ function hoverBackArrow(arrowID) {
 function leaveBackArrow(arrowID) {
   let arrow = document.getElementById(arrowID);
   arrow.src = "/assets/img/functionButtons/arrowDefault.png";
+}
+
+function clearBtnOnHover() {
+  document.getElementById("clearBtn").src = "/assets/img/functionButtons/icon_cancel_blue.png";
+}
+
+function clearBtnLeaveHover() {
+  document.getElementById("clearBtn").src = "/assets/img/functionButtons/icon_cancel.png";
 }
 
 function openInfo() {
@@ -190,6 +197,9 @@ function closeInfo() {
   container.classList.add("d-none");
 }
 
+function stopClosing() {
+  event.stopPropagation();
+}
 
 async function privacyPolicyInit() {
   await mainInit();
@@ -200,7 +210,6 @@ async function legalNoticeInit() {
   await mainInit();
   highlightedNavbar(5);
 }
-
 
 function headMenu() {
   document.getElementById("headMenu").classList.toggle("d-none");

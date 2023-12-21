@@ -15,14 +15,6 @@ function openCalendar() {
   document.getElementById("datepicker").focus();
 }
 
-function clearBtnOnHover() {
-  document.getElementById("clearBtn").src = "/assets/img/functionButtons/icon_cancel_blue.png";
-}
-
-function clearBtnLeaveHover() {
-  document.getElementById("clearBtn").src = "/assets/img/functionButtons/icon_cancel.png";
-}
-
 function renderContactsToAssign() {
   let contactToAssigned = document.getElementById("contactsToAssign");
   contactToAssigned.classList.remove("d-none");
@@ -50,8 +42,8 @@ function openDropDownContacts(contactToAssigned) {
   contactsSelektorOpen = true;
 }
 
-function closeDropDownContacts(contactToAssigned) {
-  contactToAssigned.innerHTML = ``;
+function closeDropDownContacts() {
+  document.getElementById("contactsToAssign").innerHTML = ``;
   contactsSelektorOpen = false;
 }
 

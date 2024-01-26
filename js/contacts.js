@@ -121,6 +121,7 @@ function renderAlphabetCards(groupedContacts) {
   const alphabetContainer = document.getElementById("contacts-content");
 
   for (const initial in groupedContacts) {
+    // Fügen Sie für jeden Buchstaben eine Alphabet-Karte hinzu
     alphabetContainer.innerHTML += `
               <div class="alphabet-card">
                   <span>${initial}</span>
@@ -138,7 +139,7 @@ function renderContactCards(contacts) {
   let contactCardsHTML = "";
   contacts.forEach((contact) => {
     contactCardsHTML += `
-      <div class="contact-card" onclick="renderContactDetails(${contact.id}); toggleHover(this, ${contact.id})" id="profil-data-${contact.id}">
+      <div class="contact-card" onclick="renderContactDetails(${contact.id})" id="profil-data-${contact.id}">
       <div class="profil-pic-min" style="background-color: ${contact.color};">
         <span>${contact.initials}</span>
       </div>
@@ -150,14 +151,6 @@ function renderContactCards(contacts) {
       `;
   });
   return contactCardsHTML;
-}
-
-function toggleHover(element, contactId) {
-  const allElements = document.querySelectorAll('.contact-card');
-  allElements.forEach(el => el.classList.remove('contact-card-highlight'));
-  element.classList.add('contact-card-highlight');
-  renderContactDetails(contactId);
-  contactHighlighted(contactId);
 }
 
 function breakLine(contact) {
@@ -218,7 +211,7 @@ async function addEditContact(id) {
 async function contactDelete(id) {
   let indexInArray = findContactById(id);
   let contact = users[activeUser].contacts;
-  contact.splice(indexInArray, 1)[0];
+  contact.splice(indexInArray, 1)[0]; // Das gelöschte Subtask-Element
 
   document.getElementById("contactDetailContainer").innerHTML = ``;
   await setItem(`users`, JSON.stringify(users));

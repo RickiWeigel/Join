@@ -8,13 +8,15 @@ function resetCategoryRendering() {
 }
 
 function resetAllFields() {
+  // Setzen Sie alle globalen Variablen auf ihre ursprünglichen Werte zurück
   resetAllVariables();
+  // Setzen Sie alle Eingabefelder auf ihre ursprünglichen Werte zurück
   resetAllInputs();
+  // Setzen Sie alle sichtbaren Elemente auf den ursprünglichen Zustand zurück
   resetContactAssignUI();
   clearPrioritySelected();
   resetCategoryRendering();
   renderSubtasks();
-  renderPrioritySelected("Medium");
 }
 
 function resetAllVariables() {

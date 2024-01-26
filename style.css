@@ -1,6 +1,5 @@
 * {
     box-sizing: border-box;
-    user-select: none;
 }
 
 html {
@@ -443,30 +442,5 @@ input[type='date']::-webkit-inner-spin-button {
 
     .what-is-join {
         font-size: 14px;
-    }
-}
-
-@media (max-width:370px) {
-    .popupTaskContent{
-        padding: 18px 10px!important;
-    }
-    
-    .contentBoard{
-        padding: 36px!important;
-    }
-}
-
-@media (max-width:350px) {
-    .findTask{
-        margin-bottom: 30px!important;
-    }
-    .contentBoard{
-        padding: 16px!important;
-    }
-    .midInfoBox {
-        width: 310px!important;
-    }
-    .smallInfoBox{
-        width: 140px!important;
     }
 }

@@ -8,22 +8,11 @@ function renderTaskCardForStatusTemplate(
 ) {
   return `
 <div draggable="true" ondragstart="startDragging(${id})" class="taskCard" id="taskCard${id}" onclick="openPopupTask(${id})">
-
-<div class="dragMenu" style="display: none;" onclick="doNotCloseOverlay(event)">
-    <div class="drag-menu-title">Move To:</div>
-    <div onclick="moveTo('toDo','toDoTasks')" class="status-responsiv">ToDo</div>
-    <div onclick="moveTo('inProgress','inProgressTasks')" class="status-responsiv">In Progress</div>
-    <div onclick="moveTo('awaitFeedback','awaitFeedbackTasks')" class="status-responsiv">Awaiting Feedback</div>
-    <div onclick="moveTo('done','doneTasks')" class="status-responsiv">Done</div>
-</div>
-
-    <div class="categoryHeadlineContainer">
-      <div class="categoryHeadline" style="background: ${userTask.category.color};">
-          <span>${userTask.category.name}</span>
-      </div>
-      <img onclick="startDragging(${id}); openDragMenu(this); doNotCloseOverlay(event);" class="drag-icon" src="assets/img/functionButtons/drag-and-drop-responsiv.png">
+    <div class="categoryHeadline" style="background: ${
+      userTask.category.color
+    };">
+        <span>${userTask.category.name}</span>
     </div>
-    
     <div class="taskHeadline">
         <span>${userTask.taskTitle}</span>
     </div>
@@ -37,7 +26,6 @@ function renderTaskCardForStatusTemplate(
 </div>
     `;
 }
-
 
 function renderContactInitialsLongTemplate(taskContact, newColor, userContact) {
   taskContact.innerHTML = `
@@ -315,7 +303,7 @@ function renderPopupAddTaskTemplatePriorities() {
 
 function renderPopupAddTaskTemplateAssignedTo() {
   return `
-<div class="assignedTo" onclick="stopClosing()">
+<div class="assignedTo">
   <div class="assignedToContainer">
     <span>Assigne to</span>
     <div id="showInviteNewContact" class="selectContacts d-none">
@@ -328,7 +316,7 @@ function renderPopupAddTaskTemplateAssignedTo() {
             src="/assets/img/functionButtons/checkedIconSelector.png">
     </div>
 
-    <div class="selectContacts" id="selectContacts" onclick="renderContactsToAssign(); closeDropDownCategories()">
+    <div class="selectContacts" id="selectContacts" onclick="renderContactsToAssign()">
         <span>Select contacts to assign</span>
         <img src="../../assets/img/functionButtons/selectorArrow.png">
     </div>
@@ -347,10 +335,10 @@ function renderPopupAddTaskTemplateAssignedTo() {
 
 function renderPopupAddTaskTemplateCategories() {
   return `
-<div class="category" onclick="stopClosing()">
+<div class="category">
     <div class="categoryContainer">
         <span>Category</span>
-        <div id="showCategory" class="selectCategory" onclick="renderCategories(); closeDropDownContacts()">
+        <div id="showCategory" class="selectCategory" onclick="renderCategories()">
             <div id="currentCategory"><span>Select task category</span></div>
             <img src="../../assets/img/functionButtons/selectorArrow.png">
         </div>

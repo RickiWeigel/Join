@@ -34,7 +34,7 @@
             <a href="./login.html"><span class="head-menu-button">Log out</span></a>
         </div>
         <div class="info-container d-none" id="info-container" w3-include-html="\templates\info-template.html"></div>
-        <form onsubmit="requiredAddTask(); return false;" class="addTaskContent" id="addTaskContent" onclick="closeDropdown()">
+        <form onsubmit="requiredAddTask(); return false;" class="addTaskContent" id="addTaskContent">
             <div class="addTaskSection" id="addTaskSection">
                 <div class="section1">
                     <div class="titleContainer">
@@ -89,7 +89,7 @@
                     </div>
                 </div>
 
-                <div class="assignedTo" onclick="stopClosing()">
+                <div class="assignedTo">
                     <div class="assignedToContainer">
                         <span>Assigne to</span>
                         <div id="showInviteNewContact" class="selectContacts d-none">
@@ -102,7 +102,7 @@
                                 src="/assets/img/functionButtons/checkedIconSelector.png">
                         </div>
 
-                        <div class="selectContacts" id="selectContacts" onclick="renderContactsToAssign(); closeDropDownCategories()">
+                        <div class="selectContacts" id="selectContacts" onclick="renderContactsToAssign()">
                             <span>Select contacts to assign</span>
                             <img src="../../assets/img/functionButtons/selectorArrow.png">
                         </div>
@@ -115,10 +115,10 @@
                     </div>
                 </div>
 
-                <div class="category" onclick="stopClosing()">
+                <div class="category">
                     <div class="categoryContainer">
                         <span>Category</span>
-                        <div id="showCategory" class="selectCategory" onclick="renderCategories(); closeDropDownContacts()">
+                        <div id="showCategory" class="selectCategory" onclick="renderCategories()">
                             <div id="currentCategory"><span>Select task category</span></div>
                             <img src="/assets/img/functionButtons/selectorArrow.png">
                         </div>
@@ -199,8 +199,6 @@
     <script src="/js/storage.js"></script>
     <script src="/js/main.js"></script>
     <script src="/js/addTask.js"></script>
-    <script src="js/addTaskRender.js"></script>
-    <script src="js/addTasksRequired.js"></script>
     <script src="/js/resetsAddTask.js"></script>
     <script src="js/templateAddTask.js"></script>
     <script src="js/contacts.js"></script>

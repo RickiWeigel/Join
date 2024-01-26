@@ -14,6 +14,7 @@ async function getItem(key) {
   return fetch(url)
     .then((res) => res.json())
     .then((res) => {
+      // Verbesserter code
       if (res.data) {
         return res.data.value;
       }

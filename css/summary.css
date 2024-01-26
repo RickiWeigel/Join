@@ -172,8 +172,6 @@
     .information {
         gap: 15px;
         max-width: 455px;
-        overflow-x: auto;
-        padding-bottom: 80px;
     }
 
     .midInfoBox {
@@ -200,6 +198,11 @@
 
     .smallInfoBox {
         height: 140px;
+    }
+
+    .information {
+        overflow-x: auto;
+        padding-bottom: 80px;
     }
 
     .rightSection {

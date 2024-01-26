@@ -36,7 +36,7 @@ function renderPopupAddTaskTemplate() {
   return `
   <div class="popupAddTask" id="popupAddTask" onclick="event.stopPropagation()">
   <div class="titleAddTask">Add Task</div>
-  <form onsubmit="addTaskPopup(); return false;" class="addTaskForm" id="addTaskForm" onclick="closeDropdown()">
+  <form onsubmit="addTaskPopup(); return false;" class="addTaskForm" id="addTaskForm">
       <div  class="boardAddTaskContent" id="addTaskContent">
         <div class="boardAddTaskSection" id="boardAddTaskSection">
           ${renderPopupAddTaskTemplateTop()}
@@ -56,20 +56,4 @@ function renderPopupAddTaskTemplate() {
 </div>
 ${renderAddTaskMessage()}
   `;
-}
-
-function renderShowCategory() {
-  document.getElementById("showCategory").innerHTML = `
-    <div id="currentCategory"><span>Select task category</span></div>
-    <img src="../../assets/img/functionButtons/selectorArrow.png"> 
-  `;
-}
-
-function renderSubtasksTemplate(i) {
-  document.getElementById("addedSubtasks").innerHTML += `
-  <div onclick="addToSelectedSubtasks(${i})" class="subtasks">
-      <img id="checkbox[${i}]" src="../../assets/img/functionButtons/checkboxActive.png">
-      <span id="subtasks">${selectedSubtasks[i]}</span>
-  </div>
-`;
 }

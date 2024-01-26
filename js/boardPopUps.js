@@ -58,7 +58,7 @@ function hidePopupTask() {
 async function renderPopup(id) {
   let userTask = users[activeUser].userTasks[id];
   document.getElementById("popupContainer").innerHTML = `
-    <div class="popupTask" id="popupTask" onclick="closeDropdown(); event.stopPropagation()">
+    <div class="popupTask" id="popupTask" onclick="event.stopPropagation()">
       <div class="popupTaskContent" id="popupTaskContent">
       ${renderPopupTemplateTop(userTask)}
       ${renderPopupTemplateMid(userTask)}
@@ -121,7 +121,6 @@ async function openPopupAddTask(addTaskStatus) {
   popupContainer.classList.add("containerPopupActive");
   popupTask.classList.add("popupAddTaskSlideIn");
   hidePopupStatus = 1;
-  renderPrioritySelected('Medium');
 }
 
 function hidePopupAddTask() {

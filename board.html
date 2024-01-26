@@ -42,72 +42,49 @@
                 </div>
                 <div class="btn" onclick="openPopupAddTask('toDo')"><span>Add Task +</span></div>
             </div>
-
             <div class="statusCategories">
                 <div class="singleCategory" id="toDo">
-
                     <div class="singleCategoryHeader">
-                        <div>ToDo</div>
+                        <span>To do</span>
                         <img onclick="openPopupAddTask('toDo')" id="plusButton"
                             src="/assets/img/board/plus button v1.png">
                     </div>
-
-                    <div class="processSection">
-                        <div class="statusCard" id="toDoTasks"
-                            ondragover="allowDrop(event); statusCardHighlight('toDoTasks')"
-                            ondragleave="removeHighlight('toDoTasks')" ondrop="moveTo('toDo','toDoTasks')">
-                        </div>
+                    <div class="statusCard" id="toDoTasks"
+                        ondragover="allowDrop(event); statusCardHighlight('toDoTasks')"
+                        ondragleave="removeHighlight('toDoTasks')" ondrop="moveTo('toDo','toDoTasks')">
                     </div>
-
                 </div>
                 <div class="singleCategory" id="inProgress">
-
                     <div class="singleCategoryHeader">
-                        <div>In Progress</div>
+                        <span>In Progress</span>
                         <img onclick="openPopupAddTask('inProgress')" src="/assets/img/board/plus button v1.png">
                     </div>
-
-                    <div class="processSection">
-                        <div class="statusCard" id="inProgressTasks"
-                            ondragover="allowDrop(event); statusCardHighlight('inProgressTasks')"
-                            ondragleave="removeHighlight('inProgressTasks')"
-                            ondrop="moveTo('inProgress','inProgressTasks')">
-                        </div>
+                    <div class="statusCard" id="inProgressTasks"
+                        ondragover="allowDrop(event); statusCardHighlight('inProgressTasks')"
+                        ondragleave="removeHighlight('inProgressTasks')"
+                        ondrop="moveTo('inProgress','inProgressTasks')">
                     </div>
-
                 </div>
                 <div class="singleCategory" id="awaitFeedback">
-
                     <div class="singleCategoryHeader">
-                        <div>Awaiting Feedback</div>
+                        <span>Await Feedback</span>
                         <img onclick="openPopupAddTask('awaitFeedback')" src="/assets/img/board/plus button v1.png">
                     </div>
-
-
-                    <div class="processSection">
-                        <div class="statusCard" id="awaitFeedbackTasks"
-                            ondragover="allowDrop(event); statusCardHighlight('awaitFeedbackTasks')"
-                            ondragleave="removeHighlight('awaitFeedbackTasks')"
-                            ondrop="moveTo('awaitFeedback','awaitFeedbackTasks')">
-                        </div>
+                    <div class="statusCard" id="awaitFeedbackTasks"
+                        ondragover="allowDrop(event); statusCardHighlight('awaitFeedbackTasks')"
+                        ondragleave="removeHighlight('awaitFeedbackTasks')"
+                        ondrop="moveTo('awaitFeedback','awaitFeedbackTasks')">
                     </div>
-
                 </div>
                 <div class="singleCategory" id="done">
-
                     <div class="singleCategoryHeader">
-                        <div>Done</div>
+                        <span>Done</span>
                         <img onclick="openPopupAddTask('done')" src="/assets/img/board/plus button v1.png">
                     </div>
-
-
-                    <div class="processSection">
-                        <div class="statusCard" id="doneTasks"
-                            ondragover="allowDrop(event); statusCardHighlight('doneTasks')"
-                            ondragleave="removeHighlight('doneTasks')" ondrop="moveTo('done','doneTasks')">
-                        </div>
+                    <div class="statusCard" id="doneTasks"
+                        ondragover="allowDrop(event); statusCardHighlight('doneTasks')"
+                        ondragleave="removeHighlight('doneTasks')" ondrop="moveTo('done','doneTasks')">
                     </div>
-
                 </div>
             </div>
         </div>
@@ -126,13 +103,10 @@
 <script src="/js/storage.js"></script>
 <script src="/js/main.js"></script>
 <script src="/js/addTask.js"></script>
-<script src="js/addTaskRender.js"></script>
-<script src="js/addTasksRequired.js"></script>
 <script src="/js/resetsAddTask.js"></script>
 <script src="/js/board.js"></script>
 <script src="/js/boardPopUps.js"></script>
 <script src="/js/templatesBoard.js"></script>
 <script src="js/templateAddTask.js"></script>
-<script src="js/dragAndDrop.js"></script>
 
 </html>

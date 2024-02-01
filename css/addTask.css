@@ -473,14 +473,33 @@ input[type='date']::-webkit-calendar-picker-indicator {
 }
 
 @media (max-width: 800px) {
+
     .btn-container {
         padding-bottom: 180px;
     }
 }
 
 @media (max-width: 500px) {
+    .enterTitle input{
+        font-size: 28px;
+    }
     .priorityContainer {
         flex-direction: column;
         gap: 6px;
     }
+    .addTaskContent{
+        padding: 16px 16px;
+    }
 }
+
+@media (max-width: 380px) {
+    .btn-container{
+        justify-content: space-between;
+        gap: 10px;
+    }
+    .btn-white, .btn-blue{
+        width: 130px;
+        font-size: 19px;
+    }
+}
+

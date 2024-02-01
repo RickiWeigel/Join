@@ -61,10 +61,10 @@
 
 .statusCard {
     width: 100%;
-    min-height: 55vh;
+    height: calc(100% + 50px);
     border-radius: 30px;
     border-color: #3780ff56;
-    padding: 10px 10px 30px;
+    padding: 10px 10px 10px;
     display: flex;
     flex-direction: column;
     gap: 35px;
@@ -74,6 +74,7 @@
     background-color: #3780ff10;
     border-style: dashed;
     border-width: 1px;
+    z-index: 6;
 }
 
 .removeStatusCardHighlight {
@@ -103,7 +104,7 @@
     justify-content: center;
     align-items: center;
     gap: 20px;
-    font-size: 23px;
+    font-size: clamp(18px, 5vw, 23px);
     font-weight: 700;
     text-align: center;
     color: #42526E;
@@ -121,6 +122,7 @@
 }
 
 .taskCard {
+    position: relative;
     display: flex;
     flex-direction: column;
     padding: 18px 19px;
@@ -133,9 +135,11 @@
 
 .taskCard:hover {
     cursor: pointer;
+    box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.288);
 }
 
 .categoryHeadline {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -144,6 +148,37 @@
     color: white;
     border-radius: 8px;
     margin-bottom: 20px;
+}
+
+.dragMenu div {
+    display: none;
+}
+
+.drag-menu-title {
+    text-decoration: underline;
+    font-weight: bold;
+    margin-bottom: 10px;
+    cursor: default !important;
+}
+
+.dragMenu div:hover {
+    display: flex;
+    font-weight: bold;
+}
+
+
+@keyframes openDragMenu {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
 
 .taskHeadline {
@@ -173,6 +208,30 @@
     padding: 0px;
     margin-bottom: 24px;
     gap: 12px;
+}
+
+.noTasks {
+    text-align: center;
+    text-transform: uppercase;
+    display: flex;
+    font-size: clamp(16px, 5vw, 28px);
+    font-weight: bold;
+    color: #3780ffb9;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: calc(100% + 50px);
+    border-radius: 30px;
+    border-color: #3780ff56;
+    padding: 10px 10px 10px;
+    background-color: #3780ff10;
+    border-style: dashed;
+    border-width: 1px;
+}
+
+.processSection {
+    width: 100%;
+    height: calc(100% + 50px);
 }
 
 .progress {
@@ -217,6 +276,28 @@
     height: 35px;
     border: 2px solid #FFFFFF;
     border-radius: 50%;
+}
+
+.categoryHeadlineContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 30px;
+}
+
+
+.drag-icon {
+    display: none;
+    width: 35px;
+    height: 35px;
+    object-fit: contain;
+    cursor: pointer;
+    margin: 0;
+    z-index: 1;
+}
+
+.drag-icon:hover {
+    filter: brightness(0) saturate(100%) invert(46%) sepia(88%) saturate(2186%) hue-rotate(201deg) brightness(101%) contrast(101%);
 }
 
 .box0 {
@@ -391,7 +472,7 @@
 }
 
 .popupTaskHeadline {
-    font-size: clamp(36px, 3vw, 42px);
+    font-size: clamp(30px, 3vw, 42px);
     ;
     font-weight: 700;
 }
@@ -555,24 +636,20 @@
 @keyframes slideInPopupAddTask {
     from {
         left: 100%;
-        /* Startposition - aus dem Sichtbereich schieben */
     }
 
     to {
         left: calc(100% - 512px);
-        /* Endposition - ganz rechts anzeigen */
     }
 }
 
 @keyframes slideOutPopupAddTask {
     from {
         left: calc(100% - 512px);
-        /* Startposition - ganz rechts anzeigen */
     }
 
     to {
         left: 100%;
-        /* Endposition - aus dem Sichtbereich schieben */
     }
 }
 
@@ -610,7 +687,6 @@
     align-items: center;
     scroll-behavior: smooth;
     scrollbar-width: none;
-    /* Firefox Scrollleiste ausblenden */
     -ms-overflow-style: none;
 }
 
@@ -619,6 +695,32 @@
 }
 
 @media (max-width: 1200px) {
+    .drag-icon {
+        display: flex;
+    }
+
+    .dragMenu {
+        position: absolute;
+        background-color: #c9e8f5;
+        width: 90%;
+        height: 90%;
+        font-size: 20px;
+        padding: 10px;
+        flex-direction: column;
+        justify-content: space-evenly;
+        border: 1px solid #0038FF;
+        border-radius: 10px;
+        top: 11px;
+        left: 13px;
+        animation-name: openDragMenu;
+        animation-timing-function: linear;
+        animation-duration: 225ms;
+    }
+
+    .dragMenu div {
+        display: flex;
+    }
+
     .statusCategories {
         flex-direction: column;
     }

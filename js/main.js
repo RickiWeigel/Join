@@ -1,15 +1,15 @@
 let userlogin = false;
 let activeUser;
-let tasksInTodo = 0;
-let tasksInProgress = 0;
-let tasksInAwaitFeedback = 0;
-let tasksInDone = 0;
+let toDoTasks = 0;
+let inProgressTasks = 0;
+let awaitFeedbackTasks = 0;
+let doneTasks = 0;
 let currentDate = getCurrentDate();
 let tasks = [];
 let selectedContactsToAssign = [];
 let contactsSelektorOpen = false;
 let taskCategories = [];
-let categorySelektorOpen;
+let categorySelektorOpen = false;
 let priority;
 let taskStatus;
 let newSubtasks = [];
@@ -118,13 +118,12 @@ function getRandomColor() {
 function getCurrentDate() {
   const today = new Date();
   const year = today.getFullYear().toString();
-  const month = (today.getMonth() + 1).toString().padStart(2, "0"); // Monate werden von 0 bis 11 gezählt, daher +1
+  const month = (today.getMonth() + 1).toString().padStart(2, "0");
   const day = today.getDate().toString().padStart(2, "0");
   return year + "-" + month + "-" + day;
 }
 
 function redirectToBoard() {
-  // Leiten Sie auf die gewünschte Seite weiter
   window.location.href = "/board.html";
 }
 
@@ -134,23 +133,21 @@ function renderHeaderProfilInitials() {
   `;
 }
 
+
 function highlightedNavbar(item) {
   noHighlightNav();
   if (item == 1) {
     highlightSelectedNav("navSummary");
-    // highlightSelectedNav('navSummary-mobile');
   }
   if (item == 2) {
     highlightSelectedNav("navBoard");
-    // highlightSelectedNav('navBoard-mobile');
   }
   if (item == 3) {
     highlightSelectedNav("navTask");
-    // highlightSelectedNav('navTask-mobile');
   }
   if (item == 4) {
     highlightSelectedNav("navContacts");
-    // highlightSelectedNav('navContacts-mobile');
+
   }
   if (item == 5) {
     highlightSelectedNav("legalNotice");
@@ -172,15 +169,22 @@ function noHighlightNav() {
   }
 }
 
-// Help
 function hoverBackArrow(arrowID) {
   let arrow = document.getElementById(arrowID);
-  arrow.src = "../assets/img/functionButtons/arrowHover.png"; // Hier die URL des gehoverten Bildes einfügen
+  arrow.src = "../assets/img/functionButtons/arrowHover.png";
 }
 
 function leaveBackArrow(arrowID) {
   let arrow = document.getElementById(arrowID);
-  arrow.src = "/assets/img/functionButtons/arrowDefault.png"; // Hier die URL des normalen Bildes einfügen
+  arrow.src = "/assets/img/functionButtons/arrowDefault.png";
+}
+
+function clearBtnOnHover() {
+  document.getElementById("clearBtn").src = "/assets/img/functionButtons/icon_cancel_blue.png";
+}
+
+function clearBtnLeaveHover() {
+  document.getElementById("clearBtn").src = "/assets/img/functionButtons/icon_cancel.png";
 }
 
 function openInfo() {
@@ -193,19 +197,20 @@ function closeInfo() {
   container.classList.add("d-none");
 }
 
-// Privacy Policy
+function stopClosing() {
+  event.stopPropagation();
+}
+
 async function privacyPolicyInit() {
   await mainInit();
   highlightedNavbar(6);
 }
 
-// Legal Notice
 async function legalNoticeInit() {
   await mainInit();
   highlightedNavbar(5);
 }
 
-//Head Menu
 function headMenu() {
   document.getElementById("headMenu").classList.toggle("d-none");
 }

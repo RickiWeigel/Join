@@ -258,13 +258,13 @@ function closeLeave() {
   button.src = "../../assets/img/functionButtons/close.png";
 }
 
-function renderCategoriesEdit() {
+function renderCategoriesEdit(i) {
   if (!categorySelektorOpen) {
     document.getElementById("selectTaskCategory").innerHTML = `
       <div onclick="showNewCategory()" class="dropdown-content"><span>New category</span></div>
   `;
     for (let i = 0; i < users[activeUser].taskCategories.length; i++) {
-      renderCategoriesEditDropdown();
+      renderCategoriesEditDropdown(i);
     }
     categorySelektorOpen = true;
   } else {
@@ -273,7 +273,7 @@ function renderCategoriesEdit() {
   }
 }
 
-function renderCategoriesEditDropdown() {
+function renderCategoriesEditDropdown(i) {
   userTaskCategory = users[activeUser].taskCategories[i];
   document.getElementById("selectTaskCategory").innerHTML += `
   <div onclick="setSelectedCategoryEdit('${i}')" class="dropdown-content">

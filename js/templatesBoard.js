@@ -339,6 +339,7 @@ function renderPopupAddTaskTemplateAssignedTo() {
             </div>
         </div>
     </div>
+    <div class="contactsContainer" id="contactsContainer"></div>
     <div id="requiredAssignedTo" class="required v-none">Please select a contact!</div>
   </div>  
 </div>

@@ -81,6 +81,7 @@ function selectContactsToAssign(id) {
     selectedContactsToAssign.push(selectedContact);
     contactSelectorElement.src = "/assets/img/functionButtons/checkButtonChecked.png";
   }
+  renderContactInitialsPopup(selectedContactsToAssign);
 }
 
 async function addTask() {

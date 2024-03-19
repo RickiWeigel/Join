@@ -20,6 +20,46 @@ body {
     width: 462px;
 }
 
+.contactsContainer {
+    display: flex;
+    align-items: center;
+    width: 93px;
+    height: auto;
+    padding: 6px;
+}
+
+.contact {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 8px;
+    gap: 10px;
+    width: 35px;
+    height: 35px;
+    border: 2px solid #FFFFFF;
+    border-radius: 50%;
+}
+
+.contact span{
+    font-size: 12px;
+    color: white;
+}
+
+.box0 {
+    order: 0;
+}
+
+.box1 {
+    order: 1;
+    margin: 0px -6px;
+}
+
+.boxRest {
+    order: 2;
+    background: #ff9900;
+}
+
+
 ::placeholder {
     color: #D1D1D1;
 
@@ -480,26 +520,29 @@ input[type='date']::-webkit-calendar-picker-indicator {
 }
 
 @media (max-width: 500px) {
-    .enterTitle input{
+    .enterTitle input {
         font-size: 28px;
     }
+
     .priorityContainer {
         flex-direction: column;
         gap: 6px;
     }
-    .addTaskContent{
+
+    .addTaskContent {
         padding: 16px 16px;
     }
 }
 
 @media (max-width: 380px) {
-    .btn-container{
+    .btn-container {
         justify-content: space-between;
         gap: 10px;
     }
-    .btn-white, .btn-blue{
+
+    .btn-white,
+    .btn-blue {
         width: 130px;
         font-size: 19px;
     }
 }
-

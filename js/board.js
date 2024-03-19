@@ -171,6 +171,25 @@ function renderContactInitials(id) {
   }
 }
 
+function renderContactInitialsPopup(contactsArr) {
+  console.log(contactsArr);
+  const taskContact = document.getElementById(`contactsContainer`);
+  taskContact.innerHTML = "";
+  for (let j = 0; j < Math.min(contactsArr.length, 2); j++) {
+    const newColor = contactsArr[j].color;
+    taskContact.innerHTML += `
+      <div class="contact box${j}" style="background-color: ${newColor};">
+        <span id="contactInitials">${contactsArr[j].initials}</span>
+      </div>`;
+  }
+  if (contactsArr.length > 2) {
+    taskContact.innerHTML += `
+      <div class="contact boxRest">
+        <span id="contactInitials">+${contactsArr.length - 2}</span>
+      </div>`;
+  }
+}
+
 function resetTaskContainers() {
   document.getElementById("toDoTasks").innerHTML = "";
   document.getElementById("inProgressTasks").innerHTML = "";

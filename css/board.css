@@ -218,7 +218,7 @@
     font-weight: bold;
     color: #3780ffb9;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     width: 100%;
     height: calc(100% + 50px);
     border-radius: 30px;

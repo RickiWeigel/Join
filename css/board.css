@@ -98,6 +98,14 @@
     user-select: none;
 }
 
+.contactsContainer {
+    display: flex;
+    align-items: center;
+    width: 93px;
+    height: auto;
+    padding: 6px;
+}
+
 .singleCategoryHeader {
     height: 30px;
     display: flex;
@@ -184,6 +192,7 @@
 .taskHeadline {
     color: #4589FF;
     font-weight: 700;
+    margin-bottom: 10px;
 }
 
 .btn-blue-AddTask {

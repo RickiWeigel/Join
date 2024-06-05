@@ -119,7 +119,7 @@
     flex-wrap: wrap;
     gap: 35px;
     align-items: center;
-    max-width: 937px;
+    max-width: 940px;
 }
 
 .boxTop img {
@@ -173,7 +173,7 @@
         gap: 15px;
         max-width: 455px;
         overflow-x: auto;
-        padding-bottom: 80px;
+        padding-bottom: 60px;
     }
 
     .midInfoBox {

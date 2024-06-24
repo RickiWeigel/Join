@@ -1,12 +1,12 @@
 let users = [];
 let rememberMe = false;
-let rememberMeCheckbox = document.getElementById("checkboxRememberMe");
-let registerBtn = document.getElementById("registerButton");
-let registerEmail = document.getElementById("signupInputEmail");
-let registerName = document.getElementById("signupInputName");
-let registerPassword = document.getElementById("signupInputPassword");
-let loginEmail = document.getElementById("loginInputEmail");
-let loginPasswort = document.getElementById("loginInputPassword");
+// let checkboxRememberMe = document.getElementById("checkboxRememberMe");
+// let registerBtn = document.getElementById("registerButton");
+// let registerEmail = document.getElementById("signupInputEmail");
+// let signupInputName = document.getElementById("signupInputName");
+// let signupInputPassword = document.getElementById("signupInputPassword");
+// let loginInputEmail = document.getElementById("loginInputEmail");
+// let loginInputPassword = document.getElementById("loginInputPassword");
 
 async function loginInit() {
   loadUsers();
@@ -17,9 +17,9 @@ async function loginInit() {
 function loadRememberMeDatas() {
   let rememberMeStorage = localStorage.getItem("rememberMe");
   if (rememberMeStorage == "true") {
-    loginEmail.value = localStorage.getItem("logDataEmail");
-    loginPasswort.value = localStorage.getItem("logDataPassword");
-    rememberMeCheckbox.src =
+    loginInputEmail.value = localStorage.getItem("logDataEmail");
+    loginInputPassword.value = localStorage.getItem("logDataPassword");
+    checkboxRememberMe.src =
       "../../assets/img/functionButtons/checkboxActive.png";
     rememberMe = true;
   }
@@ -27,19 +27,19 @@ function loadRememberMeDatas() {
 
 function rememberMeCheckboxToggle() {
   if (!rememberMe) {
-    rememberMeCheckbox.src =
+    checkboxRememberMe.src =
       "../../assets/img/functionButtons/checkboxActive.png";
     rememberMe = true;
   } else {
-    rememberMeCheckbox.src = "../../assets/img/functionButtons/checkbox.png";
+    checkboxRememberMe.src = "../../assets/img/functionButtons/checkbox.png";
     rememberMe = false;
   }
 }
 
 function setRememberMeStorage() {
   if (rememberMe) {
-    localStorage.setItem("logDataEmail", loginEmail.value);
-    localStorage.setItem("logDataPassword", loginPasswort.value);
+    localStorage.setItem("logDataEmail", loginInputEmail.value);
+    localStorage.setItem("logDataPassword", loginInputPassword.value);
     localStorage.setItem("rememberMe", true);
   } else {
     localStorage.setItem("logDataEmail", null);
@@ -50,7 +50,7 @@ function setRememberMeStorage() {
 
 function login() {
   let user = users.find(
-    (u) => u.email == loginEmail.value && u.password == loginPasswort.value
+    (u) => u.email == loginInputEmail.value && u.password == loginInputPassword.value
   );
   setRememberMeStorage();
   if (user) {
@@ -62,7 +62,7 @@ function login() {
 }
 
 function showLoginFault() {
-  let mail = users.find((m) => m.email == loginEmail.value);
+  let mail = users.find((m) => m.email == loginInputEmail.value);
 
   if (!mail) {
     document.getElementById("loginFaultEmail").classList.remove("d-none");
@@ -70,8 +70,8 @@ function showLoginFault() {
   } else {
     document.getElementById("loginFaultPassword").classList.remove("d-none");
     document.getElementById("loginFaultEmail").classList.add("d-none");
-    loginPasswort.value = "";
-    loginPasswort.placeholder = "Please try again!";
+    loginInputPassword.value = "";
+    loginInputPassword.placeholder = "Please try again!";
   }
 }
 
@@ -81,14 +81,14 @@ function saveActiveUserLocal(user) {
 }
 
 async function register() {
-  registerBtn.disabled = true;
+  registerButton.disabled = true;
   users.push({
     id: users.length,
-    name: registerName.value,
-    email: registerEmail.value,
-    password: registerPassword.value,
+    name: signupInputName.value,
+    email: signupInputEmail.value,
+    password: signupInputPassword.value,
     color: getRandomColor(),
-    initials: getUserInitials(registerName.value),
+    initials: getUserInitials(signupInputName.value),
     contacts: [],
     userTasks: [],
     taskCategories: [],
@@ -101,42 +101,42 @@ async function register() {
 
 function guestLog() {
   let guest = users[0];
-  loginEmail.value = guest.email;
-  loginPasswort.value = guest.password;
+  loginInputEmail.value = guest.email;
+  loginInputPassword.value = guest.password;
   setTimeout(() => {
     login();
   }, 1000);
 }
 
 function loadRegisterInLogin() {
-  loginEmail.value = registerEmail.value;
-  loginPasswort.value = registerPassword.value;
+  loginInputEmail.value = signupInputEmail.value;
+  loginInputPassword.value = signupInputPassword.value;
 }
 
 /**
  * go back to login section
  */
 function backToLogin() {
-  document.getElementById("loginBox").classList.remove("d-none");
-  document.getElementById("signupBox").classList.add("d-none");
-  document.getElementById("forgotBox").classList.add("d-none");
-  document.getElementById("resetbox").classList.add("d-none");
-  document.getElementById("loginLogoWhite").classList.add("no-opacity");
-  document.getElementById("loginLogoBlue").classList.remove("no-opacity");
-  document.getElementById("loginPage").classList.add("pageColorChange");
-  document.getElementById("loginSignupBox").classList.remove("d-none");
+  loginBox.classList.remove("d-none");
+  signupBox.classList.add("d-none");
+  forgotBox.classList.add("d-none");
+  resetbox.classList.add("d-none");
+  loginLogoWhite.classList.add("no-opacity");
+  loginLogoBlue.classList.remove("no-opacity");
+  loginPage.classList.add("pageColorChange");
+  loginSignupBox.classList.remove("d-none");
 }
 
 /**
  * show sign up section
  */
 function loadSignUpBox() {
-  document.getElementById("loginBox").classList.add("d-none");
-  document.getElementById("signupBox").classList.remove("d-none");
-  document.getElementById("loginLogoWhite").classList.remove("no-opacity");
-  document.getElementById("loginLogoBlue").classList.add("no-opacity");
-  document.getElementById("loginPage").classList.remove("pageColorChange");
-  document.getElementById("loginSignupBox").classList.add("d-none");
+  loginBox.classList.add("d-none");
+  signupBox.classList.remove("d-none");
+  loginLogoWhite.classList.remove("no-opacity");
+  loginLogoBlue.classList.add("no-opacity");
+  loginPage.classList.remove("pageColorChange");
+  loginSignupBox.classList.add("d-none");
 }
 
 /**
@@ -144,12 +144,12 @@ function loadSignUpBox() {
  */
 function changeColorsOfLoginScreen() {
   setTimeout(() => {
-    document.getElementById("loginPage").classList.add("pageColorChange");
-    document.getElementById("loginLogoWhite").classList.add("logoMovement");
-    document.getElementById("loginLogoWhite").classList.add("no-opacity");
-    document.getElementById("loginLogoBlue").classList.add("logoMovement");
-    document.getElementById("loginLogoBlue").classList.remove("no-opacity");
-    document.getElementById("loginBox").classList.remove("no-opacity");
-    document.getElementById("loginSignupBox").classList.remove("no-opacity");
+    loginPage.classList.add("pageColorChange");
+    loginLogoWhite.classList.add("logoMovement");
+    loginLogoWhite.classList.add("no-opacity");
+    loginLogoBlue.classList.add("logoMovement");
+    loginLogoBlue.classList.remove("no-opacity");
+    loginBox.classList.remove("no-opacity");
+    loginSignupBox.classList.remove("no-opacity");
   }, 1000);
 }

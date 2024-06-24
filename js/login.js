@@ -1,12 +1,6 @@
 let users = [];
 let rememberMe = false;
-// let checkboxRememberMe = document.getElementById("checkboxRememberMe");
-// let registerBtn = document.getElementById("registerButton");
-// let registerEmail = document.getElementById("signupInputEmail");
-// let signupInputName = document.getElementById("signupInputName");
-// let signupInputPassword = document.getElementById("signupInputPassword");
-// let loginInputEmail = document.getElementById("loginInputEmail");
-// let loginInputPassword = document.getElementById("loginInputPassword");
+
 
 async function loginInit() {
   loadUsers();
